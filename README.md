@@ -30,11 +30,13 @@ Setup (OS X)
 
 - [Heroku Toolbelt]
 - Ruby, >= 2.3.1
+- Postgres
 
-You can install most of the above with [Homebrew].
+You can install most of the above with [Homebrew]. For Postgres, @ptrikutam uses [Postgres.app] but you're welcome to set it up however you like.
 
 [Heroku Toolbelt]: https://toolbelt.heroku.com/
 [Homebrew]: http://brew.sh/
+[Postgres.app]: http://postgresapp.com/
 
 #### Setting up the repository
 
@@ -44,6 +46,6 @@ Clone the repo and run the setup script:
     cd commons
     ./bin/setup
 
-To start the app locally run the command:
+To start the app locally run the command (make sure postgres is running):
 
     foreman start -f Procfile.dev
