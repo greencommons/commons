@@ -1,0 +1,22 @@
+inherit_from: .hound_defaults.yml
+require: rubocop-rspec
+
+Metrics/LineLength:
+  Max: 100
+  Enabled: true
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+    - single_quotes
+    - double_quotes
+Style/MultilineOperationIndentation:
+  Enabled: false
+RSpec/DescribedClass:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: no_comma
+  SupportedStyles:
+    - comma
+    - no_comma
