@@ -49,3 +49,5 @@ Clone the repo and run the setup script:
 To start the app locally run the command (make sure postgres is running):
 
     foreman start -f Procfile.dev
+
+You should be able to visit http://localhost:3000/ within your browser and see the Green Commons homepage.
