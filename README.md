@@ -10,9 +10,9 @@ Servers
 |    branch   |environment|remote|URL|
 |-------------|-----------|------|---|
 |`master`     |production|`git@heroku.com:greencommons.git`|[greencommons.herokuapp.com](https://greencommons.herokuapp.com)|
-|`development`|staging|`git@heroku.com:greencommons-staging.git`|[greencommons-staging.herokuapp.com](https://greencommons-staging.herokuapp.com/)|
 
-Note: `development` & `master` will auto-deploy to their respective environments.
+
+Note: Pushing to `master` will auto-deploy to production.
 
 
 Contributing
