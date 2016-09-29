@@ -1,24 +1,36 @@
-# README
+# Green Commons
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CircleCI](https://circleci.com/gh/greencommons/commons/tree/master.svg?style=svg)](https://circleci.com/gh/greencommons/commons/tree/master)
 
-Things you may want to cover:
+This is the repository for the Green Commons project.
 
-* Ruby version
+Servers
+-------
 
-* System dependencies
+|    branch   |environment|remote|URL|
+|-------------|-----------|------|---|
+|`master`     |production|`git@heroku.com:greencommons.git`|[greencommons.herokuapp.com](https://greencommons.herokuapp.com)|
+|`development`|staging|`git@heroku.com:greencommons-staging.git`|[greencommons-staging.herokuapp.com](https://greencommons-staging.herokuapp.com/)|
 
-* Configuration
+Note: `development` & `master` will auto-deploy to their respective environments.
 
-* Database creation
 
-* Database initialization
+Contributing
+------------
 
-* How to run the test suite
+We follow [thoughtbot's git guide](https://github.com/thoughtbot/guides/tree/master/protocol/git) to determine the development workflow.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+Setup (OS X)
+------------
+
+Clone the repo and run the setup script:
+
+    git clone git@github.com:greencommons/commons.git
+    cd commons
+    ./bin/setup
+
+To start the app locally run the command:
+
+    foreman start -f Procfile.dev
