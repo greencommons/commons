@@ -26,7 +26,7 @@ We follow [thoughtbot's git guide](https://github.com/thoughtbot/guides/tree/mas
 Setup (OS X)
 ------------
 
-### Perequisites
+#### Perequisites
 
 - [Heroku Toolbelt]
 - Ruby, >= 2.3.1
@@ -36,6 +36,7 @@ You can install most of the above with [Homebrew].
 [Heroku Toolbelt]: https://toolbelt.heroku.com/
 [Homebrew]: http://brew.sh/
 
+#### Setting up the repository
 
 Clone the repo and run the setup script:
 
