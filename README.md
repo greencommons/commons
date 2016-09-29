@@ -1,4 +1,5 @@
-# Green Commons
+Green Commons
+=============
 
 [![CircleCI](https://circleci.com/gh/greencommons/commons/tree/master.svg?style=svg)](https://circleci.com/gh/greencommons/commons/tree/master) [![Code Climate](https://codeclimate.com/github/greencommons/commons/badges/gpa.svg)](https://codeclimate.com/github/greencommons/commons)
 
@@ -24,6 +25,17 @@ We follow [thoughtbot's git guide](https://github.com/thoughtbot/guides/tree/mas
 
 Setup (OS X)
 ------------
+
+### Perequisites
+
+- [Heroku Toolbelt]
+- Ruby, >= 2.3.1
+
+You can install most of the above with [Homebrew].
+
+[Heroku Toolbelt]: https://toolbelt.heroku.com/
+[Homebrew]: http://brew.sh/
+
 
 Clone the repo and run the setup script:
 
