@@ -59,10 +59,11 @@ test:
 
 ## Customize deployment commands
 deployment:
-  staging:
+  production:
     branch: master
-    heroku:
-      appname: greencommons
+    commands:
+      - git push git@heroku.com:greencommons.git $CIRCLE_SHA1:master
+      - heroku run 'rake db:migrate' --app greencommons
 
 ## Custom notifications
 # notify:
