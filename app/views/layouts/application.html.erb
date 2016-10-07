@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <% if notice.present? %>
+      <p class="notice"> <%= "NOTICE: #{notice}" %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert"><%= "ALERT: #{alert}" %></p>
+    <% end %>
+  
     <%= yield %>
   </body>
 </html>
