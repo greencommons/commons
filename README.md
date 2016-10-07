@@ -51,3 +51,14 @@ To start the app locally run the command (make sure postgres is running):
     foreman start -f Procfile.dev
 
 You should be able to visit http://localhost:3000/ within your browser and see the Green Commons homepage.
+
+
+Testing
+-------
+
+We test using [rspec]/[rspec-rails]. You can run the test suite by running:
+
+    bundle exec rspec spec
+
+[rspec]: https://github.com/rspec/rspec
+[rspec-rails]: https://github.com/rspec/rspec-rails
