@@ -58,6 +58,11 @@ GEM
     dotenv (2.1.1)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -187,6 +192,7 @@ DEPENDENCIES
   byebug
   devise
   dotenv
+  factory_girl_rails
   listen (~> 3.0.5)
   paper_trail
   pg
@@ -204,4 +210,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.1
+   1.13.5
