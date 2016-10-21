@@ -47,6 +47,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.5'
   # gem 'database_cleaner' # Use to ensure a clean database for testing
+  gem 'shoulda'
   gem 'faker'
   gem 'factory_girl_rails'
 end
