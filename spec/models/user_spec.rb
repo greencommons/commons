@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject { FactoryGirl.build(:user) }
-  describe 'validations' do
+  describe 'Validations' do
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
@@ -16,5 +16,9 @@ RSpec.describe User, type: :model do
       subject.password = nil
       expect(subject).to_not be_valid
     end
+  end
+
+  describe "Associations" do
+    it { should have_and_belong_to_many (:groups) }
   end
 end
