@@ -1,11 +1,15 @@
 class Resource < ApplicationRecord
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
-  # Warning: since this is an enum (stored as an integer), order matters. We need to preserve the 
-  # order of this array, otherwise all the types stored in the database will switch around.
+  # Warning: since this is an enum (stored as an integer), we need to preserve the original integers
+  # each value is associated with. Otherwise the types stored in the database will switch around.
   # See: http://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
-  enum resource_type:  [:book, :article, :report, :study]
+  enum resource_type: {
+    article: 0,
+    book: 1,
+    report: 2
+  }
 
   validates_presence_of :title, :resource_type
 end
