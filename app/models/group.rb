@@ -3,4 +3,8 @@ class Group < ApplicationRecord
   has_many :lists, as: :owner
 
   validates_presence_of :name
+
+  def resources
+    self.lists.map(&:resources).flatten.uniq
+  end
 end
