@@ -1,4 +1,5 @@
 class Group < ApplicationRecord
+  has_paper_trail
   has_and_belongs_to_many :users
   has_many :lists, as: :owner
 
