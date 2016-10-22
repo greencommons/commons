@@ -8,6 +8,11 @@ RSpec.describe List, type: :model do
       expect(subject).to be_valid
     end
 
+    it 'is invalid without a name' do
+      subject.name = nil
+      expect(subject).to_not be_valid
+    end
+
     it 'is invalid without an owner' do
       subject.owner = nil
       expect(subject).to_not be_valid
@@ -15,6 +20,7 @@ RSpec.describe List, type: :model do
 
     it 'is valid with a user owner' do
       subject.owner = FactoryGirl.create(:user)
+      subject.save
       expect(subject).to be_valid
     end
 
@@ -30,8 +36,14 @@ RSpec.describe List, type: :model do
   end
 
   describe '#owner' do
-    it 'returns a user if it the owner is a user'
-    it 'returns a gorup if the owner is a group'
+    it 'returns a user if it the owner is a user' do
+      subject.update(owner: FactoryGirl.create(:user))
+      expect(subject.owner).to be_a(User)
+    end
+    it 'returns a gorup if the owner is a group' do
+      subject.update(owner: FactoryGirl.create(:group))
+      expect(subject.owner).to be_a(Group)
+    end
   end
 
   describe "Associations" do
