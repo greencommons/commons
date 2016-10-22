@@ -21,6 +21,9 @@ gem 'paper_trail'
 # Authentication
 gem 'devise'
 
+# Tagging
+gem 'acts-as-taggable-on', '~> 4.0'
+
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
