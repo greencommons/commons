@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe List, type: :model do
-  subject { FactoryGirl.build(:list) }
+  subject { FactoryGirl.create(:list) }
 
   describe 'Validations' do
+    subject { FactoryGirl.build(:list) }
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
