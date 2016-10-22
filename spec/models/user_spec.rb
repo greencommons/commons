@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "Associations" do
-    it { should have_and_belong_to_many (:groups) }
+    it { should have_and_belong_to_many(:groups) }
+    it { should have_many(:lists) }
   end
 end
