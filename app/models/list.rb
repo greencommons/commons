@@ -1,4 +1,5 @@
 class List < ApplicationRecord
+  has_paper_trail
   belongs_to :owner, polymorphic: true
   has_and_belongs_to_many :resources
 
