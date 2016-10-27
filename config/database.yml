@@ -21,8 +21,10 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
   host: localhost
-  username: root
   database: commons
+
+production:
+  <<: *default
 
 development:
   <<: *default
@@ -34,8 +36,3 @@ development:
 test:
   <<: *default
   database: commonstest
-
-# TODO: Do we need to include this?
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
