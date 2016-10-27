@@ -1,22 +1,37 @@
 inherit_from: .hound_defaults.yml
 require: rubocop-rspec
 
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/initializers/devise.rb'
+
+# Ruby Style
 Metrics/LineLength:
   Max: 100
   Enabled: true
+Style/MultilineOperationIndentation:
+  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: single_quotes
   SupportedStyles:
     - single_quotes
     - double_quotes
-Style/MultilineOperationIndentation:
-  Enabled: false
-RSpec/DescribedClass:
-  Enabled: false
-RSpec/FilePath:
-  Enabled: false
 TrailingCommaInLiteral:
   EnforcedStyleForMultiline: no_comma
   SupportedStyles:
     - comma
     - no_comma
+
+# Rails Styles
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+# RSpec Styles
+RSpec/DescribedClass:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false

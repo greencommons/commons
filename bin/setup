@@ -21,11 +21,15 @@ chdir APP_ROOT do
 
   # Check for tools that need to be installed
   %w(foreman heroku).each do |tool|
-    if !system("which #{tool}")
+    unless system("which #{tool}")
       puts "#{tool} INSTALLED"
       abort("\n== #{tool} not installed, aborting ==")
     end
   end
+
+  # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
+  # Do this to not type `bundle exec` ever again.
+  system('mkdir -p .git/safe')
 
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'

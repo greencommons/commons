@@ -13,7 +13,7 @@
 # - Group's list
 
 # Create users
-(1..5).each do |n|
+5.times do
   User.create(
     email: "user#{n}@greencommons.org",
     password: 'thecommons'
@@ -21,7 +21,7 @@
 end
 
 # Create 50 fake unowned resources
-(0..50).each do |n|
+50.times do
   Resource.create(
     title: Faker::Book.title,
     resource_type: Resource.resource_types.keys.sample
@@ -29,7 +29,7 @@ end
 end
 
 # Create 50 fake owned resources
-(0..50).each do |n|
+50.times do
   Resource.create(
     title: Faker::Book.title,
     user: User.all.sample,
@@ -49,7 +49,6 @@ g = Group.create(
 # Assign 2 users to group
 g.users << User.all.sample(2)
 
-
 g2 = Group.create(
   name: 'Full Group',
   short_description: Faker::Lorem.sentence,
@@ -61,7 +60,6 @@ g2 = Group.create(
 # Assign 2 users to group
 g2.users << User.all
 
-
 # Make lists for everyone
 User.all.each do |user|
   user.lists.create(
@@ -69,7 +67,6 @@ User.all.each do |user|
     resources: Resource.all.sample(rand(10..20))
   )
 end
-
 
 2.times do
   Group.first.lists.create(

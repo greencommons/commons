@@ -1,28 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Resource, type: :model do
-  subject { FactoryGirl.build(:resource) }
-
   describe 'Validations' do
     it 'is valid with valid attributes' do
-      expect(subject).to be_valid
-    end
-    it 'is invalid without a title' do
-      subject.title = nil
-      expect(subject).to_not be_valid
-    end
-    it 'is invalid without a resource_type' do
-      subject.resource_type = nil
-      expect(subject).to_not be_valid
+      resource = FactoryGirl.build(:resource)
+
+      expect(resource).to be_valid
     end
 
-    it 'is invalid with undefined resource_type' do
-      expect { subject.resource_type = :nonsense }.to raise_error ArgumentError
-    end
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:resource_type) }
   end
 
-  describe "Associations" do
-    it { should belong_to(:user) }
-    it { should have_and_belong_to_many(:lists) }
+  describe 'Associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_and_belong_to_many(:lists) }
   end
 end

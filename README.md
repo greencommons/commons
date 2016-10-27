@@ -58,7 +58,7 @@ Testing
 
 We test using [rspec]/[rspec-rails]. You can run the test suite by running:
 
-    bundle exec rspec spec
+    bundle exec rake
 
 [rspec]: https://github.com/rspec/rspec
 [rspec-rails]: https://github.com/rspec/rspec-rails

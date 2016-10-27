@@ -5,6 +5,7 @@ class List < ApplicationRecord
   belongs_to :owner, polymorphic: true
   has_and_belongs_to_many :resources
 
-  validates_presence_of :name
-  validates :owner_type, inclusion: ['User', 'Group']
+  validates :name, presence: true
+  validates :owner, presence: true
+  validates :owner_type, inclusion: %w(User Group)
 end
