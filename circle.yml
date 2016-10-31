@@ -50,7 +50,7 @@ machine:
 ## Customize test commands
 test:
   override:
-    - bundle exec rspec spec
+    - bundle exec rspec
 #   post:
 #     - bundle exec rake jasmine:ci: # add an extra test type
 #         environment:

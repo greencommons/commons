@@ -2,5 +2,8 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-task(:default).clear
-task default: %w(rubocop spec)
+task default: :spec
+
+if Rails.env.test?
+  task(:default).prerequisites << task(:rubocop)
+end
