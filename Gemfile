@@ -4,12 +4,15 @@ ruby '2.3.1'
 
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'devise'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'paper_trail'
 gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+
 
 group :development do
   gem 'bundler-audit'
