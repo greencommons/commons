@@ -4,6 +4,8 @@ ruby '2.3.1'
 
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'devise'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'paper_trail'
 gem 'pg'
 gem 'puma', '~> 3.0'

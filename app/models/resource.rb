@@ -1,4 +1,7 @@
 class Resource < ApplicationRecord
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   RESOURCE_TYPES = {
     article: 0,
     book: 1,
