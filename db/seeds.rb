@@ -13,7 +13,7 @@
 # - Group's list
 
 # Create users
-5.times do
+5.times do |n|
   User.create(
     email: "user#{n}@greencommons.org",
     password: 'thecommons'
