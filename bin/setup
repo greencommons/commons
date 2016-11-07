@@ -3,11 +3,15 @@ require 'pathname'
 require 'fileutils'
 include FileUtils
 
-# path to your application root.
+# Path to your application root.
 APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
 
 def system!(*args)
   system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+def this_is_not_installed?(cli_name)
+  !system("which #{cli_name} > /dev/null 2>&1")
 end
 
 chdir APP_ROOT do
@@ -19,12 +23,20 @@ chdir APP_ROOT do
     system! 'cp .env.sample .env'
   end
 
-  # Check for tools that need to be installed
-  %w(foreman heroku).each do |tool|
-    unless system("which #{tool}")
-      puts "#{tool} INSTALLED"
-      abort("\n== #{tool} not installed, aborting ==")
-    end
+  if this_is_not_installed?('foreman')
+    puts '== Installing foreman =='
+    system('gem install foreman')
+  end
+
+  if this_is_not_installed?('heroku')
+    puts "== Installing Heroku's Command Line Tool =="
+    system('brew install heroku')
+  end
+
+  if this_is_not_installed?('elasticsearch')
+    puts "== Installing ElasticSearch =="
+    puts "NOTE! You must be running ElasticSearch for the app to work."
+    system('brew install elasticsearch')
   end
 
   # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
