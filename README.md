@@ -26,7 +26,7 @@ We follow [thoughtbot's git guide](https://github.com/thoughtbot/guides/tree/mas
 Setup (OS X)
 ------------
 
-#### Perequisites
+#### Prerequisites
 
 - [Heroku Toolbelt]
 - Ruby, >= 2.3.1
