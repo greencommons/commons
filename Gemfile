@@ -15,10 +15,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
+  gem 'bummr'
   gem 'bundler-audit'
   gem 'listen', '~> 3.0.5'
-  gem 'pry-rails'
   gem 'pry-coolline'
+  gem 'pry-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'

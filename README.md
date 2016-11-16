@@ -62,3 +62,20 @@ We test using [rspec]/[rspec-rails]. You can run the test suite by running:
 
 [rspec]: https://github.com/rspec/rspec
 [rspec-rails]: https://github.com/rspec/rspec-rails
+
+Updating Gems
+-------------
+
+We should update gems regularly for security and bugfix reasons.
+We use a tool called [bummr] to update the dependencies for us.
+It will update each gem individually, then run the tests and if any fail,
+use `git bisect` to figure out which one is the problem.
+
+Every [week or so], run this command:
+
+```
+bummr update
+```
+
+[bummr]: https://github.com/lpender/bummr
+[week or so]: http://adarsh.io/save-money-and-be-happier-by-updating-your-gems-every-monday-morning/
