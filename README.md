@@ -29,7 +29,7 @@ Setup (OS X)
 #### Prerequisites
 
 - [Heroku Toolbelt]
-- Ruby, >= 2.3.1
+- Ruby, >= 2.3.2
 - Postgres
 
 You can install most of the above with [Homebrew]. For Postgres, @ptrikutam uses [Postgres.app] but you're welcome to set it up however you like.
