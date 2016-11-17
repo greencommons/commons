@@ -45,5 +45,9 @@ RSpec/DescribedClass:
   Enabled: false
 RSpec/FilePath:
   Enabled: false
+RSpec/ExampleLength:
+  Description: Checks for long examples.
+  Enabled: true
+  Max: 20
 RSpec/FilePath:
   Enabled: false

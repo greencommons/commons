@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe List, type: :model do
-  list = FactoryGirl.create(:list)
-
+RSpec.describe List do
   describe 'Validations' do
     it 'is valid with valid attributes' do
-      list = FactoryGirl.create(:list)
+      list = create(:list)
 
       expect(list).to be_valid
     end

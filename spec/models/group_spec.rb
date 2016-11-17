@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Group, type: :model do
+RSpec.describe Group do
   describe 'Validations' do
     it 'is valid with valid attributes' do
-      group = FactoryGirl.create(:group)
+      group = create(:group)
 
       expect(group).to be_valid
     end
@@ -12,13 +12,13 @@ RSpec.describe Group, type: :model do
   end
 
   describe '#resources' do
-    let(:r1) { FactoryGirl.create(:resource) }
-    let(:r2) { FactoryGirl.create(:resource) }
-    let(:l1) { FactoryGirl.create(:list, resources: [r1, r2]) }
-    let(:l2) { FactoryGirl.create(:list, resources: [r2]) }
+    let(:r1) { create(:resource) }
+    let(:r2) { create(:resource) }
+    let(:l1) { create(:list, resources: [r1, r2]) }
+    let(:l2) { create(:list, resources: [r2]) }
 
     it 'returns a unique list of resources' do
-      group = FactoryGirl.create(:group)
+      group = create(:group)
 
       group.update(lists: [l1, l2])
 

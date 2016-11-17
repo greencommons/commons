@@ -1,6 +1,5 @@
 class Resource < ApplicationRecord
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
   RESOURCE_TYPES = {
     article: 0,
@@ -20,4 +19,7 @@ class Resource < ApplicationRecord
   has_and_belongs_to_many :lists
 
   validates :title, :resource_type, presence: true
+
+  after_save { SearchIndex.add(self) }
+  after_destroy { SearchIndex.remove(self) }
 end

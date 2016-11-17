@@ -12,14 +12,13 @@ gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'sass-rails', '~> 5.0'
+gem 'sidekiq'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'bummr'
   gem 'bundler-audit'
   gem 'listen', '~> 3.0.5'
-  gem 'pry-coolline'
-  gem 'pry-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'
@@ -27,10 +26,11 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'byebug', platform: :mri
+  gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv'
   gem 'factory_girl_rails'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop'
   gem 'rubocop-rspec'
