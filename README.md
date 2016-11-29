@@ -52,6 +52,24 @@ To start the app locally run the command (make sure postgres is running):
 
 You should be able to visit http://localhost:3000/ within your browser and see the Green Commons homepage.
 
+Developing
+----------
+
+You can optionally use [`guard-livereload`]
+to refresh the page automatically
+when you've saved changes to a file.
+
+Run
+
+```
+bundle exec guard
+```
+
+and be sure to install the appropriate browser extension
+listed in the gem's `README.md`.
+
+[`guard-livereload`]: https://github.com/guard/guard-livereload
+
 
 Testing
 -------

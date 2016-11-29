@@ -20,6 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development do
   gem 'bummr'
   gem 'bundler-audit'
+  gem 'guard-livereload', '>= 2.5.2', require: false
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
