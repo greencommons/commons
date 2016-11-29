@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022021350) do
+ActiveRecord::Schema.define(version: 20161130200617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,12 +51,12 @@ ActiveRecord::Schema.define(version: 20161022021350) do
   end
 
   create_table "resources", force: :cascade do |t|
-    t.string   "title",                     null: false
-    t.integer  "resource_type", default: 0, null: false
+    t.string   "title",                      null: false
+    t.integer  "resource_type", default: 0,  null: false
     t.integer  "user_id"
-    t.json     "metadata"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.jsonb    "metadata",      default: {}, null: false
     t.index ["user_id"], name: "index_resources_on_user_id", using: :btree
   end
 

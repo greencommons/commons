@@ -1,5 +1,5 @@
 # https://github.com/mperham/sidekiq/wiki/Advanced-Options#the-sidekiq-configuration-file
-concurrency: 5
+:concurrency: 1
 staging:
   :concurrency: 10
 production:

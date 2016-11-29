@@ -31,12 +31,16 @@ Setup (OS X)
 - [Heroku Toolbelt]
 - Ruby, >= 2.3.2
 - Postgres
+- QT ([install instructions here])
+- [XCode] 8.0+
 
 You can install most of the above with [Homebrew]. For Postgres, @ptrikutam uses [Postgres.app] but you're welcome to set it up however you like.
 
 [Heroku Toolbelt]: https://toolbelt.heroku.com/
 [Homebrew]: http://brew.sh/
 [Postgres.app]: http://postgresapp.com/
+[install instructions here]: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit#macos-sierra-1012
+[XCode]: https://developer.apple.com/xcode/
 
 #### Setting up the repository
 

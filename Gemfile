@@ -4,6 +4,7 @@ ruby '2.3.2'
 
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bootstrap-sass', '~> 3.3.7'
+gem 'capybara-webkit'
 gem 'devise'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -15,6 +16,7 @@ gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
+gem 'slim'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do

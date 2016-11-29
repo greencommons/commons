@@ -50,5 +50,7 @@ RSpec/ExampleLength:
   Description: Checks for long examples.
   Enabled: true
   Max: 20
-RSpec/FilePath:
-  Enabled: false
+RSpec/MultipleExpectations:
+  Description: Checks if examples contain too many `expect` calls.
+  Enabled: true
+  Max: 3

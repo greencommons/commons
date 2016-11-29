@@ -1,0 +1,21 @@
+h1.title
+  | Search#new
+
+.customer-search-form
+  = form_for new_search_path, method: :get do |form|
+    = form.label 'Search for'
+    p
+    = text_field_tag :query, params[:query]
+    = submit_tag 'Go', name: nil
+
+ul.search-results
+  - @results.each do |result|
+    h2.Result
+
+    li.search-result
+      h3.title
+        = result.title
+      h5.author-name
+        = result.metadata.fetch(:author, 'No Author Found')
+      h5.year-published
+        = result.metadata.fetch(:year_published, 'Year Published Unknown')
