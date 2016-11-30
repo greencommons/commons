@@ -1,0 +1,9 @@
+# https://github.com/mperham/sidekiq/wiki/Advanced-Options#the-sidekiq-configuration-file
+concurrency: 5
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 20
+:queues:
+  - 'default'
+  - ['elasticsearch', 2]
