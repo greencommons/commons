@@ -25,3 +25,6 @@
 
 # Ingore those damn Mac OS files
 .DS_Store
+
+# Ignore Redis database
+dump.rdb
