@@ -9,7 +9,7 @@ RSpec.describe SearchIndex do
       SearchIndex.add(resource)
 
       expect(IndexerJob).to have_received(:perform_async).
-        with(:index, resource.id)
+        with(:index, resource.class.name, resource.id)
     end
 
     context 'if index callbacks disabled', search_indexing_callbacks: false do
@@ -20,7 +20,7 @@ RSpec.describe SearchIndex do
         SearchIndex.add(resource)
 
         expect(IndexerJob).not_to have_received(:perform_async).
-          with(:index, resource.id)
+          with(:index, resource.class.name, resource.id)
       end
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe SearchIndex do
       SearchIndex.remove(resource)
 
       expect(IndexerJob).to have_received(:perform_async).
-        with(:delete, resource.id)
+        with(:delete, resource.class.name, resource.id)
     end
 
     context 'if index callbacks disabled', search_indexing_callbacks: false do
@@ -44,7 +44,7 @@ RSpec.describe SearchIndex do
         SearchIndex.remove(resource)
 
         expect(IndexerJob).not_to have_received(:perform_async).
-          with(:delete, resource.id)
+          with(:delete, resource.class.name, resource.id)
       end
     end
   end
