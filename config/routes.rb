@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  root 'search#new'
+
+  resources :search, only: [:new]
+
   devise_for :users
-  root 'static_pages#index'
 
   if Rails.env.development?
     require 'sidekiq/web'
