@@ -22,3 +22,6 @@
 
 # Ignore dotenv
 .env
+
+# Ingore those damn Mac OS files
+.DS_Store
