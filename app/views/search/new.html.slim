@@ -22,10 +22,14 @@
           dd
             = result.id
           dt
-            strong Author
+            strong Creator
           dd
-            = result.metadata.fetch(:author, 'No Author Found')
+            = result.metadata.fetch(:creators, 'No Author Found')
           dt
-            strong Published
+            strong Date Published
           dd
-            = result.metadata.fetch(:year_published, 'Year Published Unknown')
+            = result.metadata.fetch(:date, 'Year Published Unknown')
+          dt
+            strong Publisher
+          dd
+            = result.metadata.fetch(:publisher, 'Publisher Unknown')

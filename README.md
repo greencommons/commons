@@ -112,3 +112,8 @@ bummr update
 
 [bummr]: https://github.com/lpender/bummr
 [week or so]: http://adarsh.io/save-money-and-be-happier-by-updating-your-gems-every-monday-morning/
+
+Adding New Resources to the Database
+------------------------------------
+
+See [ETL.md](ETL.md) for more information.

@@ -1,0 +1,5 @@
+require_relative 'common'
+
+source(ProcessAllFilesInLocalFolder, 'lib/etl/data/*.epub')
+transform(TransformEpub)
+destination(CreateNewResourceRecord)

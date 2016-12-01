@@ -1,0 +1,3 @@
+require_relative 'extract/process_all_files_in_local_folder'
+require_relative 'transform/transform_epub'
+require_relative 'load/create_new_resource_record'
