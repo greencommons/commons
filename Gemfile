@@ -4,7 +4,6 @@ ruby '2.3.2'
 
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bootstrap-sass', '~> 3.3.7'
-gem 'capybara-webkit'
 gem 'devise'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -40,4 +39,8 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'shoulda'
+end
+
+group :test do
+  gem 'capybara-webkit'
 end
