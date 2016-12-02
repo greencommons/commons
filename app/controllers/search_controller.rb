@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
   def new
-    @results = Resource.search(params[:query])
+    @results = params[:query].present? ? Resource.search(params[:query]) : []
   end
 end
