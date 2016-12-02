@@ -3,7 +3,7 @@
   <head>
     <title>Commons</title>
     <%= csrf_meta_tags %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -11,13 +11,7 @@
   <body>
     <%= render 'shared/nav' %>
     <div class="container">
-      <% if notice.present? %>
-        <p class="notice"> <%= "NOTICE: #{notice}" %></p>
-      <% end %>
-      <% if alert.present? %>
-        <p class="alert"><%= "ALERT: #{alert}" %></p>
-      <% end %>
-
+      <%= render 'shared/alerts' %>
       <%= yield %>
     </div>
 
