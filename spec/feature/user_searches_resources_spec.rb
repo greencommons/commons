@@ -10,7 +10,7 @@ RSpec.feature 'Searching for resources', :worker do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Go'
+        click_button 'Search'
       end
 
       expect(page).to have_text(resource.title)
