@@ -1,0 +1,29 @@
+.summary-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  width: 100%;
+  @include box-shadow(0 1px 4px rgba(0,0,0,.3));
+
+  .sc-row {
+    margin-bottom: 10px;
+  }
+
+  .sc-row-last {}
+
+  .sc-meta {
+    float: left;
+    margin-right: 5%;
+  }
+
+  .sc-more {
+    float: right;
+  }
+
+  h5, p {
+    margin: 0;
+  }
+
+  .glyphicon {
+    margin-right: 10px;
+  }
+}

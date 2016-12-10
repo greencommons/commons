@@ -1,0 +1,33 @@
+.summary-card
+  .sc-row
+      h5
+        span.glyphicon.glyphicon-th-large
+        = resource.name
+  .sc-row
+    p
+      strong ABOUT 
+      = resource.long_description
+  .sc-row
+    p
+      span.glyphicon.glyphicon-tag
+      a href="/" tag
+      | , 
+      a href="/" another tag
+      | , 
+      a href="/" solar panels
+  .sc-row-last 
+    .sc-meta
+      p
+        span.glyphicon.glyphicon-calendar
+        = humanize_date(resource.created_at)
+    .sc-meta
+      p
+        span.glyphicon.glyphicon-user
+        = "#{resource.users.count} members"
+    .sc-meta
+      p
+        span.glyphicon.glyphicon-list
+        = "#{resource.lists.count} Lists"
+    .sc-more
+      = link_to 'Read More >>', resource
+    .clearfix
