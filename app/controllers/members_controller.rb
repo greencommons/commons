@@ -1,12 +1,28 @@
 class MembersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group
-  before_action :set_group_user, except: [:index]
+  before_action :set_group_user, except: [:index, :create]
   before_action :set_is_admin
   before_action :check_admin_rights, except: [:index]
 
   def index
     @members = @group.groups_users.includes(:user)
+  end
+
+  def create
+    @user = User.where(email: params[:email]).first
+
+    unless @user
+      notice = 'User not found.'
+    else
+      if @group.add_user(@user)
+        notice = 'Member was successfully added.'
+      else
+        notice = 'Member already in group.'
+      end
+    end
+
+    redirect_to group_members_path(@group), notice: notice
   end
 
   def make_admin

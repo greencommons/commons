@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   root 'search#new'
-
   resources :search, only: [:new]
   resources :groups do
-    resources :members, only: [:index, :destroy] do
+    resources :members, only: [:index, :create, :destroy] do
       member do
         post :make_admin
         post :remove_admin
