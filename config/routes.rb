@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root 'search#new'
+
+  namespace :api do
+    get '/autocomplete/members', to: 'autocomplete#members', as: "autocomplete_members"
+  end
+
   resources :search, only: [:new]
   resources :groups do
     resources :members, only: [:index, :create, :destroy] do
