@@ -1,0 +1,5 @@
+require_relative 'common'
+
+source(ProcessAllFilesInS3Bucket, 'knowledge.commons', 'island_press')
+transform(TransformEpub)
+destination(CreateNewResourceRecord)

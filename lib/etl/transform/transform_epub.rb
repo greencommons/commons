@@ -13,6 +13,9 @@ class TransformEpub
         publisher: publisher,
       }
     }
+
+  rescue => error
+    ap "Error opening epub: #{error}"
   end
 
   private
@@ -24,11 +27,11 @@ class TransformEpub
   end
 
   def creators
-    metadata.creators.first.content
+    metadata.creators&.first&.content
   end
 
   def date
-    metadata.date.content
+    metadata.date&.content
   end
 
   def metadata
@@ -52,7 +55,6 @@ class PageContentExtractor
 
   def start
     parsed_book.each_page_on_spine do |page|
-      print '.' # rubocop:disable Rails/Output
       parsed_xml = page.content_document.read
       page_plain = ActionView::Base.full_sanitizer.sanitize(parsed_xml)
       @book_text = (@book_text || '') + page_plain
