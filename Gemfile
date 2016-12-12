@@ -39,6 +39,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-wait'
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'shoulda'

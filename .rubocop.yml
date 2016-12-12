@@ -6,6 +6,7 @@ AllCops:
     - 'bin/**/*'
     - 'db/**/*'
     - 'config/initializers/devise.rb'
+    - 'app/helpers/devise_helper.rb'
     - 'Guardfile'
 
 # Ruby Style
@@ -54,3 +55,12 @@ RSpec/MultipleExpectations:
   Description: Checks if examples contain too many `expect` calls.
   Enabled: true
   Max: 3
+RSpec/NestedGroups:
+  Description: Checks for nested example groups.
+  Enabled: true
+  MaxNesting: 3
+RSpec/VerifiedDoubles:
+  # Note, we are already doing this by default. See spec/spec_helper.rb
+  Description: Prefer using verifying doubles over normal doubles.
+  Enabled: false
+  IgnoreSymbolicNames: false

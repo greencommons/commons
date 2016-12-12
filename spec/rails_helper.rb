@@ -15,6 +15,14 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = true
 
+  config.before(:suite) do
+    Resource.__elasticsearch__.create_index!(index: Resource.index_name)
+  end
+
+  config.before(:each, elasticsearch: true) do
+    reset_resource_index
+  end
+
   config.around(:each, search_indexing_callbacks: false) do |example|
     ClimateControl.modify(ENABLE_SEARCH_INDEX_CALLBACKS: 'false') do
       example.run
@@ -25,5 +33,10 @@ RSpec.configure do |config|
     Sidekiq::Testing.inline! do
       example.run
     end
+  end
+
+  def reset_resource_index
+    Resource.__elasticsearch__.delete_index!(index: Resource.index_name)
+    Resource.__elasticsearch__.create_index!(index: Resource.index_name)
   end
 end

@@ -1,5 +1,6 @@
 class Resource < ApplicationRecord
   include Elasticsearch::Model
+  index_name "articles-#{Rails.env}"
 
   RESOURCE_TYPES = {
     article: 0,
@@ -20,6 +21,19 @@ class Resource < ApplicationRecord
 
   validates :title, :resource_type, presence: true
 
-  after_save { SearchIndex.add(self) }
-  after_destroy { SearchIndex.remove(self) }
+  after_save do
+    SearchIndex.new(
+      model_name: self.class.name,
+      id: id,
+      async: true,
+    ).add
+  end
+
+  after_destroy do
+    SearchIndex.new(
+      model_name: self.class.name,
+      id: id,
+      async: true,
+    ).remove
+  end
 end
