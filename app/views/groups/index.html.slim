@@ -1,0 +1,25 @@
+.row
+  .col-lg-12
+    h1 My Groups
+    .bs-component
+    
+      table.table.table-striped.table-hover
+        thead
+          tr
+            th ID
+            th Name
+            th Short description
+            th Long description
+            th Url
+            th Email
+            th colspan="3" 
+        tbody
+          - @groups.each do |group|
+            tr
+              td= group.id
+              td= group.name
+              td= group.short_description
+              td= group.long_description
+              td= group.url
+              td= group.email
+              td= link_to 'Edit', edit_group_path(group)
