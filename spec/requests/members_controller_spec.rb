@@ -38,7 +38,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'POST /groups/:group_id/members/:id/make_admin' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.find_member(john) }
 
       before { group.add_user(john) }
@@ -65,7 +65,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'POST /groups/:group_id/members/:id/remove_admin' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.find_member(john) }
 
       context 'when regular user' do
@@ -92,7 +92,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'DELETE /groups/:group_id/members/:id' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.groups_users.where(user: john).first }
 
       before { group.add_user(john) }
