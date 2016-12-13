@@ -27,7 +27,8 @@ RSpec.describe Group do
   end
 
   describe 'Associations' do
-    it { is_expected.to have_and_belong_to_many(:users) }
+    it { is_expected.to have_many(:groups_users) }
+    it { is_expected.to have_many(:users) }
     it { is_expected.to have_many(:lists) }
   end
 end
