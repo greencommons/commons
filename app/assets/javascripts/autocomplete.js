@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
   $("[data-autocomplete]").each(function() {
-    let input = $(this);
-    let path = input.data("autocomplete");
+    var input = $(this);
+    var path = input.data("autocomplete");
 
     input.on('input', function() {
       if(input.val().length > 0) {
-        input.addClass("easy-autocomplete-loading")
+        input.addClass("easy-autocomplete-loading");
       } else {
-        input.removeClass("easy-autocomplete-loading")
+        input.removeClass("easy-autocomplete-loading");
       }
     });
 
@@ -26,12 +26,12 @@ $(document).ready(function() {
           enabled: true
         },
         onLoadEvent: function() {
-          input.removeClass("easy-autocomplete-loading")
+          input.removeClass("easy-autocomplete-loading");
         }
       },
       requestDelay: 500,
       theme: "bootstrap"
     });
   });
-  
+
 });
