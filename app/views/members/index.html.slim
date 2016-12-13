@@ -12,9 +12,9 @@
         .row
           .col-lg-10
             .form-group
-            = text_field_tag :email, "", data: { autocomplete: api_autocomplete_members_path(group_id: @group.id) }, 
-                                         class: "form-control", 
-                                         placeholder: "Type member name or email"
+            = text_field_tag :email, '', data: { autocomplete: api_autocomplete_members_path(group_id: @group.id) }, 
+                                         class: 'form-control', 
+                                         placeholder: 'Type member name or email'
           .col-lg-2
             .form-group
               = button_tag type: 'submit', class: 'form-control btn btn-primary' do

@@ -38,7 +38,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'POST /groups/:id/members' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.find_member(john) }
 
       context 'when regular user' do
