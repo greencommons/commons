@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :authenticate_user!, only: [:make_admin, :remove_admin, :destroy]
+  before_action :authenticate_user!, except: [:index]
   before_action :set_group
   before_action :set_group_user, except: [:index, :create]
   before_action :set_is_admin
