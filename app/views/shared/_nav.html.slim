@@ -22,6 +22,7 @@ nav.navbar.navbar-inverse
               span.caret
             ul.dropdown-menu role='menu'
               /! <li><a href='#'>Profile</a></li
+              li= link_to('My Groups', groups_path)
               li= link_to('Logout', destroy_user_session_path)
       - else
         form.navbar-form.navbar-right

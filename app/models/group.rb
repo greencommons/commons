@@ -11,4 +11,20 @@ class Group < ApplicationRecord
   def resources
     lists.map(&:resources).flatten.uniq
   end
+
+  def add_admin(user)
+    groups_users.create(user: user, admin: true)
+  end
+
+  def add_user(user)
+    groups_users.create(user: user)
+  end
+
+  def is_admin?(user)
+    find_member(user).try(:admin) || false
+  end
+
+  def find_member(user)
+    groups_users.where(user: user).first
+  end
 end
