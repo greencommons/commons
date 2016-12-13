@@ -1,0 +1,13 @@
+- if alert.present?
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+      .alert.alert-warning.alert-dismissable
+        a.close data-dismiss='alert' href='#'  ×
+        = alert
+        
+- if notice.present?
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+      .alert.alert-info.alert-dismissable
+        a.close data-dismiss='alert' href='#'  ×
+        = notice

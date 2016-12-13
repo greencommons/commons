@@ -4,14 +4,27 @@ RSpec.describe 'Groups', type: :request do
   let(:group) { create(:group) }
 
   context 'unauthorized' do
-    it 'redirects to login page' do
-      get group_members_path(group)
-      expect(response).to redirect_to new_user_session_path
+    describe 'GET /groups/:id/members' do
+      it 'gets 200' do
+        get group_members_path(group)
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    describe 'POST /groups/:group_id/members/:id/make_admin' do
+      let(:john) { create(:user, email: 'john@example.com') }
+      let(:john_group_user) { group.find_member(john) }
+
+      before { group.add_user(john) }
+
+      it 'redirects to login page' do
+        post make_admin_group_member_path(group, john_group_user)
+        expect(response).to redirect_to new_user_session_path
+      end
     end
   end
 
   context 'authorized' do
-
     let(:user) { create(:user) }
 
     before { sign_in user }
@@ -51,7 +64,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'POST /groups/:group_id/members/:id/make_admin' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.find_member(john) }
 
       before { group.add_user(john) }
@@ -78,7 +91,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'POST /groups/:group_id/members/:id/remove_admin' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.find_member(john) }
 
       context 'when regular user' do
@@ -105,7 +118,7 @@ RSpec.describe 'Groups', type: :request do
     end
 
     describe 'DELETE /groups/:group_id/members/:id' do
-      let(:john) { create(:user, email: "john@example.com") }
+      let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.groups_users.where(user: john).first }
 
       before { group.add_user(john) }

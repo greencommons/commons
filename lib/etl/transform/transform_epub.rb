@@ -52,7 +52,7 @@ class PageContentExtractor
 
   def start
     parsed_book.each_page_on_spine do |page|
-      print '.'
+      print '.' # rubocop:disable Rails/Output
       parsed_xml = page.content_document.read
       page_plain = ActionView::Base.full_sanitizer.sanitize(parsed_xml)
       @book_text = (@book_text || '') + page_plain
