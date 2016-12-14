@@ -13,11 +13,11 @@ class Group < ApplicationRecord
   end
 
   def add_admin(user)
-    groups_users.new(user: user, admin: true).save
+    groups_users.create(user: user, admin: true)
   end
 
   def add_user(user)
-    groups_users.new(user: user).save
+    groups_users.create(user: user)
   end
 
   def is_admin?(user)
