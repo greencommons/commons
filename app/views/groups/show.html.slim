@@ -1,10 +1,105 @@
-.row
-  .col-lg-2
-    = link_to '<< BACK', groups_path
-    
-.row
-  .col-lg-12 
-    h1= @group.name
-    = link_to 'Edit', edit_group_path(@group)
-    br
-    = link_to 'Manage Members', group_members_path(@group)
+.group-details
+  .row.group-details__row
+    .col-xs-2
+      = link_to '< BACK', groups_path, class: 'btn btn-default'
+      
+    .col-xs-10
+      .resource-actions
+        = render 'shared/components/btn_count', path: '#', 
+                                                text: 'ADD TO LIST', 
+                                                label: @group.lists.count,
+                                                classes: 'resource-actions__button--right',
+                                                style: 'success'
+
+        a href='' class='resource-actions__button--right btn btn-danger' LEAVE GROUP
+        = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
+          | MEMBERS 
+          .badge #{@group.users.count}
+        a href='' class='resource-actions__button btn btn-primary' SETTINGS
+
+  .row.group-details__row.group-details__row--half
+    .col-lg-1
+      = image_tag 'user.png', class: 'group-details__picture'
+    .col-lg-11 
+      h1= @group.name
+      
+  .row.group-details__row
+    .col-lg-12
+      .row
+        = form_tag '/', class: 'form-horizontal' do
+          .col-lg-2
+            = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
+          .col-lg-1
+            = button_tag type: 'submit', class: 'form-control btn btn-success' do
+              span.glyphicon.glyphicon-plus aria-hidden='true'
+          .col-lg-9
+            p.group-details__tag-list
+              span.glyphicon.glyphicon-tag.glyphicon--right
+              a href="/" tag
+              | , 
+              a href="/" another tag
+              | , 
+              a href="/" solar panels
+              
+  .row
+    .col-lg-12
+      h3 ABOUT
+      p
+        = @group.long_description * 10
+        
+  .row.group-details__row
+    .col-lg-12.text-right
+      = link_to '#' do
+        | SEE MORE
+        span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
+        
+  .row.group-details__row
+    .col-lg-12
+      .row
+        .col-lg-8
+          h3 WHAT'S NEW
+        .col-lg-4
+          .resource-actions
+            = link_to 'SEE ALL', '#', class: 'btn btn-primary resource-actions__button--align-title'
+      .row
+        - Resource.limit(4).each do |resource|
+          .col-lg-12
+            = render 'shared/summary_cards/main', resource: resource
+                  
+  .row.group-details__row
+    .col-lg-12
+      .row.group-details__row--half
+        .col-lg-8
+          h3 LISTS
+        .col-lg-4
+          .resource-actions
+            = link_to 'NEW LIST', '#', class: 'btn btn-primary resource-actions__button--right resource-actions__button--align-title'
+            = link_to 'ALL LISTS', '#', class: 'btn btn-primary resource-actions__button--align-title'
+      .row
+        - @group.lists.each do |list|
+          .col-lg-6
+            = render 'shared/summary_cards/main', resource: list
+            
+  .row.group-details__row
+    .col-lg-12
+      .row.group-details__row--half
+        .col-lg-12
+          h3 DISCUSS
+      .row
+        .col-lg-12
+          = render 'comments/comment', resource: nil
+          = render 'comments/comment', resource: nil
+          = render 'comments/comment', resource: nil
+          = render 'comments/subcomment', resource: nil
+          = render 'comments/comment', resource: nil
+      .row.group-details__row
+        .col-lg-12.text-center
+          = link_to 'LOAD MORE COMMENTS', '#', class: 'btn btn-primary'
+          
+      .row
+        .col-lg-12
+          = form_tag '/', class: 'comment-form' do
+            .form-group
+              = text_area_tag :comment, '', class: 'form-control comment-form__textarea', placeholder: 'Add a comment...'
+            .form-group.pull-right
+              = button_tag 'SUBMIT', type: 'submit', class: 'form-control btn btn-success'

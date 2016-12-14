@@ -2,7 +2,7 @@
   .summary-card__body
     .summary-card__row
       h5
-        span.glyphicon.glyphicon-th-large
+        span.glyphicon.glyphicon-th-large.glyphicon--right
         = resource.name
     .summary-card__row
       p
@@ -10,7 +10,7 @@
         = resource.long_description
     .summary-card__row
       p
-        span.glyphicon.glyphicon-tag
+        span.glyphicon.glyphicon-tag.glyphicon--right
         a href="/" tag
         | , 
         a href="/" another tag
@@ -19,15 +19,15 @@
     .summary-card__row.summary-card__row--last 
       .summary-card__metadata
         p
-          span.glyphicon.glyphicon-calendar
+          span.glyphicon.glyphicon-calendar.glyphicon--right
           = humanize_date(resource.created_at)
       .summary-card__metadata
         p
-          span.glyphicon.glyphicon-user
+          span.glyphicon.glyphicon-user.glyphicon--right
           | #{resource.users.count} members
       .summary-card__metadata
         p
-          span.glyphicon.glyphicon-list
+          span.glyphicon.glyphicon-list.glyphicon--right
           | #{resource.lists.count} Lists
       .summary-card__metadata.summary-card__metadata--right
         = link_to 'Read More >>', resource

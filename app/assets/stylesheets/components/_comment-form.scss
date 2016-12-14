@@ -1,0 +1,7 @@
+.comment-form {
+  .form-group &__textarea {
+    border: 1px solid $gray-lighter;
+    @include box-shadow(0 1px 4px rgba(0,0,0,.3));
+    padding: 10px 20px;
+  }
+}

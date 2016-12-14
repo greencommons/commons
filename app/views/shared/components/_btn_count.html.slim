@@ -1,0 +1,10 @@
+div class=("btn-count #{defined?(classes) ? classes : ''}")
+  = link_to path, class: "btn btn-#{defined?(style) ? style : 'primary'} btn-count__btn" do
+    - if defined?(icon) && defined?(text)
+      = text
+      span class="glyphicon glyphicon-#{icon} glyphicon--left"
+    - elsif defined?(icon)
+      span class="glyphicon glyphicon-#{icon}"
+    - elsif defined?(text)
+      = text
+  .btn-count__label= label

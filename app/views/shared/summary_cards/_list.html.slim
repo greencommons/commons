@@ -1,0 +1,17 @@
+.summary-card
+  .summary-card__body
+    .summary-card__row
+      .summary-card__more
+        span.glyphicon.glyphicon-calendar.glyphicon--right
+        = humanize_date(resource.created_at)
+      .summary-card__more.summary-card__more--space
+        span.glyphicon.glyphicon-list.glyphicon--right
+        = '13 items'
+      .summary-card__metadata
+        h5= resource.name
+      .clearfix
+    .summary-card__row--last
+      p
+        = resource.description
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum

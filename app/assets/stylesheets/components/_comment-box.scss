@@ -1,5 +1,5 @@
-.summary-card {
-  margin-bottom: 30px;
+.comment-box {
+  margin-bottom: 20px;
   width: 100%;
 
   &__body {
@@ -40,12 +40,12 @@
     text-align: right;
   }
 
-  &__actions--left {
-    text-align: left;
-  }
-
   .col-* {
     padding: 0;
+  }
+
+  .glyphicon {
+    margin-right: 10px;
   }
 
   h5, p {
@@ -53,6 +53,6 @@
   }
 
   img {
-    width: 100%;
+    width: 50px;
   }
 }

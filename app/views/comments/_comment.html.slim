@@ -1,0 +1,21 @@
+.row
+  .col-xs-12
+    .comment-box
+      .comment-box__body
+        .comment-box__row.row
+          .col-xs-1
+            = image_tag 'user.png'
+          .col-xs-11
+            .comment-box__row
+              .comment-box__more
+                | November 12, 2016
+              .comment-box__metadata
+                h5
+                  | Johnny
+              .clearfix
+            .comment-box__row.comment-box__row--last
+              p
+                = 'Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.'
+                
+      .comment-box__actions
+        = link_to 'REPLY', '/'

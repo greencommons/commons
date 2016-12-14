@@ -1,0 +1,51 @@
+.summary-card
+  .summary-card__body
+    .summary-card__row
+      .summary-card__more
+        = render 'shared/components/btn_count', path: '#', icon: 'plus', label: '10', style: 'success'
+        
+      h5
+        span.glyphicon.glyphicon-file.glyphicon--right
+        = resource.title
+    .summary-card__row
+      p
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    .summary-card__row
+      p
+        span.glyphicon.glyphicon-tag.glyphicon--right
+        a href="#" tag
+        | , 
+        a href="#" another tag
+        | , 
+        a href="#" solar panels
+    .summary-card__row.summary-card__row--last 
+      .summary-card__metadata
+        p
+          span.glyphicon.glyphicon-user.glyphicon--right
+          | Science Mag
+      .summary-card__metadata
+        p
+          span.glyphicon.glyphicon-calendar.glyphicon--right
+          = humanize_date(resource.created_at)
+      .summary-card__metadata
+        p
+          span.glyphicon.glyphicon-comment.glyphicon--right
+          | 13 Comments
+      .summary-card__metadata
+        p
+          span.glyphicon.glyphicon-edit.glyphicon--right
+          = link_to '102 Annotations', '#'
+      .summary-card__metadata.summary-card__metadata--right
+        = link_to 'View Original Document', '#'
+      .clearfix
+    
+  .summary-card__actions.summary-card__actions--left
+    p.italic
+      | Added to 
+      = link_to 'List Name', '#'
+      |  by 
+      = link_to 'Person Name', '#'
+      |  4 days ago

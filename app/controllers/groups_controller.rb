@@ -6,6 +6,9 @@ class GroupsController < ApplicationController
     @groups = current_user.groups
   end
 
+  def show
+  end
+
   def new
     @group = Group.new
   end
