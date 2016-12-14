@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $("[data-autocomplete]").each(function() {
     var input = $(this);
     var path = input.data("autocomplete");
@@ -33,5 +32,4 @@ $(document).ready(function() {
       theme: "bootstrap"
     });
   });
-
 });
