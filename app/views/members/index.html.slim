@@ -1,13 +1,13 @@
 .row
   .col-lg-2
     = link_to '<< BACK', @group
-    
+
 .row
   .col-lg-6
     h1 #{@group.name} Group
     h4 #{@members.count} members
   .col-lg-6
-    - if @is_admin
+    - if @admin
       = form_tag('/', class: 'form-horizontal add-member-form') do
         .row
           .col-lg-10

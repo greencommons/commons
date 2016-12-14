@@ -38,11 +38,12 @@ class GroupsController < ApplicationController
   end
 
   private
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
-    def group_params
-      params.require(:group).permit(:name, :short_description, :long_description, :url, :email)
-    end
+  def set_group
+    @group = Group.find(params[:id])
+  end
+
+  def group_params
+    params.require(:group).permit(:name, :short_description, :long_description, :url, :email)
+  end
 end

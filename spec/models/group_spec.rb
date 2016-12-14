@@ -34,7 +34,7 @@ RSpec.describe Group do
       group.add_admin(user)
 
       group_user = group.groups_users.where(user: user).first
-      expect(group_user).to_not be nil
+      expect(group_user).not_to be nil
       expect(group_user.admin).to eq(true)
     end
   end
@@ -47,30 +47,29 @@ RSpec.describe Group do
       group.add_user(user)
 
       group_user = group.groups_users.where(user: user).first
-      expect(group_user).to_not be nil
+      expect(group_user).not_to be nil
       expect(group_user.admin).to eq(false)
     end
   end
 
-  describe '#is_admin?' do
+  describe '#admin?' do
     let(:group) { create(:group) }
     let(:user) { create(:user) }
 
     context 'with admin' do
       it 'gets true back' do
         group.add_admin(user)
-        expect(group.is_admin?(user)).to be true
+        expect(group.admin?(user)).to be true
       end
     end
 
     context 'with regular user' do
       it 'gets false back' do
         group.add_user(user)
-        expect(group.is_admin?(user)).to be false
+        expect(group.admin?(user)).to be false
       end
     end
   end
-
 
   describe 'Associations' do
     it { is_expected.to have_many(:groups_users) }
