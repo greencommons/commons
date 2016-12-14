@@ -1,8 +1,89 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <div class="text-center">
   <h1>Paper Default Styles</h1>
   <p class="lead">These are default styles taken directly from the <a href="https://bootswatch.com/paper/">Paper theme</a>.</p>
 </div>
 
+
+  <!-- Summary Card
+  ================================================== -->
+  <div class="bs-docs-section clearfix">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+          <h2 id="navbar">Summary Cards</h2>
+        </div>
+
+        <div class='row'>
+          <div class='col-xs-12'>
+            <p>
+              Summary cards are reusable components used to show the details
+              of specific entites (groups, groups_users, and more to come).
+              Currently, the type of summary card that will be used is deduced from
+              the passed resource class.
+            </p>
+          </div>
+        </div>
+
+        <div class="summary-card-group-example">
+          <div class='row'>
+            <div class='col-xs-12'>
+              <h3 id="navbar">Groups</h3>
+              <p>The following slim template will generate the summary card below.</p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <pre><code class='ruby'>.row<br/>  .col-xs-12<br/><%= "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:group)" %></code></pre>
+            </div>
+            <div class='col-xs-12'>
+              <%= render "shared/summary_cards/main", resource: FactoryGirl.build(:group) %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <p>
+                Bootstrap classes can be used to show a different amount of cards per line.
+              </p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <pre><code class='ruby'>.row<br/>  .col-xs-6<br/><%= "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:group)" %><br/>  .col-xs-6<br/><%= "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:group)" %></code></pre>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-6'>
+              <%= render "shared/summary_cards/main", resource: FactoryGirl.build(:group) %>
+            </div>
+            <div class='col-xs-6'>
+              <%= render "shared/summary_cards/main", resource: FactoryGirl.build(:group) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-card-group-example">
+          <div class='row'>
+            <div class='col-xs-12'>
+              <h3 id="navbar">Group Members</h3>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <pre><code class='ruby'>.row<br/>  .col-xs-12<br/><%= "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:groups_user)" %></code></pre>
+            </div>
+            <div class='col-xs-6'>
+              <%= render "shared/summary_cards/main", resource: FactoryGirl.build(:groups_user) %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <!-- Navbar
   ================================================== -->
