@@ -11,7 +11,17 @@ class MembersController < ApplicationController
 
   def create
     user = User.where(email: params[:email]).first
-    notice = add_group_user(user)
+
+    notice = if user
+      if @group.add_user(user)
+        'Member was successfully added.'
+      else
+        'Member already in group.'
+      end
+    else
+      'User not found.'
+    end
+
     redirect_to group_members_path(@group), notice: notice
   end
 
@@ -54,11 +64,5 @@ class MembersController < ApplicationController
       unless @is_admin
         redirect_to group_members_path(@group), alert: "You don't have the rights to do that."
       end
-    end
-
-    def add_group_user(user)
-      return 'User not found.' unless user
-      return 'Member was successfully added.' if @group.add_user(user)
-      'Member already in group.'
     end
 end
