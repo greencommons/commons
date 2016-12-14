@@ -1,8 +1,83 @@
+link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" rel="stylesheet" /
+script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" 
+javascript:
+  hljs.initHighlightingOnLoad();
+
 .text-center
   h1 Paper Default Styles
   p.lead
     | These are default styles taken directly from the
     a href='https://bootswatch.com/paper/'  Paper theme
+    
+/!
+  | Summary Card
+  | \==================================================
+.bs-docs-section.clearfix
+  .row
+    .col-lg-12
+      .page-header
+        h2#navbar Summary Cards
+      .row
+        .col-xs-12
+          p
+            | Summary cards are reusable components used to show the details
+            | of specific entites (groups, groups_users, and more to come).
+            | Currently, the type of summary card that will be used is deduced from
+            | the passed resource class.
+      .summary-card-group-example
+        .row
+          .col-xs-12
+            h3#navbar Groups
+            p The following slim template will generate the summary card below.
+        .row
+          .col-xs-12
+            pre
+              code.ruby
+                | .row
+                br/
+                |   .col-xs-12
+                br/
+                = "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:group)"
+          .col-xs-12
+            = render "shared/summary_cards/main", resource: FactoryGirl.build(:group)
+        .row
+          .col-xs-12
+            p
+              | Bootstrap classes can be used to show a different amount of cards per line.
+        .row
+          .col-xs-12
+            pre
+              code.ruby
+                | .row
+                br/
+                |   .col-xs-6
+                br/
+                = "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:group)"
+                br/
+                |   .col-xs-6
+                br/
+                = "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:group)"
+        .row
+          .col-xs-6
+            = render "shared/summary_cards/main", resource: FactoryGirl.build(:group)
+          .col-xs-6
+            = render "shared/summary_cards/main", resource: FactoryGirl.build(:group)
+      .summary-card-group-example
+        .row
+          .col-xs-12
+            h3#navbar Group Members
+        .row
+          .col-xs-12
+            pre
+              code.ruby
+                | .row
+                br/
+                |   .col-xs-12
+                br/
+                = "    = render 'shared/summary_cards/main', resource: FactoryGirl.build(:groups_user)"
+          .col-xs-6
+            = render "shared/summary_cards/main", resource: FactoryGirl.build(:groups_user)
+
 /!
   | Navbar
   | \==================================================
