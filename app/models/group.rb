@@ -20,11 +20,11 @@ class Group < ApplicationRecord
     groups_users.create(user: user)
   end
 
-  def is_admin?(user)
+  def admin?(user)
     find_member(user).try(:admin) || false
   end
 
   def find_member(user)
-    groups_users.where(user: user).first
+    groups_users.find_by(user: user)
   end
 end
