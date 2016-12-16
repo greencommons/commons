@@ -1,9 +1,9 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
-    @groups = current_user.groups
+    @groups = policy_scope(Group)
   end
 
   def show
@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+    authorize @group
   end
 
   def edit
@@ -18,6 +19,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+    authorize @group
 
     if @group.save
       @group.add_admin(current_user)
@@ -44,6 +46,7 @@ class GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
+    authorize @group
   end
 
   def group_params
