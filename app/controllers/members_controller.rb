@@ -3,9 +3,9 @@ class MembersController < ApplicationController
   before_action :set_group
   before_action :set_group_user, except: [:index, :create]
   before_action :set_admin
-  before_action :check_admin_rights, except: [:index]
 
   def index
+    authorize @group
     @members = @group.groups_users.includes(:user)
   end
 
@@ -27,14 +27,17 @@ class MembersController < ApplicationController
   end
 
   def make_admin
+    authorize @group, :update?
     toggle_admin(true)
   end
 
   def remove_admin
+    authorize @group, :update?
     toggle_admin(false)
   end
 
   def destroy
+    authorize @group
     @group_user.destroy
     redirect_to group_members_path(@group), notice: 'Member was successfully removed.'
   end
@@ -58,12 +61,6 @@ class MembersController < ApplicationController
       redirect_to group_members_path(@group), notice: 'Member was successfully updated.'
     else
       redirect_to group_members_path(@group), alert: 'The member could not be updated.'
-    end
-  end
-
-  def check_admin_rights
-    unless @admin
-      redirect_to group_members_path(@group), alert: "You don't have the rights to do that."
     end
   end
 end
