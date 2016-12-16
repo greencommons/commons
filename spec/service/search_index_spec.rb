@@ -1,6 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe SearchIndex do
+  describe '.index_name' do
+    it 'returns the correct index name, given the model and environment' do
+      resource = build_stubbed(:resource)
+
+      name = SearchIndex.index_name(resource)
+
+      expect(name).to eq 'resources-test'
+    end
+  end
+
+  describe '.log_elasticsearch_warning' do
+    it 'logs a warning, tagged with [elasticsearch]' do
+      allow(Rails.logger).to receive(:tagged)
+
+      SearchIndex.log_elasticsearch_warning('watch out!')
+
+      expect(Rails.logger).to have_received(:tagged).with('ELASTICSEARCH')
+    end
+  end
+
   describe '#add' do
     it 'adds the record to the search index' do
       travel_to(Time.zone.now) do
@@ -20,42 +40,26 @@ RSpec.describe SearchIndex do
       end
     end
 
-    context 'when asked to be performed asynchronously' do
-      it 'enqueues a job to include the record in the search index' do
-        allow(AddToIndexJob).to receive(:perform_async)
-        record = build_stubbed(:resource)
+    context 'if callbacks are disabled', search_indexing_callbacks: false do
+      it 'does not enqueue the job' do
+        allow(Elasticsearch::Model.client).to receive(:index)
+        record = create(:resource)
         model_name = record.class.name
 
-        SearchIndex.new(model_name: model_name, id: record.id, async: true).add
+        SearchIndex.new(model_name: model_name, id: record.id).add
 
-        expect(AddToIndexJob).to have_received(:perform_async).
-          with(record.class.name, record.id)
+        expect(Elasticsearch::Model.client).not_to have_received(:index)
       end
 
-      context 'if index callbacks disabled', search_indexing_callbacks: false do
-        it 'does not add to the search index' do
-          allow(AddToIndexJob).to receive(:perform_async)
-          record = build_stubbed(:resource)
-          model_name = record.class.name
+      it 'logs a warning' do
+        record = create(:resource)
+        model_name = record.class.name
+        allow(Rails.logger).to receive(:warn)
 
-          SearchIndex.new(model_name: model_name, id: record.id, async: true).add
+        SearchIndex.new(model_name: model_name, id: record.id).add
 
-          expect(AddToIndexJob).not_to have_received(:perform_async).
-            with(record.class.name, record.id)
-        end
-
-        it 'logs a warning' do
-          record = create(:resource)
-          allow(Rails.logger).to receive(:warn)
-
-          SearchIndex.new(
-            model_name: record.class.name,
-            id: record.id,
-            async: true,
-          ).add
-
-          expect(Rails.logger).to have_received(:warn).with(/callbacks.+disabled/)
-        end
+        expect(Rails.logger).to have_received(:warn).
+          with(/callbacks.+disabled/)
       end
     end
   end
@@ -76,35 +80,26 @@ RSpec.describe SearchIndex do
         )
     end
 
-    context 'when asked to be performed asynchronously' do
-      it 'removes the resource from the search index after deletion' do
-        allow(RemoveFromIndexJob).to receive(:perform_async)
-        record = build_stubbed(:resource)
+    context 'if callbacks are disabled', search_indexing_callbacks: false do
+      it 'does not enqueue the job' do
+        allow(Elasticsearch::Model.client).to receive(:delete)
+        record = create(:resource)
+        model_name = record.class.name
 
-        SearchIndex.new(
-          model_name: record.class.name,
-          id: record.id,
-          async: true,
-        ).remove
+        SearchIndex.new(model_name: model_name, id: record.id).remove
 
-        expect(RemoveFromIndexJob).to have_received(:perform_async).
-          with(record.class.name, record.id)
+        expect(Elasticsearch::Model.client).not_to have_received(:delete)
       end
 
-      context 'if index callbacks disabled', search_indexing_callbacks: false do
-        it 'does not remove the resource from the index' do
-          allow(RemoveFromIndexJob).to receive(:perform_async)
-          record = build_stubbed(:resource)
+      it 'logs a warning' do
+        record = create(:resource)
+        model_name = record.class.name
+        allow(Rails.logger).to receive(:warn)
 
-          SearchIndex.new(
-            model_name: record.class.name,
-            id: record.id,
-            async: true,
-          ).remove
+        SearchIndex.new(model_name: model_name, id: record.id).remove
 
-          expect(RemoveFromIndexJob).not_to have_received(:perform_async).
-            with(record.class.name, record.id)
-        end
+        expect(Rails.logger).to have_received(:warn).
+          with(/callbacks.+disabled/)
       end
     end
   end
