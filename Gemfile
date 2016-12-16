@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'shoulda'
+  gem 'pundit-matchers', '~> 1.1.0'
 end
 
 group :test do
