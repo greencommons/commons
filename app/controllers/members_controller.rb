@@ -1,8 +1,8 @@
 class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_group
-  before_action :set_group_user, except: [:index, :create]
-  before_action :set_admin
+  before_action :set_group_user, except: [:index, :create, :leave]
+  before_action :set_admin, except: [:leave]
 
   def index
     authorize @group
@@ -40,6 +40,13 @@ class MembersController < ApplicationController
     authorize @group
     @group_user.destroy
     redirect_to group_members_path(@group), notice: 'Member was successfully removed.'
+  end
+
+  def leave
+    @group_current_user = @group.find_member(current_user)
+    authorize @group_current_user
+    @group_current_user.destroy
+    redirect_to @group, notice: 'You are no longer a member of this group.'
   end
 
   private

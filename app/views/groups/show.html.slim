@@ -10,12 +10,17 @@
                                                 label: @group.lists.count,
                                                 classes: 'resource-actions__button--right',
                                                 style: 'primary'
-
-        a href='' class='resource-actions__button--right btn btn-default' LEAVE GROUP
+        
+        - if @group_current_user                                 
+          = link_to 'LEAVE GROUP', leave_group_members_path(@group), 
+                                   method: :delete, 
+                                   data: { confirm: 'Are you sure?' },
+                                   class: 'resource-actions__button--right btn btn-default'
+                                   
         = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
           | MEMBERS 
           .badge #{@group.users.count}
-        a href='' class='resource-actions__button btn btn-primary' SETTINGS
+        = link_to 'SETTINGS', edit_group_path(@group), class: 'resource-actions__button btn btn-primary'
 
   .row.group-details__row.group-details__row--half
     .col-lg-1
@@ -26,20 +31,23 @@
   .row.group-details__row
     .col-lg-12
       .row
-        = form_tag '/', class: 'form-horizontal' do
-          .col-lg-2
-            = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
-          .col-lg-1
-            = button_tag type: 'submit', class: 'form-control btn btn-primary' do
-              span.glyphicon.glyphicon-plus aria-hidden='true'
-          .col-lg-9
-            p.group-details__tag-list
-              span.glyphicon.glyphicon-tag.glyphicon--right
-              a href="/" tag
-              | , 
-              a href="/" another tag
-              | , 
-              a href="/" solar panels
+        - if @admin
+          .col-lg-3
+            .row
+              = form_tag '/', class: 'form-horizontal' do
+                .col-lg-8
+                  = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
+                .col-lg-4
+                  = button_tag type: 'submit', class: 'form-control btn btn-primary' do
+                    span.glyphicon.glyphicon-plus aria-hidden='true'
+        .col-lg-9
+          p.group-details__tag-list
+            span.glyphicon.glyphicon-tag.glyphicon--right
+            a href="/" tag
+            | , 
+            a href="/" another tag
+            | , 
+            a href="/" solar panels
               
   .row
     .col-lg-12
