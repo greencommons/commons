@@ -1,13 +1,8 @@
-link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" rel="stylesheet" /
-script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" 
-javascript:
-  hljs.initHighlightingOnLoad();
-
 .text-center
-  h1 Paper Default Styles
+  h1 Green Commons Visual Components
   p.lead
-    | These are default styles taken directly from the
-    a href='https://bootswatch.com/paper/'  Paper theme
+    | Below are the components built in 
+    | Green Commons that available for reuse
     
 /!
   | Summary Card
@@ -32,7 +27,7 @@ javascript:
         .row
           .col-xs-12
             pre
-              code.ruby
+              code
                 | .row
                 br/
                 |   .col-xs-12
@@ -47,7 +42,7 @@ javascript:
         .row
           .col-xs-12
             pre
-              code.ruby
+              code
                 | .row
                 br/
                 |   .col-xs-6
@@ -69,7 +64,7 @@ javascript:
         .row
           .col-xs-12
             pre
-              code.ruby
+              code
                 | .row
                 br/
                 |   .col-xs-12
@@ -78,6 +73,12 @@ javascript:
           .col-xs-6
             = render "shared/summary_cards/main", resource: FactoryGirl.build(:groups_user)
 
+.text-center
+  h1 Paper Default Styles
+  p.lead
+    | These are default styles taken directly from the
+    a href='https://bootswatch.com/paper/'  Paper theme
+                
 /!
   | Navbar
   | \==================================================
