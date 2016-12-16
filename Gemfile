@@ -20,6 +20,7 @@ gem 'sidekiq'
 gem 'slim'
 gem 'uglifier', '>= 1.3.0'
 gem 'react-rails', '~> 1.10'
+gem 'pundit'
 
 group :development do
   gem 'bummr'
