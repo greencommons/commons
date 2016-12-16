@@ -9,9 +9,9 @@
                                                 text: 'ADD TO LIST', 
                                                 label: @group.lists.count,
                                                 classes: 'resource-actions__button--right',
-                                                style: 'success'
+                                                style: 'primary'
 
-        a href='' class='resource-actions__button--right btn btn-danger' LEAVE GROUP
+        a href='' class='resource-actions__button--right btn btn-default' LEAVE GROUP
         = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
           | MEMBERS 
           .badge #{@group.users.count}
@@ -30,7 +30,7 @@
           .col-lg-2
             = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
           .col-lg-1
-            = button_tag type: 'submit', class: 'form-control btn btn-success' do
+            = button_tag type: 'submit', class: 'form-control btn btn-primary' do
               span.glyphicon.glyphicon-plus aria-hidden='true'
           .col-lg-9
             p.group-details__tag-list
@@ -102,4 +102,4 @@
             .form-group
               = text_area_tag :comment, '', class: 'form-control comment-form__textarea', placeholder: 'Add a comment...'
             .form-group.pull-right
-              = button_tag 'SUBMIT', type: 'submit', class: 'form-control btn btn-success'
+              = button_tag 'SUBMIT', type: 'submit', class: 'form-control btn btn-primary'
