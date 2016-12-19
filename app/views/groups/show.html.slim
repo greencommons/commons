@@ -70,7 +70,7 @@
           .resource-actions
             = link_to 'SEE ALL', '#', class: 'btn btn-primary resource-actions__button--align-title'
       .row
-        - Resource.limit(4).each do |resource|
+        - @resources.each do |resource|
           .col-lg-12
             = render 'shared/summary_cards/main', resource: resource
                   

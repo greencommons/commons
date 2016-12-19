@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @resources = @group.latest_resources
     @group_current_user = @group.find_member(current_user)
     @admin = @group_current_user.try(:admin?)
   end

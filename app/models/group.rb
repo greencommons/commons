@@ -5,11 +5,12 @@ class Group < ApplicationRecord
   has_many :groups_users
   has_many :users, through: :groups_users
   has_many :lists, as: :owner
+  has_many :resources, through: :lists
 
   validates :name, presence: true
 
-  def resources
-    lists.map(&:resources).flatten.uniq
+  def latest_resources
+    resources.sort_by_created_at.limit(4)
   end
 
   def add_admin(user)
