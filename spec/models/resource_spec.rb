@@ -20,38 +20,24 @@ RSpec.describe Resource do
   describe 'Callbacks' do
     describe 'after_save' do
       it 'adds the resource to the search index after creation' do
-        index = double('SearchIndex', add: true)
-        allow(SearchIndex).to receive(:new).and_return(index)
+        allow(AddToIndexJob).to receive(:perform_async)
 
         resource = create(:resource)
 
-        expect(SearchIndex).to have_received(:new).
-          with(
-            model_name: resource.class.name,
-            id: resource.id,
-            async: true,
-          )
-        expect(index).to have_received(:add)
+        expect(AddToIndexJob).to have_received(:perform_async).
+          with(resource.class.name, resource.id)
       end
     end
 
     describe 'after_destroy' do
       it 'removes the resource from the search index after deletion' do
         resource = create(:resource)
-        index = double('SearchIndex', remove: true)
-        allow(SearchIndex).to receive(:new).and_return(index)
-        id = resource.id
-        model_name = resource.class.name
+        allow(RemoveFromIndexJob).to receive(:perform_async)
 
         resource.destroy
 
-        expect(SearchIndex).to have_received(:new).
-          with(
-            model_name: model_name,
-            id: id,
-            async: true,
-          )
-        expect(index).to have_received(:remove)
+        expect(RemoveFromIndexJob).to have_received(:perform_async).
+          with(resource.class.name, resource.id)
       end
     end
   end

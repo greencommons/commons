@@ -37,6 +37,32 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
+    describe 'POST /groups/:id/members' do
+      let(:john) { create(:user, email: 'john@example.com') }
+      let(:john_group_user) { group.find_member(john) }
+
+      context 'when regular user' do
+        it 'does not switch the user to admin for this group and redirect to group_members_path' do
+          group && john
+
+          post group_members_path(group), params: { email: john.email }
+          expect(group.find_member(john)).to be nil
+        end
+      end
+
+      context 'when admin' do
+        it 'adds the user to the group and redirect to the group_members_path' do
+          group.add_admin(user)
+
+          post group_members_path(group), params: { email: john.email }
+
+          expect(john_group_user).not_to be nil
+          expect(john_group_user.admin).to be false
+          expect(response).to redirect_to group_members_path
+        end
+      end
+    end
+
     describe 'POST /groups/:group_id/members/:id/make_admin' do
       let(:john) { create(:user, email: 'john@example.com') }
       let(:john_group_user) { group.find_member(john) }
@@ -48,7 +74,7 @@ RSpec.describe 'Groups', type: :request do
           group.add_user(user)
 
           post make_admin_group_member_path(group, john_group_user)
-          expect(group.is_admin?(john)).to be false
+          expect(group.admin?(john)).to be false
           expect(response).to redirect_to group_members_path
         end
       end
@@ -58,7 +84,7 @@ RSpec.describe 'Groups', type: :request do
           group.add_admin(user)
 
           post make_admin_group_member_path(group, john_group_user)
-          expect(group.is_admin?(john)).to be true
+          expect(group.admin?(john)).to be true
           expect(response).to redirect_to group_members_path
         end
       end
@@ -74,7 +100,7 @@ RSpec.describe 'Groups', type: :request do
           group.add_admin(john)
 
           post remove_admin_group_member_path(group, john_group_user)
-          expect(group.is_admin?(john)).to be true
+          expect(group.admin?(john)).to be true
           expect(response).to redirect_to group_members_path
         end
       end
@@ -85,7 +111,7 @@ RSpec.describe 'Groups', type: :request do
           group.add_admin(john)
 
           post remove_admin_group_member_path(group, john_group_user)
-          expect(group.is_admin?(john)).to be false
+          expect(group.admin?(john)).to be false
           expect(response).to redirect_to group_members_path
         end
       end
@@ -102,7 +128,7 @@ RSpec.describe 'Groups', type: :request do
           group.add_user(user)
 
           delete group_member_path(group, john_group_user)
-          expect(john_group_user.reload).to_not be nil
+          expect(john_group_user.reload).not_to be nil
           expect(response).to redirect_to group_members_path
         end
       end
@@ -115,7 +141,7 @@ RSpec.describe 'Groups', type: :request do
           expect(group.groups_users.where(user: john).first).to be nil
           expect(response).to redirect_to group_members_path
         end
-        end
+      end
     end
   end
 end

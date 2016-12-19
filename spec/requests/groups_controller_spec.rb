@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Groups', type: :request do
-
   let(:group) { create(:group) }
   let(:valid_attributes) { attributes_for(:group) }
   let(:invalid_attributes) { attributes_for(:group, name: nil) }
 
-  describe "unauthorized" do
+  describe 'unauthorized' do
     describe 'GET /groups' do
       it 'redirects to login page' do
         get groups_path

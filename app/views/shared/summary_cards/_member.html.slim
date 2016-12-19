@@ -14,7 +14,7 @@
           p
             = 'Software Engineer @ Island Press. I like turtles.'
             
-  - if resource.user != current_user && @is_admin
+  - if resource.user != current_user && @admin
     .summary-card__actions
       - if resource.admin?
         = link_to 'REMOVE ADMIN', remove_admin_group_member_path(@group, resource), method: :post
