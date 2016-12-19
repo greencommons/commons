@@ -3,21 +3,20 @@
     = link_to '<< BACK', @group
 
 .row
-  .col-lg-6
+  .col-xs-12.col-md-6.col-lg-6
     h1 #{@group.name} Group
     h4 #{@members.count} members
-  .col-lg-6
+  .col-xs-12.col-md-6.col-lg-6
     - if @admin
-      = form_tag('/', class: 'form-horizontal add-member-form') do
-        .row
-          .col-lg-10
-            .form-group
-              = text_field_tag :name, '', class: 'form-control', placeholder: 'Type member name or email'
-          .col-lg-2
-            .form-group
-              = button_tag type: 'submit', class: 'form-control btn btn-primary' do
-                span.glyphicon.glyphicon-plus aria-hidden='true'
-
+      .add-member-form
+        = react_component('AutocompleteForm', { name: 'user-autocomplete',
+                                                field: 'email',
+                                                action: group_members_path,
+                                                autocomplete_url: api_autocomplete_members_path(group_id: @group.id),
+                                                placeholder: 'Type member name or email',
+                                                authenticity_token: form_authenticity_token }, 
+                                              { prerender: true })
+      
 .row
   - @members.each do |member|
     .col-xs-12.col-lg-6

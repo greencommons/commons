@@ -868,3 +868,11 @@ $dl-horizontal-offset:        $component-offset-horizontal !default;
 $dl-horizontal-breakpoint:    $grid-float-breakpoint !default;
 //** Horizontal line color.
 $hr-border:                   $gray-lighter !default;
+
+//== Autocomplete Form
+//
+//##
+
+$autocomplete-bg-color:       #fff !default;
+$autocomplete-border-color:   $gray-light !default;
+$autocomplete-hover-color:    #ebebeb !default;
