@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::AutocompleteController', type: :request do
-
   describe 'unauthorized' do
     describe 'GET /autocomplete/members' do
       it 'redirects to login page' do
@@ -44,7 +43,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
             group = create(:group)
             john = create(:user, email: 'john@commons.org')
             mark = create(:user, email: 'mark@commons.org')
-            jack = create(:user, email: 'jack@commons.org')
+            create(:user, email: 'jack@commons.org')
 
             group.add_user(john)
 

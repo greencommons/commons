@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_group
   before_action :set_group_user, except: [:index, :create]
-  before_action :set_is_admin
+  before_action :set_admin
   before_action :check_admin_rights, except: [:index]
 
   def index
@@ -12,15 +12,16 @@ class MembersController < ApplicationController
   def create
     user = User.where(email: params[:email]).first
 
-    notice = if user
-      if @group.add_user(user)
-        'Member was successfully added.'
+    notice =
+      if user
+        if @group.add_user(user)
+          'Member was successfully added.'
+        else
+          'Member already in group.'
+        end
       else
-        'Member already in group.'
+        'User not found.'
       end
-    else
-      'User not found.'
-    end
 
     redirect_to group_members_path(@group), notice: notice
   end

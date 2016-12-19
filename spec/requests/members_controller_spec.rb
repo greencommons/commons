@@ -56,7 +56,7 @@ RSpec.describe 'Groups', type: :request do
 
           post group_members_path(group), params: { email: john.email }
 
-          expect(john_group_user).to_not be nil
+          expect(john_group_user).not_to be nil
           expect(john_group_user.admin).to be false
           expect(response).to redirect_to group_members_path
         end

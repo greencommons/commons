@@ -11,6 +11,6 @@ class User < ApplicationRecord
   has_many :groups, through: :groups_users
   has_many :lists, as: :owner
 
-  scope :filter_by_email, -> (email) { where("email ILIKE ?", "%#{email}%") }
+  scope :filter_by_email, ->(email) { where('email ILIKE ?', "%#{email}%") }
   scope :sort_by_email, -> { order('email ASC') }
 end

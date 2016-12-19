@@ -7,8 +7,8 @@ RSpec.describe UserFilter do
         it 'returns all the users not belonging to the given group' do
           group = create(:group)
           john = create(:user, email: 'john@commons.org')
-          mark = create(:user, email: 'mark@commons.org')
-          jack = create(:user, email: 'jack@commons.org')
+          create(:user, email: 'mark@commons.org')
+          create(:user, email: 'jack@commons.org')
 
           group.add_user(john)
 
@@ -21,8 +21,8 @@ RSpec.describe UserFilter do
         it 'returns no users when the only matching user belongs to the group' do
           group = create(:group)
           john = create(:user, email: 'john@commons.org')
-          mark = create(:user, email: 'mark@commons.org')
-          jack = create(:user, email: 'jack@commons.org')
+          create(:user, email: 'mark@commons.org')
+          create(:user, email: 'jack@commons.org')
 
           group.add_user(john)
 
@@ -34,9 +34,9 @@ RSpec.describe UserFilter do
       context 'when the group has no users' do
         it 'returns all the users with query=comm' do
           group = create(:group)
-          john = create(:user, email: 'john@commons.org')
-          mark = create(:user, email: 'mark@commons.org')
-          jack = create(:user, email: 'jack@commons.org')
+          create(:user, email: 'john@commons.org')
+          create(:user, email: 'mark@commons.org')
+          create(:user, email: 'jack@commons.org')
 
           users = UserFilter.new(query: 'comm', group_id: group.id).run
           expect(users.map(&:email)).to include('john@commons.org',
@@ -48,9 +48,9 @@ RSpec.describe UserFilter do
 
     context 'when group_id is nil' do
       it 'returns all the users with query=comm' do
-        john = create(:user, email: 'john@commons.org')
-        mark = create(:user, email: 'mark@commons.org')
-        jack = create(:user, email: 'jack@commons.org')
+        create(:user, email: 'john@commons.org')
+        create(:user, email: 'mark@commons.org')
+        create(:user, email: 'jack@commons.org')
 
         users = UserFilter.new(query: 'comm').run
         expect(users.map(&:email)).to include('john@commons.org',
@@ -59,9 +59,9 @@ RSpec.describe UserFilter do
       end
 
       it 'returns john with query=jo' do
-        john = create(:user, email: 'john@commons.org')
-        mark = create(:user, email: 'mark@commons.org')
-        jack = create(:user, email: 'jack@commons.org')
+        create(:user, email: 'john@commons.org')
+        create(:user, email: 'mark@commons.org')
+        create(:user, email: 'jack@commons.org')
 
         users = UserFilter.new(query: 'jo').run
         expect(users.map(&:email)).to eq(['john@commons.org'])
