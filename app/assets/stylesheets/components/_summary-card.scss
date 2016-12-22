@@ -16,6 +16,10 @@
     margin-bottom: 0;
   }
 
+  &__row--min-height {
+    min-height: 46px;
+  }
+
   &__metadata {
     float: left;
     margin-right: 5%;
