@@ -77,6 +77,13 @@ RSpec.describe 'Groups', type: :request do
         expect(john_group_user.reload).not_to be nil
       end
     end
+
+    describe 'DELETE /groups/:group_id/members' do
+      it 'removes the current_user from the group' do
+        delete leave_group_members_path(group)
+        expect(group.find_member(user)).to be nil
+      end
+    end
   end
 
   context 'group admin' do
@@ -138,6 +145,25 @@ RSpec.describe 'Groups', type: :request do
         delete group_member_path(group, group.find_member(john))
         expect(group.groups_users.where(user: john).first).to be nil
         expect(response).to redirect_to group_members_path
+      end
+    end
+
+    describe 'DELETE /groups/:group_id/members' do
+      context 'with multiple admins' do
+        it 'removes the current_user from the group' do
+          john = create(:user, email: 'john@example.com')
+          group.add_admin(john)
+
+          delete leave_group_members_path(group)
+          expect(group.find_member(user)).to be nil
+        end
+      end
+
+      context 'with one admin' do
+        it 'does not remove the current_user from the group' do
+          delete leave_group_members_path(group)
+          expect(group.find_member(user)).not_to be nil
+        end
       end
     end
   end

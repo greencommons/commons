@@ -46,8 +46,13 @@ class MembersController < ApplicationController
   def leave
     @group_current_user = @group.find_member(current_user)
     authorize @group_current_user
-    @group_current_user.destroy
-    redirect_to @group, notice: 'You are no longer a member of this group.'
+
+    if !@group_current_user.admin? || @group.admin_count > 1
+      @group_current_user.destroy
+      redirect_to @group, notice: 'You are no longer a member of this group.'
+    else
+      redirect_to @group, notice: 'You cannot leave this group because you are the only admin.'
+    end
   end
 
   private

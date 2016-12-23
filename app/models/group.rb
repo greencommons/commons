@@ -28,4 +28,8 @@ class Group < ApplicationRecord
   def find_member(user)
     groups_users.find_by(user: user)
   end
+
+  def admin_count
+    groups_users.where(admin: true).count
+  end
 end
