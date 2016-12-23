@@ -9,8 +9,8 @@ class Group < ApplicationRecord
 
   validates :name, presence: true
 
-  def latest_resources
-    resources.sort_by_created_at.limit(4)
+  def latest_resources(limit: 4)
+    resources.sort_by_created_at.distinct.limit(limit)
   end
 
   def add_admin(user)
