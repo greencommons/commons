@@ -48,18 +48,47 @@
             a href="/" another tag
             | , 
             a href="/" solar panels
-              
+            
   .row
     .col-lg-12
       h3 ABOUT
       p
-        = @group.long_description * 10
-        
+        = @group.short_description
+      #group-details__more.collapse
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-text-color.glyphicon--right
+              = @group.long_description * 10
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-share.glyphicon--right
+              = link_to @group.url, @group.url
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-envelope.glyphicon--right
+              = mail_to @group.email, @group.email
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-calendar.glyphicon--right
+              = humanize_date(@group.created_at)
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-edit.glyphicon--right
+              = humanize_date(@group.updated_at)      
+    
   .row.group-details__row
     .col-lg-12.text-right
-      = link_to '#' do
+      = link_to '#', data: { expand: '#group-details__more', reverse: '#group-details__hide' },  id: 'group-details__show' do
         | SEE MORE
         span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
+      = link_to '#', data: { expand: '#group-details__more', reverse: '#group-details__show' }, id: 'group-details__hide', class: 'collapse' do
+        | HIDE
+        span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
         
   .row.group-details__row
     .col-lg-12
