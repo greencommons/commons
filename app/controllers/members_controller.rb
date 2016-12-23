@@ -5,11 +5,12 @@ class MembersController < ApplicationController
   before_action :set_admin, except: [:leave]
 
   def index
-    authorize @group
+    authorize @group, :show?
     @members = @group.groups_users.includes(:user)
   end
 
   def create
+    authorize @group, :update?
     user = User.where(email: params[:email]).first
 
     notice =
@@ -37,7 +38,7 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    authorize @group
+    authorize @group, :update?
     @group_user.destroy
     redirect_to group_members_path(@group), notice: 'Member was successfully removed.'
   end

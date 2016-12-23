@@ -23,15 +23,15 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def update?
-    @group.is_admin?(@user)
+    @group.admin?(@user)
   end
 
   def edit?
-    @group.is_admin?(@user)
+    @group.admin?(@user)
   end
 
   def destroy?
-    @group.is_admin?(@user)
+    @group.admin?(@user)
   end
 
   def scope
