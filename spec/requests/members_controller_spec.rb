@@ -73,7 +73,6 @@ RSpec.describe 'Groups', type: :request do
         group.add_user(john)
         john_group_user = group.find_member(john)
 
-
         delete group_member_path(group, john_group_user)
         expect(john_group_user.reload).not_to be nil
       end
