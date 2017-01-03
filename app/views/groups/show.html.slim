@@ -10,13 +10,16 @@
                                                 label: @group.lists.count,
                                                 classes: 'resource-actions__button--right',
                                                 style: 'primary'
-        
-        - if @group_current_user                                 
-          = link_to 'LEAVE GROUP', leave_group_members_path(@group), 
-                                   method: :delete, 
-                                   data: { confirm: 'Are you sure?' },
-                                   class: 'resource-actions__button--right btn btn-default'
-                                   
+        - if @current_user                                        
+          - if @group_current_user                                 
+            = link_to 'LEAVE GROUP', leave_group_members_path(@group), 
+                                     method: :delete, 
+                                     data: { confirm: 'Are you sure you want to leave this group?' },
+                                     class: 'resource-actions__button--right btn btn-default'
+          - else
+            = link_to 'JOIN GROUP', join_group_members_path(@group), 
+                                    method: :post, 
+                                    class: 'resource-actions__button--right btn btn-default'
         = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
           | MEMBERS 
           .badge #{@group.users.count}
