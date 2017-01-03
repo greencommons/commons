@@ -1,7 +1,6 @@
 .row
   .col-xs-2
     = link_to '< BACK', @group, class: 'btn btn-default'
-      
 .row
   .col-xs-12.col-md-6.col-lg-6
     h1 #{@group.name} Group
@@ -16,7 +15,6 @@
                                                 placeholder: 'Type member name or email',
                                                 authenticity_token: form_authenticity_token }, 
                                               { prerender: true })
-      
 .row
   - @members.each do |member|
     .col-xs-12.col-lg-6
