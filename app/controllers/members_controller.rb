@@ -50,7 +50,7 @@ class MembersController < ApplicationController
     if @group_current_user.save
       redirect_to @group, notice: "Welcome to the '#{@group.name}' group!"
     else
-      redirect_to @group, notice: 'We couldn\'t add you to this group.'
+      redirect_to @group, alert: 'We couldn\'t add you to this group.'
     end
   end
 
@@ -62,7 +62,7 @@ class MembersController < ApplicationController
       @group_current_user.destroy
       redirect_to @group, notice: 'You are no longer a member of this group.'
     else
-      redirect_to @group, notice: 'You cannot leave this group because you are the only admin.'
+      redirect_to @group, alert: 'You cannot leave this group because you are the only admin.'
     end
   end
 
