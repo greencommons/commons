@@ -1,76 +1,38 @@
-# Cases we should cover with seeds
-# - User with no resources, no lists, no groups
-# - User with no resources, one list, no groups
-# - User with resource, list, group
-# - User with one group, no list
-# - Group with all users, one list
-# - Group with 2 users, no list
-# - Resource belongs to a user, and two lists
-# - Resource belongs to no user, and two lists
-# - Resource belongs to one list
-# - User's list
-# - User's list
-# - Group's list
+# config
+users_count = 20
+resources_count = 400
+groups_count = 10
 
-# Create users
-5.times do |n|
-  User.create(
-    email: "user#{n}@greencommons.org",
-    password: 'thecommons'
-  )
+p "Creating #{users_count} users..."
+users_count.times do |n|
+  FactoryGirl.create(:user, email: "user#{n}@greencommons.org",
+                            password: 'thecommons')
 end
 
-# Create 50 fake unowned resources
-50.times do
-  Resource.create(
-    title: Faker::Book.title,
-    resource_type: Resource.resource_types.keys.sample
-  )
+p "Creating #{resources_count} resources..."
+(resources_count / 2).times do |n|
+  # unowned resources
+  FactoryGirl.create(:resource)
+
+  # owned resources
+  FactoryGirl.create(:resource, user: User.all.sample)
 end
 
-# Create 50 fake owned resources
-50.times do
-  Resource.create(
-    title: Faker::Book.title,
-    user: User.all.sample,
-    resource_type: Resource.resource_types.keys.sample
-  )
-end
-
-# Create 2 groups
-g = Group.create(
-  name: 'Sample Group',
-  short_description: Faker::Lorem.sentence,
-  long_description: Faker::Lorem.paragraph,
-  url: Faker::Internet.url,
-  email: Faker::Internet.email
-)
-
-# Assign 2 users to group
-g.users << User.all.sample(2)
-
-g2 = Group.create(
-  name: 'Full Group',
-  short_description: Faker::Lorem.sentence,
-  long_description: Faker::Lorem.paragraph,
-  url: Faker::Internet.url,
-  email: Faker::Internet.email
-)
-
-# Assign 2 users to group
-g2.users << User.all
-
-# Make lists for everyone
+p 'Creating 2 lists with 10-50 resources for each user...'
 User.all.each do |user|
-  user.lists.create(
-    name: Faker::Book.title,
-    resources: Resource.all.sample(rand(10..20))
-  )
+  FactoryGirl.create_list(:list, 2, owner: user,
+                                    resources: Resource.order('RANDOM()').limit(rand(10..50)))
 end
 
-2.times do
-  Group.first.lists.create(
-    name: Faker::Book.title,
-    resources: Resource.all.sample(rand(30..50))
-  )
+p "Creating #{groups_count} groups and 3-5 lists with 30-80 resources for each group..."
+groups_count.times do |n|
+  group = FactoryGirl.create(:group)
+  users = User.order('RANDOM()').limit(rand(2..10)).to_a
+
+  group.add_admin(User.first)
+  group.add_admin(users.shift)
+  users.each { |user| group.add_user(user) }
+
+  FactoryGirl.create_list(:list, rand(3..5), owner: group,
+                                             resources: Resource.order('RANDOM()').limit(rand(30..80)))
 end
