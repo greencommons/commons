@@ -1,15 +1,16 @@
 class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_group
-  before_action :set_group_user, except: [:index, :create]
-  before_action :set_admin
-  before_action :check_admin_rights, except: [:index]
+  before_action :set_group_user, except: [:index, :create, :join, :leave]
+  before_action :set_admin, except: [:join, :leave]
 
   def index
+    authorize @group, :show?
     @members = @group.groups_users.includes(:user)
   end
 
   def create
+    authorize @group, :update?
     user = User.where(email: params[:email]).first
 
     notice =
@@ -27,16 +28,42 @@ class MembersController < ApplicationController
   end
 
   def make_admin
+    authorize @group, :update?
     toggle_admin(true)
   end
 
   def remove_admin
+    authorize @group, :update?
     toggle_admin(false)
   end
 
   def destroy
+    authorize @group, :update?
     @group_user.destroy
     redirect_to group_members_path(@group), notice: 'Member was successfully removed.'
+  end
+
+  def join
+    @group_current_user = @group.groups_users.new(user: current_user)
+    authorize @group_current_user
+
+    if @group_current_user.save
+      redirect_to @group, notice: "Welcome to the '#{@group.name}' group!"
+    else
+      redirect_to @group, alert: 'We couldn\'t add you to this group.'
+    end
+  end
+
+  def leave
+    @group_current_user = @group.find_member(current_user)
+    authorize @group_current_user
+
+    if !@group_current_user.admin? || @group.admin_count > 1
+      @group_current_user.destroy
+      redirect_to @group, notice: 'You are no longer a member of this group.'
+    else
+      redirect_to @group, alert: 'You cannot leave this group because you are the only admin.'
+    end
   end
 
   private
@@ -58,12 +85,6 @@ class MembersController < ApplicationController
       redirect_to group_members_path(@group), notice: 'Member was successfully updated.'
     else
       redirect_to group_members_path(@group), alert: 'The member could not be updated.'
-    end
-  end
-
-  def check_admin_rights
-    unless @admin
-      redirect_to group_members_path(@group), alert: "You don't have the rights to do that."
     end
   end
 end

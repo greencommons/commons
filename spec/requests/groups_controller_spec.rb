@@ -5,16 +5,23 @@ RSpec.describe 'Groups', type: :request do
   let(:valid_attributes) { attributes_for(:group) }
   let(:invalid_attributes) { attributes_for(:group, name: nil) }
 
-  describe 'unauthorized' do
+  describe 'guest' do
     describe 'GET /groups' do
       it 'redirects to login page' do
         get groups_path
         expect(response).to redirect_to new_user_session_path
       end
     end
+
+    describe 'GET /groups/:id' do
+      it 'gets 200' do
+        get group_path(group)
+        expect(response).to have_http_status(200)
+      end
+    end
   end
 
-  describe 'authorized' do
+  describe 'regular group member' do
     before { sign_in create(:user) }
 
     describe 'GET /groups' do
@@ -31,18 +38,11 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'GET /groups/edit' do
-      it 'gets 200' do
-        get edit_group_path(group)
-        expect(response).to have_http_status(200)
-      end
-    end
-
     describe 'POST /groups' do
       context 'valid attributes' do
         it 'gets redirected to groups_path' do
           post groups_path, params: { group: valid_attributes }
-          expect(response).to redirect_to groups_path
+          expect(response).to redirect_to Group.last
         end
 
         it 'creates the group' do
@@ -64,13 +64,37 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
+    describe 'GET /groups/edit' do
+      it 'gets 302' do
+        get edit_group_path(group)
+        expect(response).to have_http_status(302)
+      end
+    end
+  end
+
+  describe 'group admin' do
+    let(:user) do
+      user = create(:user)
+      group.add_admin(user)
+      user
+    end
+
+    before { sign_in user }
+
+    describe 'GET /groups/edit' do
+      it 'gets 200' do
+        get edit_group_path(group)
+        expect(response).to have_http_status(200)
+      end
+    end
+
     describe 'PATCH /groups/:id' do
       let(:group) { create(:group, name: 'Nice Group') }
 
       context 'valid attributes' do
         it 'gets redirected to groups_path' do
           patch group_path(group), params: { group: { name: 'Better Group' } }
-          expect(response).to redirect_to groups_path
+          expect(response).to redirect_to group
         end
 
         it 'updates the group' do

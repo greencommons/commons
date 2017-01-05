@@ -5,11 +5,12 @@ class Group < ApplicationRecord
   has_many :groups_users
   has_many :users, through: :groups_users
   has_many :lists, as: :owner
+  has_many :resources, through: :lists
 
   validates :name, presence: true
 
-  def resources
-    lists.map(&:resources).flatten.uniq
+  def latest_resources(limit: 4)
+    resources.sort_by_created_at.distinct.limit(limit)
   end
 
   def add_admin(user)
@@ -26,5 +27,9 @@ class Group < ApplicationRecord
 
   def find_member(user)
     groups_users.find_by(user: user)
+  end
+
+  def admin_count
+    groups_users.where(admin: true).count
   end
 end

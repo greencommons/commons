@@ -1,0 +1,16 @@
+.btn-count {
+  @include box-shadow(1px 1px 4px rgba(0,0,0,.4));
+  display: inline-block;
+  
+  &__btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: none;
+  }
+
+  &__label {
+    display: inline-block;
+    text-align: center;
+    padding: 5px 13px;
+  }
+}

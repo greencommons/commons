@@ -20,6 +20,7 @@ gem 'sidekiq'
 gem 'slim'
 gem 'uglifier', '>= 1.3.0'
 gem 'react-rails', '~> 1.10'
+gem 'pundit'
 
 group :development do
   gem 'bummr'
@@ -45,6 +46,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'shoulda'
+  gem 'pundit-matchers', '~> 1.1.0'
 end
 
 group :test do

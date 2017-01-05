@@ -21,6 +21,8 @@ class Resource < ApplicationRecord
 
   validates :title, :resource_type, presence: true
 
+  scope :sort_by_created_at, -> { order('created_at DESC') }
+
   after_commit on: [:create, :update] do
     AddToIndexJob.perform_async(self.class.name, id)
   end

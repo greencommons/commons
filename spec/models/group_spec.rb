@@ -11,7 +11,7 @@ RSpec.describe Group do
     it { is_expected.to validate_presence_of(:name) }
   end
 
-  describe '#resources' do
+  describe '#latest_resources' do
     let(:r1) { create(:resource) }
     let(:r2) { create(:resource) }
     let(:l1) { create(:list, resources: [r1, r2]) }
@@ -22,7 +22,15 @@ RSpec.describe Group do
 
       group.update(lists: [l1, l2])
 
-      expect(group.resources).to eq([r1, r2])
+      expect(group.latest_resources.to_a).to eq([r2, r1])
+    end
+
+    it 'returns the number of records specified by limit' do
+      group = create(:group)
+
+      group.update(lists: [l1, l2])
+
+      expect(group.latest_resources(limit: 1).to_a).to eq([r2])
     end
   end
 

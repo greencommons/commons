@@ -1,10 +1,145 @@
-.row
-  .col-lg-2
-    = link_to '<< BACK', groups_path
+.group-details
+  .row.group-details__row
+    .col-xs-2
+      = link_to '< BACK', groups_path, class: 'btn btn-default'
+      
+    .col-xs-10
+      .resource-actions
+        = render 'shared/components/btn_count', path: '#', 
+                                                text: 'ADD TO LIST', 
+                                                label: @group.lists.count,
+                                                classes: 'resource-actions__button--right',
+                                                style: 'primary'
+        - if @current_user                                        
+          - if @group_current_user                                 
+            = link_to 'LEAVE GROUP', leave_group_members_path(@group), 
+                                     method: :delete, 
+                                     data: { confirm: 'Are you sure you want to leave this group?' },
+                                     class: 'resource-actions__button--right btn btn-default'
+          - else
+            = link_to 'JOIN GROUP', join_group_members_path(@group), 
+                                    method: :post, 
+                                    class: 'resource-actions__button--right btn btn-default'
+        = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
+          | MEMBERS 
+          .badge #{@group.users.count}
+        = link_to 'SETTINGS', edit_group_path(@group), class: 'resource-actions__button btn btn-primary'
+
+  .row.group-details__row.group-details__row--half
+    .col-lg-1
+      = image_tag 'user.png', class: 'group-details__picture'
+    .col-lg-11 
+      h1= @group.name
+      
+  .row.group-details__row
+    .col-lg-12
+      .row
+        - if @admin
+          .col-lg-3
+            .row
+              = form_tag '/', class: 'form-horizontal' do
+                .col-lg-8
+                  = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
+                .col-lg-4
+                  = button_tag type: 'submit', class: 'form-control btn btn-primary' do
+                    span.glyphicon.glyphicon-plus aria-hidden='true'
+        .col-lg-9
+          p.group-details__tag-list
+            span.glyphicon.glyphicon-tag.glyphicon--right
+            a href="/" tag
+            | , 
+            a href="/" another tag
+            | , 
+            a href="/" solar panels
+            
+  .row
+    .col-lg-12
+      h3 ABOUT
+      p
+        = @group.short_description
+      #group-details__more.collapse
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-text-color.glyphicon--right
+              = @group.long_description * 10
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-share.glyphicon--right
+              = link_to @group.url, @group.url
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-envelope.glyphicon--right
+              = mail_to @group.email, @group.email
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-calendar.glyphicon--right
+              = humanize_date(@group.created_at)
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-edit.glyphicon--right
+              = humanize_date(@group.updated_at)      
     
-.row
-  .col-lg-12 
-    h1= @group.name
-    = link_to 'Edit', edit_group_path(@group)
-    br
-    = link_to 'Manage Members', group_members_path(@group)
+  .row.group-details__row
+    .col-lg-12.text-right
+      = link_to '#', data: { expand: '#group-details__more', reverse: '#group-details__hide' },  id: 'group-details__show' do
+        | SEE MORE
+        span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
+      = link_to '#', data: { expand: '#group-details__more', reverse: '#group-details__show' }, id: 'group-details__hide', class: 'collapse' do
+        | HIDE
+        span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
+        
+  .row.group-details__row
+    .col-lg-12
+      .row
+        .col-lg-8
+          h3 WHAT'S NEW
+        .col-lg-4
+          .resource-actions
+            = link_to 'SEE ALL', '#', class: 'btn btn-primary resource-actions__button--align-title'
+      .row
+        - @resources.each do |resource|
+          .col-lg-12
+            = render 'shared/summary_cards/main', resource: resource
+                  
+  .row.group-details__row
+    .col-lg-12
+      .row.group-details__row--half
+        .col-lg-8
+          h3 LISTS
+        .col-lg-4
+          .resource-actions
+            = link_to 'NEW LIST', '#', class: 'btn btn-primary resource-actions__button--right resource-actions__button--align-title'
+            = link_to 'ALL LISTS', '#', class: 'btn btn-primary resource-actions__button--align-title'
+      .row
+        - @group.lists.each do |list|
+          .col-lg-6
+            = render 'shared/summary_cards/main', resource: list
+            
+  .row.group-details__row
+    .col-lg-12
+      .row.group-details__row--half
+        .col-lg-12
+          h3 DISCUSS
+      .row
+        .col-lg-12
+          = render 'comments/comment', resource: nil
+          = render 'comments/comment', resource: nil
+          = render 'comments/comment', resource: nil
+          = render 'comments/subcomment', resource: nil
+          = render 'comments/comment', resource: nil
+      .row.group-details__row
+        .col-lg-12.text-center
+          = link_to 'LOAD MORE COMMENTS', '#', class: 'btn btn-primary'
+          
+      .row
+        .col-lg-12
+          = form_tag '/', class: 'comment-form' do
+            .form-group
+              = text_area_tag :comment, '', class: 'form-control comment-form__textarea', placeholder: 'Add a comment...'
+            .form-group.pull-right
+              = button_tag 'SUBMIT', type: 'submit', class: 'form-control btn btn-primary'

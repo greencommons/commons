@@ -1,0 +1,15 @@
+.resource-actions {
+  float: right;
+
+  &__button--right {
+    margin-right: 20px;
+  }
+
+  &__button--align-title {
+    margin-top: 23px;
+  }
+
+  .badge {
+    margin-left: 3px;
+  }
+}

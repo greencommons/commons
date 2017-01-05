@@ -1,5 +1,6 @@
 require 'factory_girl_rails'
 require 'sidekiq/testing'
+require 'pundit/matchers'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
