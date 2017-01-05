@@ -3,11 +3,12 @@ users_count = 20
 resources_count = 400
 groups_count = 10
 
+p 'Creating admin user with email \'admin@greencommons.org\' and password \'thecommons\'...'
+admin = FactoryGirl.create(:user, email: 'admin@greencommons.org',
+                                  password: 'thecommons')
+
 p "Creating #{users_count} users..."
-users_count.times do |n|
-  FactoryGirl.create(:user, email: "user#{n}@greencommons.org",
-                            password: 'thecommons')
-end
+FactoryGirl.create_list(:user, users_count)
 
 p "Creating #{resources_count} resources..."
 (resources_count / 2).times do |n|
@@ -29,7 +30,7 @@ groups_count.times do |n|
   group = FactoryGirl.create(:group)
   users = User.order('RANDOM()').limit(rand(2..10)).to_a
 
-  group.add_admin(User.first)
+  group.add_admin(admin)
   group.add_admin(users.shift)
   users.each { |user| group.add_user(user) }
 
