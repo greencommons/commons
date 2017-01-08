@@ -1,6 +1,6 @@
 namespace :elasticsearch do
   desc 'Deletes the "resource" index and regenerates it with all records currently in Resource'
-  task :reset_resource_index do
+  task reset_resource_index: :environment do
     client = Elasticsearch::Client.new(
       url: ENV.fetch('BONSAI_URL', 'http://localhost:9200'), log: true
     )
