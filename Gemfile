@@ -22,11 +22,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'react-rails', '~> 1.10'
 gem 'pundit'
 gem 'kiba', '~> 1.0.0'
+gem 'epub-parser'
 
 group :development do
   gem 'bummr'
   gem 'bundler-audit'
-  gem 'epub-parser'
   gem 'guard-livereload', '>= 2.5.2', require: false
   gem 'listen', '~> 3.0.5'
   gem 'spring'
