@@ -23,6 +23,7 @@ gem 'react-rails', '~> 1.10'
 gem 'pundit'
 gem 'kiba', '~> 1.0.0'
 gem 'epub-parser'
+gem 'awesome_print'
 
 group :development do
   gem 'bummr'
@@ -35,7 +36,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'awesome_print'
   gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
