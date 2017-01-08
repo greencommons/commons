@@ -21,13 +21,13 @@ gem 'slim'
 gem 'uglifier', '>= 1.3.0'
 gem 'react-rails', '~> 1.10'
 gem 'pundit'
+gem 'kiba', '~> 1.0.0'
 
 group :development do
   gem 'bummr'
   gem 'bundler-audit'
   gem 'epub-parser'
   gem 'guard-livereload', '>= 2.5.2', require: false
-  gem 'kiba', '~> 1.0.0'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
