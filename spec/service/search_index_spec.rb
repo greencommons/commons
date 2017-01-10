@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe SearchIndex do
   describe '.index_name' do
     it 'returns the correct index name, given the model and environment' do
-      resource = build_stubbed(:resource)
-
-      name = SearchIndex.index_name(resource)
+      name = SearchIndex.index_name(Resource)
 
       expect(name).to eq 'resources-test'
     end

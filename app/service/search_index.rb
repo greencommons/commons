@@ -1,6 +1,6 @@
 class SearchIndex
-  def self.index_name(record)
-    "#{record.class.name.pluralize.downcase}-#{Rails.env}"
+  def self.index_name(klass)
+    "#{klass.name.pluralize.downcase}-#{Rails.env}"
   end
 
   def self.log_elasticsearch_warning(message)

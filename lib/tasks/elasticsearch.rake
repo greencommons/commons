@@ -4,7 +4,11 @@ namespace :elasticsearch do
     client = Elasticsearch::Client.new(
       url: ENV.fetch('BONSAI_URL', 'http://localhost:9200'), log: true
     )
-    client.indices.delete index: 'resources'
+
+    if client.indices.exists? index: Resource.index_name
+      client.indices.delete index: Resource.index_name
+    end
+
     Resource.__elasticsearch__.create_index!
     Resource.import
   end
