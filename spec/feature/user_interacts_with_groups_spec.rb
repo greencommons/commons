@@ -36,7 +36,7 @@ RSpec.feature 'Interacting with groups' do
     expect(page).to have_content('You are not authorized to perform this action.')
   end
 
-  scenario 'users can\'t access edit group page' do
+  scenario 'users can\'t edit members list' do
     user = feature_login
     group = create(:group)
     new_user = create(:user)
