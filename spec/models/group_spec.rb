@@ -84,4 +84,6 @@ RSpec.describe Group do
     it { is_expected.to have_many(:users) }
     it { is_expected.to have_many(:lists) }
   end
+
+  it_behaves_like 'indexable', :group
 end

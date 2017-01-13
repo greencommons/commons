@@ -1,6 +1,5 @@
 class Resource < ApplicationRecord
-  include Elasticsearch::Model
-  index_name SearchIndex.index_name(self)
+  include Indexable
 
   RESOURCE_TYPES = {
     article: 0,
@@ -22,12 +21,4 @@ class Resource < ApplicationRecord
   validates :title, :resource_type, presence: true
 
   scope :sort_by_created_at, -> { order('created_at DESC') }
-
-  after_commit on: [:create, :update] do
-    AddToIndexJob.perform_async(self.class.name, id)
-  end
-
-  after_commit on: [:destroy] do
-    RemoveFromIndexJob.perform_async(self.class.name, id)
-  end
 end
