@@ -1,5 +1,6 @@
 class CreateNewResourceRecord
   def write(attributes)
+    ap 'Saving...'
     @attributes = attributes
 
     if existing_record

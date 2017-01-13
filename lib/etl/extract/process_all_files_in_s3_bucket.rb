@@ -10,6 +10,8 @@ class ProcessAllFilesInS3Bucket
   def each
     epub_files.each do |epub_key|
       Tempfile.open(['island_press', '.epub'], dir, binmode: true) do |tempfile|
+        ap "Processing #{epub_key}..."
+
         s3.get_object(
           response_target: tempfile.path,
           bucket: bucket_name,

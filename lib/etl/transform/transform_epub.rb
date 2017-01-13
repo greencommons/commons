@@ -2,6 +2,7 @@ require 'epub/parser'
 
 class TransformEpub
   def process(input_epub)
+    ap 'Transforming...'
     @input_epub = input_epub
 
     {
