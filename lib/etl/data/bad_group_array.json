@@ -1,0 +1,17 @@
+[
+	{
+		"namEE": "Ima Invalid Group",
+		"long_description": "Org for goodness sake",
+		"url": "http://www.goodnesssake.org",
+		"metadata": {
+		}
+	},
+	{
+		"name": "Ima Good One",
+		"long_description": "All day, every day, combating polluting corporations.",
+		"email": "support@greenfighingtback.org",
+		"metadata": {
+			"founded": "2017-01-01"
+		}
+	}
+]

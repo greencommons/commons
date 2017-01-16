@@ -1,0 +1,5 @@
+require_relative 'common'
+
+source(ProcessFilesInS3BucketFolders, 'knowledge.commons', ['valid_data/groups/'], '.json')
+transform(TransformJsonGroups)
+destination(CreateNewGroupRecords)
