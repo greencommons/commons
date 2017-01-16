@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.2'
+ruby '2.3.3'
 
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'aws-sdk', '~> 2'
@@ -24,6 +24,7 @@ gem 'pundit'
 gem 'kiba', '~> 1.0.0'
 gem 'epub-parser'
 gem 'awesome_print'
+gem 'json-schema'
 
 group :development do
   gem 'bummr'

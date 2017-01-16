@@ -1,0 +1,21 @@
+[
+	{
+		"title": "Absurdity Realized",
+		"content": "This is the beginning and the end.",
+		"metadata": {
+			"creators": "N. Chomsky",
+			"date": "2006-10-01",
+			"publisher": "MIT Press"
+		}
+	},
+	{
+		"title": "Never Again",
+		"content": "Eat it while it's hot.",
+		"metadata": {
+			"creators": "Christopher Hitchens",
+			"date": "1987-03-05",
+			"publisher": "Oxford Press",
+			"schema": "blahding/1.2.3"
+		}
+	}
+]
