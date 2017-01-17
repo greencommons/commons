@@ -24,6 +24,7 @@ gem 'pundit'
 gem 'kiba', '~> 1.0.0'
 gem 'epub-parser'
 gem 'awesome_print'
+gem 'factory_girl_rails'
 
 group :development do
   gem 'bummr'
@@ -39,7 +40,6 @@ group :development, :test do
   gem 'climate_control'
   gem 'database_cleaner'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'rspec-wait'
