@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   end
 
   resources :search, only: [:new]
+
+  resources :resources, only: [:show] 
+
   resources :groups do
     resources :members, only: [:index, :create, :destroy] do
       collection do

@@ -1,0 +1,66 @@
+.page-details
+  .row.page-details__row
+    .col-xs-2
+      = link_to '< BACK', groups_path, class: 'btn btn-default'
+      
+    .col-xs-10
+      .resource-actions
+        = render 'shared/components/btn_count', path: '#', 
+                                                text: 'ADD TO LIST', 
+                                                label: @resource.lists.count,
+                                                classes: 'resource-actions__button--right',
+                                                style: 'primary'
+                                                
+
+  .row.page-details__row.page-details__row--half
+    .col-lg-12
+      h1= @resource.title
+
+  .row.page-details__row
+    .col-lg-12
+      .row
+        .col-lg-3
+          = render 'shared/components/tag_form'
+        .col-lg-9
+          = render 'shared/components/tag_list'
+  
+  .row
+    .col-lg-12
+      h3 ABOUT
+      p
+        = @resource.content.truncate(800)
+      #page-details__more.collapse
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-share.glyphicon--right
+              = @resource.resource_type.capitalize
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-calendar.glyphicon--right
+              = humanize_date(@resource.created_at)
+        .row
+          .col-xs-12
+            p
+              span.glyphicon.glyphicon-edit.glyphicon--right
+              = humanize_date(@resource.updated_at)      
+            
+  .row.page-details__row
+    .col-lg-12.text-right
+      = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__hide' },  id: 'page-details__show' do
+        | SEE MORE
+        span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
+      = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__show' }, id: 'page-details__hide', class: 'collapse' do
+        | HIDE
+        span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
+                    
+  .row
+    .col-lg-2
+      h3 CONTENT
+    .col-lg-10
+      .resource-actions.resource-actions__button--align-title
+        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-default resource-actions__button--right'
+        = link_to '', class: 'resource-actions__button btn btn-default' do
+          | EXPORT
+          span.glyphicon.glyphicon-download.glyphicon--left aria-hidden='true'
