@@ -33,16 +33,13 @@
             p
               span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
               = @resource.resource_type.capitalize
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-calendar.glyphicon--right
-              = humanize_date(@resource.created_at)
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-edit.glyphicon--right
-              = humanize_date(@resource.updated_at)      
+              
+        = render 'resources/resource_metadata', metadata: humanize_str_date(@resource.metadata['date']), 
+                                                icon: 'calendar'
+        = render 'resources/resource_metadata', metadata: @resource.metadata['creators'],
+                                                icon: 'user'                                          
+        = render 'resources/resource_metadata', metadata: @resource.metadata['publisher'],
+                                                icon: 'home'                                          
             
   .row.page-details__row
     .col-xs-12.text-right
