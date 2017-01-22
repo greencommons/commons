@@ -4,10 +4,8 @@ module DateHelper
   end
 
   def humanize_str_date(str)
-    begin
-      humanize_date(Date.parse(str))
-    rescue StandardError => e
-      return nil
-    end
+    humanize_date(Date.parse(str))
+  rescue StandardError
+    return nil
   end
 end

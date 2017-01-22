@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :search, only: [:new]
 
-  resources :resources, only: [:show] 
+  resources :resources, only: [:show]
 
   resources :groups do
     resources :members, only: [:index, :create, :destroy] do
