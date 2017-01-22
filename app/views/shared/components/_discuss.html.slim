@@ -1,0 +1,21 @@
+.row.page-details__row--half
+  .col-lg-12
+    h3 DISCUSS
+.row
+  .col-lg-12
+    = render 'comments/comment', resource: nil
+    = render 'comments/comment', resource: nil
+    = render 'comments/comment', resource: nil
+    = render 'comments/subcomment', resource: nil
+    = render 'comments/comment', resource: nil
+.row.page-details__row
+  .col-lg-12.text-center
+    = link_to 'LOAD MORE COMMENTS', '#', class: 'btn btn-primary'
+    
+.row
+  .col-lg-12
+    = form_tag '/', class: 'comment-form' do
+      .form-group
+        = text_area_tag :comment, '', class: 'form-control comment-form__textarea', placeholder: 'Add a comment...'
+      .form-group.pull-right
+        = button_tag 'SUBMIT', type: 'submit', class: 'form-control btn btn-primary'
