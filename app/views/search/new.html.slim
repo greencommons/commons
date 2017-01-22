@@ -11,7 +11,7 @@
 
 
 - unless @results.empty?
-  - @results.each do |result|
+  - @results.records.each_with_hit do |result, hit|
     .row
       .well.col-sm-12
         h3.text-center
@@ -24,12 +24,12 @@
           dt
             strong Creator
           dd
-            = result.metadata.fetch(:creators, 'No Author Found')
+            = result.metadata.fetch('creators', 'No Author Found')
           dt
             strong Date Published
           dd
-            = result.metadata.fetch(:date, 'Year Published Unknown')
+            = result.metadata.fetch('date', 'Year Published Unknown')
           dt
             strong Publisher
           dd
-            = result.metadata.fetch(:publisher, 'Publisher Unknown')
+            = result.metadata.fetch('publisher', 'Publisher Unknown')

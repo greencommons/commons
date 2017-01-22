@@ -5,11 +5,15 @@ module Indexable
     include Elasticsearch::Model
     index_name SearchIndex.index_name(self)
 
-    after_commit on: [:create, :update] do
+    after_create do
       AddToIndexJob.perform_async(self.class.name, id)
     end
 
-    after_commit on: [:destroy] do
+    after_update do
+      UpdateIndexJob.perform_async(self.class.name, id, changed)
+    end
+
+    after_destroy do
       RemoveFromIndexJob.perform_async(self.class.name, id)
     end
   end
