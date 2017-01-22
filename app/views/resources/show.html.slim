@@ -1,6 +1,11 @@
 .page-details
   .row.page-details__row
-    .col-xs-12
+    .col-xs-6.col-md-4
+      h4
+        span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
+        = @resource.resource_type.capitalize
+    
+    .col-xs-6.col-md-8
       .resource-actions
         = render 'shared/components/btn_count', path: '#', 
                                                 text: 'ADD TO LIST', 
@@ -10,15 +15,15 @@
                                                 
 
   .row.page-details__row.page-details__row--half
-    .col-lg-12
+    .col-xs-12
       h1= @resource.title
 
   .row.page-details__row
-    .col-lg-12
+    .col-xs-12
       = render 'shared/components/tags'
   
   .row
-    .col-lg-12
+    .col-xs-12
       h3 ABOUT
       p
         = @resource.content.truncate(800)
@@ -26,7 +31,7 @@
         .row
           .col-xs-12
             p
-              span.glyphicon.glyphicon-share.glyphicon--right
+              span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
               = @resource.resource_type.capitalize
         .row
           .col-xs-12
@@ -40,7 +45,7 @@
               = humanize_date(@resource.updated_at)      
             
   .row.page-details__row
-    .col-lg-12.text-right
+    .col-xs-12.text-right
       = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__hide' },  id: 'page-details__show' do
         | SEE MORE
         span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
@@ -48,20 +53,20 @@
         | HIDE
         span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
                     
-  .row
-    .col-lg-2
+  .row.page-details__row
+    .col-xs-12.col-sm-2
       h3 CONTENT
-    .col-lg-10
+    .col-xs-12.col-sm-10
       .resource-actions.resource-actions__button--align-title
         = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-primary resource-actions__button--right'
         = link_to '', class: 'resource-actions__button btn btn-primary' do
           | EXPORT
           span.glyphicon.glyphicon-cloud-download.glyphicon--left aria-hidden='true'
 
-  .row
-    .col-lg-12
+  .row.page-details__row--half
+    .col-xs-12
       h3 EXPLORE
   .row
     - @suggestions.each do |suggestion|
-      .col-lg-6
+      .col-xs-12.col-md-6
         = render 'shared/summary_cards/main', resource: suggestion
