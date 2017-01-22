@@ -6,9 +6,9 @@ class SearchController < ApplicationController
     skip_authorization
 
     @results = if params[:query].present?
-      Elasticsearch::Model.search(params[:query], [Resource, Group, List])
-    else
-      []
-    end
+                 Elasticsearch::Model.search(params[:query], [Resource, Group, List])
+               else
+                 []
+               end
   end
 end
