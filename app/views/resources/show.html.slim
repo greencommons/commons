@@ -1,9 +1,6 @@
 .page-details
   .row.page-details__row
-    .col-xs-2
-      = link_to '< BACK', groups_path, class: 'btn btn-default'
-      
-    .col-xs-10
+    .col-xs-12
       .resource-actions
         = render 'shared/components/btn_count', path: '#', 
                                                 text: 'ADD TO LIST', 
@@ -18,11 +15,7 @@
 
   .row.page-details__row
     .col-lg-12
-      .row
-        .col-lg-3
-          = render 'shared/components/tag_form'
-        .col-lg-9
-          = render 'shared/components/tag_list'
+      = render 'shared/components/tags'
   
   .row
     .col-lg-12
@@ -60,7 +53,15 @@
       h3 CONTENT
     .col-lg-10
       .resource-actions.resource-actions__button--align-title
-        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-default resource-actions__button--right'
-        = link_to '', class: 'resource-actions__button btn btn-default' do
+        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-primary resource-actions__button--right'
+        = link_to '', class: 'resource-actions__button btn btn-primary' do
           | EXPORT
-          span.glyphicon.glyphicon-download.glyphicon--left aria-hidden='true'
+          span.glyphicon.glyphicon-cloud-download.glyphicon--left aria-hidden='true'
+
+  .row
+    .col-lg-12
+      h3 EXPLORE
+  .row
+    - @suggestions.each do |suggestion|
+      .col-lg-6
+        = render 'shared/summary_cards/main', resource: suggestion

@@ -1,0 +1,17 @@
+.row
+  .col-lg-3
+    .row
+      = form_tag '/', class: 'form-horizontal' do
+        .col-lg-8
+          = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
+        .col-lg-4
+          = button_tag type: 'submit', class: 'form-control btn btn-primary' do
+            span.glyphicon.glyphicon-plus aria-hidden='true'
+  .col-lg-9
+    p.page-details__tag-list
+      span.glyphicon.glyphicon-tag.glyphicon--right
+      a href="/" tag
+      | , 
+      a href="/" another tag
+      | , 
+      a href="/" solar panels
