@@ -1,13 +1,13 @@
 .row
-  .col-lg-3
+  .col-xs-12.col-sm-6.col-md-3
     .row
       = form_tag '/', class: 'form-horizontal' do
-        .col-lg-8
-          = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control'
-        .col-lg-4
+        .col-xs-8.col-md-8
+          = text_field_tag :tag, '', placeholder: 'Add tag', class: 'form-control page-details__tag-input'
+        .col-xs-4.col-md-4
           = button_tag type: 'submit', class: 'form-control btn btn-primary' do
             span.glyphicon.glyphicon-plus aria-hidden='true'
-  .col-lg-9
+  .col-xs-12.col-sm-6.col-md-9
     p.page-details__tag-list
       span.glyphicon.glyphicon-tag.glyphicon--right
       a href="/" tag
