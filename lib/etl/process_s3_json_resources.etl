@@ -1,0 +1,5 @@
+require_relative 'common'
+
+source(ProcessFilesInS3BucketFolders, 'knowledge.commons', ['valid_data/resources/'], '.json')
+transform(TransformJsonResources)
+destination(CreateNewResourceRecords)

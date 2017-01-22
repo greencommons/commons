@@ -35,12 +35,20 @@ For more information, see the [`kiba`] `README.md` file.
 
 ## Usage
 
-Then run the rake task to import the records,
+Then run the rake tasks to import the records,
 transform them,
 and load them into the database:
 
 ```
-bundle exec rake etl:import_local_epub
+with local test files:
+
+bundle exec rake etl:import_local_json_resources
+bundle exec rake etl:import_local_json_groups
+
+or with files from S3:
+
+bundle exec rake etl:import_s3_json_resources
+bundle exec rake etl:import_s3_json_groups
 ```
 
 ## Development
@@ -51,16 +59,24 @@ kiba ETL source files are in `lib/etl/`
 
 ```
 ├── common.rb
-├── convert-islandpress.etl
+├── process_local_json_resources.etl
+├── process_local_json_groups.etl
+├── process_s3_json_resources.etl
+├── process_s3_json_groups.etl
 ├── data
-│   ├── sample_island_press_1.epub
-│   └── sample_island_press_2.epub
+│   ├── good_resource_array.json
+│   └── good_group_array.json
 ├── extract
-│   └── process_all_files_in_local_folder.rb
+│   └── process_files_in_s3_bucket_folders.rb
 ├── load
-│   └── create_new_resource_record.rb
-└── transform
-    └── transform_epub.rb
+│   ├── create_new_resource_records.rb
+│   └── create_new_group_records.rb
+├── transform
+│   └── transform_json.rb
+└── schema
+    ├── resource_array_schema.json
+    └── group_array_schema.json
+    
 ```
 
 ### Rake Tasks
