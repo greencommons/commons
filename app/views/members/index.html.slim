@@ -7,7 +7,7 @@
     h4 #{@members.count} members
   .col-xs-12.col-md-6.col-lg-6
     - if @admin
-      .add-member-form
+      .top-page-form
         = react_component('AutocompleteForm', { name: 'user-autocomplete',
                                                 field: 'email',
                                                 action: group_members_path,

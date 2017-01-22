@@ -39,7 +39,7 @@ var AutocompleteForm = React.createClass({
   render: function() {
     return (
       <div className="row autocomplete-form">
-        <form id='add-member-form' className="form-horizontal" action={this.props.action} acceptCharset="UTF-8" method="post">
+        <form id='top-page-form' className="form-horizontal" action={this.props.action} acceptCharset="UTF-8" method="post">
           <input name="utf8" type="hidden" value="✓" />
           <input type="hidden" name="authenticity_token" value={this.props.authenticity_token} />
           <div className="col-xs-12 col-md-10">

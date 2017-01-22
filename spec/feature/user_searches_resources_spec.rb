@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Searching for resources', :worker, :elasticsearch do
   context 'when searching by title' do
-    scenario 'users should see metadata for a resource when search' do
+    scenario 'users can find a resource when searching' do
       title = Faker::Hipster.sentence
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
       create(:resource, title: title, metadata: metadata)
@@ -76,7 +76,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).to have_text(metadata[:date])
     end
 
-    scenario 'users should not see search results for deleted files' do
+    scenario 'users cannot see search results for deleted files' do
       title = Faker::Hipster.sentence
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
       resource = create(:resource, title: title, metadata: metadata)
@@ -91,8 +91,6 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).not_to have_text(title)
-      expect(page).not_to have_text(metadata[:creators])
-      expect(page).not_to have_text(metadata[:date])
     end
   end
 end

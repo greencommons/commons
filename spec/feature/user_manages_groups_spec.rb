@@ -48,7 +48,7 @@ RSpec.feature 'Managing groups' do
     visit group_path(group)
     click_on 'MEMBERS'
 
-    within('#add-member-form') do
+    within('#top-page-form') do
       fill_in 'email', with: new_member.email
       click_on 'add-member-button'
     end

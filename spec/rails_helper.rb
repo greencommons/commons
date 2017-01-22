@@ -18,7 +18,9 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.before(:suite) do
-    Resource.__elasticsearch__.create_index!(index: Resource.index_name)
+    [Resource, List, Group].each do |klass|
+      klass.__elasticsearch__.create_index!(index: klass.index_name)
+    end
   end
 
   config.before(:each, elasticsearch: true) do
@@ -38,7 +40,9 @@ RSpec.configure do |config|
   end
 
   def reset_resource_index
-    Resource.__elasticsearch__.delete_index!(index: Resource.index_name)
-    Resource.__elasticsearch__.create_index!(index: Resource.index_name)
+    [Resource, List, Group].each do |klass|
+      klass.__elasticsearch__.delete_index!(index: klass.index_name)
+      klass.__elasticsearch__.create_index!(index: klass.index_name)
+    end
   end
 end
