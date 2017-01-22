@@ -17,4 +17,6 @@ RSpec.describe List do
     it { is_expected.to belong_to(:owner) }
     it { is_expected.to have_and_belong_to_many(:resources) }
   end
+
+  it_behaves_like 'indexable', :list
 end
