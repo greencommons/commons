@@ -1,5 +1,4 @@
 class CreateNewResourceRecord < CreateNewRecord
-
   private
 
   def existing_record

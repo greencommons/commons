@@ -35,8 +35,8 @@ class ProcessAllFilesInS3Folders
   end
 
   def file_keys
-    [*@prefix_folders].each_with_object([]) do |prefix_folder, arr|
-      arr += s3.list_objects(bucket_location(prefix_folder)).contents.map(&:key)
+    [*prefix_folders].each_with_object([]) do |prefix_folder, arr|
+      arr << s3.list_objects(bucket_location(prefix_folder)).contents.map(&:key)
     end
   end
 

@@ -34,5 +34,4 @@ namespace :etl do
     job_definition = Kiba.parse(script_content, etl_filename)
     Kiba.run(job_definition)
   end
-
 end

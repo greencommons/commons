@@ -1,5 +1,4 @@
 class CreateNewGroupRecord < CreateNewRecord
-
   private
 
   def existing_record
