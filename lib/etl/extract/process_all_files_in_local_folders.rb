@@ -6,6 +6,7 @@ class ProcessAllFilesInLocalFolders
   def each
     [*folders].each do |folder|
       Dir.glob(folder) do |file|
+        ap "Processing #{file}..."
         yield file
       end
     end

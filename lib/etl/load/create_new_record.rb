@@ -14,6 +14,8 @@ class CreateNewRecord
       ap 'Saving...'
       create
     end
+  rescue StandardError => e
+    ap "Could not create record: #{e}"
   end
 
   private

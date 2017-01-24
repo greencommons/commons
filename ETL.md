@@ -48,15 +48,15 @@ The JSON ETL should be seen as the default one since it results in less errors t
 #### With local test files:
 
 ```
-bundle exec rake etl:import_local_json_resources
-bundle exec rake etl:import_local_json_groups
+bundle exec rake etl:local_json_resources_to_db
+bundle exec rake etl:local_json_groups_to_db
 ```
 
 #### With files from S3
 
 ```
-bundle exec rake etl:import_s3_json_resources
-bundle exec rake etl:import_s3_json_groups
+bundle exec rake etl:s3_json_resources_to_db
+bundle exec rake etl:s3_json_groups_to_db
 ```
 
 ### Epub Files
@@ -64,13 +64,13 @@ bundle exec rake etl:import_s3_json_groups
 #### With local test files:
 
 ```
-bundle exec rake etl:import_local_epub
+bundle exec rake etl:local_epubs_to_db
 ```
 
 #### With files from S3:
 
 ```
-bundle exec rake etl:import_s3_epub
+bundle exec rake etl:s3_islandpress_epubs_to_db
 ```
 
 ## Development
@@ -81,22 +81,32 @@ kiba ETL source files are in `lib/etl/`
 
 ```
 ├── common.rb
-├── process_local_json_resources.etl
-├── process_local_json_groups.etl
-├── process_s3_json_resources.etl
-├── process_s3_json_groups.etl
+├── local_epubs_to_db.etl
+├── local_json_resources_to_db.etl
+├── local_json_groups_to_db.etl
+├── s3_islandpress_epubs_to_db.etl
+├── s3_json_resources_to_db.etl
+├── s3_json_groups_to_db.etl
 ├── data
-│   ├── sample_island_press_1.epub
-│   ├── sample_island_press_2.epub
+│   ├── sample_epub_book_1.epub
+│   ├── sample_epub_book_2.epub
+│   ├── corrupted_sample_epub_book_3.epub
 │   ├── good_resource_array.json
+│   ├── bad_resource_array.json
 │   └── good_group_array.json
+│   └── bad_group_array.json
 ├── extract
-│   └── process_files_in_s3_bucket_folders.rb
+│   └── process_files_all_files_in_local_folders.rb
+│   └── process_files_all_files_in_s3_folders.rb
+├── normalize
+│   └── normalize_row.rb
+│   └── normalize_json.rb
 ├── load
-│   ├── create_new_resource_records.rb
-│   └── create_new_group_records.rb
+│   ├── create_new_record.rb
+│   ├── create_new_resource_record.rb
+│   └── create_new_group_record.rb
 ├── transform
-│   └── transform_json.rb
+│   └── transform_epub.rb
 └── schema
     ├── resource_array_schema.json
     └── group_array_schema.json

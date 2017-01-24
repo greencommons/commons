@@ -2,5 +2,5 @@ require_relative 'common'
 
 source(NormalizeRow,
        NormalizeJsonGroups,
-       ProcessAllFilesInLocalFolders, 'lib/etl/data/good*group*.json')
+       ProcessAllFilesInLocalFolders, 'lib/etl/data/*group*.json')
 destination(CreateNewGroupRecord)

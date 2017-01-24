@@ -10,7 +10,9 @@ class ProcessAllFilesInS3Folders
 
   def each
     filtered_files.each do |file_key|
-      Tempfile.open('s3data', dir, binmode: true) do |tempfile|
+      Tempfile.open(['s3data', file_ext], dir, binmode: true) do |tempfile|
+        ap "Processing #{tempfile}..."
+
         s3.get_object(
           response_target: tempfile.path,
           bucket: bucket_name,
@@ -35,9 +37,9 @@ class ProcessAllFilesInS3Folders
   end
 
   def file_keys
-    [*prefix_folders].each_with_object([]) do |prefix_folder, arr|
-      arr << s3.list_objects(bucket_location(prefix_folder)).contents.map(&:key)
-    end
+    [*prefix_folders].map do |prefix_folder|
+      s3.list_objects(bucket_location(prefix_folder)).contents.map(&:key)
+    end.flatten
   end
 
   def s3
