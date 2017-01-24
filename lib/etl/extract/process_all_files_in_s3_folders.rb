@@ -1,7 +1,7 @@
 require 'aws-sdk'
 require 'tempfile'
 
-class ProcessFilesInS3BucketFolders
+class ProcessAllFilesInS3Folders
   def initialize(bucket_name, prefix_folders, file_ext)
     @bucket_name = bucket_name
     @prefix_folders = prefix_folders
@@ -35,11 +35,9 @@ class ProcessFilesInS3BucketFolders
   end
 
   def file_keys
-    arr = []
-    @prefix_folders.each do |prefix_folder|
+    [*@prefix_folders].each_with_object([]) do |prefix_folder, arr|
       arr += s3.list_objects(bucket_location(prefix_folder)).contents.map(&:key)
     end
-    arr
   end
 
   def s3

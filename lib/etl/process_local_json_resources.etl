@@ -1,5 +1,6 @@
 require_relative 'common'
 
-source(ProcessAllFilesInLocalFolder, 'lib/etl/data/good*resource*.json')
-transform(TransformJsonResources)
-destination(CreateNewResourceRecords)
+source(NormalizeRow,
+       NormalizeJsonResources,
+       ProcessAllFilesInLocalFolders, 'lib/etl/data/good*resource*.json')
+destination(CreateNewResourceRecord)
