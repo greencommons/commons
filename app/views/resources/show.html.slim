@@ -1,11 +1,11 @@
 .page-details
   .row.page-details__row
-    .col-xs-6.col-md-4
-      h4
+    .col-xs-4.col-md-4
+      h6
         span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
         = @resource.resource_type.capitalize
     
-    .col-xs-6.col-md-8
+    .col-xs-8.col-md-8
       .resource-actions
         = render 'shared/components/btn_count', path: '#', 
                                                 text: 'ADD TO LIST', 
