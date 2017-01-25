@@ -1,0 +1,73 @@
+.page-details
+  .row.page-details__row
+    .col-xs-4.col-md-4
+      h6
+        span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
+        = @resource.resource_type.capitalize
+    
+    .col-xs-8.col-md-8
+      .resource-actions
+        = render 'shared/components/btn_count', path: '#', 
+                                                text: 'ADD TO LIST', 
+                                                label: @resource.lists.count,
+                                                classes: 'resource-actions__button--right',
+                                                style: 'primary'
+                                                
+
+  .row.page-details__row.page-details__row--half
+    .col-xs-12
+      h1= @resource.title
+
+  .row.page-details__row
+    .col-xs-12
+      = render 'shared/components/tags'
+  
+  .row
+    .col-xs-12
+      h3 ABOUT
+      p
+        = @resource.content.truncate(800)
+      #page-details__more.collapse
+        .row
+          .col-xs-12
+            p
+              span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
+              = @resource.resource_type.capitalize
+              
+        = render 'resources/resource_metadata', metadata: humanize_str_date(@resource.metadata['date']), 
+                                                icon: 'calendar'
+        = render 'resources/resource_metadata', metadata: @resource.metadata['creators'],
+                                                icon: 'user'                                          
+        = render 'resources/resource_metadata', metadata: @resource.metadata['publisher'],
+                                                icon: 'home'                                          
+            
+  .row.page-details__row
+    .col-xs-12.text-right
+      = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__hide' },  id: 'page-details__show' do
+        | SEE MORE
+        span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
+      = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__show' }, id: 'page-details__hide', class: 'collapse' do
+        | HIDE
+        span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
+                    
+  .row.page-details__row
+    .col-xs-12.col-sm-2
+      h3 CONTENT
+    .col-xs-12.col-sm-10
+      .resource-actions.resource-actions__button--align-title
+        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-primary resource-actions__button--right'
+        = link_to '', class: 'resource-actions__button btn btn-primary' do
+          | EXPORT
+          span.glyphicon.glyphicon-cloud-download.glyphicon--left aria-hidden='true'
+          
+  .row.page-details__row.hidden
+    .col-lg-12
+      = render 'shared/components/discuss'
+
+  .row.page-details__row--half
+    .col-xs-12
+      h3 EXPLORE
+  .row
+    - @suggestions.each do |suggestion|
+      .col-xs-12.col-md-6
+        = render 'shared/summary_cards/main', resource: suggestion
