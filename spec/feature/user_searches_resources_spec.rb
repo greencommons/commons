@@ -20,8 +20,8 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
 
     scenario 'users should see updated search results' do
-      title = 'Pinterest diy vegan mumblecore'
-      new_title = 'Bitters authentic locavore xoxo truffaut'
+      title = 'Pinterest'
+      new_title = 'Facebook'
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
@@ -49,8 +49,8 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
 
     scenario "users should see updated search results even if the record wasn't indexed" do
-      title = 'Pinterest diy vegan mumblecore'
-      new_title = 'Bitters authentic locavore xoxo truffaut'
+      title = 'Pinterest'
+      new_title = 'Facebook'
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
