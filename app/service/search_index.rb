@@ -20,8 +20,6 @@ class SearchIndex
   end
 
   def update
-    return add unless changed.any?
-
     perform do
       data = elasticsearch_hash.merge(body: { doc: changes })
       Elasticsearch::Model.client.update(data)
