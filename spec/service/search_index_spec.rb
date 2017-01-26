@@ -62,6 +62,77 @@ RSpec.describe SearchIndex do
     end
   end
 
+  describe '#update' do
+    it 'updates the record in the search index' do
+      travel_to(Time.zone.now) do
+        allow(Elasticsearch::Model.client).to receive(:update)
+        record = create(:resource)
+        model_name = record.class.name
+        SearchIndex.new(model_name: model_name, id: record.id).add
+
+        title = Faker::Book.title
+        record.update(title: title)
+        SearchIndex.new(model_name: model_name, id: record.id, changed: ['title']).update
+
+        expect(Elasticsearch::Model.client).to have_received(:update).
+          with(
+            index: model_name.constantize.index_name,
+            type: model_name.downcase,
+            id: record.id,
+            body: { doc: { 'title' => title } },
+          )
+      end
+    end
+
+    context 'when the record is not indexed properly' do
+      it 'raises Elasticsearch::Transport::Transport::Errors::NotFound' do
+        travel_to(Time.zone.now) do
+          allow(Elasticsearch::Model.client).to receive(:index)
+
+          record = create(:resource)
+          model_name = record.class.name
+
+          SearchIndex.new(model_name: model_name, id: record.id).remove
+
+          title = Faker::Book.title
+          record.update(title: title)
+          expect do
+            SearchIndex.new(model_name: model_name, id: record.id, changed: ['title']).update
+          end.not_to raise_error
+
+          expect(Elasticsearch::Model.client).to have_received(:index)
+        end
+      end
+    end
+
+    context 'if callbacks are disabled', search_indexing_callbacks: false do
+      it 'does not enqueue the job' do
+        allow(Elasticsearch::Model.client).to receive(:update)
+        record = create(:resource)
+        model_name = record.class.name
+
+        title = Faker::Book.title
+        record.update(title: title)
+        SearchIndex.new(model_name: model_name, id: record.id, changed: ['title']).update
+
+        expect(Elasticsearch::Model.client).not_to have_received(:update)
+      end
+
+      it 'logs a warning' do
+        record = create(:resource)
+        model_name = record.class.name
+        allow(Rails.logger).to receive(:warn)
+
+        title = Faker::Book.title
+        record.update(title: title)
+        SearchIndex.new(model_name: model_name, id: record.id, changed: ['title']).update
+
+        expect(Rails.logger).to have_received(:warn).
+          with(/callbacks.+disabled/)
+      end
+    end
+  end
+
   describe '#remove' do
     it 'removes the record from the index' do
       record = create(:resource)
@@ -76,6 +147,20 @@ RSpec.describe SearchIndex do
           type: model_name.downcase,
           id: record.id,
         )
+    end
+
+    context 'when the record is not indexed properly' do
+      it 'raises Elasticsearch::Transport::Transport::Errors::NotFound' do
+        travel_to(Time.zone.now) do
+          record = create(:resource)
+          model_name = record.class.name
+          SearchIndex.new(model_name: model_name, id: record.id).remove
+
+          expect do
+            SearchIndex.new(model_name: model_name, id: record.id).remove
+          end.not_to raise_error
+        end
+      end
     end
 
     context 'if callbacks are disabled', search_indexing_callbacks: false do
