@@ -1,5 +1,5 @@
 require_relative 'common'
 
-source(ProcessAllFilesInS3Bucket, 'knowledge.commons', 'island_press')
+source(ProcessAllFilesInLocalFolders, ['lib/etl/data/*.epub'])
 transform(TransformEpub)
 destination(CreateNewResourceRecord)

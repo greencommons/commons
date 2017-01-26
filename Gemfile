@@ -25,6 +25,7 @@ gem 'kiba', '~> 1.0.0'
 gem 'epub-parser'
 gem 'awesome_print'
 gem 'factory_girl_rails'
+gem 'json-schema'
 
 group :development do
   gem 'bummr'

@@ -1,0 +1,6 @@
+require_relative 'common'
+
+source(NormalizeRow,
+       NormalizeJsonResources,
+       ProcessAllFilesInLocalFolders, 'lib/etl/data/*resource*.json')
+destination(CreateNewResourceRecord)

@@ -1,0 +1,22 @@
+[
+	{
+		"name": "A Green Group",
+		"long_description": "Founded in 1991, this organization aims to combat climate change and otherwise save humanity.",
+		"url": "http://www.agreengroup.org",
+		"metadata": {
+		}
+	},
+	{
+		"name": "Climate Uncles",
+		"long_description": "Uncles of the future generation, we stand together and protect.",
+		"email": "info@climateuncles.org",
+		"metadata": {
+			"founded": "2016-01-05"
+		}
+	},
+	{
+		"name": "Clean Energies R Us",
+		"email": "cleaner@cleanenergiesrus.org",
+		"short_description": "Uncles of the future generation, we stand together and protect."
+	}
+]
