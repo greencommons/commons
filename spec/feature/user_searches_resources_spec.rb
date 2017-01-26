@@ -20,8 +20,8 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
 
     scenario 'users should see updated search results' do
-      title = Faker::Book.title
-      new_title = Faker::Book.title
+      title = 'Twitter'
+      new_title = 'Facebook'
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
@@ -49,14 +49,17 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
 
     scenario "users should see updated search results even if the record wasn't indexed" do
-      title = Faker::Book.title
-      new_title = Faker::Book.title
+      title = 'Twitter'
+      new_title = 'Facebook'
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
 
       wait_for { Resource.search(title).results.total }.to eq(1)
       RemoveFromIndexJob.new.perform('Resource', resource.id)
+
+      expect_any_instance_of(SearchIndex).to receive(:update).once.and_call_original
+      expect_any_instance_of(SearchIndex).to receive(:add).once.and_call_original
 
       resource.title = new_title
       resource.save!
