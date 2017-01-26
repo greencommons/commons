@@ -1,0 +1,35 @@
+.row.group-details__row
+  .col-sm-12.col-md-5.col-lg-6
+    h1 Search Results
+  .col-sm-12.col-md-7.col-lg-6.text-center.top-page-form
+    .row
+      .col-xs-12
+        = form_for search_path, method: :get, html: { class: 'form-horizontal customer-search-form' } do |form|
+          .form-group
+            .col-xs-8.col-sm-8.col-sm-offset-2
+              = text_field_tag :query, params[:query], placeholder: 'Enter Search Term', class: 'form-control input-lg'
+            .col-xs-4.col-sm-2
+              = button_tag type: 'submit', class: 'col-lg-12 btn btn-lg btn-primary' do
+                span.glyphicon.glyphicon-zoom-in aria-hidden='true'
+    .row
+      .col-xs-12.text-right
+        = link_to 'Advanced Search', '/'
+
+.row.group-details__row
+  .col-xs-6
+    h4= "#{@results.count} Results"
+  .col-xs-6.text-right
+    h4= 'Sort:'
+
+.row
+  .col-md-2
+    .summary-card
+      .summary-card__body
+        .summary-card__row.text-center
+          h5 FILTER
+  .col-md-10
+    - if @results.any?
+      - @results.records.each_with_hit do |result, hit|
+        = render 'shared/summary_cards/main', resource: result, hit: hit
+    - else
+      = 'No results found.'

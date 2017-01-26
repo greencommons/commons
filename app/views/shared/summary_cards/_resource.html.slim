@@ -7,6 +7,8 @@
       h5
         span.glyphicon.glyphicon-file.glyphicon--right
         = resource.title
+        - if defined?(hit) 
+          = " (Score: #{hit._score})"
     .summary-card__row
       p
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 

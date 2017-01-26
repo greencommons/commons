@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Searching for resources', :worker, :elasticsearch do
   context 'when searching by title' do
-    scenario 'users should see metadata for a resource when search' do
+    scenario 'users can find a resource when searching' do
       title = Faker::Hipster.sentence
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
       create(:resource, title: title, metadata: metadata)
@@ -15,8 +15,6 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).to have_text(title)
-      expect(page).to have_text(metadata[:creators])
-      expect(page).to have_text(metadata[:date])
     end
 
     scenario 'users should see updated search results' do
@@ -49,8 +47,8 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
 
     scenario "users should see updated search results even if the record wasn't indexed" do
-      title = 'Twitter'
-      new_title = 'Facebook'
+      title = 'Spotify'
+      new_title = 'Deezer'
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
@@ -72,11 +70,31 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).to have_text(new_title)
-      expect(page).to have_text(metadata[:creators])
-      expect(page).to have_text(metadata[:date])
     end
 
-    scenario 'users should not see search results for deleted files' do
+    scenario 'users can search for resources, groups and lists' do
+      title = Faker::Hipster.sentence
+
+      resource = create(:resource, title: "#{title} My Resource")
+      group = create(:group, name: "#{title} My Group")
+      list = create(:list, name: "#{title} My List")
+
+      wait_for {
+        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+      }.to eq(3)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: title
+        click_button 'Search'
+      end
+
+      expect(page).to have_text('My Resource')
+      expect(page).to have_text('My Group')
+      expect(page).to have_text('My List')
+    end
+
+    scenario 'users cannot see search results for deleted files' do
       title = Faker::Hipster.sentence
       metadata = { creators: 'Rachel Carson', date: Time.zone.today }
       resource = create(:resource, title: title, metadata: metadata)
@@ -91,8 +109,6 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).not_to have_text(title)
-      expect(page).not_to have_text(metadata[:creators])
-      expect(page).not_to have_text(metadata[:date])
     end
   end
 end

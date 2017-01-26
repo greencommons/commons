@@ -8,7 +8,11 @@
         span.glyphicon.glyphicon-list.glyphicon--right
         = '13 items'
       .summary-card__metadata
-        h5= resource.name
+        h5
+          span.glyphicon.glyphicon-list.glyphicon--right
+          = resource.name
+          - if defined?(hit) 
+            = " (Score: #{hit._score})"
       .clearfix
     .summary-card__row--last
       p

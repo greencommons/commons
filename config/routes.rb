@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :search, only: [:new]
+  get '/search', to: 'search#show', as: 'search'
 
   resources :resources, only: [:show]
 
