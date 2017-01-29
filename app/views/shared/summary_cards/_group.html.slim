@@ -4,7 +4,7 @@
       h5
         span.glyphicon.glyphicon-th-large.glyphicon--right
         = resource.name
-        - if defined?(hit) 
+        - if defined?(hit) && hit
           = " (Score: #{hit._score})"
     .summary-card__row.summary-card__row--min-height
       p

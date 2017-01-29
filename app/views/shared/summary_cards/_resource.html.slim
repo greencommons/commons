@@ -7,7 +7,7 @@
       h5
         span.glyphicon.glyphicon-file.glyphicon--right
         = resource.title
-        - if defined?(hit) 
+        - if defined?(hit) && hit
           = " (Score: #{hit._score})"
     .summary-card__row
       p
