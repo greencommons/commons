@@ -22,12 +22,38 @@
     h4= 'Sort:'
 
 .row
-  .col-md-2
-    .summary-card
-      .summary-card__body
-        .summary-card__row.text-center
-          h5 FILTER
-  .col-md-10
+  .col-md-3
+    .filters
+      .filters__title.text-center
+        h5 FILTER
+      .filters__lists
+        form
+          ul.filters__list
+            li 
+              .filters__item
+                = check_box_tag :resources
+                = 'Resources'
+              ul.filters__list
+                li.filters__item
+                  = check_box_tag :books
+                  = 'Books'
+                li.filters__item
+                  = check_box_tag :articles
+                  = 'Articles'
+                li.filters__item
+                  = check_box_tag :data_sets
+                  = 'Data sets'
+            li.filters__item
+              = check_box_tag :people
+              = 'People'
+            li.filters__item
+              = check_box_tag :lists
+              = 'Lists'
+            li.filters__item
+              = check_box_tag :groups
+              = 'Groups'
+  
+  .col-md-9
     - if @results.any?
       - @results.records.each_with_hit do |result, hit|
         = render 'shared/summary_cards/main', resource: result, hit: hit

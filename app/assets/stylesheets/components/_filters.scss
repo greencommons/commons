@@ -1,0 +1,14 @@
+.filters {
+  width: 100%;
+  padding: 15px;
+  @include box-shadow(0 1px 4px rgba(0,0,0,.3));
+
+  &__list {
+    list-style: none;
+    padding-left: 20px;
+  }
+
+  &__item {
+    margin-bottom: 5px;
+  }
+}

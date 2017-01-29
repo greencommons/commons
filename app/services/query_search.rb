@@ -5,7 +5,7 @@ class QuerySearch
 
   def search
     return [] unless @params[:query]
-    
+
     Elasticsearch::Model.search({
       query: {
         bool: {
@@ -16,7 +16,6 @@ class QuerySearch
                 { match: { name: @params[:query] } },
               ]
             }
-
           ]
         }
       }
