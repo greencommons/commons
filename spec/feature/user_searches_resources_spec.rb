@@ -75,13 +75,13 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     scenario 'users can search for resources, groups and lists' do
       title = Faker::Hipster.sentence
 
-      resource = create(:resource, title: "#{title} My Resource")
-      group = create(:group, name: "#{title} My Group")
-      list = create(:list, name: "#{title} My List")
+      create(:resource, title: "#{title} My Resource")
+      create(:group, name: "#{title} My Group")
+      create(:list, name: "#{title} My List")
 
-      wait_for {
+      wait_for do
         Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
-      }.to eq(3)
+      end.to eq(3)
 
       visit new_search_path
       within('.customer-search-form') do
