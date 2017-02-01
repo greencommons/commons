@@ -1,5 +1,6 @@
 class Resource < ApplicationRecord
   include Indexable
+  acts_as_taggable
 
   RESOURCE_TYPES = {
     article: 0,
