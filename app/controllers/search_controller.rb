@@ -6,11 +6,13 @@ class SearchController < ApplicationController
     skip_authorization
 
     @query = params[:query]
-    @filters = params[:filters] || nil
+    @filters = params[:filters]
+    @sort = params[:sort]
+    @dir = params[:dir]
 
     if @query
-      builder = SearchBuilders::Builder.new(@query, @filters)
-      builder = builder.search.filter_by_resource_type
+      builder = SearchBuilders::Builder.new(@query, @filters, @sort, @dir)
+      builder = builder.search.filter_by_resource_type.sort
 
       @results = Elasticsearch::Model.search(*builder.to_elasticsearch).
                  page(params[:page] || 1).per(10)
