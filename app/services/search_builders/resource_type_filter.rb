@@ -33,11 +33,10 @@ module SearchBuilders
 
     def filter_by_resource_type
       @filters[:resource_types].keys.each do |resource_type|
-        if RESOURCE_TYPE_FILTERS.keys.include?(resource_type.to_sym)
-          @search_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
-            term: { resource_type: RESOURCE_TYPE_FILTERS[resource_type.to_sym] }
-          }
-        end
+        next unless RESOURCE_TYPE_FILTERS.keys.include?(resource_type.to_sym)
+        @search_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
+          term: { resource_type: RESOURCE_TYPE_FILTERS[resource_type.to_sym] }
+        }
       end
     end
   end

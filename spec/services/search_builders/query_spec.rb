@@ -4,15 +4,15 @@ RSpec.describe SearchBuilders::Query do
   describe '#build' do
     context 'with query = nil' do
       it 'returns the given search query' do
-        query = SearchBuilders::Query.new(nil, { something: 'else' })
-        expect(query.build).to eq({ something: 'else' })
+        query = SearchBuilders::Query.new(nil, something: 'else')
+        expect(query.build).to eq(something: 'else')
       end
     end
 
     context 'with query = ""' do
       it 'returns the given search query' do
-        query = SearchBuilders::Query.new('', { something: 'else' })
-        expect(query.build).to eq({ something: 'else' })
+        query = SearchBuilders::Query.new('', something: 'else')
+        expect(query.build).to eq(something: 'else')
       end
     end
 
@@ -22,27 +22,18 @@ RSpec.describe SearchBuilders::Query do
         query = SearchBuilders::Query.new('test', search_params)
 
         expect(query.build).to eq(
-          {
-            query: {
-              bool: {
-                must: {
-                  bool: {
-                    should: [
-                      { match: { title: 'test' } },
-                      { match: { name: 'test' } }
-                    ]
-                  }
-                },
-                filter: {
-                  bool: {
-                    should: {
-                      bool: {
-                        minimum_should_match: 1,
-                        should: []
-                      }
-                    }
-                  }
+          query: {
+            bool: {
+              must: {
+                bool: {
+                  should: [
+                    { match: { title: 'test' } },
+                    { match: { name: 'test' } }
+                  ]
                 }
+              },
+              filter: {
+                bool: { should: { bool: { minimum_should_match: 1, should: [] } } }
               }
             }
           }

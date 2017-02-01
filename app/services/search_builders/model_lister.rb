@@ -13,7 +13,7 @@ module SearchBuilders
     def build
       return MODEL_TYPE_FILTERS.values unless @filters&.dig(:model_types)&.any?
 
-      @filters[:model_types].keys.collect do |model_type|
+      @filters[:model_types].keys.map do |model_type|
         if MODEL_TYPE_FILTERS.keys.include?(model_type.to_sym)
           MODEL_TYPE_FILTERS[model_type.to_sym]
         end

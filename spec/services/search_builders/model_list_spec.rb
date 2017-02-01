@@ -18,14 +18,14 @@ RSpec.describe SearchBuilders::ModelLister do
 
     context 'with filters = { model_types: {} }' do
       it 'returns all the supported model types' do
-        lister = SearchBuilders::ModelLister.new({ model_types: {} })
+        lister = SearchBuilders::ModelLister.new(model_types: {})
         expect(lister.build).to eq [Resource, List, Group]
       end
     end
 
     context 'with filters = { model_types: { resources: "on", lists: "on" } }' do
       it 'returns only the requested types Resource and List' do
-        lister = SearchBuilders::ModelLister.new({ model_types: { resources: 'on', lists: 'on' } })
+        lister = SearchBuilders::ModelLister.new(model_types: { resources: 'on', lists: 'on' })
         expect(lister.build).to eq [Resource, List]
       end
     end

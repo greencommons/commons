@@ -29,9 +29,12 @@ RSpec.describe SearchBuilders::Builder do
     it 'prepare an array of parameters for Elastic Search' do
       builder = SearchBuilders::Builder.new('test', {})
 
-      expect(builder.to_elasticsearch).to eq([
-        builder.send(:base), SearchBuilders::ModelLister::MODEL_TYPE_FILTERS.values
-      ])
+      expect(builder.to_elasticsearch).to eq(
+        [
+          builder.send(:base),
+          SearchBuilders::ModelLister::MODEL_TYPE_FILTERS.values
+        ]
+      )
     end
   end
 end
