@@ -1,4 +1,4 @@
-.row.group-details__row
+.row.page-details__row
   .col-sm-12.col-md-5.col-lg-6
     h1 Search Results
   .col-sm-12.col-md-7.col-lg-6.text-center.top-page-form
@@ -15,7 +15,7 @@
       .col-xs-12.text-right
         = link_to 'Advanced Search', '/'
 
-.row.group-details__row
+.row.page-details__row
   .col-xs-6
     h4= "#{@results.count} Results"
   .col-xs-6.text-right
@@ -53,3 +53,7 @@
         = render 'shared/summary_cards/main', resource: result, hit: hit
     - else
       = 'No results found.'
+
+.row.page-details__row
+  .col-xs-12.text-center
+    = paginate @results

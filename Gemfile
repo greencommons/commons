@@ -26,6 +26,7 @@ gem 'epub-parser'
 gem 'awesome_print'
 gem 'factory_girl_rails'
 gem 'json-schema'
+gem 'kaminari'
 
 group :development do
   gem 'bummr'

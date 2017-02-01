@@ -12,7 +12,8 @@ class SearchController < ApplicationController
       builder = SearchBuilders::Builder.new(@query, @filters)
       builder = builder.search.filter_by_resource_type
 
-      @results = Elasticsearch::Model.search(*builder.to_elasticsearch)
+      @results = Elasticsearch::Model.search(*builder.to_elasticsearch).
+                 page(params[:page] || 1).per(10)
     else
       @results = []
     end
