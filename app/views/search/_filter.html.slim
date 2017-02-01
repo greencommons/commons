@@ -1,0 +1,4 @@
+= check_box_tag "filters[#{category}][#{name}]", 
+                defined?(value) && value ? value : 'on', 
+                @filters ? @filters.dig(category, name).present? : true
+= label_tag "filters[#{category}][#{name}]", name.to_s.humanize

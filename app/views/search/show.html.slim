@@ -27,31 +27,25 @@
       .filters__title.text-center
         h5 FILTER
       .filters__lists
-        form
+        = form_tag search_path, method: :get do
+          = hidden_field_tag :query, @query
           ul.filters__list
             li 
               .filters__item
-                = check_box_tag :resources
-                = 'Resources'
+                = render 'search/filter', name: :resources, category: :model_types
               ul.filters__list
                 li.filters__item
-                  = check_box_tag :books
-                  = 'Books'
+                  = render 'search/filter', name: :books, category: :resource_types
                 li.filters__item
-                  = check_box_tag :articles
-                  = 'Articles'
+                  = render 'search/filter', name: :articles, category: :resource_types
                 li.filters__item
-                  = check_box_tag :data_sets
-                  = 'Data sets'
+                  = render 'search/filter', name: :reports, category: :resource_types
             li.filters__item
-              = check_box_tag :people
-              = 'People'
+              = render 'search/filter', name: :lists, category: :model_types
             li.filters__item
-              = check_box_tag :lists
-              = 'Lists'
-            li.filters__item
-              = check_box_tag :groups
-              = 'Groups'
+              = render 'search/filter', name: :groups, category: :model_types
+          = submit_tag 'FILTER', class: 'col-lg-12 btn btn-lg btn-primary'
+          .clearfix
   
   .col-md-9
     - if @results.any?
