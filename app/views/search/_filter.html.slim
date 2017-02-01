@@ -1,4 +1,5 @@
 = check_box_tag "filters[#{category}][#{name}]", 
                 defined?(value) && value ? value : 'on', 
-                @filters ? @filters.dig(category, name).present? : true
+                @filters ? @filters.dig(category, name).present? : true,
+                data: { indeterminate_checkbox: defined?(indeterminate) ? indeterminate : false }
 = label_tag "filters[#{category}][#{name}]", name.to_s.humanize

@@ -32,7 +32,7 @@
           ul.filters__list
             li 
               .filters__item
-                = render 'search/filter', name: :resources, category: :model_types
+                = render 'search/filter', name: :resources, category: :model_types, indeterminate: true
               ul.filters__list
                 li.filters__item
                   = render 'search/filter', name: :books, category: :resource_types
