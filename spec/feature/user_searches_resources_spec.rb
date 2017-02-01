@@ -111,4 +111,84 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).not_to have_text(title)
     end
   end
+
+  context 'filtering' do
+    scenario 'users can filter by model' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource")
+      create(:group, name: "#{title} My Group")
+      create(:list, name: "#{title} My List")
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+      end.to eq(3)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: title
+        click_button 'Search'
+      end
+
+      expect(page).to have_text('My Resource')
+      expect(page).to have_text('My Group')
+      expect(page).to have_text('My List')
+
+      uncheck('Resources')
+      uncheck('Lists')
+      click_button 'FILTER'
+
+      expect(page).not_to have_text('My Resource')
+      expect(page).not_to have_text('My List')
+      expect(page).to have_text('My Group')
+    end
+
+    scenario 'users can filter by resource type' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource", resource_type: :article)
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource]).results.total
+      end.to eq(1)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: title
+        click_button 'Search'
+      end
+
+      expect(page).to have_text('My Resource')
+
+      uncheck('Articles')
+      click_button 'FILTER'
+
+      expect(page).not_to have_text('My Resource')
+    end
+  end
+
+  context 'sorting' do
+    scenario 'users can sort by created_at date' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
+      create(:group, name: "#{title} My Group", created_at: 5.days.ago)
+      create(:list, name: "#{title} My List", created_at: 8.days.ago)
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+      end.to eq(3)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: title
+        click_button 'Search'
+      end
+
+      select 'DATE', from: 'sort'
+      click_button 'SORT'
+
+      expect(page).to have_text(/.*My Group.*My List.*My Resource.*/)
+    end
+  end
 end

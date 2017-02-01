@@ -25,7 +25,7 @@ class SearchController < ApplicationController
 
   def set_search_variables
     @query = params[:query]
-    @filters = params[:filters]
+    @filters = params[:filters]&.to_unsafe_hash
     @sort = params[:sort]
     @dir = params[:dir]
   end
