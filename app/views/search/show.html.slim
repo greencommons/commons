@@ -1,7 +1,7 @@
 .row.page-details__row
-  .col-sm-12.col-md-5.col-lg-6
+  .col-xs-12.col-md-5.col-lg-6
     h1 Search Results
-  .col-sm-12.col-md-7.col-lg-6.text-center.top-page-form
+  .col-xs-12.col-md-7.col-lg-6.text-center.top-page-form
     .row
       .col-xs-12
         = form_for search_path, method: :get, html: { class: 'form-horizontal customer-search-form' } do |form|
@@ -12,16 +12,16 @@
               = button_tag type: 'submit', name: nil, class: 'col-lg-12 btn btn-lg btn-primary' do
                 span.glyphicon.glyphicon-zoom-in aria-hidden='true'
     .row
-      .col-xs-12.text-right
+      .col-xs-12.text-xs-center.text-sm-right
         = link_to 'Advanced Search', '/'
 
 = form_tag search_path, method: :get do
-  .row.page-details__row
-    .col-xs-6
+  .row.page-details__row--half
+    .col-xs-12.col-sm-6.page-details__row
       h4= "#{@results.count} Results"
-    .col-xs-6.text-right
+    .col-xs-12.col-sm-6
       .row
-          .col-xs-4.col-xs-offset-4
+          .col-xs-8.col-sm-4.col-sm-offset-4
             = hidden_field_tag :query, @query
             = hidden_field_tag :dir, @dir || 'desc'
             = select_tag :sort, options_for_select([ 'SCORE', 'DATE' ], @sort || 'SCORE'), class: 'form-control'
@@ -29,9 +29,9 @@
             = submit_tag 'SORT', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
 
   .row
-    .col-md-3
+    .col-xs-12.col-sm-3
       .filters
-        .filters__title.text-center
+        .filters__title.text-xs-left.text-center
           h5 FILTER
         .filters__lists
           = hidden_field_tag :query, @query
@@ -53,7 +53,7 @@
           = submit_tag 'FILTER', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
           .clearfix
     
-    .col-md-9
+    .col-xs-12.col-sm-9
       - if @results.any?
         - @results.records.each_with_hit do |result, hit|
           = render 'shared/summary_cards/main', resource: result, hit: hit

@@ -1,6 +1,7 @@
 .filters {
   width: 100%;
   padding: 15px;
+  margin-bottom: 30px;
   @include box-shadow(0 1px 4px rgba(0,0,0,.3));
 
   &__list {
