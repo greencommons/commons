@@ -1,5 +1,7 @@
 module SearchBuilders
   class Builder
+    attr_accessor :search_params
+
     def initialize(query, filters)
       @query = query
       @filters = filters
@@ -7,12 +9,12 @@ module SearchBuilders
     end
 
     def search
-      @search_params = SearchBuilders::Query.new(@query, @search_params).build
+      search_params = SearchBuilders::Query.new(@query, search_params).build
       self
     end
 
     def filter_by_resource_type
-      @search_params = SearchBuilders::ResourceTypeFilter.new(@filters, @search_params).build
+      search_params = SearchBuilders::ResourceTypeFilter.new(@filters, search_params).build
       self
     end
 
@@ -21,7 +23,7 @@ module SearchBuilders
     end
 
     def to_elasticsearch
-      [@search_params, models]
+      [search_params, models]
     end
 
     private

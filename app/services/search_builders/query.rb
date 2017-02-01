@@ -6,7 +6,7 @@ module SearchBuilders
     end
 
     def build
-      return @search_params unless @query
+      return @search_params if @query.blank?
 
       @search_params[:query][:bool][:must][:bool][:should] << { match: { title: @query } }
       @search_params[:query][:bool][:must][:bool][:should] << { match: { name: @query } }

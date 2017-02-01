@@ -2,7 +2,6 @@ module SearchBuilders
   class ModelLister
     MODEL_TYPE_FILTERS = {
       resources: Resource,
-      people: User,
       lists: List,
       groups: Group
     }.freeze
@@ -12,7 +11,7 @@ module SearchBuilders
     end
 
     def build
-      return MODEL_TYPE_FILTERS.values if @filters&.dig(:model_types)&.empty?
+      return MODEL_TYPE_FILTERS.values unless @filters&.dig(:model_types)&.any?
 
       @filters[:model_types].keys.collect do |model_type|
         if MODEL_TYPE_FILTERS.keys.include?(model_type.to_sym)
