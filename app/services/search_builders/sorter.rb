@@ -1,18 +1,22 @@
 module SearchBuilders
+  SORT_OPTIONS = {
+    date: :created_at
+  }.freeze
+
   class Sorter
-    def initialize(sort, dir, search_params)
+    def initialize(sort, dir, es_params)
       @sort = sort
       @dir = dir
-      @search_params = search_params
+      @match_sort = SORT_OPTIONS[@sort&.downcase&.to_sym]
+      @es_params = es_params
     end
 
     def build
-      return @search_params if @sort.blank? || @dir.blank?
-      return @search_params if @sort == 'SCORE'
+      return @es_params if @sort.blank? || @dir.blank?
+      return @es_params unless @match_sort
 
-      @search_params[:sort].unshift(created_at: { order: @dir })
-
-      @search_params
+      @es_params[:sort].unshift(@match_sort => { order: @dir })
+      @es_params
     end
   end
 end

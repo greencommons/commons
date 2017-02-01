@@ -4,7 +4,7 @@ RSpec.describe SearchBuilders::Builder do
   describe '#search' do
     it 'sends "build" to SearchBuilders::Query and returns itself' do
       expect_any_instance_of(SearchBuilders::Query).to receive(:build)
-      builder = SearchBuilders::Builder.new('test', {})
+      builder = SearchBuilders::Builder.new(query: 'test')
       expect(builder.search).to eq(builder)
     end
   end
@@ -12,7 +12,7 @@ RSpec.describe SearchBuilders::Builder do
   describe '#filter_by_resource_type' do
     it 'sends "build" to SearchBuilders::ResourceTypeFilter and returns itself' do
       expect_any_instance_of(SearchBuilders::ResourceTypeFilter).to receive(:build)
-      builder = SearchBuilders::Builder.new('test', {})
+      builder = SearchBuilders::Builder.new(query: 'test')
       expect(builder.filter_by_resource_type).to eq(builder)
     end
   end
@@ -20,14 +20,14 @@ RSpec.describe SearchBuilders::Builder do
   describe '#models' do
     it 'sends "build" to SearchBuilders::ModelLister' do
       expect_any_instance_of(SearchBuilders::ModelLister).to receive(:build)
-      builder = SearchBuilders::Builder.new('test', {})
+      builder = SearchBuilders::Builder.new(query: 'test')
       builder.models
     end
   end
 
   describe '#to_elasticsearch' do
     it 'prepare an array of parameters for Elastic Search' do
-      builder = SearchBuilders::Builder.new('test', {})
+      builder = SearchBuilders::Builder.new(query: 'test')
 
       expect(builder.to_elasticsearch).to eq(
         [

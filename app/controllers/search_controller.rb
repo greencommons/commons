@@ -4,20 +4,29 @@ class SearchController < ApplicationController
 
   def show
     skip_authorization
-
-    @query = params[:query]
-    @filters = params[:filters]
-    @sort = params[:sort]
-    @dir = params[:dir]
+    set_search_variables
 
     if @query
-      builder = SearchBuilders::Builder.new(@query, @filters, @sort, @dir)
-      builder = builder.search.filter_by_resource_type.sort
+      builder = SearchBuilders::Builder.new(
+        query: @query,
+        filters: @filters,
+        sort: @sort,
+        dir: @dir
+      ).search.filter_by_resource_type.sort
 
       @results = Elasticsearch::Model.search(*builder.to_elasticsearch).
                  page(params[:page] || 1).per(10)
     else
       @results = []
     end
+  end
+
+  private
+
+  def set_search_variables
+    @query = params[:query]
+    @filters = params[:filters]
+    @sort = params[:sort]
+    @dir = params[:dir]
   end
 end

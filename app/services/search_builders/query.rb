@@ -1,17 +1,17 @@
 module SearchBuilders
   class Query
-    def initialize(query, search_params)
+    def initialize(query, es_params)
       @query = query
-      @search_params = search_params
+      @es_params = es_params
     end
 
     def build
-      return @search_params if @query.blank?
+      return @es_params if @query.blank?
 
-      @search_params[:query][:bool][:must][:bool][:should] << { match: { title: @query } }
-      @search_params[:query][:bool][:must][:bool][:should] << { match: { name: @query } }
+      @es_params[:query][:bool][:must][:bool][:should] << { match: { title: @query } }
+      @es_params[:query][:bool][:must][:bool][:should] << { match: { name: @query } }
 
-      @search_params
+      @es_params
     end
   end
 end

@@ -1,27 +1,27 @@
 module SearchBuilders
   class Builder
-    attr_accessor :search_params
+    attr_accessor :es_params
 
-    def initialize(query, filters, sort, dir)
+    def initialize(query: nil, filters: {}, sort: nil, dir: nil)
       @query = query
       @filters = filters
       @sort = sort
       @dir = dir
-      @search_params = base
+      @es_params = base
     end
 
     def search
-      @search_params = SearchBuilders::Query.new(@query, @search_params).build
+      @es_params = SearchBuilders::Query.new(@query, @es_params).build
       self
     end
 
     def filter_by_resource_type
-      @search_params = SearchBuilders::ResourceTypeFilter.new(@filters, @search_params).build
+      @es_params = SearchBuilders::ResourceTypeFilter.new(@filters, @es_params).build
       self
     end
 
     def sort
-      @search_params = SearchBuilders::Sorter.new(@sort, @dir, @search_params).build
+      @es_params = SearchBuilders::Sorter.new(@sort, @dir, @es_params).build
       self
     end
 
@@ -30,14 +30,14 @@ module SearchBuilders
     end
 
     def to_elasticsearch
-      [@search_params, models]
+      [@es_params, models]
     end
 
     private
 
     def base
       {
-        sort: [ '_score' ],
+        sort: ['_score'],
         query: {
           bool: {
             must: {

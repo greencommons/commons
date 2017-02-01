@@ -17,26 +17,12 @@ RSpec.describe SearchBuilders::Query do
     end
 
     context 'with query = "test"' do
-      it 'builds the search params with the right conditions' do
-        search_params = SearchBuilders::Builder.new({}, {}).search_params
-        query = SearchBuilders::Query.new('test', search_params)
+      it 'builds the es params with the right conditions' do
+        es_params = SearchBuilders::Builder.new.es_params
+        query = SearchBuilders::Query.new('test', es_params)
 
-        expect(query.build).to eq(
-          query: {
-            bool: {
-              must: {
-                bool: {
-                  should: [
-                    { match: { title: 'test' } },
-                    { match: { name: 'test' } }
-                  ]
-                }
-              },
-              filter: {
-                bool: { should: { bool: { minimum_should_match: 1, should: [] } } }
-              }
-            }
-          }
+        expect(query.build[:query][:bool][:filter]).to eq(
+          bool: { should: { bool: { minimum_should_match: 1, should: [] } } }
         )
       end
     end
