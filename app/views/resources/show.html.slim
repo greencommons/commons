@@ -22,7 +22,8 @@
     .col-xs-12
       = react_component 'Tags', { authenticity_token: form_authenticity_token,
                                   submit_url: resource_tags_path(@resource),
-                                  tags: @resource.tags }, { prerender: true }
+                                  tags: @resource.tags,
+                                  can_create: true }, { prerender: true }
   
   .row
     .col-xs-12
