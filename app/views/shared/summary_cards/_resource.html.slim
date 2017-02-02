@@ -3,12 +3,10 @@
     .summary-card__row
       .summary-card__more
         = render 'shared/components/btn_count', path: '#', icon: 'plus', label: '10', style: 'primary'
-        
       h5
         span.glyphicon.glyphicon-file.glyphicon--right
         = link_to resource.title, resource
-        - if defined?(hit) && hit
-          = " (Score: #{hit._score})"
+      = render 'shared/components/score', hit: hit if defined?(hit)
     .summary-card__row
       p
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 

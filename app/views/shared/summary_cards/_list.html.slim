@@ -11,8 +11,7 @@
         h5
           span.glyphicon.glyphicon-list.glyphicon--right
           = resource.name
-          - if defined?(hit) && hit
-            = " (Score: #{hit._score})"
+        = render 'shared/components/score', hit: hit if defined?(hit)
       .clearfix
     .summary-card__row--last
       p
