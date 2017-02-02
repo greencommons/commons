@@ -14,13 +14,7 @@
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
     .summary-card__row
-      p
-        span.glyphicon.glyphicon-tag.glyphicon--right
-        a href="#" tag
-        | , 
-        a href="#" another tag
-        | , 
-        a href="#" solar panels
+      = render 'shared/components/tags_list', tags: resource.tags
     .summary-card__row.summary-card__row--last 
       .summary-card__metadata
         p
