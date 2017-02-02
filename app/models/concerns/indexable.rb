@@ -17,4 +17,10 @@ module Indexable
       RemoveFromIndexJob.perform_async(self.class.name, id)
     end
   end
+
+  def as_indexed_json(_options = {})
+    as_json.merge(
+      'tags' => tag_list
+    )
+  end
 end

@@ -2,8 +2,9 @@ class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show]
 
   def show
-    # TODO: Switch this to suggestion mechanism once implemented
-    @suggestions = Group.limit(6)
+    @suggestions = Suggesters::Tags.new(tags: @resource.tag_list,
+                                        except: @resource,
+                                        limit: 6).suggest
   end
 
   private

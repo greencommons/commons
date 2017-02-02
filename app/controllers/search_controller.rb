@@ -18,6 +18,12 @@ class SearchController < ApplicationController
     else
       @results = []
     end
+
+    if @results.any?
+      @suggestions = Suggesters::Tags.new(tags: @results.records.first.tag_list,
+                                          except: @results.records,
+                                          limit: 6).suggest
+    end
   end
 
   private

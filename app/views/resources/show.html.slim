@@ -67,10 +67,4 @@
     .col-lg-12
       = render 'shared/components/discuss'
 
-  .row.page-details__row--half
-    .col-xs-12
-      h3 EXPLORE
-  .row
-    - @suggestions.each do |suggestion|
-      .col-xs-12.col-md-6
-        = render 'shared/summary_cards/main', resource: suggestion
+  = render 'shared/components/explore', suggestions: @suggestions
