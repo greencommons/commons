@@ -1,6 +1,6 @@
 module Suggesters
   class Tags
-    def initialize(tags:, except: [], limit: 10, models: [Group, List, Resource])
+    def initialize(tags:, except: [], limit: 10, models: [Group, Resource])
       @tags = tags
       @except = [*except]
       @limit = limit
@@ -22,7 +22,7 @@ module Suggesters
         query: {
           bool: {
             filter: {
-              terms: { tags: @tags }
+              terms: { tags: ['ocean'] }
             },
           }
         }
@@ -30,9 +30,10 @@ module Suggesters
     end
 
     def except_records
-      @es_params[:query][:bool][:must_not] ||= {
-        terms: { _id: @except.map(&:id) }
-      }
+      @es_params[:query][:bool][:must_not] ||= [
+        { terms: { _id: @except.map(&:id) } },
+        { terms: { type: @except.map { |e| e.class.name.downcase } } }
+      ]
     end
   end
 end
