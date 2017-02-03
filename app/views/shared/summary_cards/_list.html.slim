@@ -11,7 +11,7 @@
         h5
           span.glyphicon.glyphicon-list.glyphicon--right
           = resource.name
-          - if defined?(hit) 
+          - if defined?(hit) && hit
             = " (Score: #{hit._score})"
       .clearfix
     .summary-card__row--last
