@@ -1,9 +1,8 @@
 class Group < ApplicationRecord
   include Indexable
-  acts_as_taggable
+  include Taggable
 
   has_paper_trail
-  acts_as_taggable
 
   has_many :groups_users
   has_many :users, through: :groups_users

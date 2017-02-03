@@ -10,17 +10,13 @@ module Indexable
     end
 
     after_commit on: [:update] do
-      UpdateIndexJob.perform_async(self.class.name, id, previous_changes.keys)
+      _changes = previous_changes.dup
+      _changes['tags'] = _changes.delete('cached_tags')
+      UpdateIndexJob.perform_async(self.class.name, id, _changes.keys)
     end
 
     after_commit on: [:destroy] do
       RemoveFromIndexJob.perform_async(self.class.name, id)
     end
-  end
-
-  def as_indexed_json(_options = {})
-    as_json.merge(
-      'tags' => tag_list
-    )
   end
 end

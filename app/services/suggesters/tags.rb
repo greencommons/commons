@@ -22,7 +22,7 @@ module Suggesters
         query: {
           bool: {
             filter: {
-              terms: { tags: ['ocean'] }
+              terms: { tags: @tags }
             },
           }
         }

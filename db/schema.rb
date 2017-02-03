@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210110323) do
+ActiveRecord::Schema.define(version: 20170203021406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
-    t.string   "name",              null: false
+    t.string   "name",                           null: false
     t.string   "short_description"
     t.text     "long_description"
     t.string   "url"
     t.string   "email"
     t.json     "metadata"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "cached_tags",       default: [],              array: true
   end
 
   create_table "groups_users", force: :cascade do |t|
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161210110323) do
     t.datetime "updated_at",                 null: false
     t.jsonb    "metadata",      default: {}, null: false
     t.jsonb    "content",       default: {}, null: false
+    t.text     "cached_tags",   default: [],              array: true
     t.index ["user_id"], name: "index_resources_on_user_id", using: :btree
   end
 

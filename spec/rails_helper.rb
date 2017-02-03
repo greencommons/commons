@@ -33,6 +33,12 @@ RSpec.configure do |config|
     end
   end
 
+  config.around(:each, sidekiq: true) do |example|
+    Sidekiq::Testing.inline! do
+      example.run
+    end
+  end
+
   config.around(:each, :worker) do |example|
     Sidekiq::Testing.inline! do
       example.run
