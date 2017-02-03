@@ -1,6 +1,5 @@
 class Group < ApplicationRecord
   include Indexable
-  acts_as_taggable
 
   has_paper_trail
   acts_as_taggable
