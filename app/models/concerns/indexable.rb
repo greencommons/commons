@@ -10,9 +10,9 @@ module Indexable
     end
 
     after_commit on: [:update] do
-      _changes = previous_changes.dup
-      _changes['tags'] = _changes.delete('cached_tags')
-      UpdateIndexJob.perform_async(self.class.name, id, _changes.keys)
+      changes = previous_changes.dup
+      changes['tags'] =  changes.delete('cached_tags')
+      UpdateIndexJob.perform_async(self.class.name, id, changes.keys)
     end
 
     after_commit on: [:destroy] do

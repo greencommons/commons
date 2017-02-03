@@ -24,7 +24,8 @@ RSpec.describe Suggesters::Tags do
     end
 
     context 'with tags = ["ocean"], except = group' do
-      it 'returns all matching records except the specified group', elasticsearch: true, sidekiq: true do
+      it 'returns all matching records except the specified group',
+         elasticsearch: true, sidekiq: true do
         title = Faker::Hipster.sentence
         group = create(:group, name: title)
         create(:group, name: title)
