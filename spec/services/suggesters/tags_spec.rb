@@ -61,8 +61,7 @@ RSpec.describe Suggesters::Tags do
         wait_for { Suggesters::Tags.new(tags: ['ocean']).suggest.size }.to eq(2)
         records = Suggesters::Tags.new(tags: ['ocean'], limit: 1).suggest
 
-        expect(records).to include(group)
-        expect(records).not_to include(resource)
+        expect(records.count).to eq 1
       end
     end
 
