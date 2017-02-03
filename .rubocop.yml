@@ -13,6 +13,11 @@ AllCops:
 Metrics/LineLength:
   Max: 100
   Enabled: true
+Metrics/BlockLength:
+  Exclude:
+      - 'config/routes.rb'
+      - 'spec/**/*.rb'
+      - '**/*.rake'
 Style/FrozenStringLiteralComment:
   Enabled: false
   EnforcedStyle: when_needed
@@ -27,11 +32,6 @@ Style/FrozenStringLiteralComment:
     - always
 Style/MultilineOperationIndentation:
   Enabled: false
-Style/BlockLength:
-  Exclude:
-      - 'config/routes.rb'
-      - 'spec/**/*.rb'
-      - '**/*.rake'
 Style/StringLiterals:
   EnforcedStyle: single_quotes
   SupportedStyles:

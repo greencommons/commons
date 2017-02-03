@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe Suggesters::Tags do
   describe '#suggest' do
     context 'with tags = ["ocean"]' do
-
       it 'returns ', elasticsearch: true, sidekiq: true do
         title = Faker::Hipster.sentence
         group = create(:group, name: title)
-        group2 = create(:group, name: title)
+        create(:group, name: title)
         resource = create(:resource, title: title)
 
         group.tag_list.add('ocean')
