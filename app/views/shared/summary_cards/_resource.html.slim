@@ -6,7 +6,7 @@
         
       h5
         span.glyphicon.glyphicon-file.glyphicon--right
-        = resource.title
+        = link_to resource.title, resource
         - if defined?(hit) && hit
           = " (Score: #{hit._score})"
     .summary-card__row
