@@ -168,7 +168,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
   end
 
   context 'sorting' do
-    scenario 'users can sort by created_at date' do
+    scenario 'users can sort by recent first' do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
@@ -185,10 +185,33 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
         click_button 'Search'
       end
 
-      select 'DATE', from: 'sort'
+      select 'RECENT FIRST', from: 'sort'
       click_button 'SORT'
 
       expect(page).to have_text(/.*My Group.*My List.*My Resource.*/)
+    end
+
+    scenario 'users can sort by oldest first' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
+      create(:group, name: "#{title} My Group", created_at: 5.days.ago)
+      create(:list, name: "#{title} My List", created_at: 8.days.ago)
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+      end.to eq(3)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: title
+        click_button 'Search'
+      end
+
+      select 'OLDEST FIRST', from: 'sort'
+      click_button 'SORT'
+
+      expect(page).to have_text(/.*My Resource.*My List.*My Group.*/)
     end
   end
 end

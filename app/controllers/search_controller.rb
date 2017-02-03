@@ -11,7 +11,6 @@ class SearchController < ApplicationController
         query: @query,
         filters: @filters,
         sort: @sort,
-        dir: @dir
       ).search.filter_by_resource_type.sort
 
       @results = Elasticsearch::Model.search(*builder.to_elasticsearch).

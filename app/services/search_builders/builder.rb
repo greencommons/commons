@@ -2,11 +2,10 @@ module SearchBuilders
   class Builder
     attr_accessor :es_params
 
-    def initialize(query: nil, filters: {}, sort: nil, dir: nil)
+    def initialize(query: nil, filters: {}, sort: nil)
       @query = query
       @filters = filters
       @sort = sort
-      @dir = dir
       @es_params = base
     end
 
@@ -21,7 +20,7 @@ module SearchBuilders
     end
 
     def sort
-      @es_params = SearchBuilders::Sorter.new(@sort, @dir, @es_params).build
+      @es_params = SearchBuilders::Sorter.new(@sort, @es_params).build
       self
     end
 

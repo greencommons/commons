@@ -23,8 +23,11 @@
       .row
           .col-xs-8.col-sm-4.col-sm-offset-4
             = hidden_field_tag :query, @query
-            = hidden_field_tag :dir, @dir || 'desc'
-            = select_tag :sort, options_for_select([ 'SCORE', 'DATE' ], @sort || 'SCORE'), class: 'form-control'
+            = select_tag :sort, 
+                         options_for_select([ ['SCORE', 'score'], 
+                                              ['RECENT FIRST', 'recent'], 
+                                              ['OLDEST FIRST', 'oldest'] ], @sort || 'SCORE'), 
+                         class: 'form-control'
           .col-xs-4
             = submit_tag 'SORT', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
 
