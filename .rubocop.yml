@@ -27,6 +27,11 @@ Style/FrozenStringLiteralComment:
     - always
 Style/MultilineOperationIndentation:
   Enabled: false
+Style/BlockLength:
+  Exclude:
+      - 'config/routes.rb'
+      - 'spec/**/*.rb'
+      - '**/*.rake'
 Style/StringLiterals:
   EnforcedStyle: single_quotes
   SupportedStyles:

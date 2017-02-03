@@ -5,12 +5,16 @@ Rails.application.routes.draw do
     get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
   end
 
+  concern :taggable do
+    resources :tags, only: [:create]
+  end
+
   resources :search, only: [:new]
   get '/search', to: 'search#show', as: 'search'
 
-  resources :resources, only: [:show]
+  resources :resources, model_name: 'Resource', concerns: :taggable, only: [:show]
 
-  resources :groups do
+  resources :groups, model_name: 'Group', concerns: :taggable do
     resources :members, only: [:index, :create, :destroy] do
       collection do
         post :join
