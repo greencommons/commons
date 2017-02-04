@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Suggesters::Tags do
   describe '#suggest' do
     context 'with tags = ["ocean"]' do
-      it 'returns all matching records', elasticsearch: true, sidekiq: true do
+      it 'returns all matching records', :worker, :elasticsearch do
         title = Faker::Hipster.sentence
         group = create(:group, name: title)
         create(:group, name: title)
@@ -25,7 +25,7 @@ RSpec.describe Suggesters::Tags do
 
     context 'with tags = ["ocean"], except = group' do
       it 'returns all matching records except the specified group',
-         elasticsearch: true, sidekiq: true do
+         :worker, :elasticsearch do
         title = Faker::Hipster.sentence
         group = create(:group, name: title)
         create(:group, name: title)
@@ -46,7 +46,7 @@ RSpec.describe Suggesters::Tags do
     end
 
     context 'with tags = ["ocean"], limit = 1' do
-      it 'returns only one matching record', elasticsearch: true, sidekiq: true do
+      it 'returns only one matching record', :worker, :elasticsearch do
         title = Faker::Hipster.sentence
         group = create(:group, name: title)
         create(:group, name: title)
@@ -66,7 +66,7 @@ RSpec.describe Suggesters::Tags do
     end
 
     context 'with tags = ["ocean"], models = [Group]' do
-      it 'returns only Group records', elasticsearch: true, sidekiq: true do
+      it 'returns only Group records', :worker, :elasticsearch do
         title = Faker::Hipster.sentence
         group = create(:group, name: title)
         create(:group, name: title)

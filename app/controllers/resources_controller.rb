@@ -2,7 +2,7 @@ class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show]
 
   def show
-    @suggestions = Suggesters::Tags.new(tags: @resource.tag_list,
+    @suggestions = Suggesters::Tags.new(tags: @resource.cached_tags,
                                         except: @resource,
                                         limit: 6).suggest
   end
