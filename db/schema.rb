@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203021406) do
+ActiveRecord::Schema.define(version: 20170204041142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,13 @@ ActiveRecord::Schema.define(version: 20170203021406) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                     null: false
     t.string   "description"
-    t.string   "owner_type",  null: false
-    t.integer  "owner_id",    null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "owner_type",               null: false
+    t.integer  "owner_id",                 null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "cached_tags", default: [],              array: true
     t.index ["owner_type", "owner_id"], name: "index_lists_on_owner_type_and_owner_id", using: :btree
   end
 

@@ -1,8 +1,8 @@
 class List < ApplicationRecord
   include Indexable
+  include Taggable
 
   has_paper_trail
-  acts_as_taggable
 
   belongs_to :owner, polymorphic: true
   has_and_belongs_to_many :resources

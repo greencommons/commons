@@ -1,6 +1,6 @@
 module Suggesters
   class Tags
-    def initialize(tags:, except: [], limit: 10, models: [Group, Resource])
+    def initialize(tags:, except: [], limit: 10, models: [Group, List, Resource])
       @tags = tags
       @except = [*except]
       @limit = limit
