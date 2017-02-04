@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Interacting with resources', :worker, :elasticsearch do
   scenario 'users can see a list of related records' do
-    user = feature_login
+    feature_login
 
     resource = create(:resource, title: 'My Resource')
     protection_group = create(:group, name: 'Protection Group')
@@ -23,7 +23,7 @@ RSpec.feature 'Interacting with resources', :worker, :elasticsearch do
     helpful_list.save!
 
     wait_for do
-      Suggesters::Tags.new(tags: ['ocean', 'sky']).suggest.size
+      Suggesters::Tags.new(tags: %w(ocean sky)).suggest.size
     end.to eq(3)
 
     visit resource_path(resource)

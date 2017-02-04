@@ -236,7 +236,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       helpful_list.save!
 
       wait_for do
-        Suggesters::Tags.new(tags: ['ocean', 'sky']).suggest.size
+        Suggesters::Tags.new(tags: %w(ocean sky)).suggest.size
       end.to eq(3)
 
       visit new_search_path
