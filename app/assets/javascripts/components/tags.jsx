@@ -75,8 +75,8 @@ var Tags = React.createClass({
             <span className="glyphicon glyphicon-tag glyphicon--right"></span>
             {this.state.tags.map(function(tag, i) {
               return (
-                <span key={tag.name}>
-                  <a href="/">{tag.name}</a>
+                <span key={tag}>
+                  <a href={'/search?query=' + tag}>{tag}</a>
                   {i == _this.state.tags.length - 1 ? '' : ', '}
                 </span>
               )

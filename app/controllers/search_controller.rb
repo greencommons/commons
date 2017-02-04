@@ -20,7 +20,8 @@ class SearchController < ApplicationController
     end
 
     if @results.any?
-      @suggestions = Suggesters::Tags.new(tags: @results.records.first.tag_list,
+      tags = @results.records.map(&:cached_tags).flatten.compact.uniq
+      @suggestions = Suggesters::Tags.new(tags: tags,
                                           except: @results.records,
                                           limit: 6).suggest
     end

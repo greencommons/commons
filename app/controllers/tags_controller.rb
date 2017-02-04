@@ -7,7 +7,7 @@ class TagsController < ApplicationController
       entity.tag_list.add(tag_params[:name])
       entity.save
 
-      render json: entity.tags
+      render json: entity.cached_tags
     else
       render json: { error: 'Unsupported Model Name.' }
     end
