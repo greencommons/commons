@@ -1,5 +1,6 @@
 class Resource < ApplicationRecord
   include Indexable
+  include Taggable
 
   RESOURCE_TYPES = {
     article: 0,
@@ -8,7 +9,6 @@ class Resource < ApplicationRecord
   }.freeze
 
   has_paper_trail
-  acts_as_taggable
 
   # Warning: since this is an enum (stored as an integer), we need to preserve the original integers
   # each value is associated with. Otherwise the types stored in the database will switch around.

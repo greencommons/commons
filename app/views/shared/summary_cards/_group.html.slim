@@ -10,7 +10,7 @@
         strong ABOUT 
         = resource.long_description
     .summary-card__row
-      = render 'shared/components/tags_list', tags: resource.tags
+      = render 'shared/components/tags_list', tags: resource.cached_tags
     .summary-card__row.summary-card__row--last 
       .summary-card__metadata
         p

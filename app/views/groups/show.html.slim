@@ -35,7 +35,7 @@
     .col-lg-12
       = react_component 'Tags', { authenticity_token: form_authenticity_token,
                                   submit_url: group_tags_path(@group),
-                                  tags: @group.tags,
+                                  tags: @group.cached_tags,
                                   can_create: @admin }, { prerender: true }
             
   .row
@@ -48,7 +48,7 @@
           .col-xs-12
             p
               span.glyphicon.glyphicon-text-color.glyphicon--right
-              = @group.long_description * 10
+              = @group.long_description
         .row
           .col-xs-12
             p

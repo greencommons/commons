@@ -1,6 +1,6 @@
 p
   span.glyphicon.glyphicon-tag.glyphicon--right
   - tags.each_with_index do |tag, i|
-    = link_to tag.name, root_path
+    = link_to tag, search_path(query: tag)
     = ', ' unless i == tags.size - 1
   

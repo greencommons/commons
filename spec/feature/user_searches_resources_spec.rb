@@ -214,4 +214,42 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).to have_text(/.*My Resource.*My List.*My Group.*/)
     end
   end
+
+  context 'related records' do
+    scenario 'users can see related records' do
+      resource = create(:resource, title: 'My Resource')
+      protection_group = create(:group, name: 'Protection Group')
+      help_group = create(:group, name: 'Help Group')
+      helpful_list = create(:list, name: 'Helpful List')
+
+      resource.tag_list.add('ocean')
+      resource.tag_list.add('sky')
+      resource.save!
+
+      protection_group.tag_list.add('ocean')
+      protection_group.save!
+
+      help_group.tag_list.add('mountain')
+      help_group.save!
+
+      helpful_list.tag_list.add('sky')
+      helpful_list.save!
+
+      wait_for do
+        Suggesters::Tags.new(tags: %w(ocean sky)).suggest.size
+      end.to eq(3)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: 'My Resource'
+        click_button 'Search'
+      end
+
+      expect(page).to have_text('My Resource')
+      expect(page).to have_text('You may also like...')
+      expect(page).to have_text('Protection Group')
+      expect(page).to have_text('Helpful List')
+      expect(page).not_to have_text('Help Group')
+    end
+  end
 end
