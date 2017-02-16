@@ -11,6 +11,7 @@ RSpec.feature 'Update Profile' do
       fill_in 'user[last_name]', with: 'Wick'
       fill_in 'user[email]', with: 'johnwick@example.com'
       fill_in 'user[bio]', with: 'Something interesting.'
+      attach_file 'user[avatar]', Rails.root.join('spec/support/samples/horse.jpg')
       click_on 'UPDATE'
     end
 
@@ -21,6 +22,9 @@ RSpec.feature 'Update Profile' do
     expect(user.last_name).to eq 'Wick'
     expect(user.email).to eq 'johnwick@example.com'
     expect(user.bio).to eq 'Something interesting.'
+    expect(user.avatar.url).to eq "/uploads/user/avatar/#{user.id}/john-wick-avatar"
+
+    expect(page).to have_selector("img[src='#{user.avatar.url}']")
   end
 
   scenario 'users can update their password' do
