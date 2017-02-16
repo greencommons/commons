@@ -12,6 +12,7 @@ RSpec.feature 'Update Profile' do
       fill_in 'user[email]', with: 'johnwick@example.com'
       fill_in 'user[bio]', with: 'Something interesting.'
       attach_file 'user[avatar]', Rails.root.join('spec/support/samples/horse.jpg')
+
       click_on 'UPDATE'
     end
 
