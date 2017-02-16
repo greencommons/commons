@@ -10,6 +10,5 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-
 # https://github.com/reactjs/react-rails/issues/443#issuecomment-229665070
-Rails.application.config.assets.precompile += %w( react-server.js components.js )
+Rails.application.config.assets.precompile += %w(react-server.js components.js)
