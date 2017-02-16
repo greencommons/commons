@@ -6,9 +6,8 @@ module Indexable
     index_name SearchIndex.index_name(self)
 
     def run_if_public(&block)
-      if self.respond_to?(:publ?) && self.publ?
-        block.call
-      end
+      return if self.respond_to?(:priv?) && self.priv?
+      block.call
     end
 
     after_commit on: [:create] do
