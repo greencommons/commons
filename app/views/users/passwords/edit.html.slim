@@ -1,0 +1,11 @@
+.row
+  .col-lg-12 
+    h1 My Profile
+    ul.nav.nav-tabs.page-details__row
+      li
+        = link_to 'Overview', profile_path
+      li.active
+        = link_to 'Change Your Password', password_path
+    .tab-content
+      #2.tab-pane.active
+        = render 'form', user: @user

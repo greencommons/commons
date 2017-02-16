@@ -11,6 +11,11 @@ class User < ApplicationRecord
   has_many :groups, through: :groups_users
   has_many :lists, as: :owner
 
+  validates :email, presence: true, uniqueness: true
+  validates :first_name, length: { maximum: 255 }
+  validates :last_name, length: { maximum: 255 }
+  validates :bio, length: { maximum: 500 }
+
   scope :filter_by_email, ->(email) { where('email ILIKE ?', "%#{email}%") }
   scope :sort_by_email, -> { order('email ASC') }
 end
