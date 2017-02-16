@@ -28,3 +28,4 @@
 
 # Ignore Redis database
 dump.rdb
+public/uploads/*

@@ -27,6 +27,8 @@ gem 'awesome_print'
 gem 'factory_girl_rails'
 gem 'json-schema'
 gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 group :development do
   gem 'bummr'

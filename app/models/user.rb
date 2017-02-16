@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_paper_trail
   acts_as_taggable
 
+  mount_uploader :avatar, AvatarUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,4 +20,8 @@ class User < ApplicationRecord
 
   scope :filter_by_email, ->(email) { where('email ILIKE ?', "%#{email}%") }
   scope :sort_by_email, -> { order('email ASC') }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

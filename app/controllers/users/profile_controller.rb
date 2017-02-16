@@ -19,7 +19,7 @@ module Users
     private
 
     def users_params
-      params.require(:user).permit(:first_name, :last_name, :email, :bio)
+      params.require(:user).permit(:first_name, :last_name, :email, :bio, :avatar)
     end
   end
 end
