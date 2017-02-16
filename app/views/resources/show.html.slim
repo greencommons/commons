@@ -3,7 +3,7 @@
     .col-xs-4.col-md-4
       h6
         span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
-        = @resource.resource_type.capitalize
+        = @resource.resource_type.upcase
     
     .col-xs-8.col-md-8
       .resource-actions
@@ -12,11 +12,17 @@
                                                 label: @resource.lists.count,
                                                 classes: 'resource-actions__button--right',
                                                 style: 'primary'
-                                                
-
+        - if policy(@resource).edit?
+          = link_to 'EDIT', edit_resource_path(@resource), class: 'btn btn-primary resource-actions__button--right'
+        - if policy(@resource).destroy?
+          = link_to 'DELETE', @resource, method: 'DELETE', class: 'btn btn-default resource-actions__button--right', data: { confirm: 'Are you sure?' }   
+        
   .row.page-details__row.page-details__row--half
     .col-xs-12
-      h1= @resource.title
+      h1
+        - if @resource.priv?
+          span class="glyphicon glyphicon--right glyphicon-eye-close"
+        = @resource.title
 
   .row.page-details__row
     .col-xs-12
@@ -29,14 +35,24 @@
     .col-xs-12
       h3 ABOUT
       p
-        = @resource.content.truncate(800)
+        - if @resource.url?
+          .row
+            .col-xs-12
+              p= link_to @resource.url, @resource.url, target: '_blank'
+        - else
+          - if @resource.content.is_a?(String)
+            = @resource.content.truncate(800)
+          - else
+            = @resource.content
       #page-details__more.collapse
         .row
           .col-xs-12
             p
               span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
-              = @resource.resource_type.capitalize
-              
+              = @resource.resource_type.upcase
+        - if @resource.priv?
+          = render 'resources/resource_metadata', metadata: 'Private', 
+                                                  icon: 'eye-close'
         = render 'resources/resource_metadata', metadata: humanize_str_date(@resource.metadata['date']), 
                                                 icon: 'calendar'
         = render 'resources/resource_metadata', metadata: @resource.metadata['creators'],

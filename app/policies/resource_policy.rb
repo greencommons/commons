@@ -6,11 +6,42 @@ class ResourcePolicy < ApplicationPolicy
     @resource = resource
   end
 
+  def index?
+    @user
+  end
+
   def show?
-    true
+    return true unless @resource.priv?
+    @resource.user == @user
+  end
+
+  def new?
+    @user
+  end
+
+  def create?
+    @user
+  end
+
+  def edit?
+    @resource.user == @user
   end
 
   def update?
-    true
+    @resource.user == @user
+  end
+
+  def destroy?
+    @resource.user == @user
+  end
+
+  def scope
+    Pundit.policy_scope!(user, Resource)
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user: user)
+    end
   end
 end

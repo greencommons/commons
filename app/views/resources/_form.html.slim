@@ -1,0 +1,28 @@
+.row
+  .col-lg-8
+    .bs-component
+      = form_for(resource, html: { class: "form-horizontal" }) do |f|
+        - if resource.errors.any?
+          .alert.alert-warning role="alert"
+            p 
+              = pluralize(resource.errors.count, "error")
+              |  prohibited this resource from being saved.
+            ul
+              - resource.errors.full_messages.each do |message|
+                li= message
+        fieldset
+          .row
+            .col-xs-12
+              .form-group
+                = f.label :title, "TITLE", class: "col-lg-2 control-label"
+                .col-lg-10
+                  = f.text_field :title, class: "form-control", placeholder: "Resource Title"
+              .form-group
+                = f.label :url, "URL", class: "col-lg-2 control-label"
+                .col-lg-10
+                  = f.text_field :url, class: "form-control", placeholder: "Resource URL"  
+              .form-group
+                .col-lg-4.col-lg-offset-2
+                  = f.submit submit_label, class: "form-control btn btn-primary"
+                .col-lg-4
+                  = link_to "Back", cancel, class: "btn btn-default form-control"
