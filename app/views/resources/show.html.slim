@@ -1,25 +1,23 @@
 .page-details
   .row.page-details__row
-    .col-xs-4.col-md-4
+    .col-xs-4.col-sm-4
       h6
         span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
         = @resource.resource_type.upcase
-    
-    .col-xs-8.col-md-8
+    .col-xs-12.col-sm-8
       .resource-actions
         = render 'shared/components/btn_count', path: '#', 
                                                 text: 'ADD TO LIST', 
                                                 label: @resource.lists.count,
-                                                classes: 'resource-actions__button--right',
+                                                classes: 'resource-actions__button resource-actions__button--bottom resource-actions__button--right',
                                                 style: 'primary'
         - if policy(@resource).edit?
           = link_to 'EDIT', edit_resource_path(@resource), class: 'btn btn-primary resource-actions__button--right'
         - if policy(@resource).destroy?
           = link_to 'DELETE', @resource, method: 'DELETE', class: 'btn btn-default resource-actions__button--right', data: { confirm: 'Are you sure?' }   
-        
   .row.page-details__row.page-details__row--half
     .col-xs-12
-      h1
+      h1.page-details__title
         - if @resource.priv?
           span class="glyphicon glyphicon--right glyphicon-eye-close"
         = @resource.title
@@ -70,12 +68,12 @@
         span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
                     
   .row.page-details__row
-    .col-xs-12.col-sm-2
+    .col-xs-12.col-sm-4
       h3 CONTENT
-    .col-xs-12.col-sm-10
-      .resource-actions.resource-actions__button--align-title
-        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-primary resource-actions__button--right'
-        = link_to '', class: 'resource-actions__button btn btn-primary' do
+    .col-xs-12.col-sm-8
+      .resource-actions
+        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-primary resource-actions__button--bottom resource-actions__button--right'
+        = link_to '', class: 'resource-actions__button btn btn-primary resource-actions__button--bottom' do
           | EXPORT
           span.glyphicon.glyphicon-cloud-download.glyphicon--left aria-hidden='true'
           
