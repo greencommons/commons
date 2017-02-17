@@ -10,6 +10,8 @@ module Indexable
       yield
     end
 
+    after_create :set_published_at
+
     after_commit on: [:create] do
       run_if_public { AddToIndexJob.perform_async(self.class.name, id) }
     end
@@ -24,6 +26,16 @@ module Indexable
 
     after_commit on: [:destroy] do
       run_if_public { RemoveFromIndexJob.perform_async(self.class.name, id) }
+    end
+
+    def set_published_at
+      unless published_at
+        if defined?(metadata) && metadata && metadata['date']
+          update_column(:published_at, metadata['date'])
+        else
+          update_column(:published_at, created_at)
+        end
+      end
     end
   end
 end

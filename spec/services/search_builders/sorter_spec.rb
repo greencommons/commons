@@ -22,7 +22,7 @@ RSpec.describe SearchBuilders::Sorter do
         filter = SearchBuilders::Sorter.new('recent', es_params)
 
         expect(filter.build[:sort]).to eq([
-                                            { created_at: { order: :desc } },
+                                            { published_at: { order: :desc } },
                                             '_score'
                                           ])
       end
@@ -34,7 +34,7 @@ RSpec.describe SearchBuilders::Sorter do
         filter = SearchBuilders::Sorter.new('oldest', es_params)
 
         expect(filter.build[:sort]).to eq([
-                                            { created_at: { order: :asc } },
+                                            { published_at: { order: :asc } },
                                             '_score'
                                           ])
       end
