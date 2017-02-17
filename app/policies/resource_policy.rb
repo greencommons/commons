@@ -12,7 +12,7 @@ class ResourcePolicy < ApplicationPolicy
 
   def show?
     return true unless @resource.priv?
-    @resource.user == @user
+    @user && @resource.user == @user
   end
 
   def new?
@@ -24,15 +24,15 @@ class ResourcePolicy < ApplicationPolicy
   end
 
   def edit?
-    @resource.user == @user
+    @user && @resource.user == @user
   end
 
   def update?
-    @resource.user == @user
+    @user && @resource.user == @user
   end
 
   def destroy?
-    @resource.user == @user
+    @user && @resource.user == @user
   end
 
   def scope
