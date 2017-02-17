@@ -101,10 +101,11 @@
           .resource-actions
             = link_to 'NEW LIST', '#', class: 'btn btn-primary resource-actions__button--right resource-actions__button--align-title'
             = link_to 'ALL LISTS', '#', class: 'btn btn-primary resource-actions__button--align-title'
-      .row
-        - @group.lists.each do |list|
-          .col-lg-6
-            = render 'shared/summary_cards/main', resource: list
+      - @group.lists.each_slice(2) do |slice|
+        .row
+          - slice.each do |list|
+            .col-lg-6
+              = render 'shared/summary_cards/main', resource: list
             
   .row.page-details__row
     .col-lg-12
