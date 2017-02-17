@@ -15,6 +15,7 @@ class SearchController < ApplicationController
 
       @results = Elasticsearch::Model.search(*builder.to_elasticsearch).
                  page(params[:page] || 1).per(10)
+      @total_count = @results.results.total
     else
       @results = []
     end
