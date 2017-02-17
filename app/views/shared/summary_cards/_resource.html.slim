@@ -1,11 +1,12 @@
 .summary-card
   .summary-card__body
-    .summary-card__row
+    .summary-card__row--half
       h5.summary-card__title
         span class="glyphicon glyphicon--right glyphicon-#{resource_icon(resource)}"
         = link_to resource.title, resource
-      = render 'shared/components/score', hit: hit if defined?(hit)
-
+        - if defined?(hit)
+          .summary-card__relevancy
+            = render 'shared/components/score', hit: hit 
       .summary-card__top-actions
         .summary-card__more.summary-card__margin-right
           = render 'shared/components/btn_count', path: '#', icon: 'plus', label: '10', style: 'primary'
@@ -18,6 +19,7 @@
             = link_to resource, method: 'DELETE', class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
               span class="glyphicon  glyphicon-remove"
       .clearfix
+    
     .summary-card__row
       p
         - if resource.url?
