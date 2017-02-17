@@ -1,11 +1,14 @@
 .summary-card
   .summary-card__body
-    .summary-card__row
-      h5
+    .summary-card__row--half
+      h5.summary-card__title
         span.glyphicon.glyphicon-th-large.glyphicon--right
         = link_to resource.name, resource
-      = render 'shared/components/score', hit: hit if defined?(hit)
-    .summary-card__row.summary-card__row--min-height
+        - if defined?(hit)
+          .summary-card__relevancy
+            = render 'shared/components/score', hit: hit  
+    .clearfix
+    .summary-card__row
       p
         strong ABOUT 
         = resource.long_description
