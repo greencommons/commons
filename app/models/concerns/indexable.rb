@@ -31,7 +31,11 @@ module Indexable
     def set_published_at
       unless published_at
         if defined?(metadata) && metadata && metadata['date']
-          update_column(:published_at, metadata['date'])
+          begin
+            update_column(:published_at, metadata['date'])
+          rescue ActiveRecord::StatementInvalid
+            update_column(:published_at, created_at)
+          end
         else
           update_column(:published_at, created_at)
         end
