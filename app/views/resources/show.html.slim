@@ -4,6 +4,10 @@
       h6
         span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
         = @resource.resource_type.upcase
+        - if @resource.priv?
+          span.gray-light
+            span class="glyphicon glyphicon--left-double glyphicon--right glyphicon-eye-close"
+            | PRIVATE
     .col-xs-12.col-sm-8
       .resource-actions
         = render 'shared/components/btn_count', path: '#', 
@@ -18,8 +22,6 @@
   .row.page-details__row.page-details__row--half
     .col-xs-12
       h1.page-details__title
-        - if @resource.priv?
-          span class="glyphicon glyphicon--right glyphicon-eye-close"
         = @resource.title
 
   .row.page-details__row
