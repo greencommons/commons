@@ -15,7 +15,9 @@
                                                 placeholder: 'Type member name or email',
                                                 authenticity_token: form_authenticity_token }, 
                                               { prerender: true })
-.row
-  - @members.each do |member|
-    .col-xs-12.col-lg-6
-      = render 'shared/summary_cards/main', resource: member
+
+- @members.each_slice(2) do |slice|
+  .row
+    - slice.each do |member|
+      .col-xs-12.col-lg-6
+        = render 'shared/summary_cards/main', resource: member

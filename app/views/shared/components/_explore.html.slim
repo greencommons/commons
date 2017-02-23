@@ -2,7 +2,9 @@
   .row.page-details__row--half
     .col-xs-12
       h3= defined?(title) ? title : 'EXPLORE'
-  .row
-    - suggestions.each do |suggestion|
-      .col-xs-12.col-md-6
-        = render 'shared/summary_cards/main', resource: suggestion
+  
+  - suggestions.each_slice(2) do |slice|
+    .row
+      - slice.each do |suggestion|
+        .col-xs-12.col-md-6
+          = render 'shared/summary_cards/main', resource: suggestion
