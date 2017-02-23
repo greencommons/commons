@@ -23,7 +23,7 @@ RSpec.describe Resource do
     let(:resource) { create(:resource, privacy: :priv) }
 
     describe 'after_commit on: [:create]' do
-      it "adds the #{name} to the search index after creation" do
+      it "does not add the #{name} to the search index after creation" do
         allow(AddToIndexJob).to receive(:perform_async)
 
         expect(AddToIndexJob).not_to have_received(:perform_async).
@@ -32,7 +32,7 @@ RSpec.describe Resource do
     end
 
     describe 'after_commit on: [:update]' do
-      it "updates the #{name} index in the search index after update" do
+      it "does not update the #{name} index in the search index after update" do
         allow(UpdateIndexJob).to receive(:perform_async)
 
         resource.touch
@@ -43,7 +43,7 @@ RSpec.describe Resource do
     end
 
     describe 'after_commit on: [:destroy]' do
-      it "removes the #{name} from the search index after deletion" do
+      it "does not remove the #{name} from the search index after deletion" do
         allow(RemoveFromIndexJob).to receive(:perform_async)
 
         resource.destroy
