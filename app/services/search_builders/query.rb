@@ -10,6 +10,8 @@ module SearchBuilders
 
       @es_params[:query][:bool][:must][:bool][:should] << { match: { title: @query } }
       @es_params[:query][:bool][:must][:bool][:should] << { match: { name: @query } }
+      @es_params[:query][:bool][:must][:bool][:should] << { match: { content: @query } }
+      @es_params[:query][:bool][:must][:bool][:should] << { match: { long_description: @query } }
 
       @es_params
     end
