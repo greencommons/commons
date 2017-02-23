@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :search, only: [:new]
   get '/search', to: 'search#show', as: 'search'
 
+  get '/profile', to: 'users/profile#edit', as: 'profile'
+  patch '/profile', to: 'users/profile#update', as: 'update_profile'
+  get '/profile/password', to: 'users/passwords#edit', as: 'password'
+  patch '/profile/password', to: 'users/passwords#update', as: 'update_password'
+
   resources :resources, model_name: 'Resource', concerns: :taggable, only: [:show]
 
   resources :groups, model_name: 'Group', concerns: :taggable do

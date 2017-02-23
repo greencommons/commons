@@ -2,17 +2,23 @@
   .summary-card__body
     .summary-card__row.row
       .col-xs-2
-        = image_tag 'user.png'
+        = image_tag resource.user.avatar
       .col-xs-10
         .summary-card__row
           .summary-card__more
             = humanize_date(resource.created_at)
           .summary-card__metadata
-            h5= resource.user.email
+            h5 
+              - if resource.user.full_name.present?
+                = resource.user.full_name
+                br
+                = resource.user.email
+              - else
+                = resource.user.email
           .clearfix
         .summary-card__row.summary-card__row
           p
-            = 'Software Engineer @ Island Press. I like turtles.'
+            = resource.user.bio
             
   - if resource.user != current_user && @admin
     .summary-card__actions

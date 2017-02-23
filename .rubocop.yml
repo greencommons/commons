@@ -63,7 +63,7 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Description: Checks if examples contain too many `expect` calls.
   Enabled: true
-  Max: 6
+  Max: 8
 RSpec/NestedGroups:
   Description: Checks for nested example groups.
   Enabled: true

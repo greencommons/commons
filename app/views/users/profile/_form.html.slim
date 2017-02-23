@@ -1,0 +1,46 @@
+.bs-component
+  = form_for(user, url: update_profile_path, html: { class: "form-horizontal", multipart: true }) do |f|
+    - if user.errors.any?
+      .alert.alert-warning role="alert"
+        p 
+          = pluralize(user.errors.count, "error")
+          |  prohibited this user from being saved.
+        ul
+          - user.errors.full_messages.each do |message|
+            li= message
+    fieldset
+      .row
+        .page-details__row
+          .col-xs-12.col-md-7
+            .form-group
+              = f.label :first_name, "FIRST NAME", class: "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :first_name, class: "form-control", placeholder: "Your First Name"
+            .form-group
+              = f.label :last_name, "LAST NAME", class: "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :last_name, class: "form-control", placeholder: "Your Last Name"
+            .form-group
+              = f.label :email, "EMAIL", class: "col-lg-2 control-label"
+              .col-lg-10
+                = f.email_field :email, class: "form-control", placeholder: "Your Email"
+            .form-group
+              = f.label :bio, "BIO", class: "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_area :bio, class: "form-control", placeholder: "Say something about you"
+          .page-details__row.col-xs-12.col-md-3.col-md-offset-2
+            .row
+              .col-xs-12
+                = f.label :avatar, "AVATAR", class: "control-label"
+            .row
+              .col-xs-12
+                = image_tag(@user.avatar_url, class: 'avatar')
+            .row
+              .col-xs-12
+                = f.file_field :avatar, class: "control-label"
+
+      .row
+        .col-lg-9
+          .form-group
+            .col-lg-4.col-lg-offset-2
+              = f.submit 'UPDATE', class: "form-control btn btn-primary"
