@@ -25,7 +25,7 @@ RSpec.feature 'Managing resources' do
     user = feature_login
     resource = build(:resource, resource_type: :url, url: 'http://example.com', user: user)
 
-    click_link 'Upload Resource'
+    click_link 'Add Resource'
 
     within('#new_resource') do
       fill_in 'resource[title]', with: resource.title
