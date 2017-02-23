@@ -29,6 +29,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    "#{model.full_name.parameterize}-avatar" if original_filename
+    @name ||= "#{model.full_name.parameterize}-avatar-#{timestamp}" if original_filename
+  end
+
+  def timestamp
+    var = :"@#{mounted_as}_timestamp"
+    model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
 end
