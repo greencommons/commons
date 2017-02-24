@@ -1,37 +1,21 @@
 .summary-card
   .summary-card__body
-    .summary-card__row--half
-      h5.summary-card__title
-        span class="glyphicon glyphicon--right glyphicon-#{resource_icon(resource)}"
+    .summary-card__row
+      .summary-card__more
+        = render 'shared/components/btn_count', path: '#', icon: 'plus', label: '10', style: 'primary'
+      h5
+        span.glyphicon.glyphicon-file.glyphicon--right
         = link_to resource.title, resource
-        - if defined?(hit)
-          .summary-card__relevancy
-            = render 'shared/components/score', hit: hit 
-      .summary-card__top-actions
-        .summary-card__more.summary-card__margin-right
-          = render 'shared/components/btn_count', path: '#', icon: 'plus', label: '10', style: 'primary'
-        - if policy(resource).edit?
-          .summary-card__more.summary-card__margin-right
-            = link_to edit_resource_path(resource), class: 'btn btn-primary' do
-              span class="glyphicon  glyphicon-pencil"
-        - if policy(resource).destroy?
-          .summary-card__more
-            = link_to resource, method: 'DELETE', class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
-              span class="glyphicon  glyphicon-remove"
-      .clearfix
-    
+      = render 'shared/components/score', hit: hit if defined?(hit)
     .summary-card__row
       p
-        - if resource.url?
-          = link_to resource.url, resource.url, target: '_blank'
-        - else
-          - if resource.content.is_a?(String)
-            = resource.content.truncate(200)
-          - else
-            = resource.content
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
     .summary-card__row
       = render 'shared/components/tags_list', tags: resource.cached_tags
-    .summary-card__row
+    .summary-card__row.summary-card__row--last 
       .summary-card__metadata
         p
           span.glyphicon.glyphicon-user.glyphicon--right
@@ -48,13 +32,10 @@
         p
           span.glyphicon.glyphicon-edit.glyphicon--right
           = link_to '102 Annotations', '#'
-      .summary-card__bottom-actions
-        .summary-card__metadata.summary-card__metadata--link
-          = link_to 'View Original Document', '#', class: 'btn btn-default'
-        .summary-card__metadata.summary-card__metadata--link
-          = link_to 'Read More', resource, class: 'btn btn-default'
+      .summary-card__metadata.summary-card__metadata--right
+        = link_to 'View Original Document', '#'
       .clearfix
-
+    
   .summary-card__actions.summary-card__actions--left
     p.italic
       | Added to 

@@ -1,25 +1,20 @@
 .summary-card
   .summary-card__body
     .summary-card__row
-      h5.summary-card__title
+      .summary-card__more
+        span.glyphicon.glyphicon-calendar.glyphicon--right
+        = humanize_date(resource.created_at)
+      .summary-card__more.summary-card__more--space
         span.glyphicon.glyphicon-list.glyphicon--right
-        = resource.name
-        - if defined?(hit)
-          .summary-card__relevancy
-            = render 'shared/components/score', hit: hit  
-    .clearfix
-    .summary-card__row
+        = '13 items'
+      .summary-card__metadata
+        h5
+          span.glyphicon.glyphicon-list.glyphicon--right
+          = resource.name
+        = render 'shared/components/score', hit: hit if defined?(hit)
+      .clearfix
+    .summary-card__row--last
       p
         = resource.description
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-    .summary-card__row.summary-card__row--last 
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-calendar.glyphicon--right
-          = humanize_date(resource.created_at)
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-list.glyphicon--right
-          = '13 items'
-      .clearfix

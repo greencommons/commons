@@ -3,6 +3,5 @@ FactoryGirl.define do
     title { Faker::Book.title }
     resource_type { :book }
     content { Faker::Hipster.paragraph }
-    privacy 'publ'
   end
 end

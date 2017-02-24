@@ -3,7 +3,6 @@ module GlyphiconHelper
     article: 'file',
     book: 'book',
     report: 'info-sign',
-    url: 'link'
   }.freeze
 
   def resource_icon(resource)

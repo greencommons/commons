@@ -1,13 +1,8 @@
 .resource-actions {
-  float: left;
-  width: 100%;
+  float: right;
 
   &__button--right {
-    margin-right: 10px;
-  }
-
-  &__button--bottom {
-    margin-bottom: 10px;
+    margin-right: 20px;
   }
 
   &__button--align-title {
@@ -17,31 +12,4 @@
   .badge {
     margin-left: 3px;
   }
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (min-width : 320px) {
-}
-
-/* Extra Small Devices, Phones */
-@media only screen and (min-width : 480px) {
-
-}
-
-/* Small Devices, Tablets */
-@media only screen and (min-width : 768px) {
-  .resource-actions {
-    float: right;
-    width: auto;
-  }
-}
-
-/* Medium Devices, Desktops */
-@media only screen and (min-width : 992px) {
-
-}
-
-/* Large Devices, Wide Screens */
-@media only screen and (min-width : 1200px) {
-
 }
