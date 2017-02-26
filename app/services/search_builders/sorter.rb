@@ -1,7 +1,7 @@
 module SearchBuilders
   SORT_OPTIONS = {
-    recent: { col: :created_at, dir: :desc },
-    oldest: { col: :created_at, dir: :asc }
+    recent: { col: :published_at, dir: :desc },
+    oldest: { col: :published_at, dir: :asc }
   }.freeze
 
   class Sorter
