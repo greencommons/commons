@@ -21,6 +21,11 @@
           = humanize_date(resource.published_at)
       .summary-card__metadata
         p
+          span.glyphicon.glyphicon-comment.glyphicon--right
+          span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}" 
+            | 0 Comments
+      .summary-card__metadata
+        p
           span.glyphicon.glyphicon-user.glyphicon--right
           | #{resource.users.count} members
       .summary-card__metadata
@@ -28,6 +33,6 @@
           span.glyphicon.glyphicon-list.glyphicon--right
           | #{resource.lists.count} Lists
       .summary-card__metadata.summary-card__metadata--right
-        = link_to 'Read More >>', resource
+        = link_to 'Read More', resource, class: 'btn btn-default'
       .clearfix
     

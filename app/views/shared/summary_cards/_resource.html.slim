@@ -43,7 +43,8 @@
       .summary-card__metadata
         p
           span.glyphicon.glyphicon-comment.glyphicon--right
-          | 13 Comments
+          span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}" 
+            | 0 Comments
       .summary-card__metadata
         p
           span.glyphicon.glyphicon-edit.glyphicon--right
