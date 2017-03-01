@@ -29,4 +29,9 @@ class Resource < ApplicationRecord
   validates :url, length: { maximum: 255 }
 
   scope :sort_by_created_at, -> { order('created_at DESC') }
+
+  def excerpt
+    return content unless content.is_a?(String)
+    content.truncate(800)
+  end
 end

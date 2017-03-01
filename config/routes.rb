@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/search', to: 'search#show', as: 'search'
+      resources :resources, only: [:show]
+      resources :groups, only: [:show]
+      resources :lists, only: [:show]
     end
   end
 

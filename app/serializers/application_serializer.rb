@@ -1,5 +1,5 @@
 class ApplicationSerializer < ActiveModel::Serializer
   link :self do
-    href url_for(object)
+    href send("api_v1_#{object.class.to_s.downcase}_url", object)
   end
 end
