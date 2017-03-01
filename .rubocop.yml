@@ -14,10 +14,7 @@ Metrics/LineLength:
   Max: 100
   Enabled: true
 Metrics/BlockLength:
-  Exclude:
-      - 'config/routes.rb'
-      - 'spec/**/*.rb'
-      - '**/*.rake'
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
   EnforcedStyle: when_needed
