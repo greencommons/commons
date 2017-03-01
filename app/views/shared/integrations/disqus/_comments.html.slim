@@ -9,6 +9,7 @@ javascript:
   var disqus_config = function () {
     this.page.url = '#{request.original_url}';
     this.page.identifier = '#{url_for(entity)}';
+    this.page.title = '#{entity.respond_to?(:title) ? entity.title : entity.name}';
   };
 
   (function() {
