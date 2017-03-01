@@ -3,7 +3,7 @@ module Api
     class GroupsController < ApiController
       def show
         @group = Group.find(params[:id])
-        render json: @group
+        render json: @group, serializer: ::V1::GroupSerializer
       end
     end
   end

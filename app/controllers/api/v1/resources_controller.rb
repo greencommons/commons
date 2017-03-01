@@ -3,7 +3,7 @@ module Api
     class ResourcesController < ApiController
       def show
         @resource = Resource.find(params[:id])
-        render json: @resource
+        render json: @resource, serializer: ::V1::ResourceSerializer
       end
     end
   end
