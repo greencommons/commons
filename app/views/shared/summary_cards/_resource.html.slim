@@ -49,8 +49,9 @@
           span.glyphicon.glyphicon-edit.glyphicon--right
           = link_to '102 Annotations', '#'
       .summary-card__bottom-actions
-        .summary-card__metadata.summary-card__metadata--link
-          = link_to 'View Original Document', '#', class: 'btn btn-default'
+        - if resource.url
+          .summary-card__metadata.summary-card__metadata--link
+            = link_to 'View Original Document', via_hypothesis(resource.url), target: '_blank', class: 'btn btn-default'
         .summary-card__metadata.summary-card__metadata--link
           = link_to 'Read More', resource, class: 'btn btn-default'
       .clearfix
