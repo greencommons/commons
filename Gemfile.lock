@@ -24,6 +24,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.10.4)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi (= 0.1.1.beta6)
     activejob (5.0.0.1)
       activesupport (= 5.0.0.1)
       globalid (>= 0.3.6)
@@ -87,6 +92,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    case_transform (0.2)
+      activesupport
     climate_control (0.0.3)
       activesupport (>= 3.0)
     coderay (1.1.1)
@@ -387,6 +394,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.0)
   acts-as-taggable-on (~> 4.0)
   awesome_print
   aws-sdk (~> 2)
