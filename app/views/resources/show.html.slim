@@ -79,8 +79,8 @@
           | EXPORT
           span.glyphicon.glyphicon-cloud-download.glyphicon--left aria-hidden='true'
           
-  .row.page-details__row.hidden
+  .row.page-details__row
     .col-lg-12
-      = render 'shared/components/discuss'
+      = render 'shared/integrations/disqus', entity: @resource
 
   = render 'shared/components/explore', suggestions: @suggestions
