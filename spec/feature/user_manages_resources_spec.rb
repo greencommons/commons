@@ -10,6 +10,15 @@ RSpec.feature 'Managing resources' do
     expect(page).to have_text(resource.title)
   end
 
+  scenario 'users can access original document if URL is provided' do
+    user = feature_login
+    create(:resource, user: user, url: 'http://example.com')
+
+    click_link 'My Resources'
+    expect(find_link('View Original Document')[:href]).to eq('https://via.hypothes.is/http://example.com')
+    expect(find_link('View Original Document')[:target]).to eq('_blank')
+  end
+
   scenario 'users can view a resource' do
     user = feature_login
     resource = create(:resource, resource_type: :url, url: 'http://example.com', user: user)
