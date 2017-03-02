@@ -25,7 +25,9 @@ RSpec.feature 'Update Profile' do
     expect(user.last_name).to eq 'Wick'
     expect(user.email).to eq 'johnwick@example.com'
     expect(user.bio).to eq 'Something interesting.'
-    expect(user.avatar.url).to eq "/uploads/user/avatar/#{user.id}/john-wick-avatar-#{fake_time.to_i}"
+    expect(user.avatar.url).to eq(
+      "/uploads/user/avatar/#{user.id}/john-wick-avatar-#{fake_time.to_i}"
+    )
 
     expect(page).to have_selector("img[src='#{user.avatar.url}']")
   end
