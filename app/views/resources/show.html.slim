@@ -74,7 +74,8 @@
       h3 CONTENT
     .col-xs-12.col-sm-8
       .resource-actions
-        = link_to 'VIEW ORIGINAL', '', class: 'resource-actions__button btn btn-primary resource-actions__button--bottom resource-actions__button--right'
+        - if @resource.url
+          = link_to 'VIEW ORIGINAL', via_hypothesis(@resource.url), target: '_blank', class: 'resource-actions__button btn btn-primary resource-actions__button--bottom resource-actions__button--right'
         = link_to '', class: 'resource-actions__button btn btn-primary resource-actions__button--bottom' do
           | EXPORT
           span.glyphicon.glyphicon-cloud-download.glyphicon--left aria-hidden='true'
