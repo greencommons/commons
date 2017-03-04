@@ -1,8 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe Group do
-  describe 'Validations' do
-    it 'is valid with valid attributes' do
+  describe "Validations" do
+    it "is valid with valid attributes" do
       group = create(:group)
 
       expect(group).to be_valid
@@ -11,13 +12,13 @@ RSpec.describe Group do
     it { is_expected.to validate_presence_of(:name) }
   end
 
-  describe '#latest_resources' do
+  describe "#latest_resources" do
     let(:r1) { create(:resource) }
     let(:r2) { create(:resource) }
     let(:l1) { create(:list, resources: [r1, r2]) }
     let(:l2) { create(:list, resources: [r2]) }
 
-    it 'returns a unique list of resources' do
+    it "returns a unique list of resources" do
       group = create(:group)
 
       group.update(lists: [l1, l2])
@@ -25,7 +26,7 @@ RSpec.describe Group do
       expect(group.latest_resources.to_a).to eq([r2, r1])
     end
 
-    it 'returns the number of records specified by limit' do
+    it "returns the number of records specified by limit" do
       group = create(:group)
 
       group.update(lists: [l1, l2])
@@ -34,11 +35,11 @@ RSpec.describe Group do
     end
   end
 
-  describe '#add_admin' do
+  describe "#add_admin" do
     let(:group) { create(:group) }
     let(:user) { create(:user) }
 
-    it 'adds the user as an admin' do
+    it "adds the user as an admin" do
       group.add_admin(user)
 
       group_user = group.groups_users.where(user: user).first
@@ -47,11 +48,11 @@ RSpec.describe Group do
     end
   end
 
-  describe '#add_user' do
+  describe "#add_user" do
     let(:group) { create(:group) }
     let(:user) { create(:user) }
 
-    it 'adds the user as a regular user' do
+    it "adds the user as a regular user" do
       group.add_user(user)
 
       group_user = group.groups_users.where(user: user).first
@@ -60,30 +61,30 @@ RSpec.describe Group do
     end
   end
 
-  describe '#admin?' do
+  describe "#admin?" do
     let(:group) { create(:group) }
     let(:user) { create(:user) }
 
-    context 'with admin' do
-      it 'gets true back' do
+    context "with admin" do
+      it "gets true back" do
         group.add_admin(user)
         expect(group.admin?(user)).to be true
       end
     end
 
-    context 'with regular user' do
-      it 'gets false back' do
+    context "with regular user" do
+      it "gets false back" do
         group.add_user(user)
         expect(group.admin?(user)).to be false
       end
     end
   end
 
-  describe 'Associations' do
+  describe "Associations" do
     it { is_expected.to have_many(:groups_users) }
     it { is_expected.to have_many(:users) }
     it { is_expected.to have_many(:lists) }
   end
 
-  it_behaves_like 'indexable', :group
+  it_behaves_like "indexable", :group
 end

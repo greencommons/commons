@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddCachedTagsToLists < ActiveRecord::Migration[5.0]
   def up
     add_column :lists, :cached_tags, :text, array: true, default: []

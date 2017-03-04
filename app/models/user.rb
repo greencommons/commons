@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class User < ApplicationRecord
   has_paper_trail
   acts_as_taggable
@@ -18,8 +19,8 @@ class User < ApplicationRecord
   validates :last_name, length: { maximum: 255 }
   validates :bio, length: { maximum: 500 }
 
-  scope :filter_by_email, ->(email) { where('email ILIKE ?', "%#{email}%") }
-  scope :sort_by_email, -> { order('email ASC') }
+  scope :filter_by_email, ->(email) { where("email ILIKE ?", "%#{email}%") }
+  scope :sort_by_email, -> { order("email ASC") }
 
   def full_name
     "#{first_name} #{last_name}"

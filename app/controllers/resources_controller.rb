@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ResourcesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_resource, only: [:show, :edit, :update, :destroy, :leave]
@@ -28,7 +29,7 @@ class ResourcesController < ApplicationController
     @resource.user = current_user
 
     if @resource.save
-      redirect_to @resource, notice: 'Resource was successfully created.'
+      redirect_to @resource, notice: "Resource was successfully created."
     else
       render :new
     end
@@ -36,7 +37,7 @@ class ResourcesController < ApplicationController
 
   def update
     if @resource.update(resource_params)
-      redirect_to @resource, notice: 'Resource was successfully updated.'
+      redirect_to @resource, notice: "Resource was successfully updated."
     else
       render :edit
     end
@@ -44,7 +45,7 @@ class ResourcesController < ApplicationController
 
   def destroy
     @resource.destroy
-    redirect_to resources_url, notice: 'Resource was successfully destroyed.'
+    redirect_to resources_url, notice: "Resource was successfully destroyed."
   end
 
   private

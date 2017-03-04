@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateNewResourceRecord < CreateNewRecord
   private
 
@@ -13,7 +14,7 @@ class CreateNewResourceRecord < CreateNewRecord
     record = Resource.create!(attributes)
 
     ap "Title: #{record.title}"
-    ap 'Metadata: '
+    ap "Metadata: "
     ap record.metadata
     ap "Content: #{record.content.truncate(100)}"
   end

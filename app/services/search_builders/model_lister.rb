@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 module SearchBuilders
   class ModelLister
     MODEL_TYPE_FILTERS = {
       resources: Resource,
       lists: List,
-      groups: Group
+      groups: Group,
     }.freeze
 
     def initialize(filters)

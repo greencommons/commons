@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Taggable
   extend ActiveSupport::Concern
 
@@ -11,7 +12,7 @@ module Taggable
 
   def as_indexed_json(_options = {})
     json = as_json
-    json['tags'] = json.delete('cached_tags')
+    json["tags"] = json.delete("cached_tags")
     json
   end
 end

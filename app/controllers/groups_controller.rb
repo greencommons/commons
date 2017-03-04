@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class GroupsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_group, only: [:show, :edit, :update, :destroy, :leave]
@@ -26,7 +27,7 @@ class GroupsController < ApplicationController
 
     if @group.save
       @group.add_admin(current_user)
-      redirect_to @group, notice: 'Group was successfully created.'
+      redirect_to @group, notice: "Group was successfully created."
     else
       render :new
     end
@@ -34,7 +35,7 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to @group, notice: 'Group was successfully updated.'
+      redirect_to @group, notice: "Group was successfully updated."
     else
       render :edit
     end
@@ -42,7 +43,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to groups_url, notice: 'Group was successfully destroyed.'
+    redirect_to groups_url, notice: "Group was successfully destroyed."
   end
 
   private

@@ -1,11 +1,12 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 describe ResourcePolicy do
   subject { ResourcePolicy.new(user, resource) }
 
   let(:resource) { FactoryGirl.create(:resource) }
 
-  context 'when guest' do
+  context "when guest" do
     let(:user) { nil }
 
     it { is_expected.to permit_action(:show) }
@@ -18,7 +19,7 @@ describe ResourcePolicy do
     it { is_expected.to forbid_action(:destroy) }
   end
 
-  context 'when user' do
+  context "when user" do
     let(:user) { FactoryGirl.create(:user) }
 
     it { is_expected.to permit_action(:show) }
@@ -29,7 +30,7 @@ describe ResourcePolicy do
     it { is_expected.to forbid_action(:edit)    }
     it { is_expected.to forbid_action(:destroy) }
 
-    context 'when owner' do
+    context "when owner" do
       let(:resource) { FactoryGirl.create(:resource, user: user) }
 
       it { is_expected.to permit_action(:show) }

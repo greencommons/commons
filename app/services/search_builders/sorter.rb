@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 module SearchBuilders
   SORT_OPTIONS = {
     recent: { col: :published_at, dir: :desc },
-    oldest: { col: :published_at, dir: :asc }
+    oldest: { col: :published_at, dir: :asc },
   }.freeze
 
   class Sorter

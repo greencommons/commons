@@ -1,5 +1,6 @@
-require 'aws-sdk'
-require 'tempfile'
+# frozen_string_literal: true
+require "aws-sdk"
+require "tempfile"
 
 class ProcessAllFilesInS3Folders
   def initialize(bucket_name, prefix_folders, file_ext)
@@ -10,7 +11,7 @@ class ProcessAllFilesInS3Folders
 
   def each
     filtered_files.each do |file_key|
-      Tempfile.open(['s3data', file_ext], dir, binmode: true) do |tempfile|
+      Tempfile.open(["s3data", file_ext], dir, binmode: true) do |tempfile|
         ap "Processing #{tempfile}..."
 
         s3.get_object(

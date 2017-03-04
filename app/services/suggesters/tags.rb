@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Suggesters
   class Tags
     def initialize(tags:, except: [], limit: 10, models: [Group, List, Resource])
@@ -22,17 +23,17 @@ module Suggesters
         query: {
           bool: {
             filter: {
-              terms: { tags: @tags }
+              terms: { tags: @tags },
             },
-          }
-        }
+          },
+        },
       }
     end
 
     def except_records
       @es_params[:query][:bool][:must_not] ||= [
         { terms: { _id: @except.map(&:id) } },
-        { terms: { type: @except.map { |e| e.class.name.downcase } } }
+        { terms: { type: @except.map { |e| e.class.name.downcase } } },
       ]
     end
   end

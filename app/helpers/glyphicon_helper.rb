@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 module GlyphiconHelper
   RESOURCE_ICONS = {
-    article: 'file',
-    book: 'book',
-    report: 'info-sign',
-    url: 'link'
+    article: "file",
+    book: "book",
+    report: "info-sign",
+    url: "link",
   }.freeze
 
   def resource_icon(resource)

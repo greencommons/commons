@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 class CreateNewRecord
   def write(attributes)
     @attributes = attributes
 
     unless @attributes.is_a? Hash
-      ap 'Error: given attributes were not provided as a hash:'
+      ap "Error: given attributes were not provided as a hash:"
       ap @attributes
       return
     end
@@ -11,7 +12,7 @@ class CreateNewRecord
     if existing_record
       ap "Record already in database: #{record_name}"
     else
-      ap 'Saving...'
+      ap "Saving..."
       create
     end
   rescue StandardError => e

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_group
@@ -16,12 +17,12 @@ class MembersController < ApplicationController
     notice =
       if user
         if @group.add_user(user)
-          'Member was successfully added.'
+          "Member was successfully added."
         else
-          'Member already in group.'
+          "Member already in group."
         end
       else
-        'User not found.'
+        "User not found."
       end
 
     redirect_to group_members_path(@group), notice: notice
@@ -40,7 +41,7 @@ class MembersController < ApplicationController
   def destroy
     authorize @group, :update?
     @group_user.destroy
-    redirect_to group_members_path(@group), notice: 'Member was successfully removed.'
+    redirect_to group_members_path(@group), notice: "Member was successfully removed."
   end
 
   def join
@@ -60,9 +61,9 @@ class MembersController < ApplicationController
 
     if !@group_current_user.admin? || @group.admin_count > 1
       @group_current_user.destroy
-      redirect_to @group, notice: 'You are no longer a member of this group.'
+      redirect_to @group, notice: "You are no longer a member of this group."
     else
-      redirect_to @group, alert: 'You cannot leave this group because you are the only admin.'
+      redirect_to @group, alert: "You cannot leave this group because you are the only admin."
     end
   end
 
@@ -82,9 +83,9 @@ class MembersController < ApplicationController
 
   def toggle_admin(admin)
     if @group_user.update(admin: admin)
-      redirect_to group_members_path(@group), notice: 'Member was successfully updated.'
+      redirect_to group_members_path(@group), notice: "Member was successfully updated."
     else
-      redirect_to group_members_path(@group), alert: 'The member could not be updated.'
+      redirect_to group_members_path(@group), alert: "The member could not be updated."
     end
   end
 end

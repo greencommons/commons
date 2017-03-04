@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 class SearchIndex
   def self.index_name(klass)
     "#{klass.name.pluralize.downcase}-#{Rails.env}"
   end
 
   def self.log_elasticsearch_warning(message)
-    Rails.logger.tagged('ELASTICSEARCH') do
+    Rails.logger.tagged("ELASTICSEARCH") do
       Rails.logger.warn(message)
     end
   end
@@ -51,7 +52,7 @@ class SearchIndex
     {
       index: model_name.constantize.index_name,
       type:  model_name.downcase,
-      id:    id
+      id:    id,
     }
   end
 
@@ -60,12 +61,12 @@ class SearchIndex
   end
 
   def search_index_callbacks_enabled?
-    ENV.fetch('ENABLE_SEARCH_INDEX_CALLBACKS', true) != 'false'
+    ENV.fetch("ENABLE_SEARCH_INDEX_CALLBACKS", true) != "false"
   end
 
   def log_callback_warning
     self.class.log_elasticsearch_warning(
-      "Note: ElasticSearch's Model callbacks have been disabled"
+      "Note: ElasticSearch's Model callbacks have been disabled",
     )
   end
 end

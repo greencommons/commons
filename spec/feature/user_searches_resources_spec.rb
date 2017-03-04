@@ -1,35 +1,36 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
-RSpec.feature 'Searching for resources', :worker, :elasticsearch do
-  context 'when searching by title' do
-    scenario 'users can find a resource when searching' do
+RSpec.feature "Searching for resources", :worker, :elasticsearch do
+  context "when searching by title" do
+    scenario "users can find a resource when searching" do
       title = Faker::Hipster.sentence
-      metadata = { creators: 'Rachel Carson', date: Time.zone.today }
+      metadata = { creators: "Rachel Carson", date: Time.zone.today }
       create(:resource, title: title, metadata: metadata)
       wait_for { Resource.search(title).results.total }.to eq(1)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
       expect(page).to have_text(title)
     end
 
-    scenario 'users should see updated search results' do
-      title = 'Twitter'
-      new_title = 'Facebook'
-      metadata = { creators: 'Rachel Carson', date: Time.zone.today }
+    scenario "users should see updated search results" do
+      title = "Twitter"
+      new_title = "Facebook"
+      metadata = { creators: "Rachel Carson", date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
 
       wait_for { Resource.search(title).results.total }.to eq(1)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
       expect(page).to have_text(title)
 
@@ -38,23 +39,23 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       wait_for { Resource.search(new_title).results.total }.to eq(1)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: new_title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: new_title
+        click_button "Search"
       end
 
       expect(page).to have_text(new_title)
     end
 
     scenario "users should see updated search results even if the record wasn't indexed" do
-      title = 'Spotify'
-      new_title = 'Deezer'
-      metadata = { creators: 'Rachel Carson', date: Time.zone.today }
+      title = "Spotify"
+      new_title = "Deezer"
+      metadata = { creators: "Rachel Carson", date: Time.zone.today }
 
       resource = create(:resource, title: title, metadata: metadata)
 
       wait_for { Resource.search(title).results.total }.to eq(1)
-      RemoveFromIndexJob.new.perform('Resource', resource.id)
+      RemoveFromIndexJob.new.perform("Resource", resource.id)
 
       expect_any_instance_of(SearchIndex).to receive(:update).once.and_call_original
       expect_any_instance_of(SearchIndex).to receive(:add).once.and_call_original
@@ -64,15 +65,15 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       wait_for { Resource.search(new_title).results.total }.to eq(1)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: new_title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: new_title
+        click_button "Search"
       end
 
       expect(page).to have_text(new_title)
     end
 
-    scenario 'users can search for resources, groups and lists' do
+    scenario "users can search for resources, groups and lists" do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource")
@@ -84,36 +85,36 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end.to eq(3)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
-      expect(page).to have_text('My Resource')
-      expect(page).to have_text('My Group')
-      expect(page).to have_text('My List')
+      expect(page).to have_text("My Resource")
+      expect(page).to have_text("My Group")
+      expect(page).to have_text("My List")
     end
 
-    scenario 'users cannot see search results for deleted files' do
+    scenario "users cannot see search results for deleted files" do
       title = Faker::Hipster.sentence
-      metadata = { creators: 'Rachel Carson', date: Time.zone.today }
+      metadata = { creators: "Rachel Carson", date: Time.zone.today }
       resource = create(:resource, title: title, metadata: metadata)
       wait_for { Resource.search(title).results.total }.to eq(1)
       resource.destroy!
       wait_for { Resource.search(title).results.total }.to eq(0)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
       expect(page).not_to have_text(title)
     end
   end
 
-  context 'filtering' do
-    scenario 'users can filter by model' do
+  context "filtering" do
+    scenario "users can filter by model" do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource")
@@ -125,25 +126,25 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end.to eq(3)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
-      expect(page).to have_text('My Resource')
-      expect(page).to have_text('My Group')
-      expect(page).to have_text('My List')
+      expect(page).to have_text("My Resource")
+      expect(page).to have_text("My Group")
+      expect(page).to have_text("My List")
 
-      uncheck('Resources')
-      uncheck('Lists')
-      click_button 'FILTER'
+      uncheck("Resources")
+      uncheck("Lists")
+      click_button "FILTER"
 
-      expect(page).not_to have_text('My Resource')
-      expect(page).not_to have_text('My List')
-      expect(page).to have_text('My Group')
+      expect(page).not_to have_text("My Resource")
+      expect(page).not_to have_text("My List")
+      expect(page).to have_text("My Group")
     end
 
-    scenario 'users can filter by resource type' do
+    scenario "users can filter by resource type" do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", resource_type: :article)
@@ -153,22 +154,22 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end.to eq(1)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
-      expect(page).to have_text('My Resource')
+      expect(page).to have_text("My Resource")
 
-      uncheck('Articles')
-      click_button 'FILTER'
+      uncheck("Articles")
+      click_button "FILTER"
 
-      expect(page).not_to have_text('My Resource')
+      expect(page).not_to have_text("My Resource")
     end
   end
 
-  context 'sorting' do
-    scenario 'users can sort by recent first' do
+  context "sorting" do
+    scenario "users can sort by recent first" do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
@@ -180,18 +181,18 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end.to eq(3)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
-      select 'RECENT FIRST', from: 'sort'
-      click_button 'SORT'
+      select "RECENT FIRST", from: "sort"
+      click_button "SORT"
 
       expect(page).to have_text(/.*My Group.*My List.*My Resource.*/)
     end
 
-    scenario 'users can sort by oldest first' do
+    scenario "users can sort by oldest first" do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
@@ -203,36 +204,36 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end.to eq(3)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: title
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: title
+        click_button "Search"
       end
 
-      select 'OLDEST FIRST', from: 'sort'
-      click_button 'SORT'
+      select "OLDEST FIRST", from: "sort"
+      click_button "SORT"
 
       expect(page).to have_text(/.*My Resource.*My List.*My Group.*/)
     end
   end
 
-  context 'related records' do
-    scenario 'users can see related records' do
-      resource = create(:resource, title: 'My Resource')
-      protection_group = create(:group, name: 'Protection Group')
-      help_group = create(:group, name: 'Help Group')
-      helpful_list = create(:list, name: 'Helpful List')
+  context "related records" do
+    scenario "users can see related records" do
+      resource = create(:resource, title: "My Resource")
+      protection_group = create(:group, name: "Protection Group")
+      help_group = create(:group, name: "Help Group")
+      helpful_list = create(:list, name: "Helpful List")
 
-      resource.tag_list.add('ocean')
-      resource.tag_list.add('sky')
+      resource.tag_list.add("ocean")
+      resource.tag_list.add("sky")
       resource.save!
 
-      protection_group.tag_list.add('ocean')
+      protection_group.tag_list.add("ocean")
       protection_group.save!
 
-      help_group.tag_list.add('mountain')
+      help_group.tag_list.add("mountain")
       help_group.save!
 
-      helpful_list.tag_list.add('sky')
+      helpful_list.tag_list.add("sky")
       helpful_list.save!
 
       wait_for do
@@ -240,16 +241,16 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end.to eq(3)
 
       visit new_search_path
-      within('.customer-search-form') do
-        fill_in 'query', with: 'My Resource'
-        click_button 'Search'
+      within(".customer-search-form") do
+        fill_in "query", with: "My Resource"
+        click_button "Search"
       end
 
-      expect(page).to have_text('My Resource')
-      expect(page).to have_text('You may also like...')
-      expect(page).to have_text('Protection Group')
-      expect(page).to have_text('Helpful List')
-      expect(page).not_to have_text('Help Group')
+      expect(page).to have_text("My Resource")
+      expect(page).to have_text("You may also like...")
+      expect(page).to have_text("Protection Group")
+      expect(page).to have_text("Helpful List")
+      expect(page).not_to have_text("Help Group")
     end
   end
 end

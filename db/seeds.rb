@@ -1,17 +1,18 @@
+# frozen_string_literal: true
 # config
 users_count = 20
 resources_count = 400
 groups_count = 10
 
 p 'Creating admin user with email \'admin@greencommons.org\' and password \'thecommons\'...'
-admin = FactoryGirl.create(:user, email: 'admin@greencommons.org',
-                                  password: 'thecommons')
+admin = FactoryGirl.create(:user, email: "admin@greencommons.org",
+                                  password: "thecommons")
 
 p "Creating #{users_count} users..."
 FactoryGirl.create_list(:user, users_count)
 
 p "Creating #{resources_count} resources..."
-(resources_count / 2).times do |n|
+(resources_count / 2).times do |_n|
   # unowned resources
   FactoryGirl.create(:resource)
 
@@ -19,21 +20,21 @@ p "Creating #{resources_count} resources..."
   FactoryGirl.create(:resource, user: User.all.sample)
 end
 
-p 'Creating 2 lists with 10-50 resources for each user...'
+p "Creating 2 lists with 10-50 resources for each user..."
 User.all.each do |user|
   FactoryGirl.create_list(:list, 2, owner: user,
-                                    resources: Resource.order('RANDOM()').limit(rand(10..50)))
+                                    resources: Resource.order("RANDOM()").limit(rand(10..50)))
 end
 
 p "Creating #{groups_count} groups and 3-5 lists with 30-80 resources for each group..."
-groups_count.times do |n|
+groups_count.times do |_n|
   group = FactoryGirl.create(:group)
-  users = User.order('RANDOM()').limit(rand(2..10)).to_a
+  users = User.order("RANDOM()").limit(rand(2..10)).to_a
 
   group.add_admin(admin)
   group.add_admin(users.shift)
   users.each { |user| group.add_user(user) }
 
   FactoryGirl.create_list(:list, rand(3..5), owner: group,
-                                             resources: Resource.order('RANDOM()').limit(rand(30..80)))
+                                             resources: Resource.order("RANDOM()").limit(rand(30..80)))
 end
