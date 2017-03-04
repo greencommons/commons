@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SearchBuilders
   class Query
     def initialize(query, es_params)

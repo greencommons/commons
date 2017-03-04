@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Users
   class PasswordsController < ApplicationController
     before_action :authenticate_user!
@@ -11,7 +12,7 @@ module Users
 
       if @user.update_with_password(password_params)
         bypass_sign_in(@user)
-        redirect_to profile_path, notice: 'Password updated.'
+        redirect_to profile_path, notice: "Password updated."
       else
         render :edit
       end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Users
   class ProfileController < ApplicationController
     before_action :authenticate_user!
@@ -10,7 +11,7 @@ module Users
       @user = User.find(current_user.id)
 
       if @user.update(users_params)
-        redirect_to profile_path, notice: 'Profile updated.'
+        redirect_to profile_path, notice: "Profile updated."
       else
         render :edit
       end

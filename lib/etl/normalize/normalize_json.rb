@@ -1,5 +1,6 @@
-require 'json'
-require 'json-schema'
+# frozen_string_literal: true
+require "json"
+require "json-schema"
 
 class NormalizeJson
   def process(input)
@@ -29,12 +30,12 @@ end
 
 class NormalizeJsonResources < NormalizeJson
   def schema_fname
-    'lib/etl/schema/resource_array_schema.json'
+    "lib/etl/schema/resource_array_schema.json"
   end
 end
 
 class NormalizeJsonGroups < NormalizeJson
   def schema_fname
-    'lib/etl/schema/group_array_schema.json'
+    "lib/etl/schema/group_array_schema.json"
   end
 end

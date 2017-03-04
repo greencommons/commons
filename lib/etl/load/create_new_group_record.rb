@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateNewGroupRecord < CreateNewRecord
   private
 
@@ -13,7 +14,7 @@ class CreateNewGroupRecord < CreateNewRecord
     record = Group.create!(attributes)
 
     ap "Name: #{record.name}"
-    ap 'Metadata: '
+    ap "Metadata: "
     ap record.metadata
     ap record.long_description
   end

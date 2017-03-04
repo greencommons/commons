@@ -1,8 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe List do
-  describe 'Validations' do
-    it 'is valid with valid attributes' do
+  describe "Validations" do
+    it "is valid with valid attributes" do
       list = create(:list)
 
       expect(list).to be_valid
@@ -13,10 +14,10 @@ RSpec.describe List do
     it { is_expected.to validate_inclusion_of(:owner_type).in_array(%w(User Group)) }
   end
 
-  describe 'Associations' do
+  describe "Associations" do
     it { is_expected.to belong_to(:owner) }
     it { is_expected.to have_and_belong_to_many(:resources) }
   end
 
-  it_behaves_like 'indexable', :list
+  it_behaves_like "indexable", :list
 end

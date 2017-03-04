@@ -1,11 +1,12 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 describe GroupPolicy do
   subject { GroupPolicy.new(user, group) }
 
   let(:group) { FactoryGirl.create(:group) }
 
-  context 'when guest' do
+  context "when guest" do
     let(:user) { nil }
 
     it { is_expected.to permit_action(:show)    }
@@ -18,10 +19,10 @@ describe GroupPolicy do
     it { is_expected.to forbid_action(:destroy) }
   end
 
-  context 'when user' do
+  context "when user" do
     let(:user) { FactoryGirl.create(:user) }
 
-    context 'when not a group member' do
+    context "when not a group member" do
       it { is_expected.to permit_action(:index)   }
       it { is_expected.to permit_action(:show)    }
       it { is_expected.to permit_action(:create)  }
@@ -32,7 +33,7 @@ describe GroupPolicy do
       it { is_expected.to forbid_action(:destroy) }
     end
 
-    context 'when regular group member' do
+    context "when regular group member" do
       before { group.add_user(user) }
 
       it { is_expected.to permit_action(:index)   }
@@ -45,7 +46,7 @@ describe GroupPolicy do
       it { is_expected.to forbid_action(:destroy) }
     end
 
-    context 'when group admin' do
+    context "when group admin" do
       before { group.add_admin(user) }
 
       it { is_expected.to permit_action(:index)   }

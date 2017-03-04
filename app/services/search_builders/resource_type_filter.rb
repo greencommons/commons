@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 module SearchBuilders
   class ResourceTypeFilter
     RESOURCE_TYPE_FILTERS = {
-      books: 'book',
-      articles: 'article',
-      reports: 'report'
+      books: "book",
+      articles: "article",
+      reports: "report",
     }.freeze
 
     def initialize(filters, es_params)
@@ -25,9 +26,9 @@ module SearchBuilders
       @es_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
         bool: {
           must_not: {
-            exists: { field: 'resource_type' }
-          }
-        }
+            exists: { field: "resource_type" },
+          },
+        },
       }
     end
 
@@ -35,7 +36,7 @@ module SearchBuilders
       @filters[:resource_types].keys.each do |resource_type|
         next unless RESOURCE_TYPE_FILTERS.keys.include?(resource_type.to_sym)
         @es_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
-          term: { resource_type: RESOURCE_TYPE_FILTERS[resource_type.to_sym] }
+          term: { resource_type: RESOURCE_TYPE_FILTERS[resource_type.to_sym] },
         }
       end
     end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Indexable
   extend ActiveSupport::Concern
 
@@ -19,7 +20,7 @@ module Indexable
     after_commit on: [:update] do
       run_if_public do
         changes = previous_changes.dup
-        changes['tags'] =  changes.delete('cached_tags') if changes['cached_tags']
+        changes["tags"] =  changes.delete("cached_tags") if changes["cached_tags"]
         UpdateIndexJob.perform_async(self.class.name, id, changes.keys)
       end
     end
@@ -30,9 +31,9 @@ module Indexable
 
     def set_published_at
       unless published_at
-        if defined?(metadata) && metadata && metadata['date']
+        if defined?(metadata) && metadata && metadata["date"]
           begin
-            update_column(:published_at, metadata['date'])
+            update_column(:published_at, metadata["date"])
           rescue ActiveRecord::StatementInvalid
             update_column(:published_at, created_at)
           end

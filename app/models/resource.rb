@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Resource < ApplicationRecord
   include Indexable
   include Taggable
@@ -6,12 +7,12 @@ class Resource < ApplicationRecord
     article: 0,
     book: 1,
     report: 2,
-    url: 3
+    url: 3,
   }.freeze
 
   RESOURCE_PRIVACY_SETTINGS = {
     priv: 0,
-    publ: 1
+    publ: 1,
   }.freeze
 
   has_paper_trail
@@ -28,5 +29,5 @@ class Resource < ApplicationRecord
   validates :title, :resource_type, presence: true
   validates :url, length: { maximum: 255 }
 
-  scope :sort_by_created_at, -> { order('created_at DESC') }
+  scope :sort_by_created_at, -> { order("created_at DESC") }
 end

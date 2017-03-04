@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 class UpdateIndexJob
   include Sidekiq::Worker
-  sidekiq_options queue: 'elasticsearch', retry: true
+  sidekiq_options queue: "elasticsearch", retry: true
 
   def perform(model_name, id, changed)
-    Rails.logger.tagged('ELASTICSEARCH') do
+    Rails.logger.tagged("ELASTICSEARCH") do
       Rails.logger.warn(
-        "Hey! Updating the #{model_name} index for record id# #{id}"
+        "Hey! Updating the #{model_name} index for record id# #{id}",
       )
     end
 

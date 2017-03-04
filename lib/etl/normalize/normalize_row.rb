@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class NormalizeRow
   def initialize(normalizer_klass, source_klass, *args)
     @normalizer = normalizer_klass.new

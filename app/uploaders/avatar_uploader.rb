@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -15,7 +16,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    ActionController::Base.helpers.image_path('user.png')
+    ActionController::Base.helpers.image_path("user.png")
   end
 
   process resize_to_fit: [300, 300]

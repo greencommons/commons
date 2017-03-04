@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Elasticsearch::Model.client = Elasticsearch::Client.new(
-  url: ENV.fetch('BONSAI_URL', 'http://localhost:9200')
+  url: ENV.fetch("BONSAI_URL", "http://localhost:9200"),
 )

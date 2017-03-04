@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ETL
   def self.run(filename)
     etl_filename = filename

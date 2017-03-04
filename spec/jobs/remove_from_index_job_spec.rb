@@ -1,11 +1,12 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe RemoveFromIndexJob, :worker do
-  describe '.perform', search_indexing_callbacks: false do
-    it 'removes an existing record in the search index' do
+  describe ".perform", search_indexing_callbacks: false do
+    it "removes an existing record in the search index" do
       record = create(:resource)
       model_name = record.class.name
-      index = double('SearchIndex', remove: true)
+      index = double("SearchIndex", remove: true)
       allow(SearchIndex).to receive(:new).and_return(index)
 
       RemoveFromIndexJob.perform_async(record.class, record.id)

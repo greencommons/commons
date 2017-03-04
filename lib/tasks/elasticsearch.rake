@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 namespace :elasticsearch do
   def reset_index(klass)
     client = Elasticsearch::Client.new(
-      url: ENV.fetch('BONSAI_URL', 'http://localhost:9200'), log: true
+      url: ENV.fetch("BONSAI_URL", "http://localhost:9200"), log: true,
     )
 
     if client.indices.exists? index: klass.index_name
@@ -14,7 +15,7 @@ namespace :elasticsearch do
       klass.import
     rescue Faraday::ConnectionFailed => e
       ap e
-      ap 'Indexing records one at a time...'
+      ap "Indexing records one at a time..."
       klass.all.each { |r| r.__elasticsearch__.index_document }
     end
   end

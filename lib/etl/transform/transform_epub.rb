@@ -1,8 +1,9 @@
-require 'epub/parser'
+# frozen_string_literal: true
+require "epub/parser"
 
 class TransformEpub
   def process(input_epub)
-    ap 'Transforming...'
+    ap "Transforming..."
     @input_epub = input_epub
 
     {
@@ -12,7 +13,7 @@ class TransformEpub
         creators: creators,
         date: date,
         publisher: publisher,
-      }
+      },
     }
 
   rescue => error
@@ -50,7 +51,7 @@ end
 
 class PageContentExtractor
   def initialize(parsed_book)
-    @book_text = ''
+    @book_text = ""
     @parsed_book = parsed_book
   end
 
@@ -58,7 +59,7 @@ class PageContentExtractor
     parsed_book.each_page_on_spine do |page|
       parsed_xml = page.content_document.read
       page_plain = ActionView::Base.full_sanitizer.sanitize(parsed_xml)
-      @book_text = (@book_text || '') + page_plain
+      @book_text = (@book_text || "") + page_plain
     end
 
     @book_text

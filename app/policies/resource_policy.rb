@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ResourcePolicy < ApplicationPolicy
   attr_reader :user, :resource
 

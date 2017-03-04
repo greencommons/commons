@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class GroupPolicy < ApplicationPolicy
   attr_reader :user, :group
 
@@ -40,7 +41,7 @@ class GroupPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.joins(:groups_users).where('user_id = ?', user.id)
+      scope.joins(:groups_users).where("user_id = ?", user.id)
     end
   end
 end

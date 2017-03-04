@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 module ScoreHelper
   def score_class(score)
     if score > 1
-      'label-success'
+      "label-success"
     elsif score > 0.5
-      'label-warning'
+      "label-warning"
     else
-      'label-danger'
+      "label-danger"
     end
   end
 end

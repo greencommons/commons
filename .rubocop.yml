@@ -1,72 +1,370 @@
-inherit_from: .hound_defaults.yml
-require: rubocop-rspec
-
 AllCops:
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/initializers/devise.rb'
-    - 'app/helpers/devise_helper.rb'
-    - 'Guardfile'
+    - db/schema.rb
 
-# Ruby Style
-Metrics/LineLength:
-  Max: 100
+AccessorMethodName:
+  Enabled: false
+
+ActionFilter:
+  Enabled: false
+
+Alias:
+  Enabled: false
+
+ArrayJoin:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+AsciiIdentifiers:
+  Enabled: false
+
+Attr:
+  Enabled: false
+
+BlockNesting:
+  Enabled: false
+
+CaseEquality:
+  Enabled: false
+
+CharacterLiteral:
+  Enabled: false
+
+ClassAndModuleChildren:
   Enabled: true
-Metrics/BlockLength:
+  EnforcedStyle: nested
+
+ClassLength:
   Enabled: false
-Style/FrozenStringLiteralComment:
+
+ModuleLength:
   Enabled: false
-  EnforcedStyle: when_needed
-  SupportedStyles:
-    # `when_needed` will add the frozen string literal comment to files
-    # only when the `TargetRubyVersion` is set to 2.3+.
-    - when_needed
-      # `always` will always add the frozen string literal comment to a file
-      # regardless of the Ruby version or if `freeze` or `<<` are called on a
-      # string literal. If you run code against multiple versions of Ruby, it is
-      # possible that this will create errors in Ruby 2.3.0+.
-    - always
+
+ClassVars:
+  Enabled: false
+
+CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    find: detect
+    inject: reduce
+    collect: map
+    find_all: select
+
+ColonMethodCall:
+  Enabled: false
+
+CommentAnnotation:
+  Enabled: false
+
+CyclomaticComplexity:
+  Enabled: false
+
+Delegate:
+  Enabled: false
+
+DeprecatedHashMethods:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+DotPosition:
+  EnforcedStyle: trailing
+
+DoubleNegation:
+  Enabled: false
+
+EachWithObject:
+  Enabled: false
+
+EmptyLiteral:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+EvenOdd:
+  Enabled: false
+
+ExtraSpacing:
+  Enabled: true
+
+FileName:
+  Enabled: false
+
+FlipFlop:
+  Enabled: false
+
+FormatString:
+  Enabled: false
+
+GlobalVars:
+  Enabled: false
+
+GuardClause:
+  Enabled: false
+
+IfUnlessModifier:
+  Enabled: false
+
+IfWithSemicolon:
+  Enabled: false
+
+InlineComment:
+  Enabled: false
+
+Lambda:
+  Enabled: false
+
+LambdaCall:
+  Enabled: false
+
+LineEndConcatenation:
+  Enabled: false
+
+LineLength:
+  Max: 80
+
+MethodLength:
+  Enabled: false
+
+ModuleFunction:
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+
+NegatedIf:
+  Enabled: false
+
+NegatedWhile:
+  Enabled: false
+
+Next:
+  Enabled: false
+
+NilComparison:
+  Enabled: false
+
+Not:
+  Enabled: false
+
+NumericLiterals:
+  Enabled: false
+
+OneLineConditional:
+  Enabled: false
+
+OpMethod:
+  Enabled: false
+
+ParameterLists:
+  Enabled: false
+
+PercentLiteralDelimiters:
+  Enabled: false
+
+PerlBackrefs:
+  Enabled: false
+
+PredicateName:
+  NamePrefixBlacklist:
+    - is_
+  Exclude:
+    - spec/**/*
+
+Proc:
+  Enabled: false
+
+RaiseArgs:
+  Enabled: false
+
+RegexpLiteral:
+  Enabled: false
+
+SelfAssignment:
+  Enabled: false
+
+SingleLineBlockParams:
+  Enabled: false
+
+SingleLineMethods:
+  Enabled: false
+
+SignalException:
+  Enabled: false
+
+SpecialGlobalVars:
+  Enabled: false
+
+StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+TrivialAccessors:
+  Enabled: false
+
+VariableInterpolation:
+  Enabled: false
+
+WhenThen:
+  Enabled: false
+
+WhileUntilModifier:
+  Enabled: false
+
+WordArray:
+  Enabled: false
+
+# Lint
+
+AmbiguousOperator:
+  Enabled: false
+
+AmbiguousRegexpLiteral:
+  Enabled: false
+
+AssignmentInCondition:
+  Enabled: false
+
+CircularArgumentReference:
+  Enabled: false
+
+ConditionPosition:
+  Enabled: false
+
+DeprecatedClassMethods:
+  Enabled: false
+
+DuplicatedKey:
+  Enabled: false
+
+EachWithObjectArgument:
+  Enabled: false
+
+ElseLayout:
+  Enabled: false
+
+FormatParameterMismatch:
+  Enabled: false
+
+HandleExceptions:
+  Enabled: false
+
+InvalidCharacterLiteral:
+  Enabled: false
+
+InitialIndentation:
+  Enabled: false
+
+LiteralInCondition:
+  Enabled: false
+
+LiteralInInterpolation:
+  Enabled: false
+
+Loop:
+  Enabled: false
+
+NestedMethodDefinition:
+  Enabled: false
+
+NonLocalExitFromIterator:
+  Enabled: false
+
+ParenthesesAsGroupedExpression:
+  Enabled: false
+
+RequireParentheses:
+  Enabled: false
+
+UnderscorePrefixedVariableName:
+  Enabled: false
+
+UnneededDisable:
+  Enabled: false
+
+Void:
+  Enabled: false
+
+# Performance
+
+CaseWhenSplat:
+  Enabled: false
+
+Count:
+  Enabled: false
+
+Detect:
+  Enabled: false
+
+FlatMap:
+  Enabled: false
+
+ReverseEach:
+  Enabled: false
+
+Sample:
+  Enabled: false
+
+Size:
+  Enabled: false
+
+StringReplacement:
+  Enabled: false
+
+# Rails
+
+ActionFilter:
+  Enabled: false
+
+Date:
+  Enabled: false
+
+FindBy:
+  Enabled: false
+
+FindEach:
+  Enabled: false
+
+HasAndBelongsToMany:
+  Enabled: false
+
+Output:
+  Enabled: false
+
+ReadWriteAttribute:
+  Enabled: false
+
+ScopeArgs:
+  Enabled: false
+
+TimeZone:
+  Enabled: false
+
+Validation:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Description: 'Avoid multi-line chains of blocks.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#single-line-blocks'
+  Enabled: false
+
 Style/MultilineOperationIndentation:
-  Enabled: false
-Style/StringLiterals:
-  EnforcedStyle: single_quotes
-  SupportedStyles:
-    - single_quotes
-    - double_quotes
-TrailingCommaInLiteral:
-  EnforcedStyleForMultiline: no_comma
-  SupportedStyles:
-    - comma
-    - no_comma
+  Description: Checks indentation of binary operations that span multiple lines.
+  Enabled: true
+  EnforcedStyle: indented
 
-# Rails Styles
-Rails/HasAndBelongsToMany:
+Metrics/AbcSize:
   Enabled: false
-
-# RSpec Styles
-RSpec/AnyInstance:
-  Enabled: false
-RSpec/DescribeClass:
-  Enabled: false
-RSpec/DescribedClass:
-  Enabled: false
-RSpec/FilePath:
-  Enabled: false
-RSpec/ExampleLength:
-  Description: Checks for long examples.
-  Enabled: true
-  Max: 30
-RSpec/MultipleExpectations:
-  Description: Checks if examples contain too many `expect` calls.
-  Enabled: true
-  Max: 8
-RSpec/NestedGroups:
-  Description: Checks for nested example groups.
-  Enabled: true
-  MaxNesting: 3
-RSpec/VerifiedDoubles:
-  # Note, we are already doing this by default. See spec/spec_helper.rb
-  Description: Prefer using verifying doubles over normal doubles.
-  Enabled: false
-  IgnoreSymbolicNames: false

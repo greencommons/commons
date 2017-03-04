@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SearchController < ApplicationController
   def new
   end
@@ -14,7 +15,7 @@ class SearchController < ApplicationController
       ).search.filter_by_resource_type.sort
 
       @results = Elasticsearch::Model.search(*builder.to_elasticsearch).
-                 page(params[:page] || 1).per(10)
+        page(params[:page] || 1).per(10)
       @total_count = @results.results.total
     else
       @results = []

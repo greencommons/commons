@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class UserFilter
   def initialize(query:, group_id: nil)
     @query = query
@@ -16,6 +17,6 @@ class UserFilter
 
   def group_members
     return [] unless @group_id
-    @group_members ||= User.joins(:groups_users).where('group_id = ?', @group_id)
+    @group_members ||= User.joins(:groups_users).where("group_id = ?", @group_id)
   end
 end

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
-  root 'search#new'
+  root "search#new"
 
   namespace :api do
-    get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
+    get "/autocomplete/members", to: "autocomplete#members", as: "autocomplete_members"
   end
 
   concern :taggable do
@@ -10,16 +11,16 @@ Rails.application.routes.draw do
   end
 
   resources :search, only: [:new]
-  get '/search', to: 'search#show', as: 'search'
+  get "/search", to: "search#show", as: "search"
 
-  get '/profile', to: 'users/profile#edit', as: 'profile'
-  patch '/profile', to: 'users/profile#update', as: 'update_profile'
-  get '/profile/password', to: 'users/passwords#edit', as: 'password'
-  patch '/profile/password', to: 'users/passwords#update', as: 'update_password'
+  get "/profile", to: "users/profile#edit", as: "profile"
+  patch "/profile", to: "users/profile#update", as: "update_profile"
+  get "/profile/password", to: "users/passwords#edit", as: "password"
+  patch "/profile/password", to: "users/passwords#update", as: "update_password"
 
-  resources :resources, model_name: 'Resource', concerns: :taggable
+  resources :resources, model_name: "Resource", concerns: :taggable
 
-  resources :groups, model_name: 'Group', concerns: :taggable do
+  resources :groups, model_name: "Group", concerns: :taggable do
     resources :members, only: [:index, :create, :destroy] do
       collection do
         post :join
@@ -35,8 +36,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   # TODO: replace this with a check for admin user
-  if Rails.env.development? || ENV['ENABLE_SIDEKIQ_ADMIN']
-    require 'sidekiq/web'
-    mount Sidekiq::Web => '/sidekiq'
+  if Rails.env.development? || ENV["ENABLE_SIDEKIQ_ADMIN"]
+    require "sidekiq/web"
+    mount Sidekiq::Web => "/sidekiq"
   end
 end

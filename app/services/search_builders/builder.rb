@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SearchBuilders
   class Builder
     attr_accessor :es_params
@@ -36,26 +37,26 @@ module SearchBuilders
 
     def base
       {
-        sort: ['_score'],
+        sort: ["_score"],
         query: {
           bool: {
             must: {
               bool: {
-                should: []
-              }
+                should: [],
+              },
             },
             filter: {
               bool: {
                 should: {
                   bool: {
                     minimum_should_match: 1,
-                    should: []
-                  }
-                }
-              }
-            }
-          }
-        }
+                    should: [],
+                  },
+                },
+              },
+            },
+          },
+        },
       }
     end
   end

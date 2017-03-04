@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ChangeResourceMetadataToRequired < ActiveRecord::Migration[5.0]
   def up
     remove_column :resources, :metadata

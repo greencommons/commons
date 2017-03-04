@@ -1,19 +1,20 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
-RSpec.describe 'Groups', type: :request do
+RSpec.describe "Groups", type: :request do
   let(:group) { create(:group) }
 
-  context 'guest' do
-    describe 'GET /groups/:id/members' do
-      it 'gets 200' do
+  context "guest" do
+    describe "GET /groups/:id/members" do
+      it "gets 200" do
         get group_members_path(group)
         expect(response).to have_http_status(200)
       end
     end
 
-    describe 'POST /groups/:group_id/members/:id/make_admin' do
-      it 'redirects to login page' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:group_id/members/:id/make_admin" do
+      it "redirects to login page" do
+        john = create(:user, email: "john@example.com")
         group.add_user(john)
 
         post make_admin_group_member_path(group, group.find_member(john))
@@ -22,7 +23,7 @@ RSpec.describe 'Groups', type: :request do
     end
   end
 
-  context 'regular group member' do
+  context "regular group member" do
     let(:user) do
       user = create(:user)
       group.add_user(user)
@@ -31,25 +32,25 @@ RSpec.describe 'Groups', type: :request do
 
     before { sign_in user }
 
-    describe 'GET /groups/:id/members' do
-      it 'gets 200' do
+    describe "GET /groups/:id/members" do
+      it "gets 200" do
         get group_members_path(group)
         expect(response).to have_http_status(200)
       end
     end
 
-    describe 'POST /groups/:id/members' do
-      it 'does not switch the user to admin for this group' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:id/members" do
+      it "does not switch the user to admin for this group" do
+        john = create(:user, email: "john@example.com")
 
         post group_members_path(group), params: { email: john.email }
         expect(group.find_member(john)).to be nil
       end
     end
 
-    describe 'POST /groups/:group_id/members/:id/make_admin' do
-      it 'does not switch the user to admin for this group' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:group_id/members/:id/make_admin" do
+      it "does not switch the user to admin for this group" do
+        john = create(:user, email: "john@example.com")
         group.add_user(john)
 
         post make_admin_group_member_path(group, group.find_member(john))
@@ -57,9 +58,9 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'POST /groups/:group_id/members/:id/remove_admin' do
-      it 'does not switch the user to admin for this group' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:group_id/members/:id/remove_admin" do
+      it "does not switch the user to admin for this group" do
+        john = create(:user, email: "john@example.com")
         group.add_admin(john)
 
         post remove_admin_group_member_path(group, group.find_member(john))
@@ -67,9 +68,9 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'DELETE /groups/:group_id/members/:id' do
-      it 'does not switch the user to admin for this group' do
-        john = create(:user, email: 'john@example.com')
+    describe "DELETE /groups/:group_id/members/:id" do
+      it "does not switch the user to admin for this group" do
+        john = create(:user, email: "john@example.com")
         group.add_user(john)
         john_group_user = group.find_member(john)
 
@@ -78,15 +79,15 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'DELETE /groups/:group_id/members' do
-      it 'removes the current_user from the group' do
+    describe "DELETE /groups/:group_id/members" do
+      it "removes the current_user from the group" do
         delete leave_group_members_path(group)
         expect(group.find_member(user)).to be nil
       end
     end
   end
 
-  context 'group admin' do
+  context "group admin" do
     let(:user) do
       user = create(:user)
       group.add_admin(user)
@@ -95,16 +96,16 @@ RSpec.describe 'Groups', type: :request do
 
     before { sign_in user }
 
-    describe 'GET /groups/:id/members' do
-      it 'gets 200' do
+    describe "GET /groups/:id/members" do
+      it "gets 200" do
         get group_members_path(group)
         expect(response).to have_http_status(200)
       end
     end
 
-    describe 'POST /groups/:id/members' do
-      it 'adds the user to the group and redirect to the group_members_path' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:id/members" do
+      it "adds the user to the group and redirect to the group_members_path" do
+        john = create(:user, email: "john@example.com")
 
         post group_members_path(group), params: { email: john.email }
 
@@ -115,9 +116,9 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'POST /groups/:group_id/members/:id/make_admin' do
-      it 'switches the user to admin for this group and redirect to group_members_path' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:group_id/members/:id/make_admin" do
+      it "switches the user to admin for this group and redirect to group_members_path" do
+        john = create(:user, email: "john@example.com")
         group.add_user(john)
 
         post make_admin_group_member_path(group, group.find_member(john))
@@ -126,9 +127,9 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'POST /groups/:group_id/members/:id/remove_admin' do
-      it 'switches the user to admin for this group and redirect to group_members_path' do
-        john = create(:user, email: 'john@example.com')
+    describe "POST /groups/:group_id/members/:id/remove_admin" do
+      it "switches the user to admin for this group and redirect to group_members_path" do
+        john = create(:user, email: "john@example.com")
         group.add_admin(john)
 
         post remove_admin_group_member_path(group, group.find_member(john))
@@ -137,9 +138,9 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'DELETE /groups/:group_id/members/:id' do
-      it 'switches the user to admin for this group and redirect to group_members_path' do
-        john = create(:user, email: 'john@example.com')
+    describe "DELETE /groups/:group_id/members/:id" do
+      it "switches the user to admin for this group and redirect to group_members_path" do
+        john = create(:user, email: "john@example.com")
         group.add_user(john)
 
         delete group_member_path(group, group.find_member(john))
@@ -148,10 +149,10 @@ RSpec.describe 'Groups', type: :request do
       end
     end
 
-    describe 'DELETE /groups/:group_id/members' do
-      context 'with multiple admins' do
-        it 'removes the current_user from the group' do
-          john = create(:user, email: 'john@example.com')
+    describe "DELETE /groups/:group_id/members" do
+      context "with multiple admins" do
+        it "removes the current_user from the group" do
+          john = create(:user, email: "john@example.com")
           group.add_admin(john)
 
           delete leave_group_members_path(group)
@@ -159,8 +160,8 @@ RSpec.describe 'Groups', type: :request do
         end
       end
 
-      context 'with one admin' do
-        it 'does not remove the current_user from the group' do
+      context "with one admin" do
+        it "does not remove the current_user from the group" do
           delete leave_group_members_path(group)
           expect(group.find_member(user)).not_to be nil
         end

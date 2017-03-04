@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TagsController < ApplicationController
   TAGGABLE_MODELS = %w(Group Resource).freeze
 
@@ -9,7 +10,7 @@ class TagsController < ApplicationController
 
       render json: entity.cached_tags
     else
-      render json: { error: 'Unsupported Model Name.' }
+      render json: { error: "Unsupported Model Name." }
     end
   end
 
