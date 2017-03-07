@@ -10,13 +10,44 @@ RSpec.feature 'Managing resources' do
     expect(page).to have_text(resource.title)
   end
 
-  scenario 'users can access original document if URL is provided' do
-    user = feature_login
-    create(:resource, user: user, url: 'http://example.com')
+  describe 'View Original' do
+    context 'when URL is set' do
+      scenario 'users can access original document in summary card' do
+        user = feature_login
+        create(:resource, user: user, url: 'http://example.com')
 
-    click_link 'My Resources'
-    expect(find_link('View Original Document')[:href]).to eq('https://via.hypothes.is/http://example.com')
-    expect(find_link('View Original Document')[:target]).to eq('_blank')
+        click_link 'My Resources'
+        expect(find_link('View Original Document')[:href]).to eq('https://via.hypothes.is/http://example.com')
+        expect(find_link('View Original Document')[:target]).to eq('_blank')
+      end
+
+      scenario 'users can access original document in resource page' do
+        user = feature_login
+        resource = create(:resource, user: user, url: 'http://example.com')
+
+        visit resource_path(resource)
+        expect(find_link('VIEW ORIGINAL')[:href]).to eq('https://via.hypothes.is/http://example.com')
+        expect(find_link('VIEW ORIGINAL')[:target]).to eq('_blank')
+      end
+    end
+
+    context 'when URL is not set' do
+      scenario 'users cannot access original document in summary card' do
+        user = feature_login
+        create(:resource, user: user)
+
+        click_link 'My Resources'
+        expect(page).not_to have_content('View Original Document')
+      end
+
+      scenario 'users cannot access original document in resource page' do
+        user = feature_login
+        resource = create(:resource, user: user)
+
+        visit resource_path(resource)
+        expect(page).not_to have_content('View Original Document')
+      end
+    end
   end
 
   scenario 'users can view a resource' do
