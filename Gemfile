@@ -30,7 +30,6 @@ gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'fog-aws'
-gem 'active_model_serializers', '~> 0.10.0'
 
 group :development do
   gem 'bummr'
