@@ -2,18 +2,13 @@
 module Yumi
   module Presenters
     class Attributes
-      def initialize(options)
-        @options = options
-        @attributes = @options[:attributes]
-        @presenter = @options[:presenter].class.new(@options.slice(:url, :resource, :prefix))
-        @resource = @options[:resource]
+      def initialize(presenter)
+        @presenter = presenter
+        @resource = @presenter.resource
       end
 
-      # Takes the given list of attributes, loops through
-      # them and get the corresponding value from the presenter
-      # or the resource
       def to_json_api
-        @attributes.each_with_object({}) do |attr, hash|
+        @presenter.attributes.each_with_object({}) do |attr, hash|
           hash[attr] = (@presenter.respond_to?(attr) ? @presenter : @resource).send(attr)
         end
       end

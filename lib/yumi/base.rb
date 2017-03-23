@@ -5,79 +5,56 @@ module Yumi
   class Base
     extend Yumi::ClassMethods
 
-    # Initialize a presenter
-    # url: The current API/version path.
-    # Example: http://example.com/api/v1
-    #
-    # resource: The resource to present. It can be a main resource, a related
-    # resource or an included resource. Can take in list of resources or
-    # unique resource.
-    #
-    # prefix: Used for relationships. Will prefix the related resource link
-    # Example: /posts/xxx
-    #
-    def initialize(url:, resource:, prefix: nil)
-      @options = {
-        presenter: self,
-        url: url,
-        resource: resource,
-        prefix: prefix
-      }
+    attr_accessor :url, :resource, :type, :links, :attributes, :relationships,
+                  :presenter_module, :prefix
+
+    def initialize(url, resource, presenter_module = nil, prefix = nil)
+      @url = url
+      @resource = resource
+      @presenter_module = presenter_module
+      @prefix = prefix
       set_instance_variables
-
-      @options[:names] = {
-        singular: @options[:type],
-        plural: @options[:type].pluralize
-      }
     end
 
-    # Generates the default resource JSON API hash
-    def as_json_api
-      {
-        meta: @options[:meta],
-        data: Yumi::Presenters::Resource.new(@options).to_json_api,
-        links: Yumi::Presenters::Links.new(@options).to_json_api,
-        included: Yumi::Presenters::IncludedResources.new(@options).to_json_api
-      }
-    end
-
-    # Used inside the Resource presenter to build
-    # the JSON API hash for relationship
     def as_relationship
+      data = if @resource.respond_to?(:each)
+        @resource.map { |c| { type: @type.pluralize, id: c.id.to_s } }
+      else
+        { type: @type.pluralize, id: @resource.id.to_s }
+      end
+
       {
-        data: @options[:resource].map { |c| { type: @options[:names][:plural], id: c.id.to_s } },
+        data: data,
         links: {
-          self: "#{@options[:url]}/#{@options[:prefix]}relationships/#{@options[:names][:plural]}",
-          related: "#{@options[:url]}/#{@options[:prefix]}#{@options[:names][:plural]}"
+          self: "#{@url}/#{@prefix}relationships/#{@type.pluralize}",
+          related: "#{@url}/#{@prefix}#{@type.pluralize}"
         }
       }
     end
 
-    # Used inside the IncludedResources presenter to build
-    # the JSON API hash for included resources
     def as_included
       {
-        type: @options[:names][:plural],
-        id: @options[:resource].id.to_s,
-        attributes: Yumi::Presenters::Attributes.new(@options).to_json_api,
-        links: Yumi::Presenters::Links.new(@options).to_json_api
+        type: @type.pluralize,
+        id: @resource.id.to_s,
+        attributes: Yumi::Presenters::Attributes.new(self).to_json_api,
+        links: Yumi::Presenters::Links.new(self).to_json_api
       }
     end
 
     protected
 
     def object
-      @options[:resource]
+      @resource
     end
 
     private
 
     # Assigns the class variables to the instance
     def set_instance_variables
-      @options[:meta] = self.class.send('_meta') || {}
+      instance_variable_set("@type", self.class.send('_type') || 'base')
 
-      [:type, :relationships, :links, :attributes].each do |v|
-        @options[v] = self.class.send("_#{v}") || []
+      [:relationships, :links, :attributes].each do |v|
+        instance_variable_set("@#{v}", self.class.send("_#{v}") || [])
       end
     end
   end

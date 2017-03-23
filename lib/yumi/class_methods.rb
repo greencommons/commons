@@ -18,7 +18,13 @@ module Yumi
     end
 
     def has_many(*args)
-      @_relationships = args
+      @_relationships ||= []
+      args.each { |a| @_relationships << a }
+    end
+
+    def belongs_to(*args)
+      @_relationships ||= []
+      args.each { |a| @_relationships << a }
     end
 
     def links(*args)

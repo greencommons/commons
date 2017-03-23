@@ -4,21 +4,17 @@ class SearchController < ApplicationController
 
   def show
     skip_authorization
-    set_search_variables
 
-    if @query
-      builder = SearchBuilders::Builder.new(
-        query: @query,
-        filters: @filters,
-        sort: @sort,
-      ).search.filter_by_resource_type.sort
+    search = SearchBuilders::Search.new(
+      q: params[:q],
+      filters: params[:filters]&.to_unsafe_hash,
+      sort: params[:sort],
+      page: params[:page],
+      per: params[:per]
+    )
 
-      @results = Elasticsearch::Model.search(*builder.to_elasticsearch).
-                 page(params[:page] || 1).per(10)
-      @total_count = @results.results.total
-    else
-      @results = []
-    end
+    @results = search.results
+    @total_count = search.total_count
 
     if @results.any?
       tags = @results.records.map(&:cached_tags).flatten.compact.uniq
@@ -26,14 +22,5 @@ class SearchController < ApplicationController
                                           except: @results.records,
                                           limit: 6).suggest
     end
-  end
-
-  private
-
-  def set_search_variables
-    @query = params[:query]
-    @filters = params[:filters]&.to_unsafe_hash
-    @sort = params[:sort]
-    @dir = params[:dir]
   end
 end
