@@ -17,6 +17,12 @@ module Yumi
     end
 
     def as_relationship
+      data = if @resource.respond_to?(:each)
+        @resource.map { |c| { type: @type.pluralize, id: c.id.to_s } }
+      else
+        { type: @type.pluralize, id: @resource.id.to_s }
+      end
+
       {
         data: data,
         links: {
