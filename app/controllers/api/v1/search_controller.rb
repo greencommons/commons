@@ -10,10 +10,7 @@ module Api
           per: params[:per]
         )
 
-        render json: Yumi::Presenter.new(url: base_url,
-                                         current_url: request.original_url,
-                                         resource: search.results_with_relevancy,
-                                         presenters_module: ::V1).as_json_api
+        render json: present(search.results_with_relevancy)
       end
     end
   end

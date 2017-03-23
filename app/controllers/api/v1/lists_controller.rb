@@ -2,8 +2,7 @@ module Api
   module V1
     class ListsController < ApiController
       def show
-        @list = List.find(params[:id])
-        render json: @list, serializer: ::V1::ListSerializer
+        render json: present(List.find(params[:id]))
       end
     end
   end
