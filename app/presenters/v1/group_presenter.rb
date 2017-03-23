@@ -1,7 +1,7 @@
 module V1
   class GroupPresenter < Yumi::Base
     type 'group'
-    attributes :id, :name, :short_description, :long_description, :relevancy, :tags,
+    attributes :name, :short_description, :long_description, :relevancy, :tags,
                :published_at, :members_count, :lists_count, :resources_count
     links :self
     has_many :users
