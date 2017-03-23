@@ -11,7 +11,6 @@ module Yumi
 
     def as_json_api
       json = {
-
         data: data,
         links: Yumi::Presenters::RootLinks.new(@current_url).to_json_api,
         included: included
