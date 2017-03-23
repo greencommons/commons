@@ -34,6 +34,8 @@ Style/StringLiterals:
   SupportedStyles:
     - single_quotes
     - double_quotes
+Style/PredicateName:
+  Enabled: false
 TrailingCommaInLiteral:
   EnforcedStyleForMultiline: no_comma
   SupportedStyles:

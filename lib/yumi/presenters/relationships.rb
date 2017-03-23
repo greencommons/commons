@@ -18,11 +18,10 @@ module Yumi
       end
 
       def presenter(rel)
-        Yumi::Utils::PresenterHelper.presenter_from_rel(@presenter.url,
-                                                        rel,
-                                                        @presenter.resource.send(rel),
-                                                        @presenter.presenter_module,
-                                                        @presenter.prefix)
+        Yumi::Utils::PresenterHelper.new(url: @presenter.url,
+                                         resource: @presenter.resource.send(rel),
+                                         presenter_module: @presenter.presenter_module,
+                                         prefix: @presenter.prefix).presenter_from_rel(rel)
       end
     end
   end

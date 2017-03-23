@@ -10,11 +10,11 @@ module SearchBuilders
 
     def results
       @results ||= Elasticsearch::Model.search(*search_builder.to_elasticsearch).
-                                        page(@page || 1).per(@per || 10)
+                   page(@page || 1).per(@per || 10)
     end
 
     def results_with_relevancy
-      @results_with_relevancy ||= -> do
+      @results_with_relevancy ||= lambda do
         array = []
         results.records.each_with_hit do |result, hit|
           result.relevancy = hit._score

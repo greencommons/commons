@@ -5,16 +5,19 @@ module Yumi
       @current_url = current_url
       @resource = resource
       @presenters_module = presenters_module
+      @meta = meta
       @included_resources = {}
     end
 
     def as_json_api
-      {
-        meta: @meta,
+      json = {
+
         data: data,
         links: Yumi::Presenters::RootLinks.new(@current_url).to_json_api,
         included: included
       }
+      json[:meta] = @meta if @meta.any?
+      json
     end
 
     private
@@ -32,15 +35,19 @@ module Yumi
     def included
       if @resource.respond_to?(:each)
         @resource.map do |r|
-          Yumi::Presenters::IncludedResources.new(presenter_for(r), @included_resources).to_json_api
+          Yumi::Presenters::IncludedResources.new(presenter_for(r), @included_resources).
+            to_json_api
         end
       else
-        Yumi::Presenters::IncludedResources.new(presenter_for(@resource), @included_resources).to_json_api
+        Yumi::Presenters::IncludedResources.new(presenter_for(@resource), @included_resources).
+          to_json_api
       end
     end
 
     def presenter_for(resource)
-      Yumi::Utils::PresenterHelper.presenter_for(@url, resource, @presenters_module)
+      Yumi::Utils::PresenterHelper.new(url: @url,
+                                       resource: resource,
+                                       presenter_module: @presenters_module).presenter
     end
   end
 end

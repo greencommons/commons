@@ -1,24 +1,35 @@
 module Yumi
   module Utils
     class PresenterHelper
-      def self.presenter_for(url, resource, presenter_module = nil, prefix = nil)
-        klass_name = if presenter_module
-          "#{presenter_module}::#{resource.class}Presenter"
-        else
-          "#{resource.class}Presenter"
-        end
-
-        klass_name.constantize.new(@url, resource, presenter_module, prefix)
+      def initialize(url:, resource:, presenter_module: nil, prefix: nil)
+        @url = url
+        @resource = resource
+        @presenter_module = presenter_module
+        @prefix = prefix
       end
 
-      def self.presenter_from_rel(url, rel, resource, presenter_module = nil, prefix = nil)
-        klass_name = if presenter_module
-          "#{presenter_module}::#{rel.to_s.singularize.capitalize}Presenter"
-        else
-          "#{rel.to_s.singularize.capitalize}Presenter"
-        end
+      def presenter
+        @resource_class = @resource.class
+        presenter_instance
+      end
 
-        klass_name.constantize.new(@url, resource, presenter_module, prefix)
+      def presenter_from_rel(rel)
+        @resource_class = rel.to_s.singularize.capitalize
+        presenter_instance
+      end
+
+      private
+
+      def presenter_instance
+        presenter_class.constantize.new(@url, @resource, @presenter_module, @prefix)
+      end
+
+      def presenter_class
+        if @presenter_module
+          "#{@presenter_module}::#{@resource_class}Presenter"
+        else
+          "#{@resource_class}Presenter"
+        end
       end
     end
   end
