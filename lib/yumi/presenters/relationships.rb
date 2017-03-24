@@ -7,7 +7,9 @@ module Yumi
 
       def to_json_api
         @presenter.relationships.each_with_object({}) do |rel, hash|
-          hash[rel] = presenter(rel).as_relationship
+          if value = @presenter.resource.send(rel)
+            hash[rel] = presenter(rel, value).as_relationship
+          end
         end
       end
 
@@ -17,9 +19,9 @@ module Yumi
         @prefix ||= "#{@presenter.type.pluralize}/#{@presenter.resource.id}/"
       end
 
-      def presenter(rel)
+      def presenter(rel, value)
         Yumi::Utils::PresenterHelper.new(url: @presenter.url,
-                                         resource: @presenter.resource.send(rel),
+                                         resource: value,
                                          presenter_module: @presenter.presenter_module,
                                          prefix: prefix).presenter_from_rel(rel)
       end

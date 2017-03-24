@@ -4,13 +4,14 @@ class SearchController < ApplicationController
 
   def show
     skip_authorization
+    set_query_params
 
     search = SearchBuilders::Search.new(
-      q: params[:q],
-      filters: params[:filters]&.to_unsafe_hash,
-      sort: params[:sort],
-      page: params[:page],
-      per: params[:per]
+      q: @query,
+      filters: @filters,
+      sort: @sort,
+      page: @page,
+      per: @per
     )
 
     @results = search.results
@@ -22,5 +23,15 @@ class SearchController < ApplicationController
                                           except: @results.records,
                                           limit: 6).suggest
     end
+  end
+
+  private
+
+  def set_query_params
+    @query = params[:query]
+    @filters = params[:filters]&.to_unsafe_hash
+    @sort = params[:sort]
+    @page = params[:page]
+    @per = params[:per]
   end
 end

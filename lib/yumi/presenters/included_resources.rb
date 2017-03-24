@@ -30,10 +30,12 @@ module Yumi
               end
             end
           else
-            key = "#{rel}:#{associated_resource.id}"
+            if associated_resource
+              key = "#{rel}:#{associated_resource.id}"
 
-            unless hash[key]
-              hash[key] = presenter(rel, associated_resource).as_included
+              unless hash[key]
+                hash[key] = presenter(rel, associated_resource).as_included
+              end
             end
           end
         end

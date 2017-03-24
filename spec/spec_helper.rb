@@ -2,6 +2,7 @@ require 'factory_girl_rails'
 require 'sidekiq/testing'
 require 'pundit/matchers'
 require 'yumi'
+require 'json_matchers/rspec'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
