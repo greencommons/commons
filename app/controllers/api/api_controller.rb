@@ -11,6 +11,10 @@ module Api
                           presenters_module: "::#{version}".constantize).as_json_api
     end
 
+    def render_json_api(data)
+      render json: data, content_type: 'application/vnd.api+json'
+    end
+
     private
 
     def version

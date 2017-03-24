@@ -10,11 +10,12 @@ RSpec.describe Api::V1::GroupsController, type: :request do
 
     it 'returns 200 OK' do
       expect(response.status).to eq 200
+      expect(response.content_type).to eq 'application/vnd.api+json'
     end
 
     it 'returns the group as JSON API' do
       expect(response).to match_response_schema('jsonapi')
-      expect(JSON.parse(response.body)['data']['id']).to eq "#{group.id}"
+      expect(json_body['data']['id']).to eq "#{group.id}"
     end
   end
 end

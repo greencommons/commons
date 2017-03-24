@@ -2,7 +2,7 @@ module Api
   module V1
     class ResourcesController < ApiController
       def show
-        render json: present(Resource.find(params[:id]))
+        render_json_api present(Resource.find(params[:id]))
       end
     end
   end

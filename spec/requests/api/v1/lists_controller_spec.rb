@@ -10,11 +10,12 @@ RSpec.describe Api::V1::ListsController, type: :request do
 
     it 'returns 200 OK' do
       expect(response.status).to eq 200
+      expect(response.content_type).to eq 'application/vnd.api+json'
     end
 
     it 'returns the list as JSON API' do
       expect(response).to match_response_schema('jsonapi')
-      expect(JSON.parse(response.body)['data']['id']).to eq "#{list.id}"
+      expect(json_body['data']['id']).to eq "#{list.id}"
     end
   end
 end
