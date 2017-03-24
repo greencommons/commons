@@ -11,6 +11,7 @@ describe Yumi::Presenter do
     Yumi::Presenter.new(url: url,
                         current_url: "#{url}/games",
                         resource: resources,
+                        includes: 'levels,characters',
                         presenters_module: Fake,
                         meta: meta)
   end
@@ -19,6 +20,7 @@ describe Yumi::Presenter do
     Yumi::Presenter.new(url: url,
                         current_url: "#{url}/games/#{resource.id}",
                         resource: resource,
+                        includes: 'levels,characters',
                         presenters_module: Fake,
                         meta: meta)
   end
@@ -127,11 +129,9 @@ describe Yumi::Presenter do
       end
 
       it 'correctly generates the links section' do
-        expect(presenter_with_resource.as_json_api[:links]).to eq({
-          self: 'http://example.org:80/api/v1/games/1',
-          last: '',
-          next: ''
-        })
+        expect(presenter_with_resource.as_json_api[:links]).to eq(self: 'http://example.org:80/api/v1/games/1',
+                                                                  last: '',
+                                                                  next: '')
       end
 
       it 'correctly generates the data section' do

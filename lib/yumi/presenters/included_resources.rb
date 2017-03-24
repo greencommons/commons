@@ -1,8 +1,9 @@
 module Yumi
   module Presenters
     class IncludedResources
-      def initialize(presenter, included_resources = {})
+      def initialize(presenter, includes, included_resources = {})
         @presenter = presenter
+        @includes = includes
         @included_resources = included_resources
       end
 
@@ -19,24 +20,25 @@ module Yumi
 
       def included_data(resource, hash)
         @presenter.relationships.each do |rel|
+          next unless @includes.include?(rel.to_s)
           associated_resource = resource.send(rel)
 
           if associated_resource.respond_to?(:each)
             associated_resource.each do |r|
-              key = "#{rel}:#{r.id}"
-
-              unless hash[key]
-                hash[key] = presenter(rel, r).as_included
-              end
+              add(hash, r, rel)
             end
           else
-            if associated_resource
-              key = "#{rel}:#{associated_resource.id}"
+            add(hash, associated_resource, rel)
+          end
+        end
+      end
 
-              unless hash[key]
-                hash[key] = presenter(rel, associated_resource).as_included
-              end
-            end
+      def add(hash, associated_resource, rel)
+        if associated_resource
+          key = "#{rel}:#{associated_resource.id}"
+
+          unless hash[key]
+            hash[key] = presenter(rel, associated_resource).as_included
           end
         end
       end

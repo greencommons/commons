@@ -8,6 +8,7 @@ module Api
       Yumi::Presenter.new(url: base_url,
                           current_url: request.original_url,
                           resource: resource,
+                          includes: params[:include],
                           presenters_module: "::#{version}".constantize).as_json_api
     end
 

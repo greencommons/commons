@@ -15,7 +15,7 @@ RSpec.describe Api::V1::ResourcesController, type: :request do
 
     it 'returns the resource as JSON API' do
       expect(response).to match_response_schema('jsonapi')
-      expect(json_body['data']['id']).to eq "#{resource.id}"
+      expect(json_body['data']['id']).to eq resource.id.to_s
     end
   end
 end

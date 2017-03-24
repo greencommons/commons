@@ -1,9 +1,10 @@
 module Yumi
   class Presenter
-    def initialize(url:, current_url:, resource:, presenters_module: nil, meta: {})
+    def initialize(url:, current_url:, resource:, includes: '', presenters_module: nil, meta: {})
       @url = url
       @current_url = current_url
       @resource = resource
+      @includes = includes&.split(',') || []
       @presenters_module = presenters_module
       @meta = meta
       @included_resources = {}
@@ -32,13 +33,15 @@ module Yumi
     end
 
     def included
+      klass = Yumi::Presenters::IncludedResources
+
       if @resource.respond_to?(:each)
         @resource.map do |r|
-          Yumi::Presenters::IncludedResources.new(presenter_for(r), @included_resources).
+          klass.new(presenter_for(r), @includes, @included_resources).
             to_json_api
         end.flatten.uniq
       else
-        Yumi::Presenters::IncludedResources.new(presenter_for(@resource), @included_resources).
+        klass.new(presenter_for(@resource), @includes, @included_resources).
           to_json_api
       end
     end

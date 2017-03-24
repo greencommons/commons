@@ -10,9 +10,12 @@ describe Yumi::Presenters::Data do
   let(:klass) { Yumi::Presenters::Data.new(presenter) }
 
   before do
-    allow_any_instance_of(Yumi::Presenters::Attributes).to receive(:to_json_api).and_return('attributes')
-    allow_any_instance_of(Yumi::Presenters::Links).to receive(:to_json_api).and_return('links')
-    allow_any_instance_of(Yumi::Presenters::Relationships).to receive(:to_json_api).and_return('relationships')
+    allow_any_instance_of(Yumi::Presenters::Attributes).to receive(:to_json_api).
+      and_return('attributes')
+    allow_any_instance_of(Yumi::Presenters::Links).to receive(:to_json_api).
+      and_return('links')
+    allow_any_instance_of(Yumi::Presenters::Relationships).to receive(:to_json_api).
+      and_return('relationships')
   end
 
   describe '#to_json_api' do

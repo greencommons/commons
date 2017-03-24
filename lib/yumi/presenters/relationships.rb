@@ -7,9 +7,8 @@ module Yumi
 
       def to_json_api
         @presenter.relationships.each_with_object({}) do |rel, hash|
-          if value = @presenter.resource.send(rel)
-            hash[rel] = presenter(rel, value).as_relationship
-          end
+          value = @presenter.resource.send(rel)
+          hash[rel] = presenter(rel, value).as_relationship if value
         end
       end
 

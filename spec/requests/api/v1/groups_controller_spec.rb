@@ -15,7 +15,7 @@ RSpec.describe Api::V1::GroupsController, type: :request do
 
     it 'returns the group as JSON API' do
       expect(response).to match_response_schema('jsonapi')
-      expect(json_body['data']['id']).to eq "#{group.id}"
+      expect(json_body['data']['id']).to eq group.id.to_s
     end
   end
 end

@@ -66,7 +66,7 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Description: Checks for nested example groups.
   Enabled: true
-  MaxNesting: 3
+  MaxNesting: 4
 RSpec/VerifiedDoubles:
   # Note, we are already doing this by default. See spec/spec_helper.rb
   Description: Prefer using verifying doubles over normal doubles.
