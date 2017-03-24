@@ -36,7 +36,7 @@ module Yumi
         @resource.map do |r|
           Yumi::Presenters::IncludedResources.new(presenter_for(r), @included_resources).
             to_json_api
-        end
+        end.flatten.uniq
       else
         Yumi::Presenters::IncludedResources.new(presenter_for(@resource), @included_resources).
           to_json_api

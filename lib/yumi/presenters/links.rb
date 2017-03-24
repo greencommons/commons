@@ -14,7 +14,7 @@ module Yumi
       private
 
       def self_link
-        if @resource.respond_to?(:each)
+        if @presenter.resource.respond_to?(:each)
           "#{@presenter.url}/#{@presenter.type.pluralize}"
         else
           "#{@presenter.url}/#{@presenter.type.pluralize}/#{@presenter.resource.id}"

@@ -21,7 +21,7 @@ module Yumi
         Yumi::Utils::PresenterHelper.new(url: @presenter.url,
                                          resource: @presenter.resource.send(rel),
                                          presenter_module: @presenter.presenter_module,
-                                         prefix: @presenter.prefix).presenter_from_rel(rel)
+                                         prefix: prefix).presenter_from_rel(rel)
       end
     end
   end

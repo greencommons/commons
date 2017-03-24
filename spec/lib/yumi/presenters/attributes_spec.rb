@@ -3,18 +3,10 @@ require 'spec_helper'
 
 describe Yumi::Presenters::Attributes do
   let(:attributes) { [:description, :slug] }
-  let(:presenter) { OpenStruct.new({}) }
-  let(:resource) { OpenStruct.new(description: "I'm a resource.", slug: 'whatever') }
+  let(:resource) { double(:_resource, description: "I'm a resource.", slug: 'whatever') }
+  let(:presenter) { double(:_presenter, resource: resource, attributes: attributes) }
 
-  let(:options) do
-    {
-      attributes: attributes,
-      resource: resource,
-      presenter: presenter
-    }
-  end
-
-  let(:klass) { Yumi::Presenters::Attributes.new(options) }
+  let(:klass) { Yumi::Presenters::Attributes.new(presenter) }
 
   describe '#to_json_api' do
     context 'without overrides' do
@@ -25,7 +17,11 @@ describe Yumi::Presenters::Attributes do
     end
 
     context 'with overrides' do
-      let(:presenter) { OpenStruct.new(description: "I'm a presenter.") }
+      let(:presenter) do
+        double(:_presenter, resource: resource,
+                            attributes: attributes,
+                            description: "I'm a presenter.")
+      end
 
       it 'outputs the hash with the description overridden' do
         expect(klass.to_json_api).to eq(description: "I'm a presenter.",
