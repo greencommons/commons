@@ -30,7 +30,7 @@ module Api
     private
 
     def query_params
-      params.permit(:q, :filters,  :sort, :include, :page, :per)&.to_unsafe_hash
+      params.permit(:q, :filters, :sort, :include, :page, :per)&.to_unsafe_hash
     end
 
     def version

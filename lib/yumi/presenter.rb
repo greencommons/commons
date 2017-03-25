@@ -5,7 +5,7 @@ module Yumi
       @url = url
       @current_url = current_url
       @resource = resource
-      @params = params.slice(:q, :filters,  :sort, :page, :per)
+      @params = params.slice(:q, :filters, :sort, :page, :per)
       @includes = params[:include]&.split(',') || []
       @total = total
       @presenters_module = presenters_module
@@ -16,7 +16,10 @@ module Yumi
     def as_json_api
       json = {
         data: data,
-        links: Yumi::Presenters::RootLinks.new(@current_url, @params, @total, collection?).to_json_api,
+        links: Yumi::Presenters::RootLinks.new(@current_url,
+                                               @params,
+                                               @total,
+                                               collection?).to_json_api,
         included: included
       }
       json[:meta] = @meta if @meta.any?

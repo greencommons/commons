@@ -33,14 +33,14 @@ module Yumi
       end
 
       def set_last_page
-        if max_page > 0
+        if max_page.positive?
           @hash[:last] = build_current_url.gsub(/page=\d+/, "page=#{max_page}")
         end
       end
 
       def set_previous_page
         prev_page = @params[:page] - 1
-        if prev_page > 0
+        if prev_page.positive?
           @hash[:prev] = build_current_url.gsub(/page=\d+/, "page=#{prev_page}")
         end
       end
@@ -62,11 +62,8 @@ module Yumi
         base = @current_url.split('?')[0]
 
         @params.each_with_index do |(key, value), i|
-          if i == 0
-            base << "?#{key}=#{value}"
-          else
-            base << "&#{key}=#{value}"
-          end
+          prefix = i.zero? ? '?' : '&'
+          base << "#{prefix}#{key}=#{value}"
         end
 
         base
