@@ -10,7 +10,7 @@ module Api
           per: params[:per]
         )
 
-        render_json_api present(search.results_with_relevancy)
+        render_json_api present_collection(search.results_with_relevancy, search.total_count)
       end
     end
   end
