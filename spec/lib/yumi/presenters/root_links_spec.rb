@@ -13,10 +13,8 @@ describe Yumi::Presenters::RootLinks do
       let(:resource) { [Game.new(1), Game.new(2), Game.new(3)] }
 
       it 'returns /games with default page and per' do
-        expect(klass.to_json_api).to eq({
-          self: "#{BASE_URL}/api/v1/games?page=1&per=10",
-          first: "#{BASE_URL}/api/v1/games?page=1&per=10"
-        })
+        expect(klass.to_json_api).to eq(self: "#{BASE_URL}/api/v1/games?page=1&per=10",
+                                        first: "#{BASE_URL}/api/v1/games?page=1&per=10")
       end
 
       describe 'pagination' do
@@ -25,12 +23,10 @@ describe Yumi::Presenters::RootLinks do
           let(:total) { 200 }
 
           it 'returns /games?page=1&per=100' do
-            expect(klass.to_json_api).to eq({
-              self: "#{BASE_URL}/api/v1/games?page=1&per=100",
-              first: "#{BASE_URL}/api/v1/games?page=1&per=100",
-              last: "#{BASE_URL}/api/v1/games?page=2&per=100",
-              next: "#{BASE_URL}/api/v1/games?page=2&per=100"
-            })
+            expect(klass.to_json_api).to eq(self: "#{BASE_URL}/api/v1/games?page=1&per=100",
+                                            first: "#{BASE_URL}/api/v1/games?page=1&per=100",
+                                            last: "#{BASE_URL}/api/v1/games?page=2&per=100",
+                                            next: "#{BASE_URL}/api/v1/games?page=2&per=100")
           end
         end
 
@@ -39,13 +35,11 @@ describe Yumi::Presenters::RootLinks do
           let(:total) { 200 }
 
           it 'returns /games?page=2&per=100' do
-            expect(klass.to_json_api).to eq({
-              self: "#{BASE_URL}/api/v1/games?page=2&per=50",
-              first: "#{BASE_URL}/api/v1/games?page=1&per=50",
-              prev: "#{BASE_URL}/api/v1/games?page=1&per=50",
-              last: "#{BASE_URL}/api/v1/games?page=4&per=50",
-              next: "#{BASE_URL}/api/v1/games?page=3&per=50"
-            })
+            expect(klass.to_json_api).to eq(self: "#{BASE_URL}/api/v1/games?page=2&per=50",
+                                            first: "#{BASE_URL}/api/v1/games?page=1&per=50",
+                                            prev: "#{BASE_URL}/api/v1/games?page=1&per=50",
+                                            last: "#{BASE_URL}/api/v1/games?page=4&per=50",
+                                            next: "#{BASE_URL}/api/v1/games?page=3&per=50")
           end
         end
 
@@ -54,12 +48,10 @@ describe Yumi::Presenters::RootLinks do
           let(:total) { 200 }
 
           it 'returns /games?page=2&per=100' do
-            expect(klass.to_json_api).to eq({
-              self: "#{BASE_URL}/api/v1/games?page=2&per=100",
-              first: "#{BASE_URL}/api/v1/games?page=1&per=100",
-              prev: "#{BASE_URL}/api/v1/games?page=1&per=100",
-              last: "#{BASE_URL}/api/v1/games?page=2&per=100",
-            })
+            expect(klass.to_json_api).to eq(self: "#{BASE_URL}/api/v1/games?page=2&per=100",
+                                            first: "#{BASE_URL}/api/v1/games?page=1&per=100",
+                                            prev: "#{BASE_URL}/api/v1/games?page=1&per=100",
+                                            last: "#{BASE_URL}/api/v1/games?page=2&per=100")
           end
         end
       end
