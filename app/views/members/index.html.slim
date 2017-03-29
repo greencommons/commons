@@ -11,7 +11,7 @@
         = react_component('AutocompleteForm', { name: 'user-autocomplete',
                                                 field: 'email',
                                                 action: group_members_path,
-                                                autocomplete_url: api_autocomplete_members_path(group_id: @group.id),
+                                                autocomplete_url: autocomplete_members_path(group_id: @group.id),
                                                 placeholder: 'Type member name or email',
                                                 authenticity_token: form_authenticity_token }, 
                                               { prerender: true })

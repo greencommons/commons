@@ -4,7 +4,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
   describe 'unauthorized' do
     describe 'GET /autocomplete/members' do
       it 'redirects to login page' do
-        get api_autocomplete_members_path
+        get autocomplete_members_path
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
             john = create(:user, email: 'john@commons.org')
 
             sign_in(john)
-            get api_autocomplete_members_path(group_id: group.id)
+            get autocomplete_members_path(group_id: group.id)
             expect(response).to have_http_status(200)
           end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
             group.add_user(mark)
 
             sign_in(john)
-            get api_autocomplete_members_path(group_id: group.id)
+            get autocomplete_members_path(group_id: group.id)
             expect(json_body).to eq([{ 'email' => jack.email }])
           end
         end
@@ -48,7 +48,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
             group.add_user(john)
 
             sign_in(john)
-            get api_autocomplete_members_path(group_id: group.id, q: 'mark')
+            get autocomplete_members_path(group_id: group.id, q: 'mark')
             expect(json_body).to eq([{ 'email' => mark.email }])
           end
         end
@@ -60,7 +60,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
             john = create(:user, email: 'john@commons.org')
 
             sign_in(john)
-            get api_autocomplete_members_path(q: 'a')
+            get autocomplete_members_path(q: 'a')
             expect(response).to have_http_status(200)
           end
 
@@ -73,7 +73,7 @@ RSpec.describe 'Api::AutocompleteController', type: :request do
             group.add_user(john)
 
             sign_in(john)
-            get api_autocomplete_members_path(q: 'a')
+            get autocomplete_members_path(q: 'a')
             expect(json_body).to eq([{ 'email' => jack.email },
                                      { 'email' => mark.email }])
           end

@@ -1,6 +1,8 @@
 require 'factory_girl_rails'
 require 'sidekiq/testing'
 require 'pundit/matchers'
+require 'yumi'
+require 'json_matchers/rspec'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -16,3 +18,5 @@ RSpec.configure do |config|
   config.example_status_persistence_file_path = 'tmp/examples.txt'
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
+
+BASE_URL = 'http://example.org:80'.freeze

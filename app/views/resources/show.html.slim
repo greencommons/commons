@@ -40,10 +40,7 @@
             .col-xs-12
               p= link_to @resource.url, @resource.url, target: '_blank'
         - else
-          - if @resource.content.is_a?(String)
-            = @resource.content.truncate(800)
-          - else
-            = @resource.content
+          = @resource.excerpt
       #page-details__more.collapse
         .row
           .col-xs-12

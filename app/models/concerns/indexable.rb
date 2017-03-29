@@ -4,6 +4,7 @@ module Indexable
   included do
     include Elasticsearch::Model
     index_name SearchIndex.index_name(self)
+    attr_accessor :relevancy
 
     def run_if_public
       return if respond_to?(:priv?) && priv?

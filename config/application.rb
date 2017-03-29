@@ -14,3 +14,7 @@ module Commons
     require 'elasticsearch/rails/instrumentation'
   end
 end
+
+Rails.application.configure do
+  config.autoload_paths << Rails.root.join('lib')
+end

@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
+  default_url_options Rails.application.config.action_mailer.default_url_options
+
   root 'search#new'
 
+  # External API routes
   namespace :api do
-    get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
+    namespace :v1 do
+      get '/search', to: 'search#show', as: 'search'
+      resources :resources, only: [:show]
+      resources :groups, only: [:show]
+      resources :lists, only: [:show]
+    end
   end
 
+  # Internal API routes
   concern :taggable do
     resources :tags, only: [:create]
   end
+  get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
 
+  # User-facing routes
   resources :search, only: [:new]
   get '/search', to: 'search#show', as: 'search'
 

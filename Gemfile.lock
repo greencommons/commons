@@ -188,6 +188,8 @@ GEM
     json (2.0.2)
     json-schema (2.7.0)
       addressable (>= 2.4)
+    json_matchers (0.7.0)
+      json-schema (~> 2.7)
     kaminari (1.0.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.0.1)
@@ -407,6 +409,7 @@ DEPENDENCIES
   high_voltage (~> 3.0.0)
   jquery-rails
   json-schema
+  json_matchers
   kaminari
   kiba (~> 1.0.0)
   listen (~> 3.0.5)
