@@ -25,8 +25,8 @@
             = hidden_field_tag :query, @query
             = select_tag :sort, 
                          options_for_select([ ['SCORE', 'score'], 
-                                              ['RECENT FIRST', 'recent'], 
-                                              ['OLDEST FIRST', 'oldest'] ], @sort || 'SCORE'), 
+                                              ['RECENT FIRST', '-published_at'], 
+                                              ['OLDEST FIRST', 'published_at'] ], @sort || 'SCORE'), 
                          class: 'form-control'
           .col-xs-4
             = submit_tag 'SORT', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
