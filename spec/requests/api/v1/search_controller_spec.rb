@@ -61,5 +61,29 @@ RSpec.describe Api::V1::SearchController, type: :request do
         end
       end
     end
+
+    describe 'related records', :worker, :elasticsearch do
+      it 'returns the related results' do
+        resource = Resource.first
+        resource.tag_list.add('ocean')
+        resource.tag_list.add('sky')
+        resource.save!
+
+        group = Group.first
+        group.tag_list.add('ocean')
+        group.save!
+
+        list = List.first
+        list.tag_list.add('sky')
+        list.save!
+
+        wait_for do
+          Suggesters::Tags.new(tags: %w(ocean sky)).suggest.size
+        end.to eq(3)
+
+        get '/api/v1/search?q=Resource'
+        expect(json_body['related'].count).to eq 2
+      end
+    end
   end
 end
