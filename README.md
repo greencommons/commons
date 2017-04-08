@@ -117,3 +117,213 @@ Adding New Resources to the Database
 ------------------------------------
 
 See [ETL.md](ETL.md) for more information.
+
+Web API Usage
+------------------------------------
+
+The Green Commons Web API follows the [JSON API specification](http://jsonapi.org/) to facilitate the integration in your projects.
+
+### Available Resources
+
+- [Search](#search)
+- Resources
+- Groups
+- Lists
+
+#### Search - `/api/v1/search`
+
+The search endpoint can be used to search through resources, groups and lists. It accepts some query parameters allowing you to customize the results.
+
+__Query Parameters__
+
+- `q`: The term to search for.
+- `filters`: Filters to apply to the search. For now, results can only be filtered by class or `resource_type`. Supported Values:
+  - `filters[resource_types]=books,articles,reports`
+  - `filters[model_types]=resources,lists,groups`
+- `sort`: Field to sort the results by. Supported Values:
+  - `sort=published_at` (Ascending)
+  - `sort=-published_at` (Descending)
+- `page`: The page to retrieve.
+- `per`: Number of results per page.
+
+More filters and sorting options are coming soon.
+
+__Example__
+
+```
+curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,groups&page=2&per=5'
+```
+
+```
+{  
+   "data":[  
+      {  
+         "type":"resources",
+         "id":"504",
+         "attributes":{  
+            "title":"The Upside of Down: Catastrophe, Creativity, and the Renewal of Civilization",
+            "excerpt":"...",
+            "published_at":"2017-01-05T14:14:49.305Z",
+            "tags":[],
+            "resource_type":"article"
+         },
+         "links":{  
+            "self":"https://greencommons.herokuapp.com/api/v1/resources/504"
+         },
+         "relationships":{  
+            "lists":{  
+               "data":[  
+
+               ],
+               "links":{  
+                  "self":"https://greencommons.herokuapp.com/api/v1/resources/504/relationships/lists",
+                  "related":"https://greencommons.herokuapp.com/api/v1/resources/504/lists"
+               }
+            }
+         }
+      },
+      { ... }
+   ],
+   "links":{  
+      "self":"https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,groups&page=2&per=5",
+      "next":"",
+      "last":""
+   },
+   "included":[]
+}
+```
+
+#### Resources
+
+##### Retrieve a resource - `/api/v1/resources/:id`
+
+__Example__
+
+```
+curl http://greencommons.herokuapp.com/api/v1/resources/7577
+```
+
+```
+{
+  "data": {
+    "type": "resources",
+    "id": "7577",
+    "attributes": {
+      "title": "Report doubts future of wind power",
+      "excerpt": "...",
+      "published_at": null,
+      "tags": ["wind"],
+      "resource_type": "article"
+    },
+    "links": {
+      "self": "http://greencommons.herokuapp.com/api/v1/resources/7577"
+    },
+    "relationships": {
+      "lists": {
+        "data": [],
+        "links": {
+          "self": "http://greencommons.herokuapp.com/api/v1/resources/7577/relationships/lists",
+          "related": "http://greencommons.herokuapp.com/api/v1/resources/7577/lists"
+        }
+      }
+    }
+  },
+  "links": {
+    "self": "http://greencommons.herokuapp.com/api/v1/resources/7577",
+    "next": "",
+    "last": ""
+  },
+  "included": []
+}
+```
+
+#### Groups
+
+##### Retrieve a group - `/api/v1/groups/:id`
+
+__Example__
+
+```
+http://greencommons.herokuapp.com/api/v1/groups/10
+```
+
+```
+{  
+  "data":{  
+    "type":"groups",
+    "id":"10",
+    "attributes":{  
+      "name":"Mertz, Wisozk and Marks",
+      "short_description":"Ad non quia laborum enim.",
+      "long_description":"Enim recusandae vitae. Nam ut qui cum. Molestiae suscipit quae culpa sint possimus. Quo officiis perferendis. Est est et ut ullam qui commodi.",
+      "relevancy":null,
+      "tags":[  
+
+      ],
+      "published_at":null,
+      "members_count":9,
+      "lists_count":5,
+      "resources_count":164
+    },
+    "links":{  
+      "self":"http://greencommons.herokuapp.com/api/v1/groups/10"
+    },
+    "relationships":{  
+      "users":{  
+        "data":[  
+          {  
+            "type":"users",
+            "id":"1"
+          },
+          {  
+            "type":"users",
+            "id":"6"
+          },
+          {  
+            "type":"users",
+            "id":"2"
+          },
+          {  
+            "type":"users",
+            "id":"10"
+          },
+          {  
+            "type":"users",
+            "id":"5"
+          },
+          {  
+            "type":"users",
+            "id":"8"
+          },
+          {  
+            "type":"users",
+            "id":"4"
+          },
+          {  
+            "type":"users",
+            "id":"9"
+          },
+          {  
+            "type":"users",
+            "id":"7"
+          }
+        ],
+        "links":{  
+          "self":"http://greencommons.herokuapp.com/api/v1/groups/10/relationships/users",
+          "related":"http://greencommons.herokuapp.com/api/v1/groups/10/users"
+        }
+      }
+    }
+  },
+  "links":{  
+    "self":"http://greencommons.herokuapp.com/api/v1/groups/10",
+    "next":"",
+    "last":""
+  },
+  "included":[]
+}
+```
+
+#### Lists
+
+Coming Soon.
