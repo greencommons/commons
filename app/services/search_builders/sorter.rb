@@ -1,5 +1,5 @@
 module SearchBuilders
-  SORT_ATTRIBUTES = %w(published_at).freeze
+  SORT_ATTRIBUTES = %w(published_at created_at updated_at).freeze
 
   class Sorter
     def initialize(sort, es_params)
@@ -13,11 +13,11 @@ module SearchBuilders
 
       @attributes.each do |attribute|
         dir = if attribute[0] == '-'
-          attribute[0] = ''
-          'desc'
-        else
-          'asc'
-        end
+                attribute[0] = ''
+                'desc'
+              else
+                'asc'
+              end
 
         if SORT_ATTRIBUTES.include?(attribute)
           @es_params[:sort].unshift(attribute => { order: dir })
