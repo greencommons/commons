@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Yumi::Presenters::Attributes do
   let(:attributes) { [:description, :slug] }
   let(:resource) { double(:_resource, description: "I'm a resource.", slug: 'whatever') }
-  let(:presenter) { double(:_presenter, resource: resource, attributes: attributes) }
+  let(:presenter) { double(:_presenter, resource: resource, attributes: attributes, fields: nil) }
 
   let(:klass) { Yumi::Presenters::Attributes.new(presenter) }
 
@@ -20,12 +20,27 @@ describe Yumi::Presenters::Attributes do
       let(:presenter) do
         double(:_presenter, resource: resource,
                             attributes: attributes,
+                            fields: nil,
                             description: "I'm a presenter.")
       end
 
       it 'outputs the hash with the description overridden' do
         expect(klass.to_json_api).to eq(description: "I'm a presenter.",
                                         slug: 'whatever')
+      end
+    end
+
+    context 'with fields picking' do
+      let(:presenter) do
+        double(:_presenter, resource: resource,
+                            attributes: attributes,
+                            type: 'resource',
+                            fields: { 'resources' => 'slug' },
+                            description: "I'm a presenter.")
+      end
+
+      it 'outputs the hash with only the slug' do
+        expect(klass.to_json_api).to eq(slug: 'whatever')
       end
     end
   end

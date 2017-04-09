@@ -111,5 +111,14 @@ RSpec.describe Api::V1::SearchController, type: :request do
         end
       end
     end
+
+    describe 'field picking', :worker, :elasticsearch do
+      it 'only returns the name for groups' do
+        get '/api/v1/search?q=Group&fields[groups]=name'
+
+        expect(json_body['data'][0]['type']).to eq 'groups'
+        expect(json_body['data'][0]['attributes'].keys).to eq ['name']
+      end
+    end
   end
 end

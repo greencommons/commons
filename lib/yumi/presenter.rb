@@ -1,12 +1,12 @@
 module Yumi
   class Presenter
-    def initialize(url:, current_url:, resource:, params: {}, total: nil,
-                   presenters_module: nil, meta: {})
+    def initialize(url:, current_url:, resource:, params: {},
+                   total: nil, presenters_module: nil, meta: {})
       @url = url
       @current_url = current_url
       @resource = resource
-      @params = params.slice(:q, :filters, :sort, :page, :per)
-      @includes = params[:include]&.split(',') || []
+      @params = params.slice(:q, :filters, :sort, :page, :per, :include, :fields)
+      @includes = @params[:include]&.split(',') || []
       @total = total
       @presenters_module = presenters_module
       @meta = meta
@@ -55,6 +55,7 @@ module Yumi
     def presenter_for(resource)
       Yumi::Utils::PresenterHelper.new(url: @url,
                                        resource: resource,
+                                       fields: @params[:fields],
                                        presenter_module: @presenters_module).presenter
     end
 
