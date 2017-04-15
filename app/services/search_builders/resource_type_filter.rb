@@ -7,12 +7,12 @@ module SearchBuilders
     }.freeze
 
     def initialize(filters, es_params)
-      @filters = filters
+      @filters = filters || {}
       @es_params = es_params
     end
 
     def build
-      return @es_params unless @filters&.dig(:resource_types)&.any?
+      return @es_params unless values.any?
 
       ignore_irrelevant_documents
       filter_by_resource_type
@@ -32,12 +32,20 @@ module SearchBuilders
     end
 
     def filter_by_resource_type
-      @filters[:resource_types].keys.each do |resource_type|
+      values.each do |resource_type|
         next unless RESOURCE_TYPE_FILTERS.keys.include?(resource_type.to_sym)
         @es_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
           term: { resource_type: RESOURCE_TYPE_FILTERS[resource_type.to_sym] }
         }
       end
+    end
+
+    def values
+      @values ||= if @filters[:resource_types].is_a?(String)
+                    @filters[:resource_types].split(',')
+                  else
+                    @filters[:resource_types]&.keys || []
+                  end
     end
   end
 end
