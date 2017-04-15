@@ -5,8 +5,6 @@ RSpec.describe Api::V1::GroupsController, type: :request do
     let(:title) { Faker::Hipster.sentence }
 
     before do
-      title = Faker::Hipster.sentence
-
       create(:resource, title: "#{title} My Resource")
       create(:group, name: "#{title} My Group")
       create(:list, name: "#{title} My List")
@@ -23,6 +21,21 @@ RSpec.describe Api::V1::GroupsController, type: :request do
       expect(response.content_type).to eq 'application/vnd.api+json'
       expect(response).to match_response_schema('jsonapi')
       expect(json_body['data'].length).to eq 3
+    end
+
+    describe 'pagination' do
+      it 'returns the links structure', :worker, :elasticsearch do
+        get "/api/v1/search?q=#{title}&page=2&per=1"
+
+        expect(response).to match_response_schema('jsonapi')
+        expect(json_body['links']).to eq(
+          'first' => "http://www.example.com/api/v1/search?q=#{title}&page=1&per=1",
+          'last' => "http://www.example.com/api/v1/search?q=#{title}&page=3&per=1",
+          'next' => "http://www.example.com/api/v1/search?q=#{title}&page=3&per=1",
+          'prev' => "http://www.example.com/api/v1/search?q=#{title}&page=1&per=1",
+          'self' => "http://www.example.com/api/v1/search?q=#{title}&page=2&per=1"
+        )
+      end
     end
   end
 end
