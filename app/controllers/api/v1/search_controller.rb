@@ -10,7 +10,17 @@ module Api
           per: params[:per]
         )
 
-        render_json_api present_collection(search.results_with_relevancy, search.total_count)
+        results = search.results_with_relevancy
+        data = present_collection(results, search.total_count)
+
+        if results.any?
+          tags = results.map(&:cached_tags).flatten.compact.uniq
+          data[:related] = Suggesters::Tags.new(tags: tags,
+                                                except: results,
+                                                limit: 6).suggest
+        end
+
+        render_json_api data
       end
     end
   end

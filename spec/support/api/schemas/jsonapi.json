@@ -50,7 +50,7 @@
           "$ref": "#/definitions/jsonapi"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "failure": {
       "type": "object",
