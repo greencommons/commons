@@ -11,7 +11,7 @@ module Api
                           current_url: request.original_url,
                           resource: resource,
                           total: total,
-                          params: query_params,
+                          params: params.to_unsafe_hash,
                           presenters_module: "::#{version}".constantize).as_json_api
     end
 
@@ -19,7 +19,7 @@ module Api
       Yumi::Presenter.new(url: base_url,
                           current_url: request.original_url,
                           resource: resource,
-                          params: query_params,
+                          params: params.to_unsafe_hash,
                           presenters_module: "::#{version}".constantize).as_json_api
     end
 
@@ -28,10 +28,6 @@ module Api
     end
 
     private
-
-    def query_params
-      params.permit(:q, :filters, :sort, :include, :page, :per)&.to_unsafe_hash
-    end
 
     def version
       self.class.name.split('::')[1]
