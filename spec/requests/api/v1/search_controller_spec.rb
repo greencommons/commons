@@ -5,7 +5,9 @@ RSpec.describe Api::V1::SearchController, type: :request do
     let(:title) { Faker::Hipster.word }
 
     before do
-      create(:resource, title: "#{title} My Resource", resource_type: :article, published_at: 12.days.ago)
+      create(:resource, title: "#{title} My Resource",
+                        resource_type: :article,
+                        published_at: 12.days.ago)
       create(:group, name: "#{title} My Group", published_at: 5.days.ago)
       create(:list, name: "#{title} My List", published_at: 10.days.ago)
 
