@@ -1,70 +1,100 @@
-.row.page-details__row
-  .col-xs-12.col-md-5.col-lg-6
-    h1 Search Results
-  .col-xs-12.col-md-7.col-lg-6.text-center.top-page-form
+.page-details.search-page
+  .container
     .row
-      .col-xs-12
-        = form_for search_path, method: :get, html: { class: 'form-horizontal customer-search-form' } do |form|
-          .form-group
-            .col-xs-8.col-sm-8.col-sm-offset-2
-              = text_field_tag :query, params[:query], placeholder: 'Enter Search Term', class: 'form-control input-lg'
-            .col-xs-4.col-sm-2
-              = button_tag type: 'submit', name: nil, class: 'col-lg-12 btn btn-lg btn-primary' do
-                span.glyphicon.glyphicon-zoom-in aria-hidden='true'
-    .row
-      .col-xs-12.text-xs-center.text-sm-right
-        = link_to 'Advanced Search', '/'
-
-= form_tag search_path, method: :get do
-  .row.page-details__row--half
-    .col-xs-12.col-sm-6.page-details__row
-      h4= "#{@total_count} Results"
-    .col-xs-12.col-sm-6
-      .row
-          .col-xs-8.col-sm-4.col-sm-offset-4
+      .col-xs-12.col-sm-3
+        .filters
+          .filters__title.text-xs-left.text-center
+            h6
+              span.bold Filter by category
+              = link_to 'Clear', root_path, class: 'light gray pull-right'
+                
+          .filters__lists
             = hidden_field_tag :query, @query
-            = select_tag :sort, 
-                         options_for_select([ ['SCORE', 'score'], 
-                                              ['RECENT FIRST', '-published_at'], 
-                                              ['OLDEST FIRST', 'published_at'] ], @sort || 'SCORE'), 
-                         class: 'form-control'
-          .col-xs-4
-            = submit_tag 'SORT', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
+            ul.filters__list
+              li 
+                .filters__item
+                  = render 'search/filter', name: :resources, category: :model_types, indeterminate: true
+                ul.filters__list
+                  li.filters__item
+                    = render 'search/filter', name: :books, category: :resource_types
+                  li.filters__item
+                    = render 'search/filter', name: :articles, category: :resource_types
+                  li.filters__item
+                    = render 'search/filter', name: :reports, category: :resource_types
+              li.filters__item
+                = render 'search/filter', name: :lists, category: :model_types
+              li.filters__item
+                = render 'search/filter', name: :groups, category: :model_types
+            .clearfix
+            
+        .filters
+          .filters__title.text-xs-left.text-center
+            h6
+              span.bold Accessibility
+              = link_to 'Clear', root_path, class: 'light gray pull-right'
+          .filters__lists
+            = hidden_field_tag :query, @query
+            ul.filters__list
+              li 
+                .filters__item
+                  = render 'search/filter', name: :free, category: :model_types, indeterminate: true
+              li.filters__item
+                = render 'search/filter', name: :Downloadable, category: :model_types
+            .clearfix
+            
+        .filters
+          .filters__title.text-xs-left.text-center
+            h6
+              span.bold Tags
+              = link_to 'Clear', root_path, class: 'light gray pull-right'
+          .filters__tag-list
+            = link_to '#urban sustainability (245)', root_path, class: 'filters__tag'
+            = link_to '#solar energy (148)', root_path, class: 'filters__tag'
+            = link_to '#wind (136)', root_path, class: 'filters__tag filters__tag--selected'
+            = link_to '#ocean (136)', root_path, class: 'filters__tag filters__tag--selected'
+            = link_to '#solar energy (148)', root_path, class: 'filters__tag'
+            = link_to '#solar (148)', root_path, class: 'filters__tag'
+            .clearfix
+          .filters__tags-show-more
+            = link_to 'Show more', root_path
+        .filters
+          .filters__title.text-xs-left.text-center
+            h6
+              span.bold Date
+              = link_to 'Clear', root_path, class: 'light gray pull-right'
+          .filters__tag-lists
+          
+        = submit_tag 'Filter', name: nil, class: 'col-lg-12 btn btn-gc'
 
-  .row
-    .col-xs-12.col-sm-3
-      .filters
-        .filters__title.text-xs-left.text-center
-          h5 FILTER
-        .filters__lists
-          = hidden_field_tag :query, @query
-          ul.filters__list
-            li 
-              .filters__item
-                = render 'search/filter', name: :resources, category: :model_types, indeterminate: true
-              ul.filters__list
-                li.filters__item
-                  = render 'search/filter', name: :books, category: :resource_types
-                li.filters__item
-                  = render 'search/filter', name: :articles, category: :resource_types
-                li.filters__item
-                  = render 'search/filter', name: :reports, category: :resource_types
-            li.filters__item
-              = render 'search/filter', name: :lists, category: :model_types
-            li.filters__item
-              = render 'search/filter', name: :groups, category: :model_types
-          = submit_tag 'FILTER', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
-          .clearfix
-    
-    .col-xs-12.col-sm-9
-      - if @results.any?
-        - @results.records.each_with_hit do |result, hit|
-          = render 'shared/summary_cards/main', resource: result, hit: hit
-      - else
-        = 'No results found.'
+      .col-xs-12.col-sm-9
+        .page-details__row--quarter
+          = form_tag search_path, method: :get do
+            .row
+              .col-xs-12.col-sm-6
+                h6
+                  span.bold= "Results for \"#{@query}\""
+                  span.light= " - #{@total_count}"
+              .col-xs-12.col-sm-6
+                .row
+                    .col-xs-10.col-sm-4.col-sm-offset-6
+                      = hidden_field_tag :query, @query
+                      = select_tag :sort, 
+                                   options_for_select([ ['Score', 'score'], 
+                                                        ['Recent First', 'recent'], 
+                                                        ['Oldest First', 'oldest'] ], @sort || 'SCORE'), 
+                                   class: 'form-control gc-select'
+                    .col-xs-2
+                      = button_tag name: nil, type: 'submit', class: 'col-lg-12 btn btn-gc' do
+                        span.glyphicon.glyphicon-search.glyphicon--right aria-hidden='true'
 
-.row.page-details__row
-  .col-xs-12.text-center
-    = paginate @results
+        - if @results.any?
+          - @results.records.each_with_hit do |result, hit|
+            = render 'shared/summary_cards/main', resource: result, hit: hit
+        - else
+          = 'No results found.'
 
-= render 'shared/components/explore', suggestions: @suggestions, title: 'You may also like...'
+    .row.page-details__row
+      .col-xs-12.text-center
+        = paginate @results
+
+    = render 'shared/components/explore', suggestions: @suggestions, title: 'You may also like...'

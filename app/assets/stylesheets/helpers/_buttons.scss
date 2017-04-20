@@ -1,0 +1,47 @@
+.btn-gc {
+  color: #FFFFFF;
+  background-color: #EF5350;
+  border-color: #EF5350;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.btn-gc:hover,
+.btn-gc:focus,
+.btn-gc:active,
+.btn-gc.active,
+.open .dropdown-toggle.btn-gc {
+  color: #FFFFFF;
+  background-color: #D64946;
+  border-color: #EF5350;
+}
+
+.btn-gc:active,
+.btn-gc.active,
+.open .dropdown-toggle.btn-gc {
+  background-image: none;
+}
+
+.btn-gc.disabled,
+.btn-gc[disabled],
+fieldset[disabled] .btn-gc,
+.btn-gc.disabled:hover,
+.btn-gc[disabled]:hover,
+fieldset[disabled] .btn-gc:hover,
+.btn-gc.disabled:focus,
+.btn-gc[disabled]:focus,
+fieldset[disabled] .btn-gc:focus,
+.btn-gc.disabled:active,
+.btn-gc[disabled]:active,
+fieldset[disabled] .btn-gc:active,
+.btn-gc.disabled.active,
+.btn-gc[disabled].active,
+fieldset[disabled] .btn-gc.active {
+  background-color: #EF5350;
+  border-color: #EF5350;
+}
+
+.btn-gc .badge {
+  color: #EF5350;
+  background-color: #FFFFFF;
+}

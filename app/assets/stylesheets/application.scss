@@ -8,7 +8,10 @@
 @import "helpers/fonts";
 @import "helpers/text-aligning";
 @import "helpers/images";
+@import "helpers/buttons";
+@import "helpers/forms";
 
+@import "components/nav";
 @import "components/autocomplete";
 @import "components/summary-card";
 @import "components/comment-box";
@@ -19,3 +22,4 @@
 @import "components/filters";
 
 @import "pages/default";
+@import "pages/search";

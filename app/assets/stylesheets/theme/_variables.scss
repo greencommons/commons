@@ -15,7 +15,14 @@ $gray:                   #666 !default;
 $gray-light:             #bbb !default;
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
-$brand-primary:         #2196F3 !default;
+
+$gc-dark-gray:          #333333 !default;
+$gc-gray:               #a1a1a1 !default;
+$gc-blue-gray:          #e2e7e9 !default;
+
+$creme:                 #fafafa;
+
+$brand-primary:         #5e5e5e !default;//#2196F3 !default;
 $brand-success:         #4CAF50 !default;
 $brand-info:            #9C27B0 !default;
 $brand-warning:         #ff9800 !default;
@@ -69,7 +76,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 $headings-font-family:    inherit !default;
 $headings-font-weight:    400 !default;
 $headings-line-height:    1.1 !default;
-$headings-color:          #444 !default;
+$headings-color:          #606060 !default; //#444 !default;
 
 
 //== Iconography
@@ -358,7 +365,7 @@ $container-lg:                 $container-large-desktop !default;
 //##
 
 // Basics of a navbar
-$navbar-height:                    64px !default;
+$navbar-height:                    54px !default;
 $navbar-margin-bottom:             $line-height-computed !default;
 $navbar-border-radius:             $border-radius-base !default;
 $navbar-padding-horizontal:        floor(($grid-gutter-width / 2)) !default;

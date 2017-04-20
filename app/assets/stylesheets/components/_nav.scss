@@ -1,0 +1,33 @@
+.navbar {
+  margin-bottom: 0;
+
+  &-brand {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &-nav > li{
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  &-profile-image {
+    img {
+      height: 40px;
+      border: 1px solid $gray-light;
+      padding: 3px;
+      margin-top: 7px;
+      position: relative;
+    }
+  }
+
+  &-button__badge {
+    position: absolute;
+    top: 8px;
+    right: 2px;
+    background-color: #f4c652;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
+}

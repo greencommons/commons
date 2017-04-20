@@ -9,8 +9,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     = render 'shared/nav'
-    .container
-      = render 'shared/alerts'
-      = yield
+    = render 'shared/alerts'
+    = yield
     = yield :scripts
     = render 'shared/integrations/disqus/script'
