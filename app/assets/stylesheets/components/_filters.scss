@@ -5,15 +5,21 @@
   &__title {
     padding-bottom: 4px;
     margin-bottom: 14px;
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gc-clear-blue;
   }
 
   &__list {
     list-style: none;
     padding-left: 20px;
   }
-  
+
   &__item {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  &__clear {
+    font-size: 14px;
+    line-height: 18px;
+    color: $gray-lighter;
   }
 }

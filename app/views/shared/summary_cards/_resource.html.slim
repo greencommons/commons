@@ -7,9 +7,9 @@
         h5= link_to resource.title, resource
         h6
           = 'Duane Hudson ' 
-          | &middot;
+          | &bull;
           = ' List name '
-          | &middot; 
+          | &bull; 
           = humanize_date(resource.published_at)
       - if defined?(hit) && hit
         .summary-card__relevancy style="background-color: rgba(95, 125, 140, #{score_opacity(hit._score)});"

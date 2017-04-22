@@ -13,15 +13,19 @@ $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              #212121 !default;
 $gray:                   #666 !default;
 $gray-mid-light:         #999999 !default;
-$gray-light:             #bbb !default;
+$gray-light:             #919191 !default; //#bbb !default;
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
 
 $gc-dark-gray:          #333333 !default;
 $gc-gray:               #a1a1a1 !default;
 $gc-blue-gray:          #e2e7e9 !default;
+$gc-dark-blue:          #5f7d8c !default;
+$gc-clear-blue:         #dfe5e8 !default;
 
-$creme:                 #fafafa;
+$gc-red:                #f1524b !default;
+$gc-clear-red:          #fdeded !default;
+$creme:                 #fafafa !default;
 
 $brand-primary:         #5e5e5e !default;//#2196F3 !default;
 $brand-success:         #4CAF50 !default;

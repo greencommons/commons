@@ -1,7 +1,9 @@
+
 - unless suggestions.blank?
+  hr
   .row.page-details__row--half
     .col-xs-12
-      h3= defined?(title) ? title : 'EXPLORE'
+      h6= defined?(title) ? title : 'Explore'
   
   - suggestions.each_slice(2) do |slice|
     .row

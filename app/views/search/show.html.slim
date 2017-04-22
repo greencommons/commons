@@ -5,9 +5,8 @@
         .filters
           .filters__title.text-xs-left.text-center
             h6
-              span.bold Filter by category
-              = link_to 'Clear', root_path, class: 'light gray pull-right'
-                
+              | Filter by category
+              span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
           .filters__lists
             = hidden_field_tag :query, @query
             ul.filters__list
@@ -30,8 +29,8 @@
         .filters
           .filters__title.text-xs-left.text-center
             h6
-              span.bold Accessibility
-              = link_to 'Clear', root_path, class: 'light gray pull-right'
+              | Accessibility
+              span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
           .filters__lists
             = hidden_field_tag :query, @query
             ul.filters__list
@@ -45,8 +44,8 @@
         .filters
           .filters__title.text-xs-left.text-center
             h6
-              span.bold Tags
-              = link_to 'Clear', root_path, class: 'light gray pull-right'
+              | Tags
+              span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
           .tags-list
             = link_to '#urban sustainability (245)', root_path, class: 'tags-list__tag'
             = link_to '#solar energy (148)', root_path, class: 'tags-list__tag'
@@ -60,9 +59,12 @@
         .filters
           .filters__title.text-xs-left.text-center
             h6
-              span.bold Date
-              = link_to 'Clear', root_path, class: 'light gray pull-right'
-          .filters__tag-lists
+              | Date
+              span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
+          
+          .form-group.has-feedback
+            input name="daterange" type="text" value=("01/01/2015 - 01/31/2015") class='form-control fw'
+            i.glyphicon.glyphicon-calendar.form-control-feedback
           
         = submit_tag 'Filter', name: nil, class: 'col-lg-12 btn btn-gc'
 
@@ -72,20 +74,20 @@
             .row
               .col-xs-12.col-sm-6
                 h6
-                  span.bold= "Results for \"#{@query}\""
-                  span.light= " - #{@total_count}"
-              .col-xs-12.col-sm-6
-                .row
-                    .col-xs-10.col-sm-4.col-sm-offset-6
-                      = hidden_field_tag :query, @query
-                      = select_tag :sort, 
-                                   options_for_select([ ['Score', 'score'], 
-                                                        ['Recent First', 'recent'], 
-                                                        ['Oldest First', 'oldest'] ], @sort || 'SCORE'), 
-                                   class: 'form-control gc-select'
-                    .col-xs-2
-                      = button_tag name: nil, type: 'submit', class: 'col-lg-12 btn btn-gc' do
-                        span.glyphicon.glyphicon-search.glyphicon--right aria-hidden='true'
+                  span= "Results for \"#{@query}\" "
+                  span.gray-light
+                    | &bull;
+                    = " #{number_with_delimiter(@total_count, delimiter: ' ')}"
+              .col-xs-12.col-sm-2.col-sm-offset-4
+                = hidden_field_tag :query, @query
+                = select_tag :sort, 
+                             options_for_select([ ['Score', 'score'], 
+                                                  ['Recent First', 'recent'], 
+                                                  ['Oldest First', 'oldest'] ], @sort || 'SCORE'), 
+                             class: 'form-control gc-select'
+                    / .col-xs-2
+                    /   = button_tag name: nil, type: 'submit', class: 'col-lg-12 btn btn-gc' do
+                    /     span.glyphicon.glyphicon-search.glyphicon--right aria-hidden='true'
 
         - if @results.any?
           - @results.records.each_with_hit do |result, hit|
