@@ -30,6 +30,7 @@ gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'fog-aws'
+gem 'font-awesome-rails'
 
 group :development do
   gem 'bummr'

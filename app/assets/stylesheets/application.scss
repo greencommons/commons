@@ -1,3 +1,4 @@
+@import "font-awesome";
 @import "bootstrap-sprockets";
 @import "theme/variables";
 @import "bootstrap";
@@ -12,6 +13,8 @@
 @import "helpers/forms";
 
 @import "components/nav";
+@import "components/tags";
+@import "components/entity_icon";
 @import "components/autocomplete";
 @import "components/summary-card";
 @import "components/comment-box";

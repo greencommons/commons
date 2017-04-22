@@ -3,13 +3,17 @@
   width: 100%;
 
   &__body {
-    padding: 15px;
+    padding: 25px;
     width: 100%;
     @include box-shadow(0 1px 4px rgba(0,0,0,.3));
   }
 
   &__row {
     margin-bottom: 10px;
+  }
+
+  &__row--double {
+    margin-bottom: 20px;
   }
 
   &__row--last {
@@ -21,13 +25,17 @@
   }
 
   &__metadata {
-    float: left;
-    margin-right: 5%;
-    margin-bottom: 10px;
+    float: right;
+    margin-right: 20px;
+    color: $gray-light;
+    line-height: 35px;
   }
 
-  &__metadata--right {
-    float: right;
+  &__metadata--left {
+    float: left;
+  }
+
+  &__metadata--last {
     margin-right: 0;
   }
 
@@ -42,18 +50,27 @@
     margin-right: 10px;
   }
 
-  &__more--space {
-    margin-right: 30px;
-  }
-
   &__top-actions, &__bottom-actions {
     float: left;
     width: 100%;
   }
 
   &__more {
-    text-align: center;
-    display: inline;
+    display: inline-block;
+    float: left;
+  }
+
+  &__more--space {
+    margin-right: 5%;
+  }
+
+  &__more--buttons {
+    width: 30%;
+  }
+
+  &__more--meta {
+    width: 65%;
+    min-width: 300px;
   }
 
   &__actions {
@@ -66,13 +83,34 @@
   }
 
   &__title {
-    width: 100%;
-    margin-bottom: 10px;
     line-height: 30px;
+    display: inline-block;
+    width: 70%;
+    float: left;
+
+    h5 {
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    h6 {
+      color: $gray-light;
+      font-size: 14px;
+      margin: 0;
+    }
   }
 
   &__relevancy {
-    font-size: 16px;
+    font-size: 13px;
+    display: inline-block;
+    float: right;
+    background-color: #5f7d8c;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    color: #fff;
+    padding: 13px;
+    text-align: center;
   }
 
   .col-* {
@@ -81,6 +119,7 @@
 
   p {
     margin: 0;
+    color: $gray-mid-light;
   }
 
   img {
@@ -90,8 +129,6 @@
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {
-  .summary-card {
-  }
 }
 
 /* Extra Small Devices, Phones */
@@ -118,7 +155,6 @@
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
-
 }
 
 /* Large Devices, Wide Screens */

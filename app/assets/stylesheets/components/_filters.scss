@@ -12,27 +12,7 @@
     list-style: none;
     padding-left: 20px;
   }
-
-  &__tag-list {
-    margin-bottom: 10px;
-  }
-
-  &__tag {
-    display: inline-block;
-    float: left;
-    border: 1px solid $gc-gray;
-    color: $gc-gray;
-    padding: 0px 6px;
-    border-radius: 8px;
-    margin: 0 8px 8px 0;
-  }
-
-  &__tag--selected {
-    color: $gc-dark-gray;
-    background-color: $gc-blue-gray;
-    border: 1px solid $gc-blue-gray;
-  }
-
+  
   &__item {
     margin-bottom: 8px;
   }

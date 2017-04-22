@@ -1,25 +1,23 @@
 .summary-card
   .summary-card__body
-    .summary-card__row
-      h5.summary-card__title
-        span.glyphicon.glyphicon-list.glyphicon--right
-        = resource.name
-        - if defined?(hit)
-          .summary-card__relevancy
-            = render 'shared/components/score', hit: hit  
-    .clearfix
+    .summary-card__row--double
+      div class="entity-icon entity-icon--lists"
+        i class="fa fa-th-list"
+      .summary-card__title
+        h5= resource.name
+        h6
+          = humanize_date(resource.published_at)
+      - if defined?(hit) && hit
+        .summary-card__relevancy style="background-color: rgba(95, 125, 140, #{score_opacity(hit._score)});"
+          = "#{(hit._score).round(1)}"
+      .clearfix
     .summary-card__row
       p
         = resource.description
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
         | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-    .summary-card__row.summary-card__row--last 
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-calendar.glyphicon--right
-          = humanize_date(resource.published_at)
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-list.glyphicon--right
-          = "#{resource.resources.count} items"
+    .summary-card__row.summary-card__row--last
+      .summary-card__metadata.summary-card__metadata--left
+        i.fa.fa-file-text.glyphicon--right
+        = "#{resource.resources.count} items"
       .clearfix

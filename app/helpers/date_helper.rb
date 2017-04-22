@@ -1,6 +1,6 @@
 module DateHelper
   def humanize_date(date)
-    date ? date.strftime('%B %d, %Y') : 'Unknown'
+    date ? date.strftime('%d %B %Y') : 'Unknown'
   end
 
   def humanize_str_date(str)
