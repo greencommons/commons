@@ -30,4 +30,17 @@
     height: 10px;
     border-radius: 10px;
   }
+
+  .navbar-form &__search-input {
+    width: 400px;
+  }
+
+  &__search-button {
+    border: none;
+    background: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }

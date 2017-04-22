@@ -4,3 +4,11 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+.form-group .form-control-feedback {
+  pointer-events: initial;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

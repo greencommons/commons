@@ -11,11 +11,10 @@ nav.navbar
       ul.nav.navbar-nav.navbar-right
         li
           = form_for search_path, method: :get, html: { class: 'navbar-form customer-search-form' } do |form|
-            .input-group
-              = text_field_tag :query, params[:query], placeholder: 'Enter Search Term', class: 'form-control'
-              .input-group-btn
-                = button_tag type: 'submit', name: nil, class: 'btn btn-default' do
-                  i.glyphicon.glyphicon-search
+            .form-group.has-feedback
+              = text_field_tag :query, params[:query], placeholder: 'Search...', class: 'form-control navbar__search-input'
+              = button_tag type: 'submit', name: nil, class: 'form-control-feedback navbar__search-button' do
+                i.glyphicon.glyphicon-search
 
         - if user_signed_in?
           li
