@@ -1,4 +1,14 @@
 var initFilters = function() {
+  var reload = function(url) {
+    $('#search-loader__panel').show();
+    window.history.pushState({}, "", url);
+    $.ajax({
+      url: url,
+      type: 'GET',
+      dataType: 'script'
+    });
+  };
+
   $('input[name="daterange"]').daterangepicker({
     "startDate": moment().subtract(7, 'days'),
     "endDate": moment(),
@@ -16,14 +26,7 @@ var initFilters = function() {
     select.on('change', function(e) {
       var url = new Uri(window.location.href);
       url.replaceQueryParam('sort', select.val());
-
-      $('#search-loader__panel').show();
-      window.history.pushState({}, "", url);
-      $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'script'
-      });
+      reload(url);
     });
   });
 
@@ -42,13 +45,7 @@ var initFilters = function() {
         }
       });
 
-      $('#search-loader__panel').show();
-      window.history.pushState({}, "", url);
-      $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'script'
-      });
+      reload(url);
     });
   });
 };
