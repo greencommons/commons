@@ -1,4 +1,5 @@
 //= require fetch
+//= require juri
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets

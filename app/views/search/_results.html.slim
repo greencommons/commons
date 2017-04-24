@@ -1,0 +1,27 @@
+.col-xs-12.col-sm-9
+  .page-details__row--quarter
+    = form_tag search_path, method: :get do
+      .row
+        .col-xs-12.col-sm-6
+          h6
+            span= "Results for \"#{@query}\" "
+            span.gray-light
+              | &bull;
+              = " #{number_with_delimiter(@total_count, delimiter: ' ')}"
+        .col-xs-12.col-sm-2.col-sm-offset-4
+          = hidden_field_tag :query, @query
+          = select_tag :sort, 
+                       options_for_select([ ['Score', 'score'], 
+                                            ['Recent First', 'recent'], 
+                                            ['Oldest First', 'oldest'] ], @sort || 'SCORE'), 
+                       class: 'form-control gc-select',
+                       data: { 'filter-select' => true }
+  - if @results.any?
+    - @results.records.each_with_hit do |result, hit|
+      = render 'shared/summary_cards/main', resource: result, hit: hit
+  - else
+    = 'No results found.'
+
+.row.page-details__row
+  .col-xs-12.col-sm-9.col-sm-offset-3.text-center
+    = paginate @results
