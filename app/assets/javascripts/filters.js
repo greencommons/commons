@@ -14,16 +14,16 @@ var initFilters = function() {
     var select = $(this);
 
     select.on('change', function(e) {
-      var url = new Uri(window.location.href)
-      url.replaceQueryParam('sort', select.val())
+      var url = new Uri(window.location.href);
+      url.replaceQueryParam('sort', select.val());
 
-      $('#search-loader__panel').show()
+      $('#search-loader__panel').show();
       window.history.pushState({}, "", url);
       $.ajax({
         url: url,
         type: 'GET',
         dataType: 'script'
-      })
+      });
     });
   });
 
@@ -31,24 +31,24 @@ var initFilters = function() {
     var checkbox = $(this);
 
     checkbox.on('change', function(e) {
-      var url = new Uri(window.location.href)
+      var url = new Uri(window.location.href);
 
       $('[data-filter-checkbox]').each(function() {
         var check = $(this);
-        if (check.is(":checked") == true) {
-          url.replaceQueryParam(check.attr('name'), 'on')
+        if (check.is(":checked") === true) {
+          url.replaceQueryParam(check.attr('name'), 'on');
         } else {
-          url.deleteQueryParam(check.attr('name'))
+          url.deleteQueryParam(check.attr('name'));
         }
       });
 
-      $('#search-loader__panel').show()
+      $('#search-loader__panel').show();
       window.history.pushState({}, "", url);
       $.ajax({
         url: url,
         type: 'GET',
         dataType: 'script'
-      })
+      });
     });
   });
 };
