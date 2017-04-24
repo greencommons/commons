@@ -16,7 +16,33 @@ RSpec.shared_examples 'indexable' do |name|
         if record.respond_to?(:metadata)
           record.metadata = { date: date }
           record.save!
-          expect(record.published_at.utc.to_s).to eq date.utc.to_s
+          expect(record.published_at.to_date.to_s).to eq date.to_date.to_s
+        end
+      end
+
+      context 'when date string' do
+        it 'set the published_at' do
+          date = Date.today
+          record = build(name)
+
+          if record.respond_to?(:metadata)
+            record.metadata = { date: date }
+            record.save!
+            expect(record.published_at.to_date.to_s).to eq record.created_at.to_date.to_s
+          end
+        end
+      end
+
+      context 'when invalid' do
+        it 'set the published_at' do
+          date = 'fake date'
+          record = build(name)
+
+          if record.respond_to?(:metadata)
+            record.metadata = { date: date }
+            record.save
+            expect(record.published_at).to eq record.created_at
+          end
         end
       end
     end

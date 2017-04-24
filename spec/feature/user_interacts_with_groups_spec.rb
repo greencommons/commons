@@ -7,6 +7,7 @@ RSpec.feature 'Interacting with groups' do
 
     visit group_path(group)
     click_on 'JOIN GROUP'
+    wait_for_ajax
 
     expect(group.find_member(user)).not_to be nil
     expect(page).to have_content('LEAVE GROUP')
@@ -19,6 +20,7 @@ RSpec.feature 'Interacting with groups' do
 
     visit group_path(group)
     click_on 'LEAVE GROUP'
+    wait_for_ajax
 
     expect(group.find_member(user)).to be nil
     expect(page).to have_content('JOIN GROUP')

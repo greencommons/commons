@@ -59,5 +59,6 @@ end
 
 group :test do
   gem 'capybara-webkit'
+  gem 'capybara-screenshot'
   gem 'json_matchers'
 end

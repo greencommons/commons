@@ -7,6 +7,7 @@ RSpec.feature 'Update Profile' do
 
     user = feature_login
 
+    click_link 'Hello,'
     click_link 'My Profile'
     expect(find('h1')).to have_content('My Profile')
     within("#edit_user_#{user.id}") do
@@ -36,6 +37,7 @@ RSpec.feature 'Update Profile' do
     user = feature_login
     original = user.encrypted_password
 
+    click_link 'Hello,'
     click_link 'My Profile'
     expect(page).to have_current_path(profile_path)
     click_link 'Change My Password'

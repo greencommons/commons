@@ -11,7 +11,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text(title)
@@ -29,7 +29,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
       expect(page).to have_text(title)
 
@@ -40,7 +40,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: new_title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text(new_title)
@@ -66,7 +66,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: new_title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text(new_title)
@@ -86,7 +86,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text('My Resource')
@@ -105,15 +105,15 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
-      expect(page).not_to have_text(title)
+      expect(page).to have_text('No results found')
     end
   end
 
   context 'filtering' do
-    scenario 'users can filter by model' do
+    scenario 'users can filter by model', js: true do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource")
@@ -127,7 +127,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text('My Resource')
@@ -135,8 +135,9 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).to have_text('My List')
 
       uncheck('Resources')
+      wait_for_ajax
       uncheck('Lists')
-      click_button 'FILTER'
+      wait_for_ajax
 
       expect(page).not_to have_text('My Resource')
       expect(page).not_to have_text('My List')
@@ -155,13 +156,12 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text('My Resource')
 
       uncheck('Articles')
-      click_button 'FILTER'
 
       expect(page).not_to have_text('My Resource')
     end
@@ -182,11 +182,11 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
-      select 'RECENT FIRST', from: 'sort'
-      click_button 'SORT'
+      select 'Recent First', from: 'sort'
+      wait_for_ajax
 
       expect(page).to have_text(/.*My Group.*My List.*My Resource.*/)
     end
@@ -205,11 +205,11 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: title
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
-      select 'OLDEST FIRST', from: 'sort'
-      click_button 'SORT'
+      select 'Oldest First', from: 'sort'
+      wait_for_ajax
 
       expect(page).to have_text(/.*My Resource.*My List.*My Group.*/)
     end
@@ -242,7 +242,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       visit new_search_path
       within('.customer-search-form') do
         fill_in 'query', with: 'My Resource'
-        click_button 'Search'
+        find('.navbar__search-button').click
       end
 
       expect(page).to have_text('My Resource')

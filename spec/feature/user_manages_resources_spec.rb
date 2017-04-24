@@ -5,55 +5,17 @@ RSpec.feature 'Managing resources' do
     user = feature_login
     resource = create(:resource, user: user)
 
+    click_on 'Hello,'
     click_link 'My Resources'
     expect(find('h1')).to have_content('My Resources')
     expect(page).to have_text(resource.title)
-  end
-
-  describe 'View Original' do
-    context 'when URL is set' do
-      scenario 'users can access original document in summary card' do
-        user = feature_login
-        create(:resource, user: user, url: 'http://example.com')
-
-        click_link 'My Resources'
-        expect(find_link('View Original Document')[:href]).to eq('https://via.hypothes.is/http://example.com')
-        expect(find_link('View Original Document')[:target]).to eq('_blank')
-      end
-
-      scenario 'users can access original document in resource page' do
-        user = feature_login
-        resource = create(:resource, user: user, url: 'http://example.com')
-
-        visit resource_path(resource)
-        expect(find_link('VIEW ORIGINAL')[:href]).to eq('https://via.hypothes.is/http://example.com')
-        expect(find_link('VIEW ORIGINAL')[:target]).to eq('_blank')
-      end
-    end
-
-    context 'when URL is not set' do
-      scenario 'users cannot access original document in summary card' do
-        user = feature_login
-        create(:resource, user: user)
-
-        click_link 'My Resources'
-        expect(page).not_to have_content('View Original Document')
-      end
-
-      scenario 'users cannot access original document in resource page' do
-        user = feature_login
-        resource = create(:resource, user: user)
-
-        visit resource_path(resource)
-        expect(page).not_to have_content('View Original Document')
-      end
-    end
   end
 
   scenario 'users can view a resource' do
     user = feature_login
     resource = create(:resource, resource_type: :url, url: 'http://example.com', user: user)
 
+    click_on 'Hello,'
     click_link 'My Resources'
     click_link resource.title
 
@@ -65,6 +27,7 @@ RSpec.feature 'Managing resources' do
     user = feature_login
     resource = build(:resource, resource_type: :url, url: 'http://example.com', user: user)
 
+    find(:css, '.glyphicon.glyphicon-plus').click
     click_link 'Add Resource'
 
     within('#new_resource') do
@@ -97,6 +60,7 @@ RSpec.feature 'Managing resources' do
 
     visit resource_path(resource)
     click_link 'DELETE'
+    wait_for_ajax
 
     expect(Resource.count).to eq 0
   end

@@ -15,7 +15,7 @@ RSpec.feature 'Authentication' do
   end
 
   scenario 'users can logout' do
-    create(:user, email: 'admin@greencommons.org', password: 'thecommons')
+    create(:user, first_name: 'admin', email: 'admin@greencommons.org', password: 'thecommons')
     visit new_user_session_path
 
     within('#new_user') do
@@ -24,6 +24,7 @@ RSpec.feature 'Authentication' do
       click_button 'Log in'
     end
 
+    click_link 'Hello, admin'
     click_link 'Logout'
     expect(page).to have_text('Signed out successfully.')
   end
