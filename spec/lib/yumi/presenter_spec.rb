@@ -110,8 +110,8 @@ describe Yumi::Presenter do
 
       it 'correctly generates the links section' do
         expect(presenter_with_resources.as_json_api[:links]).to eq(
-          self: 'http://example.org:80/api/v1/games?page=1&per=10',
-          first: 'http://example.org:80/api/v1/games?page=1&per=10'
+          self: 'http://example.org:80/api/v1/games?include=levels,characters&page=1&per=10',
+          first: 'http://example.org:80/api/v1/games?include=levels,characters&page=1&per=10'
         )
       end
 
@@ -131,7 +131,7 @@ describe Yumi::Presenter do
 
       it 'correctly generates the links section' do
         expect(presenter_with_resource.as_json_api[:links]).to eq(
-          self: 'http://example.org:80/api/v1/games/1'
+          self: 'http://example.org:80/api/v1/games/1?include=levels,characters'
         )
       end
 

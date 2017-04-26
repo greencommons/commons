@@ -6,11 +6,12 @@ module Yumi
     extend Yumi::ClassMethods
 
     attr_accessor :url, :resource, :type, :links, :attributes, :relationships,
-                  :presenter_module, :prefix, :relationships
+                  :presenter_module, :prefix, :relationships, :fields
 
-    def initialize(url, resource, presenter_module = nil, prefix = nil)
+    def initialize(url, resource, presenter_module = nil, prefix = nil, fields = nil)
       @url = url
       @resource = resource
+      @fields = fields
       @presenter_module = presenter_module
       @prefix = prefix
       set_instance_variables

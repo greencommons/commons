@@ -1,9 +1,10 @@
 module Yumi
   module Utils
     class PresenterHelper
-      def initialize(url:, resource:, presenter_module: nil, prefix: nil)
+      def initialize(url:, resource:, fields: nil, presenter_module: nil, prefix: nil)
         @url = url
         @resource = resource
+        @fields = fields
         @presenter_module = presenter_module
         @prefix = prefix
       end
@@ -21,7 +22,7 @@ module Yumi
       private
 
       def presenter_instance
-        presenter_class.constantize.new(@url, @resource, @presenter_module, @prefix)
+        presenter_class.constantize.new(@url, @resource, @presenter_module, @prefix, @fields)
       end
 
       def presenter_class
