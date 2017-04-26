@@ -5,9 +5,11 @@ RSpec.describe Api::V1::SearchController, type: :request do
     let(:title) { Faker::Hipster.word }
 
     before do
-      create(:resource, title: "#{title} My Resource", resource_type: :article)
-      create(:group, name: "#{title} My Group")
-      create(:list, name: "#{title} My List")
+      create(:resource, title: "#{title} My Resource",
+                        resource_type: :article,
+                        published_at: 12.days.ago)
+      create(:group, name: "#{title} My Group", published_at: 5.days.ago)
+      create(:list, name: "#{title} My List", published_at: 10.days.ago)
 
       wait_for do
         Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
@@ -83,6 +85,30 @@ RSpec.describe Api::V1::SearchController, type: :request do
 
         get '/api/v1/search?q=Resource'
         expect(json_body['related'].count).to eq 2
+      end
+    end
+
+    describe 'sorting' do
+      context 'by published_at' do
+        context 'asc' do
+          it 'returns the search results sorted as JSON API', :worker, :elasticsearch do
+            get "/api/v1/search?q=#{title}&sort=published_at"
+
+            t1 = Time.parse(json_body['data'][0]['attributes']['published_at'])
+            t2 = Time.parse(json_body['data'][1]['attributes']['published_at'])
+            expect(t1.to_i).to be < t2.to_i
+          end
+        end
+
+        context 'desc' do
+          it 'returns the search results sorted as JSON API', :worker, :elasticsearch do
+            get "/api/v1/search?q=#{title}&sort=-published_at"
+
+            t1 = Time.parse(json_body['data'][0]['attributes']['published_at'])
+            t2 = Time.parse(json_body['data'][1]['attributes']['published_at'])
+            expect(t2.to_i).to be < t1.to_i
+          end
+        end
       end
     end
   end
