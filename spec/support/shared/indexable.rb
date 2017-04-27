@@ -9,7 +9,7 @@ RSpec.shared_examples 'indexable' do |name|
     end
 
     context 'when date in metadata' do
-      it 'set the published_at' do
+      it 'sets the published_at' do
         date = Time.now
         record = build(name)
 
@@ -20,21 +20,21 @@ RSpec.shared_examples 'indexable' do |name|
         end
       end
 
-      context 'when date string' do
-        it 'set the published_at' do
-          date = Date.today
+      context 'when date is a string' do
+        it 'sets the published_at' do
+          date = Date.today.to_s
           record = build(name)
 
           if record.respond_to?(:metadata)
             record.metadata = { date: date }
             record.save!
-            expect(record.published_at.to_date.to_s).to eq record.created_at.to_date.to_s
+            expect(record.published_at.to_date.to_s).to eq date.to_s
           end
         end
       end
 
       context 'when invalid' do
-        it 'set the published_at' do
+        it 'sets the published_at' do
           date = 'fake date'
           record = build(name)
 
