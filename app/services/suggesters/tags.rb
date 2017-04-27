@@ -9,15 +9,17 @@ module Suggesters
 
     def suggest
       load_es_params
-      records
+      return records unless @except.any?
+
+      records.reject do |r|
+        @except.map { |e| [e.id, e.class.name] }.include?([r.id, r.class.name])
+      end
     end
 
     private
 
     def records
-      @records ||= Elasticsearch::Model.search(@es_params, @models).records.to_a.reject do |r|
-        @except.map { |e| [e.id, e.class.name] }.include?([r.id, r.class.name])
-      end
+      @records ||= Elasticsearch::Model.search(@es_params, @models).records.to_a
     end
 
     def load_es_params

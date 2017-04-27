@@ -34,7 +34,7 @@ module Indexable
         if defined?(metadata) && metadata && metadata['date']
           begin
             self.published_at = Date.parse(metadata['date'])
-          rescue StandardError
+          rescue ArgumentError
             self.published_at = created_at
           end
         else

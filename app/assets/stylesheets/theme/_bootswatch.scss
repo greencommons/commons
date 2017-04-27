@@ -517,10 +517,16 @@ input[type="checkbox"],
 }
 
 // Indicators =================================================================
+.alert-row {
+  background-color: $creme;
+  padding-top: 23px;
+  padding-bottom: 10px;
+}
 
 .alert {
   border: none;
   color: #fff;
+  margin-bottom: 0;
 
   &-success {
     background-color: $brand-success;

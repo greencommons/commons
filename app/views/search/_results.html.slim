@@ -12,8 +12,8 @@
           = hidden_field_tag :query, @query
           = select_tag :sort, 
                        options_for_select([ ['Score', 'score'], 
-                                            ['Recent First', 'recent'], 
-                                            ['Oldest First', 'oldest'] ], @sort || 'SCORE'), 
+                                            ['Recent First', '-published_at'], 
+                                            ['Oldest First', 'published_at'] ], @sort || 'SCORE'), 
                        class: 'form-control gc-select',
                        data: { 'filter-select' => true }
   - if @results.any?

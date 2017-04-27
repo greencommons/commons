@@ -34,4 +34,8 @@ class Resource < ApplicationRecord
     return content unless content.is_a?(String)
     content.truncate(800)
   end
+
+  def publisher
+    metadata['publisher']
+  end
 end

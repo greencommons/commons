@@ -36,6 +36,21 @@ var initFilters = function() {
     checkbox.on('change', function(e) {
       var url = new Uri(window.location.href);
 
+      var parent = checkbox.parents('li').parents('li')
+                           .children('.filters__item').find('input');
+      var list = checkbox.parents('li').children('ul');
+      var children = list.find('input[type="checkbox"]');
+
+      if (checkbox.data('indeterminate-checkbox')) {
+        children.prop('checked', checkbox.is(':checked'));
+      } else if (checkbox.data('indeterminate-checkbox-child')) {
+        if (list.find('input[type="checkbox"]:checked').length > 0) {
+          parent.prop('checked', true);
+        } else {
+          parent.prop('checked', false);
+        }
+      }
+
       $('[data-filter-checkbox]').each(function() {
         var check = $(this);
         if (check.is(":checked") === true) {

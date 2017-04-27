@@ -12,4 +12,3 @@
 
 //= require filters
 //= require expand
-//= require checkbox
