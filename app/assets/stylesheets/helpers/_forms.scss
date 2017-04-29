@@ -1,4 +1,5 @@
-.form-control.gc-select, .form-control.gc-select:focus {
+.form-control.gc-select,
+.form-control.gc-select:focus {
   border: 0;
   box-shadow: none;
   font-size: 14px;
@@ -15,4 +16,22 @@
 
 .form-control {
   @include box-shadow(none);
+}
+
+textarea,
+textarea.form-control,
+input.form-control,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+[type=text].form-control,
+[type=password].form-control,
+[type=email].form-control,
+[type=tel].form-control,
+[contenteditable].form-control {
+  background-color: #fff;
+  font-size: 14px;
+  color: $gc-dark-gray;
+  border-radius: 6px;
 }
