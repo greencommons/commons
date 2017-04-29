@@ -168,7 +168,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
   end
 
   context 'sorting' do
-    scenario 'users can sort by recent first' do
+    scenario 'users can sort by newest first' do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
@@ -185,7 +185,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
         find('.navbar__search-button').click
       end
 
-      select 'Recent First', from: 'sort'
+      select 'Newest First', from: 'sort'
       wait_for_ajax
 
       expect(page).to have_text(/.*My Group.*My List.*My Resource.*/)

@@ -10,8 +10,8 @@ describe DateHelper do
     end
 
     context 'with nil' do
-      it 'returns "unknown"' do
-        expect(helper.humanize_date(nil)).to eq('Unknown')
+      it 'returns ""' do
+        expect(helper.humanize_date(nil)).to eq('')
       end
     end
   end
