@@ -35,6 +35,10 @@ class Resource < ApplicationRecord
     content.truncate(800)
   end
 
+  def creators
+    metadata['creators']
+  end
+
   def publisher
     metadata['publisher']
   end

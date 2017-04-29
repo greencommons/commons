@@ -1,9 +1,11 @@
 .navbar {
   margin-bottom: 0;
+  border-bottom: 1px solid $gc-clear-gray;
+  @include box-shadow(none);
 
   &-brand {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   &-nav > li{

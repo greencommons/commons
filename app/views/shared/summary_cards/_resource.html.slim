@@ -6,8 +6,8 @@
       .summary-card__title
         h5= link_to resource.title, resource
         h6
-          - if resource.user&.full_name&.present?
-            = resource.user&.full_name
+          - if resource.creators.present?
+            = resource.creators
             |  &bull; 
           - if resource.publisher
             = resource.publisher

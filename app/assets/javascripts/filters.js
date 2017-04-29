@@ -14,7 +14,7 @@ var initFilters = function() {
     "endDate": moment(),
     "buttonClasses": "btn btn-sm btn-gc",
     locale: {
-      format: 'DD/MM/YYYY'
+      format: 'MM/DD/YYYY'
     }
   }, function(start, end, label) {
     // Handle filtering

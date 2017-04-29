@@ -12,3 +12,7 @@
     text-decoration: none;
   }
 }
+
+.form-control {
+  @include box-shadow(none);
+}

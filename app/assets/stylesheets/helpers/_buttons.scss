@@ -4,6 +4,8 @@
   border-color: #EF5350;
   text-transform: none;
   font-weight: bold;
+  border-radius: 6px;
+  @include box-shadow(none);
 }
 
 .btn-gc:hover,

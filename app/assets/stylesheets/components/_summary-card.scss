@@ -5,7 +5,9 @@
   &__body {
     padding: 25px;
     width: 100%;
-    @include box-shadow(0 1px 4px rgba(0,0,0,.3));
+    border: 1px solid $gc-clear-blue;
+    border-radius: 6px;
+    background: #fff;
   }
 
   &__row {
