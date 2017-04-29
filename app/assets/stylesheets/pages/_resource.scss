@@ -1,0 +1,42 @@
+.resource-page {
+  padding-top: 0;
+
+  &__container {
+    padding-top: 60px;
+    background-color: $books-clear;
+  }
+
+  &__header {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 6px;
+  }
+
+  &__header--books {
+    background-color: $books-clear;
+  }
+
+  &__header--article {
+    background-color: $articles-clear;
+  }
+
+  &__header--report {
+    background-color: $reports-clear;
+  }
+
+  &__type {
+    line-height: 50px;
+  }
+
+  &__type--books {
+    color: $books-dark;
+  }
+
+  &__type--article {
+    color: $articles-dark;
+  }
+
+  &__type--report {
+    color: $reports-dark;
+  }
+}

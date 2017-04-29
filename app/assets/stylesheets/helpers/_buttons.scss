@@ -47,3 +47,100 @@ fieldset[disabled] .btn-gc.active {
   color: #EF5350;
   background-color: #FFFFFF;
 }
+
+// White button
+.btn-white {
+  color: $gc-gray;
+  background-color: #FFF;
+  border: 1px solid $gray-lighter;
+  box-shadow: none;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.btn-white:hover,
+.btn-white:focus,
+.btn-white:active,
+.btn-white.active,
+.open .dropdown-toggle.btn-white {
+  background-color: $gray-lighter;
+}
+
+.btn-white:active,
+.btn-white.active,
+.open .dropdown-toggle.btn-white {
+  background-image: none;
+}
+
+.btn-white.disabled,
+.btn-white[disabled],
+fieldset[disabled] .btn-white,
+.btn-white.disabled:hover,
+.btn-white[disabled]:hover,
+fieldset[disabled] .btn-white:hover,
+.btn-white.disabled:focus,
+.btn-white[disabled]:focus,
+fieldset[disabled] .btn-white:focus,
+.btn-white.disabled:active,
+.btn-white[disabled]:active,
+fieldset[disabled] .btn-white:active,
+.btn-white.disabled.active,
+.btn-white[disabled].active,
+fieldset[disabled] .btn-white.active {
+  background-color: #EF5350;
+  border-color: #EF5350;
+}
+
+.btn-white .badge {
+  color: #EF5350;
+  background-color: #FFFFFF;
+}
+
+// Dark blue button
+.btn-dark-blue {
+  color: #FFF;
+  background-color: $gc-dark-blue;
+  border-color: $gc-dark-blue;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.btn-dark-blue:hover,
+.btn-dark-blue:focus,
+.btn-dark-blue:active,
+.btn-dark-blue.active,
+.open .dropdown-toggle.btn-dark-blue {
+  color: #FFFFFF;
+  background-color: #425762;
+  border-color: #EF5350;
+}
+
+.btn-dark-blue:active,
+.btn-dark-blue.active,
+.open .dropdown-toggle.btn-dark-blue {
+  background-image: none;
+}
+
+.btn-dark-blue.disabled,
+.btn-dark-blue[disabled],
+fieldset[disabled] .btn-dark-blue,
+.btn-dark-blue.disabled:hover,
+.btn-dark-blue[disabled]:hover,
+fieldset[disabled] .btn-dark-blue:hover,
+.btn-dark-blue.disabled:focus,
+.btn-dark-blue[disabled]:focus,
+fieldset[disabled] .btn-dark-blue:focus,
+.btn-dark-blue.disabled:active,
+.btn-dark-blue[disabled]:active,
+fieldset[disabled] .btn-dark-blue:active,
+.btn-dark-blue.disabled.active,
+.btn-dark-blue[disabled].active,
+fieldset[disabled] .btn-dark-blue.active {
+  background-color: #EF5350;
+  border-color: #EF5350;
+}
+
+.btn-dark-blue .badge {
+  color: #EF5350;
+  background-color: #FFFFFF;
+}

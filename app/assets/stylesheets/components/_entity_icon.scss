@@ -10,27 +10,27 @@
   margin-right: 15px;
 
   &--book {
-    background-color: #f3faee;
-    color: #a3cf86;
+    background-color: $books-clear;
+    color: $books-dark;
   }
 
   &--article {
-    background-color: #fef7e3;
-    color: #f5c746;
+    background-color: $articles-clear;
+    color: $articles-dark;
   }
 
   &--report {
-    background-color: #f4efe8;
-    color: #b49261;
+    background-color: $reports-clear;
+    color: $reports-dark;
   }
 
   &--groups {
-    background-color: #e6f3fb;
-    color: #58abe0;
+    background-color: $groups-clear;
+    color: $groups-dark;
   }
 
   &--lists {
-    background-color: #ffeee9;
-    color: #fb8969;
+    background-color: $lists-clear;
+    color: $lists-dark;
   }
 }
