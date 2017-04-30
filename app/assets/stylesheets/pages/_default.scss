@@ -16,12 +16,16 @@
     margin-bottom: $row-spacing;
   }
 
+  &__row--double {
+    margin-bottom: $row-spacing * 1.5;
+  }
+
   &__row--half {
     margin-bottom: $row-spacing / 2;
   }
 
-  &__row--mb-4 {
-    margin-bottom: 4px;
+  &__row--third {
+    margin-bottom: $row-spacing / 3;
   }
 
   &__picture {
@@ -35,6 +39,12 @@
 
   &__tag-list {
     line-height: 37px;
+  }
+
+  &__metadata {
+    margin-right: 20px;
+    color: $gray-light;
+    float: left;
   }
 }
 

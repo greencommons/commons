@@ -2,14 +2,29 @@
   padding-top: 0;
 
   &__container {
-    padding-top: 60px;
     background-color: $books-clear;
+    height: 400px;
+  }
+
+  &__header-container {
+    position: relative;
+  }
+
+  &__content-container {
+    background-color: $creme;
+    padding-top: 160px;
   }
 
   &__header {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
     background-color: #fff;
     padding: 30px;
     border-radius: 6px;
+    min-height: 420px;
+    @include box-shadow(2px 2px 4px rgba(0,0,0,.1));
   }
 
   &__header--books {
@@ -38,5 +53,11 @@
 
   &__type--report {
     color: $reports-dark;
+  }
+
+  &__title {
+    margin-bottom: 0;
+    line-height: 62px;
+    font-size: 52px;
   }
 }

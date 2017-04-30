@@ -3,97 +3,80 @@
     .container
       .row
         .col-xs-12
-          .resource-page__header
-            .row
-              .col-xs-6.col-md-4
-                div class="entity-icon entity-icon--#{@resource.resource_type}"
-                  i class="fa fa-#{resource_icon(@resource)}"
-                div class="resource-page__type resource-page__type--#{@resource.resource_type}"
-                  = @resource.resource_type.pluralize.capitalize
-              .col-xs-6.col-md-8
-                .resource-actions
-                  = link_to '', class: 'resource-actions__button btn btn-white resource-actions__button--bottom resource-actions__button--right' do
-                    | Export
-                    i.fa.fa-share.glyphicon--left
-                  / - if @resource.url
-                  = link_to via_hypothesis(@resource.url), target: '_blank', class: 'resource-actions__button btn btn-dark-blue resource-actions__button--bottom'
-                    | View Original
-                    i.fa.fa-link.glyphicon--left
-            
-            h6
-              span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
-              - if @resource.priv?
-                span.gray-light
-                  span class="glyphicon glyphicon--left-double glyphicon--right glyphicon-eye-close"
-                  | PRIVATE
-                  
-            .resource-actions
-              = render 'shared/components/btn_count', path: '#', 
-                                                      text: 'ADD TO LIST', 
-                                                      label: @resource.lists.count,
-                                                      classes: 'resource-actions__button resource-actions__button--bottom resource-actions__button--right',
-                                                      style: 'primary'
-              - if policy(@resource).edit?
-                = link_to 'EDIT', edit_resource_path(@resource), class: 'btn btn-primary resource-actions__button--right'
-              - if policy(@resource).destroy?
-                = link_to 'DELETE', @resource, method: 'DELETE', class: 'btn btn-default resource-actions__button--right', data: { confirm: 'Are you sure?' }   
-            
-            h1.page-details__title
-              = @resource.title
-            .clearfix
-
-
-      .row
-        .col-xs-12
-          h3 ABOUT
-          p
-            - if @resource.url?
+          .resource-page__header-container
+            .resource-page__header
               .row
-                .col-xs-12
-                  p= link_to @resource.url, @resource.url, target: '_blank'
-            - else
-              = @resource.excerpt
-          #page-details__more.collapse
-            .row
-              .col-xs-12
-                p
-                  span class="glyphicon glyphicon--right glyphicon-#{resource_icon(@resource)}"
-                  = @resource.resource_type.upcase
-            - if @resource.priv?
-              = render 'resources/resource_metadata', metadata: 'Private', 
-                                                      icon: 'eye-close'
-            = render 'resources/resource_metadata', metadata: humanize_str_date(@resource.metadata['date']), 
-                                                    icon: 'calendar'
-            = render 'resources/resource_metadata', metadata: @resource.metadata['creators'],
-                                                    icon: 'user'                                          
-            = render 'resources/resource_metadata', metadata: @resource.metadata['publisher'],
-                                                    icon: 'home'                                          
-                
-      .row.page-details__row
-        .col-xs-12.text-right
-          = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__hide' },  id: 'page-details__show' do
-            | SEE MORE
-            span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
-          = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__show' }, id: 'page-details__hide', class: 'collapse' do
-            | HIDE
-            span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
-                        
-      .row.page-details__row
-        .col-xs-12.col-sm-4
-          h3 CONTENT
-        .col-xs-12.col-sm-8
+                .page-details__row
+                  .col-xs-6.col-md-4
+                    div class="entity-icon entity-icon--#{@resource.resource_type}"
+                      i class="fa fa-#{resource_icon(@resource)}"
+                    div class="resource-page__type resource-page__type--#{@resource.resource_type}"
+                      = @resource.resource_type.pluralize.capitalize
+                  .col-xs-6.col-md-8
+                    .resource-actions
+                      = link_to '', class: 'resource-actions__button btn btn-white resource-actions__button--bottom resource-actions__button--right' do
+                        | Export
+                        i.fa.fa-share.glyphicon--left
+                      / - if @resource.url
+                      = link_to via_hypothesis(@resource.url), target: '_blank', class: 'resource-actions__button btn btn-dark-blue resource-actions__button--bottom'
+                        | View Original
+                        i.fa.fa-link.glyphicon--left
+                  .clearfix
+              .row
+                .page-details__row--third
+                  .col-xs-12
+                    h1.resource-page__title
+                      = @resource.title
+                  .clearfix
+              .row
+                .page-details__row--half
+                  .col-xs-12
+                    - if @resource&.user&.full_name.present?
+                      .page-details__metadata 
+                        i.fa.fa-suitcase.glyphicon--right
+                        = "Owner: #{@resource&.user&.full_name}"
+                    .page-details__metadata 
+                      i.fa.fa-calendar.glyphicon--right
+                      = "Published Date: #{humanize_date(@resource.published_at)}"
+                    .page-details__metadata 
+                      i.fa.fa-calendar.glyphicon--right
+                      = "Creators: #{@resource.creators}"
+                    .page-details__metadata 
+                      i.fa.fa-user-circle.glyphicon--right
+                      = "Publisher: #{@resource.publisher}"
+                    .page-details__metadata 
+                      i.fa.fa-lock.glyphicon--right
+                      = "Privacy: #{@resource.priv? ? 'Private' : 'Public'}"
+                  .clearfix
+              .row
+                .page-details__row--half
+                  .col-xs-12
+                    p
+                      | ABOUT ISLAND PRESS Since 1984, the nonprofit Island Press has been stimulating, shaping, and communicating the ideas that are essential for solving environmental problems worldwide. With more than 800 titles in print and some 40 new releases each year, we are the nation’s leading publisher on environmental issues. We identify innovative thinkers and emerging trends in the environmental field. We work with world-renowned experts and authors to develop cross-disciplinary solutions to environmental challenges.
+                  .clearfix
+                  
+              .row
+                .page-details__row--half
+                  .col-xs-12.col-md-6
+                    = react_component 'Tags', { authenticity_token: form_authenticity_token,
+                                                submit_url: resource_tags_path(@resource),
+                                                tags: @resource.cached_tags,
+                                                can_create: @admin }, { prerender: true }
+                                                
+                  .col-xs-12.col-md-6
+                    .resource-actions
+                      - if policy(@resource).edit?
+                        = link_to 'Edit', edit_resource_path(@resource), class: "btn btn-#{@resource.resource_type} btn--margin-right"
+                      - if policy(@resource).destroy?
+                        = link_to 'Delete', @resource, method: 'DELETE', class: "btn btn-#{@resource.resource_type} btn--margin-right", data: { confirm: 'Are you sure?' }   
+                      = link_to "Add to a list (#{@resource.lists.count})", '#', class: "btn btn-#{@resource.resource_type}"
 
-              
-      .row.page-details__row
-        .col-lg-12
+
+  .resource-page__content-container                  
+    .container
+      .row
+        .col-xs-12.col-md-9
           = render 'shared/integrations/disqus/comments', entity: @resource
-
-      = render 'shared/components/explore', suggestions: @suggestions
-
-      .row.page-details__row
-        .col-xs-12
-          = react_component 'Tags', { authenticity_token: form_authenticity_token,
-                                      submit_url: resource_tags_path(@resource),
-                                      tags: @resource.cached_tags,
-                                      can_create: true }, { prerender: true }
-      
+        .col-xs-12.col-md-3
+          | Explore
+        
