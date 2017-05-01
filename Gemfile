@@ -30,6 +30,9 @@ gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'fog-aws'
+gem 'font-awesome-rails'
+gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
 
 group :development do
   gem 'bummr'
@@ -56,5 +59,6 @@ end
 
 group :test do
   gem 'capybara-webkit'
+  gem 'capybara-screenshot'
   gem 'json_matchers'
 end

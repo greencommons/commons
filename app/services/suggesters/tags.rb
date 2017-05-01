@@ -9,11 +9,18 @@ module Suggesters
 
     def suggest
       load_es_params
-      except_records if @except
-      Elasticsearch::Model.search(@es_params, @models).records
+      return records unless @except.any?
+
+      records.reject do |r|
+        @except.map { |e| [e.id, e.class.name] }.include?([r.id, r.class.name])
+      end
     end
 
     private
+
+    def records
+      @records ||= Elasticsearch::Model.search(@es_params, @models).records.to_a
+    end
 
     def load_es_params
       @es_params = {
@@ -27,13 +34,6 @@ module Suggesters
           }
         }
       }
-    end
-
-    def except_records
-      @es_params[:query][:bool][:must_not] ||= [
-        { terms: { _id: @except.map(&:id) } },
-        { terms: { type: @except.map { |e| e.class.name.downcase } } }
-      ]
     end
   end
 end

@@ -29,7 +29,7 @@ RSpec.feature 'Interacting with resources', :worker, :elasticsearch do
     visit resource_path(resource)
 
     expect(page).to have_content('My Resource')
-    expect(page).to have_content('EXPLORE')
+    expect(page).to have_content('Explore')
     expect(page).to have_content('Protection Group')
     expect(page).to have_content('Helpful List')
     expect(page).not_to have_content('Help Group')

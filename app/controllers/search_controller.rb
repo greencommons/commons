@@ -23,6 +23,11 @@ class SearchController < ApplicationController
                                           except: @results.records,
                                           limit: 6).suggest
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private

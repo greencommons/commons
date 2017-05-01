@@ -1,0 +1,41 @@
+.footer {
+  height: 56px;
+  line-height: 56px;
+  padding: 0 20px;
+  background: #fff;
+  color: $gray;
+  border-top: 1px solid $gray-lighter;
+
+  &__copyright {
+    display: inline-block;
+  }
+
+  &__menu, &__social {
+    display: inline-block;
+    float: right;
+    margin-bottom: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 24px;
+
+      a {
+        color: $gray;
+      }
+    }
+  }
+
+  &__social {
+    height: inherit;
+
+    li {
+      height: inherit;
+      margin-right: 14px;
+
+      a {
+        color: $gray-mid-ligher;
+        font-size: 20px;
+      }
+    }
+  }
+}

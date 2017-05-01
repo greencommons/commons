@@ -1,8 +1,8 @@
 module GlyphiconHelper
   RESOURCE_ICONS = {
-    article: 'file',
+    article: 'file-text',
     book: 'book',
-    report: 'info-sign',
+    report: 'clipboard',
     url: 'link'
   }.freeze
 

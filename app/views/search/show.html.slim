@@ -1,70 +1,12 @@
-.row.page-details__row
-  .col-xs-12.col-md-5.col-lg-6
-    h1 Search Results
-  .col-xs-12.col-md-7.col-lg-6.text-center.top-page-form
-    .row
-      .col-xs-12
-        = form_for search_path, method: :get, html: { class: 'form-horizontal customer-search-form' } do |form|
-          .form-group
-            .col-xs-8.col-sm-8.col-sm-offset-2
-              = text_field_tag :query, params[:query], placeholder: 'Enter Search Term', class: 'form-control input-lg'
-            .col-xs-4.col-sm-2
-              = button_tag type: 'submit', name: nil, class: 'col-lg-12 btn btn-lg btn-primary' do
-                span.glyphicon.glyphicon-zoom-in aria-hidden='true'
-    .row
-      .col-xs-12.text-xs-center.text-sm-right
-        = link_to 'Advanced Search', '/'
+.page-details.search-page
+  .container
+    .row#search-loader
+      #search-loader__panel
+        = image_tag 'loader.gif'
+      #filters
+        = render 'search/filters'
+      #results
+        = render 'search/results'
 
-= form_tag search_path, method: :get do
-  .row.page-details__row--half
-    .col-xs-12.col-sm-6.page-details__row
-      h4= "#{@total_count} Results"
-    .col-xs-12.col-sm-6
-      .row
-          .col-xs-8.col-sm-4.col-sm-offset-4
-            = hidden_field_tag :query, @query
-            = select_tag :sort, 
-                         options_for_select([ ['SCORE', 'score'], 
-                                              ['RECENT FIRST', '-published_at'], 
-                                              ['OLDEST FIRST', 'published_at'] ], @sort || 'SCORE'), 
-                         class: 'form-control'
-          .col-xs-4
-            = submit_tag 'SORT', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
-
-  .row
-    .col-xs-12.col-sm-3
-      .filters
-        .filters__title.text-xs-left.text-center
-          h5 FILTER
-        .filters__lists
-          = hidden_field_tag :query, @query
-          ul.filters__list
-            li 
-              .filters__item
-                = render 'search/filter', name: :resources, category: :model_types, indeterminate: true
-              ul.filters__list
-                li.filters__item
-                  = render 'search/filter', name: :books, category: :resource_types
-                li.filters__item
-                  = render 'search/filter', name: :articles, category: :resource_types
-                li.filters__item
-                  = render 'search/filter', name: :reports, category: :resource_types
-            li.filters__item
-              = render 'search/filter', name: :lists, category: :model_types
-            li.filters__item
-              = render 'search/filter', name: :groups, category: :model_types
-          = submit_tag 'FILTER', name: nil, class: 'col-lg-12 btn btn-lg btn-primary'
-          .clearfix
+    = render 'shared/components/explore', suggestions: @suggestions, title: 'You may also like...'
     
-    .col-xs-12.col-sm-9
-      - if @results.any?
-        - @results.records.each_with_hit do |result, hit|
-          = render 'shared/summary_cards/main', resource: result, hit: hit
-      - else
-        = 'No results found.'
-
-.row.page-details__row
-  .col-xs-12.text-center
-    = paginate @results
-
-= render 'shared/components/explore', suggestions: @suggestions, title: 'You may also like...'

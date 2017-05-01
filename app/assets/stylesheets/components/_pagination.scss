@@ -1,0 +1,25 @@
+// Overriding Kaminari default Bootstrap style
+.pagination {
+  li {
+    a {
+      border: none;
+      background: none;
+      color: $gc-gray;
+
+      &:hover {
+        background-color: $gc-dark-blue;
+        border-color: $gc-dark-blue;
+        border-radius: 6px;
+        color: #fff;
+      }
+    }
+  }
+
+  li.active {
+    a {
+      background-color: $gc-dark-blue;
+      border-color: $gc-dark-blue;
+      border-radius: 6px;
+    }
+  }
+}

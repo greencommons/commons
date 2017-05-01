@@ -1,11 +1,12 @@
 module ScoreHelper
-  def score_class(score)
-    if score > 1
-      'label-success'
-    elsif score > 0.5
-      'label-warning'
+  def score_opacity(score)
+    case score
+    when 0..1
+      score / 2
+    when 1..10
+      score / 10
     else
-      'label-danger'
+      1
     end
   end
 end

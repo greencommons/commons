@@ -1,0 +1,4 @@
+$("#filters").html("<%= escape_javascript(render 'search/filters' ) %>");
+$("#results").html("<%= escape_javascript(render 'search/results' ) %>");
+initFilters();
+$('#search-loader__panel').hide()

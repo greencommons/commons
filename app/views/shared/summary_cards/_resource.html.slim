@@ -1,66 +1,42 @@
 .summary-card
   .summary-card__body
-    .summary-card__row--half
-      h5.summary-card__title
-        span class="glyphicon glyphicon--right glyphicon-#{resource_icon(resource)}"
-        = link_to resource.title, resource
-        - if defined?(hit)
-          .summary-card__relevancy
-            = render 'shared/components/score', hit: hit 
-      .summary-card__top-actions
-        .summary-card__more.summary-card__margin-right
-          = render 'shared/components/btn_count', path: '#', icon: 'plus', label: '10', style: 'primary'
-        - if policy(resource).edit?
-          .summary-card__more.summary-card__margin-right
-            = link_to edit_resource_path(resource), class: 'btn btn-primary' do
-              span class="glyphicon  glyphicon-pencil"
-        - if policy(resource).destroy?
-          .summary-card__more
-            = link_to resource, method: 'DELETE', class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
-              span class="glyphicon  glyphicon-remove"
+    .summary-card__row--double
+      div class="entity-icon entity-icon--#{resource.resource_type}"
+        i class="fa fa-#{resource_icon(resource)}"
+      .summary-card__title
+        h5= link_to resource.title, resource
+        h6
+          - if resource.creators.present?
+            = resource.creators
+            |  &bull; 
+          - if resource.publisher
+            = resource.publisher
+            |  &bull; 
+          = humanize_date(resource.published_at)
+      - if defined?(hit) && hit
+        .summary-card__relevancy style="background-color: rgba(95, 125, 140, #{score_opacity(hit._score)});"
+          = "#{(hit._score).round(1)}"
       .clearfix
-    
     .summary-card__row
       p
         - if resource.url?
           = link_to resource.url, resource.url, target: '_blank'
         - else
           - if resource.content.is_a?(String)
-            = resource.content.truncate(200)
+            = resource.content.truncate(400)
           - else
             = resource.content
-    .summary-card__row
-      = render 'shared/components/tags_list', tags: resource.cached_tags
-    .summary-card__row
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-user.glyphicon--right
-          | Science Mag
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-calendar.glyphicon--right
-          = humanize_date(resource.published_at)
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-comment.glyphicon--right
+    = render 'shared/components/tags_list', tags: resource.cached_tags
+    .summary-card__row.summary-card__row--last
+      .summary-card__more.summary-card__more--space.summary-card__more--buttons
+        = link_to 'Add to a list (25)', root_path, class: 'btn btn-gc'
+      .summary-card__more.summary-card__more--meta
+        .summary-card__metadata.summary-card__metadata--last
+          i.fa.fa-pencil.glyphicon--right
+          | 102 Annotations
+        .summary-card__metadata
+          i.fa.fa-comments.glyphicon--right
           span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}" 
             | 0 Comments
-      .summary-card__metadata
-        p
-          span.glyphicon.glyphicon-edit.glyphicon--right
-          = link_to '102 Annotations', '#'
-      .summary-card__bottom-actions
-        - if resource.url
-          .summary-card__metadata.summary-card__metadata--link
-            = link_to 'View Original Document', via_hypothesis(resource.url), target: '_blank', class: 'btn btn-default'
-        .summary-card__metadata.summary-card__metadata--link
-          = link_to 'Read More', resource, class: 'btn btn-default'
       .clearfix
-
-  .summary-card__actions.summary-card__actions--left
-    p.italic
-      | Added to 
-      = link_to 'List Name', '#'
-      |  by 
-      = link_to 'Person Name', '#'
-      |  4 days ago
+        

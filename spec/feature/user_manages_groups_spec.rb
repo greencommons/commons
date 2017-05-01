@@ -5,6 +5,7 @@ RSpec.feature 'Managing groups' do
     feature_login
     group = build(:group)
 
+    find(:css, '.glyphicon.glyphicon-plus').click
     click_link 'Create Group'
     expect(find('h1')).to have_content('Create Group')
     within('#new_group') do
@@ -73,9 +74,11 @@ RSpec.feature 'Managing groups' do
     expect(page).to have_text('2 members')
 
     click_on 'MAKE ADMIN'
+    wait_for_ajax
     expect(group.admin?(new_member)).to be true
 
     click_on 'REMOVE ADMIN'
+    wait_for_ajax
     expect(group.admin?(new_member)).to be false
   end
 end

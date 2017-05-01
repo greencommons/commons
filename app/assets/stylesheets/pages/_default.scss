@@ -1,6 +1,8 @@
 .page-details {
   $row-spacing: 30px;
 
+  padding-top: 60px;
+
   h1, h3 {
     margin-top: 0;
   }
@@ -16,6 +18,10 @@
 
   &__row--half {
     margin-bottom: $row-spacing / 2;
+  }
+
+  &__row--mb-4 {
+    margin-bottom: 4px;
   }
 
   &__picture {

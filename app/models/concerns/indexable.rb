@@ -33,13 +33,15 @@ module Indexable
       unless published_at
         if defined?(metadata) && metadata && metadata['date']
           begin
-            update_column(:published_at, metadata['date'])
-          rescue ActiveRecord::StatementInvalid
-            update_column(:published_at, created_at)
+            self.published_at = Date.parse(metadata['date'])
+          rescue ArgumentError
+            self.published_at = created_at
           end
         else
-          update_column(:published_at, created_at)
+          self.published_at = created_at
         end
+
+        save!
       end
     end
   end

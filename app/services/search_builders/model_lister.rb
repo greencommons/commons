@@ -17,7 +17,7 @@ module SearchBuilders
         if MODEL_TYPE_FILTERS.keys.include?(model_type.to_sym)
           MODEL_TYPE_FILTERS[model_type.to_sym]
         end
-      end
+      end.compact
     end
 
     private
