@@ -54,7 +54,10 @@
                 .page-details__row
                   .col-xs-12
                     p.page-details__description
-                      = @resource.excerpt
+                      - if @resource.url?
+                        = @resource.url
+                      - else
+                        = @resource.excerpt
                   .clearfix
                   
               .row
