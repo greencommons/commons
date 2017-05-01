@@ -30,9 +30,13 @@ class Resource < ApplicationRecord
 
   scope :sort_by_created_at, -> { order('created_at DESC') }
 
+  def name
+    title
+  end
+
   def excerpt
     return content unless content.is_a?(String)
-    content.truncate(800)
+    content.truncate(500)
   end
 
   def creators

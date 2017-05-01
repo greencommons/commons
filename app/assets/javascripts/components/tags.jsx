@@ -40,24 +40,20 @@ var Tags = React.createClass({
     if (!this.props.can_create) { return null };
 
     return (
-      <div className="row">
+      <div className="page-details__tag-form">
         <form id="add_tag_form" className="form-horizontal" onSubmit={this.submit} acceptCharset="UTF-8" method="post">
           <input type="hidden" name="authenticity_token" value={this.props.authenticity_token} />
-          <div className="col-xs-8 col-md-8">
-            <input type="text"
-                   name="tag[name]"
-                   id="tag"
-                   onChange={this.change}
-                   value={this.state.tag}
-                   placeholder="Add tag"
-                   className="form-control page-details__tag-input" />
-          </div>
-          <div className="col-xs-4 col-md-4">
-            <button id="add_tag_button" name="button" type="submit" className="form-control btn btn-dark-blue">
-              Add tag
-              <span aria-hidden="true" className="glyphicon glyphicon-plus glyphicon--left"></span>
-            </button>
-          </div>
+          <input type="text"
+                 name="tag[name]"
+                 id="tag"
+                 onChange={this.change}
+                 value={this.state.tag}
+                 placeholder="Add tag"
+                 className="form-control page-details__tag-input input--tag-like" />
+          <button id="add_tag_button" name="button" type="submit" className="form-control btn btn-sm btn--tag-like btn-dark-blue">
+            Add tag
+            <span aria-hidden="true" className="glyphicon glyphicon-plus glyphicon--left"></span>
+          </button>
         </form>
       </div>
     )
@@ -67,17 +63,20 @@ var Tags = React.createClass({
     var _this = this;
 
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          <div className="tags-list">
-            {this.state.tags.map(function(tag, i) {
-              return (
-                <a key={tag} href={'/search?query=' + tag} className='tags-list__tag'>{tag}</a>
-              )
-            })}
-            {this.renderForm()}
+      <div>
+        <div className="row">
+          <div className="col-xs-12">
+            <div className="tags-list">
+              {this.state.tags.map(function(tag, i) {
+                return (
+                  <a key={tag} href={'/search?query=' + tag} className='tags-list__tag'>#{tag}</a>
+                )
+              })}
+              {this.renderForm()}
+            </div>
           </div>
         </div>
+
       </div>
     );
   },

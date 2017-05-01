@@ -6,6 +6,18 @@
   margin-left: 10px;
 }
 
+.btn--tag-like {
+  padding: 0px 6px;
+  border-radius: 6px;
+  width: 90px;
+  height: 25px;
+}
+
+.btn--large {
+  padding: 12px 30px;
+  font-size: 16px;
+}
+
 .btn-gc {
   color: #FFFFFF;
   background-color: #EF5350;
@@ -248,6 +260,104 @@ fieldset[disabled] .btn-article.active {
 }
 
 .btn-article .badge {
+  color: #EF5350;
+  background-color: #FFFFFF;
+}
+
+.btn-report {
+  color: #FFF;
+  background-color: $reports-dark;
+  border-color: $reports-dark;
+  text-transform: none;
+  font-weight: bold;
+  @include box-shadow(none);
+}
+
+.btn-report:hover,
+.btn-report:focus,
+.btn-report:active,
+.btn-report.active,
+.open .dropdown-toggle.btn-report {
+  color: #FFFFFF;
+  background-color: $reports-darker;
+  border-color: $reports-darker;
+}
+
+.btn-report:active,
+.btn-report.active,
+.open .dropdown-toggle.btn-report {
+  background-image: none;
+}
+
+.btn-report.disabled,
+.btn-report[disabled],
+fieldset[disabled] .btn-report,
+.btn-report.disabled:hover,
+.btn-report[disabled]:hover,
+fieldset[disabled] .btn-report:hover,
+.btn-report.disabled:focus,
+.btn-report[disabled]:focus,
+fieldset[disabled] .btn-report:focus,
+.btn-report.disabled:active,
+.btn-report[disabled]:active,
+fieldset[disabled] .btn-report:active,
+.btn-report.disabled.active,
+.btn-report[disabled].active,
+fieldset[disabled] .btn-report.active {
+  background-color: #EF5350;
+  border-color: #EF5350;
+}
+
+.btn-report .badge {
+  color: #EF5350;
+  background-color: #FFFFFF;
+}
+
+.btn-url {
+  color: #FFF;
+  background-color: $urls-dark;
+  border-color: $urls-dark;
+  text-transform: none;
+  font-weight: bold;
+  @include box-shadow(none);
+}
+
+.btn-url:hover,
+.btn-url:focus,
+.btn-url:active,
+.btn-url.active,
+.open .dropdown-toggle.btn-url {
+  color: #FFFFFF;
+  background-color: $urls-darker;
+  border-color: $urls-darker;
+}
+
+.btn-url:active,
+.btn-url.active,
+.open .dropdown-toggle.btn-url {
+  background-image: none;
+}
+
+.btn-url.disabled,
+.btn-url[disabled],
+fieldset[disabled] .btn-url,
+.btn-url.disabled:hover,
+.btn-url[disabled]:hover,
+fieldset[disabled] .btn-url:hover,
+.btn-url.disabled:focus,
+.btn-url[disabled]:focus,
+fieldset[disabled] .btn-url:focus,
+.btn-url.disabled:active,
+.btn-url[disabled]:active,
+fieldset[disabled] .btn-url:active,
+.btn-url.disabled.active,
+.btn-url[disabled].active,
+fieldset[disabled] .btn-url.active {
+  background-color: #EF5350;
+  border-color: #EF5350;
+}
+
+.btn-url .badge {
   color: #EF5350;
   background-color: #FFFFFF;
 }

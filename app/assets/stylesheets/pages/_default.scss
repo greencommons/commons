@@ -17,7 +17,11 @@
   }
 
   &__row--double {
-    margin-bottom: $row-spacing * 1.5;
+    margin-bottom: $row-spacing * 2;
+  }
+
+  &__row--more-space {
+    margin-bottom: $row-spacing * 1.3;
   }
 
   &__row--half {
@@ -33,6 +37,11 @@
     margin-top: 23px;
   }
 
+  &__tag-form {
+    display: inline-block;
+    float: left;
+  }
+
   &__tag-input {
     margin-bottom: 4px;
   }
@@ -45,6 +54,20 @@
     margin-right: 20px;
     color: $gray-light;
     float: left;
+    font-size: 14px;
+    line-height: 24px;
+
+    i {
+      font-size: 19px;
+      color: $gray-mid-ligher;
+    }
+  }
+
+  &__description {
+    font-size: 17px;
+    line-height: 31px;
+    color: $gray;
+    display: block;
   }
 
   &__section-title {

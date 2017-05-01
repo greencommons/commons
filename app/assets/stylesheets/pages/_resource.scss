@@ -1,54 +1,53 @@
 .resource-page {
   padding-top: 0;
 
-  &__container {
+  &__background {
+    height: 500px;
+  }
+
+  &__background--book {
     background-color: $books-clear;
-    height: 400px;
   }
 
-  &__header-container {
-    position: relative;
+  &__background--article {
+    background-color: $articles-clear;
   }
 
-  &__content-container {
+  &__background--report {
+    background-color: $reports-clear;
+  }
+
+  &__background--url {
+    background-color: $urls-clear;
+  }
+
+  &__container {
     background-color: $creme;
-    padding-top: 160px;
-    padding-bottom: 60px;
+  }
+
+  &__wrapper {
+    margin-top: -420px;
   }
 
   &__header {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
     background-color: #fff;
-    padding: 30px;
+    padding: 40px;
     border-radius: 6px;
     min-height: 420px;
     @include box-shadow(2px 2px 4px rgba(0,0,0,.1));
+    margin-bottom: 60px;
   }
 
   &__content {
     padding: 0 40px;
   }
 
-  &__header--books {
-    background-color: $books-clear;
-  }
-
-  &__header--article {
-    background-color: $articles-clear;
-  }
-
-  &__header--report {
-    background-color: $reports-clear;
-  }
-
   &__type {
-    line-height: 50px;
+    line-height: 80px;
+    font-size: 16px;
   }
 
-  &__type--books {
+  &__type--book {
     color: $books-dark;
   }
 
@@ -60,10 +59,15 @@
     color: $reports-dark;
   }
 
+  &__type--url {
+    color: $urls-dark;
+  }
+
   &__title {
     margin-bottom: 0;
     line-height: 62px;
     font-size: 52px;
+    color: $gc-dark-gray;
   }
 
   &__empty-content-viewer {
@@ -73,10 +77,11 @@
     i {
       font-size: 6em;
       margin-bottom: 10px;
+      color: $gray-mid-ligher;
     }
 
     p {
-
+      font-size: 16px;
     }
   }
 }

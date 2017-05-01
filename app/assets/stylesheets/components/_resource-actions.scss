@@ -2,6 +2,10 @@
   float: left;
   width: 100%;
 
+  &--align-middle {
+    line-height: 80px;
+  }
+
   &__button--right {
     margin-right: 10px;
   }
