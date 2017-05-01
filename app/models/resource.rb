@@ -46,12 +46,4 @@ class Resource < ApplicationRecord
   def publisher
     metadata['publisher']
   end
-
-  def creators
-    metadata['creators']
-  end
-
-  def publisher
-    metadata['publisher']
-  end
 end
