@@ -13,6 +13,7 @@
   &__content-container {
     background-color: $creme;
     padding-top: 160px;
+    padding-bottom: 60px;
   }
 
   &__header {
@@ -25,6 +26,10 @@
     border-radius: 6px;
     min-height: 420px;
     @include box-shadow(2px 2px 4px rgba(0,0,0,.1));
+  }
+
+  &__content {
+    padding: 0 40px;
   }
 
   &__header--books {
@@ -59,5 +64,19 @@
     margin-bottom: 0;
     line-height: 62px;
     font-size: 52px;
+  }
+
+  &__empty-content-viewer {
+    text-align: center;
+    padding: 20px 0;
+
+    i {
+      font-size: 6em;
+      margin-bottom: 10px;
+    }
+
+    p {
+
+    }
   }
 }

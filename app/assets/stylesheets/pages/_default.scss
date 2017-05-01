@@ -46,6 +46,15 @@
     color: $gray-light;
     float: left;
   }
+
+  &__section-title {
+    margin-bottom: 14px;
+  }
+
+  &__section-title--underline {
+    border-bottom: 1px solid $gc-clear-blue;
+    padding-bottom: 4px;
+  }
 }
 
 /* Custom, iPhone Retina */
