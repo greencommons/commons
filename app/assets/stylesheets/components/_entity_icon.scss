@@ -18,32 +18,32 @@
   }
 
   &--book {
-    background-color: $books-clear;
+    background-color: $books-light;
     color: $books-dark;
   }
 
   &--article {
-    background-color: $articles-clear;
+    background-color: $articles-light;
     color: $articles-dark;
   }
 
   &--report {
-    background-color: $reports-clear;
+    background-color: $reports-light;
     color: $reports-dark;
   }
 
   &--url {
-    background-color: $urls-clear;
+    background-color: $urls-light;
     color: $urls-dark;
   }
 
   &--groups {
-    background-color: $groups-clear;
+    background-color: $groups-light;
     color: $groups-dark;
   }
 
   &--lists {
-    background-color: $lists-clear;
+    background-color: $lists-light;
     color: $lists-dark;
   }
 }
