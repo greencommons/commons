@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :leave]
 
   def index
-    @groups = policy_scope(Group)
+    @groups = policy_scope(Group).page(params[:page] || 1).per(10)
   end
 
   def show

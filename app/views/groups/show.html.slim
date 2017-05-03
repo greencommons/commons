@@ -1,3 +1,81 @@
+.page-details.resource-page 
+  div class="resource-page__background resource-page__background--groups"
+    = render 'shared/alerts'
+  .resource-page__container
+    .container
+      .row
+        .col-xs-12
+          .resource-page__wrapper
+            .resource-page__header
+              .row
+                .page-details__row--more-space 
+                  .col-xs-12.col-sm-6.col-md-4
+                    div class="entity-icon entity-icon--big entity-icon--groups"
+                      i class="fa fa-users"
+                    div class="resource-page__type resource-page__type--groups"
+                      | Groups
+                  .col-xs-12.col-sm-6.col-md-8
+                    .resource-actions.resource-actions--align-middle
+                      - if policy(@group).edit?
+                        = link_to edit_group_path(@group), class: 'resource-actions__button btn btn-white resource-actions__button--right' do
+                          | Settings
+                          i.fa.fa-cog.glyphicon--left
+                      - if @current_user                                        
+                        - if @group_current_user                                 
+                          = link_to leave_group_members_path(@group), method: :delete, 
+                                    data: { confirm: 'Are you sure you want to leave this group?' },
+                                    class: 'resource-actions__button btn btn-dark-blue' do
+                            | Leave group
+                            i.fa.fa-user-times.glyphicon--left
+                        - else
+                          = link_to join_group_members_path(@group), method: :post, 
+                                    class: 'resource-actions__button btn btn-dark-blue' do
+                            | Join group
+                            i.fa.fa-user-plus.glyphicon--left
+                  .clearfix
+              .row
+                .page-details__row--half
+                  .col-xs-12
+                    h1.resource-page__title
+                      = @group.name
+                  .clearfix
+              .row
+                .page-details__row
+                  .col-xs-12
+                    .page-details__metadata.page-details__metadata--half-margin 
+                      .user-picture
+                        = image_tag(@group.users[0] ? @group.users[0].avatar_url : 'user.png', 
+                                    class: 'user-picture__image')
+                        = image_tag(@group.users[1] ? @group.users[1].avatar_url : 'user.png', 
+                                    class: 'user-picture__image user-picture__image--over')
+                        = link_to group_members_path(@group), class: 'btn btn--picture-cover' do
+                          = @group.users.count
+                    .page-details__metadata 
+                      | members
+                    .page-details__metadata 
+                      i.fa.fa-calendar.glyphicon--right
+                      = "Published Date: #{humanize_date(@group.published_at)}"
+                  .clearfix
+              .row
+                .page-details__row
+                  .col-xs-12
+                    p.page-details__description
+                      = @group.long_description
+                  .clearfix
+                  
+              .row
+                .col-xs-12.col-md-6
+                  = react_component 'Tags', { authenticity_token: form_authenticity_token,
+                                              submit_url: group_tags_path(@group),
+                                              tags: @group.cached_tags,
+                                              can_create: policy(@group).update? }, { prerender: true }
+                .col-xs-12.col-md-6
+                  .resource-actions
+                    - if policy(@group).destroy?
+                      = link_to 'Delete', @group, method: 'DELETE', class: "btn btn-groups btn--margin-right btn--large", data: { confirm: 'Are you sure?' }   
+                    = link_to "Add to a list (#{@group.lists.count})", '#', class: "btn btn-groups btn--large"
+
+
 .page-details
   = render 'shared/alerts'
   .row.page-details__row
@@ -11,21 +89,9 @@
                                                 label: @group.lists.count,
                                                 classes: 'resource-actions__button--right',
                                                 style: 'primary'
-        - if @current_user                                        
-          - if @group_current_user                                 
-            = link_to 'LEAVE GROUP', leave_group_members_path(@group), 
-                                     method: :delete, 
-                                     data: { confirm: 'Are you sure you want to leave this group?' },
-                                     class: 'resource-actions__button--right btn btn-default'
-          - else
-            = link_to 'JOIN GROUP', join_group_members_path(@group), 
-                                    method: :post, 
-                                    class: 'resource-actions__button--right btn btn-default'
         = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
           | MEMBERS 
           .badge #{@group.users.count}
-        = link_to 'SETTINGS', edit_group_path(@group), class: 'resource-actions__button btn btn-primary'
-
   .row.page-details__row.page-details__row--half
     .col-lg-1
       = image_tag 'user.png', class: 'page-details__picture'
