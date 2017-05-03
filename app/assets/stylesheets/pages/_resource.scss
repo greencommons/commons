@@ -1,0 +1,87 @@
+.resource-page {
+  padding-top: 0;
+
+  &__background {
+    height: 500px;
+  }
+
+  &__background--book {
+    background-color: $books-light;
+  }
+
+  &__background--article {
+    background-color: $articles-light;
+  }
+
+  &__background--report {
+    background-color: $reports-light;
+  }
+
+  &__background--url {
+    background-color: $urls-light;
+  }
+
+  &__container {
+    background-color: $creme;
+  }
+
+  &__wrapper {
+    margin-top: -420px;
+  }
+
+  &__header {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 6px;
+    min-height: 420px;
+    @include box-shadow(2px 2px 4px rgba(0,0,0,.1));
+    margin-bottom: 60px;
+  }
+
+  &__content {
+    padding: 0 40px;
+  }
+
+  &__type {
+    line-height: 80px;
+    font-size: 16px;
+  }
+
+  &__type--book {
+    color: $books-dark;
+  }
+
+  &__type--article {
+    color: $articles-dark;
+  }
+
+  &__type--report {
+    color: $reports-dark;
+  }
+
+  &__type--url {
+    color: $urls-dark;
+  }
+
+  &__title {
+    margin-bottom: 0;
+    line-height: 62px;
+    font-size: 52px;
+    color: $gc-dark-gray;
+  }
+
+  &__empty-content-viewer {
+    text-align: center;
+    padding: 20px 0;
+
+    i {
+      font-size: 6em;
+      margin-bottom: 10px;
+      color: $gray-mid-ligher;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+}

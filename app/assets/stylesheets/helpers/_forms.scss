@@ -18,6 +18,15 @@
   @include box-shadow(none);
 }
 
+.input--tag-like {
+  padding: 0px 6px;
+  border-radius: 6px;
+  width: 90px;
+  height: 25px;
+  display: inline-block;
+  margin: 0 8px 8px 0;
+}
+
 textarea,
 textarea.form-control,
 input.form-control,

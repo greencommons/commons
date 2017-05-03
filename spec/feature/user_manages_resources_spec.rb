@@ -19,7 +19,7 @@ RSpec.feature 'Managing resources' do
     click_link 'My Resources'
     click_link resource.title
 
-    expect(page).to have_text('URL')
+    expect(page).to have_text('Urls')
     expect(page).to have_text('http://example.com')
   end
 
@@ -59,7 +59,7 @@ RSpec.feature 'Managing resources' do
     resource = create(:resource, resource_type: :url, url: 'http://example.com', user: user)
 
     visit resource_path(resource)
-    click_link 'DELETE'
+    click_link 'Delete'
     wait_for_ajax
 
     expect(Resource.count).to eq 0

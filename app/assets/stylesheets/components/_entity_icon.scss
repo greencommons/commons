@@ -5,32 +5,45 @@
   display: inline-block;
   font-size: 20px;
   text-align: center;
-  padding: 6px 12px;
-  border-radius: 5px;
+  line-height: 50px;
+  border-radius: 6px;
   margin-right: 15px;
 
+  &--big {
+    font-size: 24px;
+    line-height: 80px;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+
   &--book {
-    background-color: #f3faee;
-    color: #a3cf86;
+    background-color: $books-light;
+    color: $books-dark;
   }
 
   &--article {
-    background-color: #fef7e3;
-    color: #f5c746;
+    background-color: $articles-light;
+    color: $articles-dark;
   }
 
   &--report {
-    background-color: #f4efe8;
-    color: #b49261;
+    background-color: $reports-light;
+    color: $reports-dark;
+  }
+
+  &--url {
+    background-color: $urls-light;
+    color: $urls-dark;
   }
 
   &--groups {
-    background-color: #e6f3fb;
-    color: #58abe0;
+    background-color: $groups-light;
+    color: $groups-dark;
   }
 
   &--lists {
-    background-color: #ffeee9;
-    color: #fb8969;
+    background-color: $lists-light;
+    color: $lists-dark;
   }
 }

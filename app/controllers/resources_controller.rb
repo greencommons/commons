@@ -9,7 +9,7 @@ class ResourcesController < ApplicationController
   def show
     @suggestions = Suggesters::Tags.new(tags: @resource.cached_tags,
                                         except: @resource,
-                                        limit: 6).suggest
+                                        limit: 12).suggest
   end
 
   def new

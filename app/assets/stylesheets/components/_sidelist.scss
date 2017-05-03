@@ -1,0 +1,16 @@
+.sidelist {
+  text-decoration: none;
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    width: 100%;
+
+    a {
+      display: block;
+      width: 100%;
+      border-bottom: 1px solid $gc-clear-blue;
+      padding: 6px 0;
+    }
+  }
+}
