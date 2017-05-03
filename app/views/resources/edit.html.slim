@@ -1,4 +1,11 @@
-.row
-  .col-lg-12 
-    h1 Edit #{@resource.title}
-    = render 'form', resource: @resource, submit_label: 'UPDATE', cancel: @resource
+.page-details--creme-bg
+  .container
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2
+        .form-box.form-box--middle
+          .form-box__title
+            .row
+              .col-xs-12.col-md-8.col-md-offset-2
+                h1 Edit #{@resource.title}
+          .form-box__body
+            = render 'form', resource: @resource, submit_label: 'Update', cancel: @resource

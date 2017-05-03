@@ -33,7 +33,7 @@ RSpec.feature 'Managing resources' do
     within('#new_resource') do
       fill_in 'resource[title]', with: resource.title
       fill_in 'resource[url]', with: resource.url
-      click_on 'CREATE'
+      click_on 'Create'
     end
 
     expect(find('h1')).to have_content(resource.title)
@@ -47,7 +47,7 @@ RSpec.feature 'Managing resources' do
     visit edit_resource_path(resource)
     within("#edit_resource_#{resource.id}") do
       fill_in 'resource[title]', with: 'Water Experiments'
-      click_on 'UPDATE'
+      click_on 'Update'
     end
 
     expect(find('h1')).to have_content('Water Experiments')
