@@ -1,4 +1,11 @@
-.row
-  .col-lg-12 
-    h1 Edit #{@group.name}
-    = render 'form', group: @group, submit_label: 'UPDATE', cancel: @group
+.page-details--creme-bg
+  .container
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2
+        .form-box
+          .form-box__title
+            .row
+              .col-xs-12.col-md-8.col-md-offset-2
+                h1 Edit #{@group.name}
+          .form-box__body
+            = render 'form', group: @group, submit_label: 'Update', cancel: @group
