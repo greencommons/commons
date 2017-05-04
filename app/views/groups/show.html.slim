@@ -76,104 +76,53 @@
                     = link_to "Add to a list (#{@group.lists.count})", '#', class: "btn btn-groups btn--large"
 
 
-.page-details
-  = render 'shared/alerts'
-  .row.page-details__row
-    .col-xs-2
-      = link_to '< BACK', groups_path, class: 'btn btn-default'
-      
-    .col-xs-10
-      .resource-actions
-        = render 'shared/components/btn_count', path: '#', 
-                                                text: 'ADD TO LIST', 
-                                                label: @group.lists.count,
-                                                classes: 'resource-actions__button--right',
-                                                style: 'primary'
-        = link_to group_members_path(@group), class: 'resource-actions__button--right btn btn-primary' do
-          | MEMBERS 
-          .badge #{@group.users.count}
-  .row.page-details__row.page-details__row--half
-    .col-lg-1
-      = image_tag 'user.png', class: 'page-details__picture'
-    .col-lg-11 
-      h1= @group.name
-      
-  .row.page-details__row
-    .col-lg-12
-      = react_component 'Tags', { authenticity_token: form_authenticity_token,
-                                  submit_url: group_tags_path(@group),
-                                  tags: @group.cached_tags,
-                                  can_create: @admin }, { prerender: true }
-            
-  .row
-    .col-lg-12
-      h3 ABOUT
-      p
-        = @group.short_description
-      #page-details__more.collapse
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-text-color.glyphicon--right
-              = @group.long_description
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-share.glyphicon--right
-              = link_to @group.url, @group.url
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-envelope.glyphicon--right
-              = mail_to @group.email, @group.email
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-calendar.glyphicon--right
-              = humanize_date(@group.created_at)
-        .row
-          .col-xs-12
-            p
-              span.glyphicon.glyphicon-edit.glyphicon--right
-              = humanize_date(@group.updated_at)      
-    
-  .row.page-details__row
-    .col-lg-12.text-right
-      = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__hide' },  id: 'page-details__show' do
-        | SEE MORE
-        span.glyphicon.glyphicon-menu-down.glyphicon--left aria-hidden='true'
-      = link_to '#', data: { expand: '#page-details__more', reverse: '#page-details__show' }, id: 'page-details__hide', class: 'collapse' do
-        | HIDE
-        span.glyphicon.glyphicon-menu-up.glyphicon--left aria-hidden='true'
-        
-  .row.page-details__row
-    .col-lg-12
-      .row
-        .col-lg-8
-          h3 WHAT'S NEW
-        .col-lg-4
-          .resource-actions
-            = link_to 'SEE ALL', '#', class: 'btn btn-primary resource-actions__button--align-title'
-      .row
-        - @resources.each do |resource|
-          .col-lg-12
-            = render 'shared/summary_cards/main', resource: resource
-                  
-  .row.page-details__row
-    .col-lg-12
-      .row.page-details__row--half
-        .col-lg-8
-          h3 LISTS
-        .col-lg-4
-          .resource-actions
-            = link_to 'NEW LIST', '#', class: 'btn btn-primary resource-actions__button--right resource-actions__button--align-title'
-            = link_to 'ALL LISTS', '#', class: 'btn btn-primary resource-actions__button--align-title'
-      - @group.lists.each_slice(2) do |slice|
-        .row
-          - slice.each do |list|
-            .col-lg-6
-              = render 'shared/summary_cards/main', resource: list
-            
-  .row.page-details__row
-    .col-lg-12
-      = render 'shared/integrations/disqus/comments', entity: @group
+            .resource-page__content
+              .row
+                .col-xs-12.col-md-9
+                  .row.page-details__row--double
+                    .col-xs-12
+                      .page-details__section-title.page-details__row
+                        h6.pull-left
+                          | What's new
+                        .pull-right
+                          = link_to '#', class: 'btn btn-white-transparent' do
+                            | See all
+                            i.fa.fa-long-arrow-right.glyphicon--left
+                        .clearfix
+                      - @resources.each do |resource|
+                        .row
+                          .col-lg-12
+                            = render 'shared/summary_cards/main', resource: resource
+                  .row.page-details__row--double
+                    .col-xs-12
+                      .page-details__section-title.page-details__row
+                        h6.pull-left
+                          | Lists
+                        .pull-right
+                          = link_to '#', class: 'btn btn-white-transparent resource-actions__button--right' do
+                            | New list
+                            i.fa.fa-plus.glyphicon--left
+                          = link_to '#', class: 'btn btn-white-transparent' do
+                            | See all
+                            i.fa.fa-long-arrow-right.glyphicon--left
+                          
+                        .clearfix
+                      - @lists.each do |list|
+                        .row
+                          .col-xs-12
+                            = render 'shared/summary_cards/main', resource: list
+                          
+                  .row
+                    .col-xs-12
+                      .page-details__row--double
+                        = render 'shared/integrations/disqus/comments', entity: @group
+                              
+                .col-xs-12.col-md-3
+                  .page-details__row--double
+                    .page-details__section-title
+                      h6
+                        | Similar groups
+                    ul.sidelist
+                      - @similar.each do |similar_group|
+                        li= link_to similar_group.name, group_path(similar_group)
+                    

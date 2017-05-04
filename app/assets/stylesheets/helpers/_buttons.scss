@@ -109,6 +109,7 @@
   @include box-shadow(none);
   text-transform: none;
   font-weight: normal;
+  border-radius: 6px;
 }
 
 .btn-white:hover,
@@ -147,4 +148,27 @@ fieldset[disabled] .btn-white.active {
 .btn-white .badge {
   color: #EF5350;
   background-color: #FFFFFF;
+}
+
+.btn-white-transparent {
+  color: $gc-dark-gray;
+  background-color: none;
+  border: 1px solid $gc-clear-blue;
+  @include box-shadow(none);
+  text-transform: none;
+  font-weight: normal;
+  font-size: 16px;
+  border-radius: 6px;
+
+  i {
+    color: $gc-clear-blue;
+  }
+}
+
+.btn-white-transparent:hover,
+.btn-white-transparent:focus,
+.btn-white-transparent:active,
+.btn-white-transparent.active,
+.open .dropdown-toggle.btn-white-transparent {
+  background-color: $gray-lighter;
 }

@@ -8,6 +8,11 @@ class GroupsController < ApplicationController
 
   def show
     @resources = @group.latest_resources
+    @lists = @group.lists
+    @similar = Suggesters::Tags.new(tags: @group.cached_tags,
+                                    except: @group,
+                                    limit: 12,
+                                    models: [Group]).suggest
     @group_current_user = @group.find_member(current_user)
     @admin = @group_current_user.try(:admin?)
   end

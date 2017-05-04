@@ -11,6 +11,12 @@
       width: 100%;
       border-bottom: 1px solid $gc-clear-blue;
       padding: 6px 0;
+      font-size: 14px;
+      color: $gc-gray;
+
+      &:hover {
+        color: $gc-dark-gray;
+      }
     }
   }
 }
