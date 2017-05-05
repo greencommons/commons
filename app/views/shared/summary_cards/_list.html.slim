@@ -4,7 +4,7 @@
       div class="entity-icon entity-icon--lists"
         i class="fa fa-th-list"
       .summary-card__title
-        h5= resource.name
+        h5= link_to resource.name, resource
         h6
           = humanize_date(resource.published_at)
       - if defined?(hit) && hit
