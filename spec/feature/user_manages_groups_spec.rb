@@ -39,8 +39,8 @@ RSpec.feature 'Managing groups' do
 
     expect(find('h1')).to have_content(group.name)
     expect(page).to have_text('New Description.')
-    expect(group.reload.tag_list).to eq %w(some cool tags)
-    expect(group.reload.cached_tags).to eq %w(some cool tags)
+    expect(group.reload.tag_list).to match_array %w(some cool tags)
+    expect(group.reload.cached_tags).to match_array %w(some cool tags)
   end
 
   scenario 'group admins can add and remove members' do
