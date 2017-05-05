@@ -4,10 +4,6 @@ module Taggable
   included do
     acts_as_taggable
 
-    before_save do
-      self.cached_tags = tag_list
-    end
-
     after_touch do
       update(cached_tags: tag_list)
     end

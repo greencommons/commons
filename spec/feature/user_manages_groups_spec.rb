@@ -14,7 +14,7 @@ RSpec.feature 'Managing groups' do
       fill_in 'group[long_description]', with: group.long_description
       fill_in 'group[url]', with: group.url
       fill_in 'group[email]', with: 'admin@greencommons.org'
-      click_on 'CREATE'
+      click_on 'Create'
     end
     expect(find('h1')).to have_content(group.name)
   end
@@ -22,21 +22,25 @@ RSpec.feature 'Managing groups' do
   scenario 'group admins can update a group' do
     user = feature_login
     group = create(:group)
+    group.tag_list.add('test')
     group.add_admin(user)
 
     visit group_path(group)
-    click_on 'SETTINGS'
+    click_on 'Settings'
     expect(find('h1')).to have_content("Edit #{group.name}")
 
     within("#edit_group_#{group.id}") do
       fill_in 'group[name]', with: group.name
-      fill_in 'group[short_description]', with: 'New Description.'
+      fill_in 'group[long_description]', with: 'New Description.'
+      fill_in 'group[tag_list]', with: 'some, cool, tags'
 
-      click_on 'UPDATE'
+      click_on 'Update'
     end
 
     expect(find('h1')).to have_content(group.name)
     expect(page).to have_text('New Description.')
+    expect(group.reload.tag_list).to eq %w(some cool tags)
+    expect(group.reload.cached_tags).to eq %w(some cool tags)
   end
 
   scenario 'group admins can add and remove members' do
@@ -47,7 +51,7 @@ RSpec.feature 'Managing groups' do
     new_member = create(:user)
 
     visit group_path(group)
-    click_on 'MEMBERS'
+    click_on '1'
 
     within('#top-page-form') do
       fill_in 'email', with: new_member.email
@@ -56,7 +60,7 @@ RSpec.feature 'Managing groups' do
 
     expect(page).to have_text(new_member.email)
 
-    click_on 'REMOVE'
+    click_on 'Remove'
     expect(page).not_to have_text(new_member.email)
   end
 
@@ -69,15 +73,15 @@ RSpec.feature 'Managing groups' do
     group.add_user(new_member)
 
     visit group_path(group)
-    click_on 'MEMBERS'
+    click_on '2'
 
     expect(page).to have_text('2 members')
 
-    click_on 'MAKE ADMIN'
+    click_on 'Make admin'
     wait_for_ajax
     expect(group.admin?(new_member)).to be true
 
-    click_on 'REMOVE ADMIN'
+    click_on 'Remove admin rights'
     wait_for_ajax
     expect(group.admin?(new_member)).to be false
   end

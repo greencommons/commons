@@ -17,10 +17,8 @@
   }
 
   &__suggestion {
-    background: inherit;
-    border-color: $autocomplete-border-color;
-    border-style: solid;
-    border-width: 0 1px;
+    background: $creme;
+    border: none;
     display: block;
     font-size: 14px;
     font-weight: normal;

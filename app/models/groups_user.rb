@@ -6,4 +6,6 @@ class GroupsUser < ApplicationRecord
   validates :user, presence: true
   validates :admin, inclusion: { in: [true, false] }
   validates :user_id, uniqueness: { scope: :group_id }
+
+  scope :sorted, -> { order(:created_at) }
 end

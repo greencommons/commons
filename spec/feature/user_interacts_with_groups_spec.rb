@@ -6,11 +6,11 @@ RSpec.feature 'Interacting with groups' do
     group = create(:group)
 
     visit group_path(group)
-    click_on 'JOIN GROUP'
+    click_on 'Join group'
     wait_for_ajax
 
     expect(group.find_member(user)).not_to be nil
-    expect(page).to have_content('LEAVE GROUP')
+    expect(page).to have_content('Leave group')
   end
 
   scenario 'users can leave an existing group' do
@@ -19,11 +19,11 @@ RSpec.feature 'Interacting with groups' do
     group.add_user(user)
 
     visit group_path(group)
-    click_on 'LEAVE GROUP'
+    click_on 'Leave group'
     wait_for_ajax
 
     expect(group.find_member(user)).to be nil
-    expect(page).to have_content('JOIN GROUP')
+    expect(page).to have_content('Join group')
   end
 
   scenario 'users can\'t edit groups' do
@@ -33,9 +33,7 @@ RSpec.feature 'Interacting with groups' do
     group.add_user(user)
 
     visit group_path(group)
-    click_on 'SETTINGS'
-
-    expect(page).to have_content('You are not authorized to perform this action.')
+    expect(page).not_to have_content('Settings')
   end
 
   scenario 'users can\'t edit members list' do

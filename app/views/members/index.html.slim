@@ -1,23 +1,56 @@
-.row
-  .col-xs-2
-    = link_to '< BACK', @group, class: 'btn btn-default'
-.row
-  .col-xs-12.col-md-6.col-lg-6
-    h1 #{@group.name} Group
-    h4 #{@members.count} members
-  .col-xs-12.col-md-6.col-lg-6
-    - if @admin
-      .top-page-form
-        = react_component('AutocompleteForm', { name: 'user-autocomplete',
-                                                field: 'email',
-                                                action: group_members_path,
-                                                autocomplete_url: autocomplete_members_path(group_id: @group.id),
-                                                placeholder: 'Type member name or email',
-                                                authenticity_token: form_authenticity_token }, 
-                                              { prerender: true })
-
-- @members.each_slice(2) do |slice|
-  .row
-    - slice.each do |member|
-      .col-xs-12.col-lg-6
-        = render 'shared/summary_cards/main', resource: member
+.page-details.resource-page 
+  div class="resource-page__background resource-page__background--groups"
+    = render 'shared/alerts'
+  .resource-page__container
+    .container
+      .row
+        .col-xs-12
+          .resource-page__wrapper
+            .resource-page__header
+              .row
+                .page-details__row--more-space 
+                  .col-xs-12.col-sm-6.col-md-5
+                    div class="entity-icon entity-icon--big entity-icon--groups"
+                      i class="fa fa-users"
+                    div class="resource-page__type resource-page__type--groups"
+                      | Group Members
+                  .col-xs-12.col-sm-6.col-md-7
+                    - if @admin
+                      .top-page-form
+                        = react_component('AutocompleteForm', { name: 'user-autocomplete',
+                                                                field: 'email',
+                                                                action: group_members_path,
+                                                                autocomplete_url: autocomplete_members_path(group_id: @group.id),
+                                                                placeholder: 'Type member name or email',
+                                                                authenticity_token: form_authenticity_token }, 
+                                                              { prerender: true })
+                  .clearfix
+              .row
+                .page-details__row--half
+                  .col-xs-12
+                    h1.resource-page__title
+                      = link_to @group.name, @group
+                  .clearfix
+              .row
+                .page-details__row
+                  .col-xs-12
+                    .page-details__metadata.page-details__metadata--half-margin 
+                      .user-picture
+                        = image_tag(@group.users[0] ? @group.users[0].avatar_url : 'user.png', 
+                                    class: 'user-picture__image')
+                        = image_tag(@group.users[1] ? @group.users[1].avatar_url : 'user.png', 
+                                    class: 'user-picture__image user-picture__image--over')
+                        a class='btn btn--picture-cover'
+                          = @group.users.count
+                    .page-details__metadata 
+                      | members
+                    .page-details__metadata 
+                      i.fa.fa-calendar.glyphicon--right
+                      = "Published Date: #{humanize_date(@group.published_at)}"
+                  .clearfix
+              .page-details__row
+                - @members.sorted.each_slice(2) do |slice|
+                  .row
+                    - slice.each do |member|
+                      .col-xs-12.col-md-6
+                        = render 'shared/summary_cards/main', resource: member

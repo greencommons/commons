@@ -30,6 +30,7 @@ class GroupsController < ApplicationController
     authorize @group
 
     if @group.save
+      @group.touch
       @group.add_admin(current_user)
       redirect_to @group, notice: 'Group was successfully created.'
     else
@@ -39,6 +40,7 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
+      @group.touch
       redirect_to @group, notice: 'Group was successfully updated.'
     else
       render :edit
@@ -58,6 +60,7 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :short_description, :long_description, :tag_list, :url, :email)
+    params.require(:group).permit(:name, :short_description, :long_description,
+                                  :tag_list, :url, :email)
   end
 end
