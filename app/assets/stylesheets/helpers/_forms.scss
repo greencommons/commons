@@ -29,7 +29,6 @@
 
 textarea,
 textarea.form-control,
-input.form-control,
 input[type=text],
 input[type=password],
 input[type=email],
@@ -43,4 +42,10 @@ input[type=number],
   font-size: 14px;
   color: $gc-dark-gray;
   border-radius: 6px;
+}
+
+.control-label {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: $gc-dark-gray;
 }

@@ -18,10 +18,11 @@
 @import "components/pagination";
 @import "components/daterangepicker";
 
+@import "components/form-box";
 @import "components/loader";
 @import "components/footer";
 @import "components/tags";
-@import "components/entity_icon";
+@import "components/entity-icon";
 @import "components/autocomplete";
 @import "components/summary-card";
 @import "components/comment-box";
@@ -33,5 +34,4 @@
 @import "components/sidelist";
 
 @import "pages/default";
-@import "pages/search";
 @import "pages/resource";

@@ -12,6 +12,10 @@
     line-height: 30px;
   }
 
+  &--creme-bg {
+    background-color: $creme;
+  }
+
   &__row {
     margin-bottom: $row-spacing;
   }
