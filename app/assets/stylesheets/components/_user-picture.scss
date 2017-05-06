@@ -1,0 +1,16 @@
+.user-picture {
+  &__image {
+    height: 36px;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    position: relative;
+    margin-top: -6px;
+    display: inline-block;
+    float: left;
+
+  }
+
+  &__image--over {
+    margin-left: -18px;
+  }
+}

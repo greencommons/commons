@@ -73,7 +73,7 @@ var AutocompleteForm = React.createClass({
 
   renderSubmit: function() {
     return (
-      <button id='add-member-button' name="button" type="submit" className="form-control btn btn-primary">
+      <button id='add-member-button' name="button" type="submit" className="form-control btn btn-dark-blue">
         <span aria-hidden="true" className="glyphicon glyphicon-plus"></span>
       </button>
     )

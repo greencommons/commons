@@ -3,11 +3,16 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :leave]
 
   def index
-    @groups = policy_scope(Group)
+    @groups = policy_scope(Group).page(params[:page] || 1).per(10)
   end
 
   def show
     @resources = @group.latest_resources
+    @lists = @group.lists
+    @similar = Suggesters::Tags.new(tags: @group.cached_tags,
+                                    except: @group,
+                                    limit: 12,
+                                    models: [Group]).suggest
     @group_current_user = @group.find_member(current_user)
     @admin = @group_current_user.try(:admin?)
   end
@@ -25,6 +30,7 @@ class GroupsController < ApplicationController
     authorize @group
 
     if @group.save
+      @group.touch
       @group.add_admin(current_user)
       redirect_to @group, notice: 'Group was successfully created.'
     else
@@ -34,6 +40,7 @@ class GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
+      @group.touch
       redirect_to @group, notice: 'Group was successfully updated.'
     else
       render :edit
@@ -53,6 +60,7 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :short_description, :long_description, :url, :email)
+    params.require(:group).permit(:name, :short_description, :long_description,
+                                  :tag_list, :url, :email)
   end
 end
