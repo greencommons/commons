@@ -52,10 +52,12 @@ ActiveRecord::Schema.define(version: 20170506092947) do
   end
 
   create_table "lists_items", force: :cascade do |t|
-    t.integer "list_id"
-    t.string  "item_type"
-    t.integer "item_id"
-    t.text    "note"
+    t.integer  "list_id"
+    t.string   "item_type"
+    t.integer  "item_id"
+    t.text     "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["item_type", "item_id"], name: "index_lists_items_on_item_type_and_item_id", using: :btree
     t.index ["list_id", "item_id", "item_type"], name: "index_lists_items_on_list_id_and_item_id_and_item_type", unique: true, using: :btree
     t.index ["list_id"], name: "index_lists_items_on_list_id", using: :btree

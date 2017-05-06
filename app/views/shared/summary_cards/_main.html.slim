@@ -1,5 +1,7 @@
 - if partial = summary_card_for(resource)
-  = render partial, resource: resource, hit: defined?(hit) ? hit : nil
+  = render partial, resource: resource, 
+                    hit: defined?(hit) ? hit : nil, 
+                    minimalist: defined?(minimalist) ? minimalist : nil
 - else
   p Unsupported Summary Card Type
   = resource

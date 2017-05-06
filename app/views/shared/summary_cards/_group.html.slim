@@ -14,19 +14,21 @@
     .summary-card__row
       p
         = resource.short_description
-    = render 'shared/components/tags_list', tags: resource.cached_tags
-    .summary-card__row.summary-card__row--last
-      .summary-card__more.summary-card__more--space.summary-card__more--buttons
-        = link_to 'Add to a list (25)', root_path, class: 'btn btn-gc'
-      .summary-card__more.summary-card__more--meta
-        .summary-card__metadata.summary-card__metadata--last
-          i.fa.fa-th-list.glyphicon--right
-          | #{resource.lists.count} Lists
-        .summary-card__metadata
-          i.fa.fa-users.glyphicon--right
-          | #{resource.users.count} members   
-        .summary-card__metadata
-          i.fa.fa-comments.glyphicon--right
-          span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}" 
-            | 0 Comments
-      .clearfix
+    - unless minimalist
+      = render 'shared/components/tags_list', tags: resource.cached_tags
+      .summary-card__row.summary-card__row--last
+        .summary-card__more.summary-card__more--space.summary-card__more--buttons
+          = link_to 'Add to a list (25)', '#', class: 'btn btn-gc'
+        .summary-card__more.summary-card__more--meta
+          .summary-card__metadata.summary-card__metadata--last
+            i.fa.fa-th-list.glyphicon--right
+            | #{resource.lists.count} Lists
+          .summary-card__metadata
+            i.fa.fa-users.glyphicon--right
+            | #{resource.users.count} members   
+          .summary-card__metadata
+            i.fa.fa-comments.glyphicon--right
+            span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}" 
+              | 0 Comments
+        .clearfix
+    

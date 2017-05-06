@@ -8,6 +8,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    @items = @list.lists_items.sorted.page(params[:page] || 1).per(12)
     @similar = Suggesters::Tags.new(tags: @list.cached_tags,
                                     except: @list,
                                     limit: 12,

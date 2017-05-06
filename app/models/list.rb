@@ -7,10 +7,10 @@ class List < ApplicationRecord
 
   belongs_to :owner, polymorphic: true
   has_many :lists_items
-  has_many :resources, :through => :lists_items, :source => :item,
-    :source_type => 'Resource'
-  has_many :groups, :through => :lists_items, :source => :item,
-    :source_type => 'Group'
+  has_many :resources, through: :lists_items, source: :item,
+                       source_type: 'Resource'
+  has_many :groups, through: :lists_items, source: :item,
+                    source_type: 'Group'
 
   validates :name, presence: true
   validates :owner, presence: true

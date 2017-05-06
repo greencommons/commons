@@ -63,16 +63,22 @@
             .resource-page__content
               .row
                 .col-xs-12.col-md-9
-                  .row.page-details__row--double
+                  .row.page-details__row
                     .col-xs-12
                       .page-details__section-title.page-details__row
                         h6.pull-left
-                          | #{@list.resources.count} items
-                          
-                  .row
+                          | #{@list.lists_items.count} items
+                  .row.page-details__row--double
                     .col-xs-12
-                      .page-details__row--double
-                        = render 'shared/integrations/disqus/comments', entity: @list
+                      - @items.each_slice(2) do |slice|
+                        .row
+                          - slice.each do |list_item|
+                            .col-xs-12.col-md-6
+                              = render 'shared/summary_cards/main', resource: list_item.item, 
+                                                                    minimalist: true
+                    .row.page-details__row
+                      .col-xs-12.text-center
+                        = paginate @items
                               
                 .col-xs-12.col-md-3
                   .page-details__row--double

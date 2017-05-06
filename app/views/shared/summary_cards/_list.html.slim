@@ -14,10 +14,8 @@
     .summary-card__row
       p
         = resource.description
-        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
-        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
     .summary-card__row.summary-card__row--last
       .summary-card__metadata.summary-card__metadata--left
         i.fa.fa-file-text.glyphicon--right
-        = "#{resource.resources.count} items"
+        = "#{resource.lists_items.count} items"
       .clearfix

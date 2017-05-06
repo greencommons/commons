@@ -4,4 +4,6 @@ class ListsItem < ApplicationRecord
 
   validates :list, presence: true
   validates :item, presence: true
+
+  scope :sorted, -> { order(:created_at) }
 end
