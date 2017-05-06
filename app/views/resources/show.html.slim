@@ -19,6 +19,16 @@
                       = link_to '#', class: 'resource-actions__button btn btn-white resource-actions__button--right' do
                         | Export
                         i.fa.fa-share.glyphicon--left
+                      - if policy(@resource).edit?
+                        = link_to edit_resource_path(@resource), class: "resource-actions__button btn btn-white resource-actions__button--right" do
+                          | Edit
+                          i.fa.fa-pencil.glyphicon--left
+                      - if policy(@resource).destroy?
+                        = link_to @resource, method: 'DELETE', 
+                                             class: "resource-actions__button btn btn-white resource-actions__button--right", 
+                                             data: { confirm: 'Are you sure?' } do
+                          | Delete
+                          i.fa.fa-times.glyphicon--left
                       - if @resource.url
                         = link_to via_hypothesis(@resource.url), target: '_blank', class: 'resource-actions__button btn btn-dark-blue'
                           | View Original
@@ -68,10 +78,6 @@
                                               can_create: policy(@resource).update? }, { prerender: true }
                 .col-xs-12.col-md-6
                   .resource-actions
-                    - if policy(@resource).edit?
-                      = link_to 'Edit', edit_resource_path(@resource), class: "btn btn-#{@resource.resource_type} btn--margin-right btn--large"
-                    - if policy(@resource).destroy?
-                      = link_to 'Delete', @resource, method: 'DELETE', class: "btn btn-#{@resource.resource_type} btn--margin-right btn--large", data: { confirm: 'Are you sure?' }   
                     = link_to "Add to a list (#{@resource.lists.count})", '#', class: "btn btn-#{@resource.resource_type} btn--large"
 
 
