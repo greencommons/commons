@@ -82,7 +82,8 @@ RSpec.describe Group do
   describe 'Associations' do
     it { is_expected.to have_many(:groups_users) }
     it { is_expected.to have_many(:users) }
-    it { is_expected.to have_many(:lists) }
+    it { is_expected.to have_many(:owned_lists) }
+    it { is_expected.to have_many(:lists_items) }
   end
 
   it_behaves_like 'indexable', :group

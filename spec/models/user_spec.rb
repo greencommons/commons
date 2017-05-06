@@ -19,7 +19,7 @@ RSpec.describe User do
   describe 'Associations' do
     it { is_expected.to have_many(:groups_users) }
     it { is_expected.to have_many(:groups) }
-    it { is_expected.to have_many(:lists) }
+    it { is_expected.to have_many(:owned_lists) }
   end
 
   describe '#full_name' do
