@@ -18,7 +18,8 @@ class Resource < ApplicationRecord
   enum resource_type: RESOURCE_TYPES
 
   belongs_to :user, optional: true
-  has_and_belongs_to_many :lists
+  has_many :lists_items, as: :item
+  has_many :lists, through: :lists_items
 
   validates :title, :resource_type, presence: true
   validates :url, length: { maximum: 255 }

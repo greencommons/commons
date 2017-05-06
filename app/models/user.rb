@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   has_many :groups_users
   has_many :groups, through: :groups_users
-  has_many :lists, as: :owner
+  has_many :owned_lists, as: :owner
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, length: { maximum: 255 }

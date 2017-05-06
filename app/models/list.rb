@@ -6,7 +6,11 @@ class List < ApplicationRecord
   has_paper_trail
 
   belongs_to :owner, polymorphic: true
-  has_and_belongs_to_many :resources
+  has_many :lists_items
+  has_many :resources, :through => :lists_items, :source => :item,
+    :source_type => 'Resource'
+  has_many :groups, :through => :lists_items, :source => :item,
+    :source_type => 'Group'
 
   validates :name, presence: true
   validates :owner, presence: true
