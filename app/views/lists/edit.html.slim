@@ -6,6 +6,6 @@
           .form-box__title
             .row
               .col-xs-12.col-md-8.col-md-offset-2
-                h1 Create Group
+                h1 Edit #{@list.name}
           .form-box__body
-            = render 'form', group: @group, submit_label: 'Create', cancel: groups_path
+            = render 'form', list: @list, submit_label: 'Update', cancel: @list

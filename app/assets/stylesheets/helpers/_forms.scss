@@ -49,3 +49,44 @@ input[type=number],
   margin-bottom: 6px;
   color: $gc-dark-gray;
 }
+
+input[type="checkbox"].checkbox--yellow {
+  position: relative;
+  border: none;
+  margin-bottom: -4px;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:checked:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 6px;
+    display: table;
+    width: 6px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-top-width: 0;
+    border-left-width: 0;
+    @include rotate(45deg);
+  }
+
+  &:checked:after {
+    background-color: #f5c746;
+    border-color: #f5c746;
+  }
+
+  &:disabled:after {
+    border-color: $gray-light;
+  }
+
+  &:disabled:checked:after {
+    background-color: $gray-light;
+    border-color: transparent;
+  }
+}

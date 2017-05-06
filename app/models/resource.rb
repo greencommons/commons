@@ -1,6 +1,7 @@
 class Resource < ApplicationRecord
   include Indexable
   include Taggable
+  include Privacy
 
   RESOURCE_TYPES = {
     article: 0,
@@ -9,18 +10,12 @@ class Resource < ApplicationRecord
     url: 3
   }.freeze
 
-  RESOURCE_PRIVACY_SETTINGS = {
-    priv: 0,
-    publ: 1
-  }.freeze
-
   has_paper_trail
 
   # Warning: since this is an enum (stored as an integer), we need to preserve the original integers
   # each value is associated with. Otherwise the types stored in the database will switch around.
   # See: http://www.justinweiss.com/articles/creating-easy-readable-attributes-with-activerecord-enums/
   enum resource_type: RESOURCE_TYPES
-  enum privacy: RESOURCE_PRIVACY_SETTINGS
 
   belongs_to :user, optional: true
   has_and_belongs_to_many :lists

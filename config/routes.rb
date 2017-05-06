@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :resources, model_name: 'Resource', concerns: :taggable
   resources :lists, model_name: 'List', concerns: :taggable
-  
+
   resources :groups, model_name: 'Group', concerns: :taggable do
     resources :members, only: [:index, :create, :destroy] do
       collection do

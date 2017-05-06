@@ -1,6 +1,7 @@
 class List < ApplicationRecord
   include Indexable
   include Taggable
+  include Privacy
 
   has_paper_trail
 
