@@ -1,0 +1,35 @@
+#add-to-list.modal.fade role="dialog" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button"  &times;
+        h6 Add #{resource.name} to list
+      .modal-body
+        = form_for([resource, ListsItem.new]) do |f|
+          - if resource.errors.any?
+            .page-details__row
+              .alert.alert-warning role='alert'
+                p 
+                  = pluralize(resource.errors.count, 'error')
+                  |  prohibited this resource from being saved.
+                ul
+                  - resource.errors.full_messages.each do |message|
+                    li= message
+          fieldset
+            .form-group
+              = f.label :list, 'List', class: 'control-label'
+            .form-group
+              = f.label :note, 'Note', class: 'control-label'
+              = f.text_field :note, class: 'form-control'
+            .form-group
+              = f.label :long_description, 'About (long)', class: 'control-label'
+              = f.text_area :long_description, class: 'form-control'
+            .form-group
+              .checkbox
+                = f.check_box :add_items, { class: 'checkbox--yellow' }, 'true', 'false'
+                | Add items
+            .form-group
+              .pull-right
+                = f.submit 'Submit', class: 'form-control btn btn-gc'
+
+    

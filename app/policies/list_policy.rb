@@ -23,15 +23,23 @@ class ListPolicy < ApplicationPolicy
   end
 
   def update?
-    @user && @list.owner == @user
+    @user && owned?
   end
 
   def edit?
-    @user && @list.owner == @user
+    @user && owned?
   end
 
   def destroy?
-    @user && @list.owner == @user
+    @user && owned?
+  end
+
+  def owned?
+    if @list.owner.is_a?(Group)
+      @list.owner.admin?(@user)
+    else
+      @list.owner == @user
+    end
   end
 
   def scope

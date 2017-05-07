@@ -21,4 +21,5 @@ RSpec.describe List do
   end
 
   it_behaves_like 'indexable', :list
+  it_behaves_like 'privacy', :list
 end
