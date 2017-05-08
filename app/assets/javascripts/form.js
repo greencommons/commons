@@ -1,4 +1,10 @@
 $(document).on('ready turbolinks:load', function () {
+  $('[data-gcselect2]').each(function() {
+    $(this).select2({
+      theme: "bootstrap"
+    });
+  });
+
   $('[data-gctagsinput]').each(function() {
     var container = $(this);
     var input = container.children('input');

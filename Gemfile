@@ -34,6 +34,7 @@ gem 'font-awesome-rails'
 gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
 gem 'bootstrap-tagsinput-rails'
+gem 'select2-rails'
 
 group :development do
   gem 'bummr'

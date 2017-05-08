@@ -8,8 +8,9 @@
 //= require moment
 //= require daterangepicker
 //= require bootstrap-tagsinput
+//= require select2
 
-//= require tags_input
+//= require form
 
 //= require components
 
