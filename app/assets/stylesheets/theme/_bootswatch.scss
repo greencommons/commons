@@ -523,33 +523,12 @@ input[type="checkbox"],
 
 .alert {
   border: none;
-  color: #fff;
   margin-bottom: 0;
-
-  &-success {
-    background-color: $brand-success;
-  }
-
-  &-info {
-    background-color: $brand-info;
-  }
-
-  &-warning {
-    background-color: $brand-warning;
-  }
-
-  &-danger {
-    background-color: $brand-danger;
-  }
 
   a:not(.close):not(.btn),
   .alert-link {
     color: #fff;
     font-weight: bold;
-  }
-
-  .close {
-    color: #fff;
   }
 }
 

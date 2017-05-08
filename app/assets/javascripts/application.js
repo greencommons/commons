@@ -7,6 +7,9 @@
 //= require react_ujs
 //= require moment
 //= require daterangepicker
+//= require bootstrap-tagsinput
+
+//= require tags_input
 
 //= require components
 

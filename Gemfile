@@ -33,6 +33,7 @@ gem 'fog-aws'
 gem 'font-awesome-rails'
 gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
+gem 'bootstrap-tagsinput-rails'
 
 group :development do
   gem 'bummr'

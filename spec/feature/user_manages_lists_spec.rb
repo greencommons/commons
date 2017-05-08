@@ -31,7 +31,6 @@ RSpec.feature 'Managing lists' do
     within('#new_list') do
       fill_in 'list[name]', with: 'My list'
       fill_in 'list[description]', with: 'Description!'
-      fill_in 'list[tag_list]', with: 'wind,sea,water'
       click_on 'Create'
     end
 
@@ -49,7 +48,6 @@ RSpec.feature 'Managing lists' do
     within('#new_list') do
       fill_in 'list[name]', with: 'My list'
       fill_in 'list[description]', with: 'Description!'
-      fill_in 'list[tag_list]', with: 'wind,sea,water'
       find(:css, '#list_privacy').set(true)
       click_on 'Create'
     end

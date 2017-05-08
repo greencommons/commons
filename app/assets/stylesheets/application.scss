@@ -4,6 +4,7 @@
 @import "bootstrap";
 @import "daterangepicker-bs3";
 @import "theme/bootswatch";
+@import 'bootstrap-tagsinput.scss';
 
 @import "helpers/colors";
 @import "helpers/glyphicons";
@@ -33,6 +34,7 @@
 @import "components/filters";
 @import "components/sidelist";
 @import "components/user-picture";
+@import "components/bootstrap-tagsinput-override";
 
 @import "pages/default";
 @import "pages/resource";

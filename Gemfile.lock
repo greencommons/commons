@@ -67,6 +67,8 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-tagsinput-rails (0.4.2.1)
+      railties (>= 3.1)
     builder (3.2.2)
     bummr (0.1.6)
       rainbow
@@ -403,6 +405,7 @@ DEPENDENCIES
   aws-sdk (~> 2)
   bootstrap-daterangepicker-rails
   bootstrap-sass (~> 3.3.7)
+  bootstrap-tagsinput-rails
   bummr
   bundler-audit
   capybara-screenshot
