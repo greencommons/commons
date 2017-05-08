@@ -32,15 +32,12 @@ RSpec.feature 'Managing groups' do
     within("#edit_group_#{group.id}") do
       fill_in 'group[name]', with: group.name
       fill_in 'group[long_description]', with: 'New Description.'
-      fill_in 'group[tag_list]', with: 'some, cool, tags'
 
       click_on 'Update'
     end
 
     expect(find('h1')).to have_content(group.name)
     expect(page).to have_text('New Description.')
-    expect(group.reload.tag_list).to match_array %w(some cool tags)
-    expect(group.reload.cached_tags).to match_array %w(some cool tags)
   end
 
   scenario 'group admins can add and remove members' do
