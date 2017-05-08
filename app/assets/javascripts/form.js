@@ -23,7 +23,7 @@ $(document).on('ready turbolinks:load', function () {
     });
 
     input.on('itemRemoved', function(event) {
-      if(input.tagsinput('items').length == 0) {
+      if(input.tagsinput('items').length === 0) {
         child.attr('placeholder', 'Separate tags with commas...');
       }
     });
