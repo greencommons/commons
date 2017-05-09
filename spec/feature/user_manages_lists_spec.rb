@@ -23,7 +23,7 @@ RSpec.feature 'Managing lists' do
   end
 
   scenario 'users can create a list' do
-    feature_login
+    user = feature_login
 
     find(:css, '.glyphicon.glyphicon-plus').click
     click_link 'Create List'
@@ -31,12 +31,17 @@ RSpec.feature 'Managing lists' do
     within('#new_list') do
       fill_in 'list[name]', with: 'My list'
       fill_in 'list[description]', with: 'Description!'
+      find('.bootstrap-tagsinput').find('input').set('some,random,tags')
       click_on 'Create'
     end
 
     expect(find('h1')).to have_content('My list')
     expect(List.count).to eq 1
+    expect(List.first.owner).to eq user
     expect(List.first.privacy).to eq 'publ'
+    expect(page).to have_content('some')
+    expect(page).to have_content('random')
+    expect(page).to have_content('tags')
   end
 
   scenario 'users can create a private list' do
@@ -64,11 +69,14 @@ RSpec.feature 'Managing lists' do
     visit edit_list_path(list)
     within("#edit_list_#{list.id}") do
       fill_in 'list[name]', with: 'Water Experiments'
+      find('.bootstrap-tagsinput').find('input').set('some,tags')
       click_on 'Update'
     end
 
     expect(find('h1')).to have_content('Water Experiments')
     expect(List.last.name).to eq 'Water Experiments'
+    expect(page).to have_content('some')
+    expect(page).to have_content('tags')
   end
 
   scenario 'users can destroy a list' do

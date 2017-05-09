@@ -14,9 +14,14 @@ RSpec.feature 'Managing groups' do
       fill_in 'group[long_description]', with: group.long_description
       fill_in 'group[url]', with: group.url
       fill_in 'group[email]', with: 'admin@greencommons.org'
+      find('.bootstrap-tagsinput').find('input').set('some,random,tags')
       click_on 'Create'
     end
+
     expect(find('h1')).to have_content(group.name)
+    expect(page).to have_content('some')
+    expect(page).to have_content('random')
+    expect(page).to have_content('tags')
   end
 
   scenario 'group admins can update a group' do
@@ -32,12 +37,16 @@ RSpec.feature 'Managing groups' do
     within("#edit_group_#{group.id}") do
       fill_in 'group[name]', with: group.name
       fill_in 'group[long_description]', with: 'New Description.'
+      find('.bootstrap-tagsinput').find('input').set('some,tags')
 
       click_on 'Update'
     end
 
     expect(find('h1')).to have_content(group.name)
     expect(page).to have_text('New Description.')
+
+    expect(page).to have_content('some')
+    expect(page).to have_content('tags')
   end
 
   scenario 'group admins can add and remove members' do
