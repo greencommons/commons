@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:create]
   end
   get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
+  get '/autocomplete/lists/:current_resource', to: 'autocomplete#lists', as: 'autocomplete_lists'
 
   # User-facing routes
   resources :search, only: [:new]

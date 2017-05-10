@@ -76,6 +76,12 @@
                 .col-xs-12.col-md-6
                   .resource-actions
                     = link_to "Add to a list (#{@group.lists.count})", '#', class: "btn btn-groups btn--large"
+                    = react_component 'AddToListButton', { name: @group.name, 
+                                                           id: @group.id, 
+                                                           autocomplete_path: autocomplete_lists_path(current_resource: "Group:#{@group.id}"),
+                                                           authenticity_token: form_authenticity_token,
+                                                           list_count: @group.lists.count }
+
 
 
             .resource-page__content

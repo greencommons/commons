@@ -11,6 +11,10 @@
     margin-bottom: 200px;
   }
 
+  &--modal {
+    width: 100%;
+  }
+
   &__title {
     padding: 20px 30px;
     border-bottom: 1px solid $gray-lighter;
