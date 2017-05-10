@@ -14,6 +14,7 @@
     .summary-card__row
       p
         = resource.description
+    = render 'shared/components/tags_list', tags: resource.cached_tags
     .summary-card__row.summary-card__row--last
       .summary-card__metadata.summary-card__metadata--left
         i.fa.fa-file-text.glyphicon--right
