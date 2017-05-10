@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   has_many :groups_users
   has_many :groups, through: :groups_users
-  has_many :lists, as: :owner
+  has_many :owned_lists, as: :owner, class_name: List
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, length: { maximum: 255 }
@@ -24,4 +24,5 @@ class User < ApplicationRecord
   def full_name
     ([first_name, last_name] - ['']).compact.join(' ')
   end
+  alias name full_name
 end

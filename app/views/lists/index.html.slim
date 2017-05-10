@@ -4,13 +4,13 @@
       .col-xs-12
         = render 'shared/alerts'
 
-        h1 My Groups
-        - @groups.each_slice(2) do |slice|
+        h1 My Lists
+        - @lists.each_slice(2) do |slice|
           .row 
-            - slice.each do |group|
+            - slice.each do |list|
               .col-xs-12.col-md-6
-                = render "shared/summary_cards/main", resource: group
+                = render "shared/summary_cards/main", resource: list
                 
     .row.page-details__row
       .col-xs-12.text-center
-        = paginate @groups
+        = paginate @lists

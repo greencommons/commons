@@ -20,6 +20,10 @@
                         = link_to edit_group_path(@group), class: 'resource-actions__button btn btn-white resource-actions__button--right' do
                           | Settings
                           i.fa.fa-cog.glyphicon--left
+                      - if policy(@group).destroy?
+                        = link_to @group, method: 'DELETE', class: "resource-actions__button btn btn-white resource-actions__button--right", data: { confirm: 'Are you sure?' } do
+                          | Delete
+                          i.fa.fa-times.glyphicon--left
                       - if @current_user                                        
                         - if @group_current_user                                 
                           = link_to leave_group_members_path(@group), method: :delete, 
@@ -71,8 +75,6 @@
                                               can_create: policy(@group).update? }, { prerender: true }
                 .col-xs-12.col-md-6
                   .resource-actions
-                    - if policy(@group).destroy?
-                      = link_to 'Delete', @group, method: 'DELETE', class: "btn btn-groups btn--margin-right btn--large", data: { confirm: 'Are you sure?' }   
                     = link_to "Add to a list (#{@group.lists.count})", '#', class: "btn btn-groups btn--large"
 
 

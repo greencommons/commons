@@ -1,0 +1,91 @@
+.page-details.resource-page 
+  div class="resource-page__background resource-page__background--lists"
+    = render 'shared/alerts'
+  .resource-page__container
+    .container
+      .row
+        .col-xs-12
+          .resource-page__wrapper
+            .resource-page__header
+              .row
+                .page-details__row--more-space 
+                  .col-xs-12.col-sm-6.col-md-4
+                    div class="entity-icon entity-icon--big entity-icon--lists"
+                      i class="fa fa-list"
+                    div class="resource-page__type resource-page__type--lists"
+                      | Lists
+                  .col-xs-12.col-sm-6.col-md-8
+                    .resource-actions.resource-actions--align-middle
+                      - if policy(@list).edit?
+                        = link_to edit_list_path(@list), class: 'resource-actions__button btn btn-white resource-actions__button--right' do
+                          | Edit
+                          i.fa.fa-pencil.glyphicon--left
+                      - if policy(@list).destroy?
+                        = link_to @group, method: 'DELETE', class: "resource-actions__button btn btn-white", data: { confirm: 'Are you sure?' }   
+                          | Delete
+                          i.fa.fa-times.glyphicon--left
+                  .clearfix
+              .row
+                .page-details__row--half
+                  .col-xs-12
+                    h1.resource-page__title
+                      = @list.name
+                  .clearfix
+              .row
+                .page-details__row
+                  .col-xs-12
+                    .page-details__metadata 
+                      i.fa.fa-suitcase.glyphicon--right
+                      = "Owner: #{@list.owner.name}"
+                    .page-details__metadata 
+                      i.fa.fa-calendar.glyphicon--right
+                      = "Published Date: #{humanize_date(@list.published_at)}"
+                    .page-details__metadata 
+                      i.fa.fa-lock.glyphicon--right
+                      = "Privacy: #{@list.priv? ? 'Private' : 'Public'}"
+                  .clearfix
+              .row
+                .page-details__row
+                  .col-xs-12
+                    p.page-details__description
+                      = @list.description
+                  .clearfix
+                  
+              .row
+                .col-xs-12.col-md-6
+                  = react_component 'Tags', { authenticity_token: form_authenticity_token,
+                                              submit_url: list_tags_path(@list),
+                                              tags: @list.cached_tags,
+                                              can_create: policy(@list).update? }, { prerender: true }
+                .col-xs-12.col-md-6
+                  .resource-actions
+
+            .resource-page__content
+              .row
+                .col-xs-12.col-md-9
+                  .row.page-details__row
+                    .col-xs-12
+                      .page-details__section-title.page-details__row
+                        h6.pull-left
+                          | #{@list.lists_items.count} items
+                  .row.page-details__row--double
+                    .col-xs-12
+                      - @items.each_slice(2) do |slice|
+                        .row
+                          - slice.each do |list_item|
+                            .col-xs-12.col-md-6
+                              = render 'shared/summary_cards/main', resource: list_item.item, 
+                                                                    minimalist: true
+                    .row.page-details__row
+                      .col-xs-12.text-center
+                        = paginate @items
+                              
+                .col-xs-12.col-md-3
+                  .page-details__row--double
+                    .page-details__section-title
+                      h6
+                        | Similar lists
+                    ul.sidelist
+                      - @similar.each do |similar_list|
+                        li= link_to similar_list.name, list_path(similar_list)
+                    

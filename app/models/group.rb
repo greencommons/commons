@@ -6,8 +6,10 @@ class Group < ApplicationRecord
 
   has_many :groups_users
   has_many :users, through: :groups_users
-  has_many :lists, as: :owner
+  has_many :owned_lists, as: :owner, class_name: List
   has_many :resources, through: :lists
+  has_many :lists_items, as: :item
+  has_many :lists, through: :lists_items
 
   validates :name, presence: true
 

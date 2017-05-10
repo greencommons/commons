@@ -4,7 +4,7 @@
       div class="entity-icon entity-icon--lists"
         i class="fa fa-th-list"
       .summary-card__title
-        h5= resource.name
+        h5= link_to resource.name, resource
         h6
           = humanize_date(resource.published_at)
       - if defined?(hit) && hit
@@ -14,10 +14,9 @@
     .summary-card__row
       p
         = resource.description
-        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
-        | Lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    = render 'shared/components/tags_list', tags: resource.cached_tags
     .summary-card__row.summary-card__row--last
       .summary-card__metadata.summary-card__metadata--left
         i.fa.fa-file-text.glyphicon--right
-        = "#{resource.resources.count} items"
+        = "#{resource.lists_items.count} items"
       .clearfix

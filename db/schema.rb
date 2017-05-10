@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217083008) do
+ActiveRecord::Schema.define(version: 20170506092947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,14 +47,20 @@ ActiveRecord::Schema.define(version: 20170217083008) do
     t.datetime "updated_at",                null: false
     t.text     "cached_tags",  default: [],              array: true
     t.datetime "published_at"
+    t.integer  "privacy",      default: 1,  null: false
     t.index ["owner_type", "owner_id"], name: "index_lists_on_owner_type_and_owner_id", using: :btree
   end
 
-  create_table "lists_resources", id: false, force: :cascade do |t|
-    t.integer "list_id"
-    t.integer "resource_id"
-    t.index ["list_id"], name: "index_lists_resources_on_list_id", using: :btree
-    t.index ["resource_id"], name: "index_lists_resources_on_resource_id", using: :btree
+  create_table "lists_items", force: :cascade do |t|
+    t.integer  "list_id"
+    t.string   "item_type"
+    t.integer  "item_id"
+    t.text     "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_lists_items_on_item_type_and_item_id", using: :btree
+    t.index ["list_id", "item_id", "item_type"], name: "index_lists_items_on_list_id_and_item_id_and_item_type", unique: true, using: :btree
+    t.index ["list_id"], name: "index_lists_items_on_list_id", using: :btree
   end
 
   create_table "resources", force: :cascade do |t|

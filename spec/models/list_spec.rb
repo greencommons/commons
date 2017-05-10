@@ -15,8 +15,11 @@ RSpec.describe List do
 
   describe 'Associations' do
     it { is_expected.to belong_to(:owner) }
-    it { is_expected.to have_and_belong_to_many(:resources) }
+    it { is_expected.to have_many(:lists_items) }
+    it { is_expected.to have_many(:resources) }
+    it { is_expected.to have_many(:groups) }
   end
 
   it_behaves_like 'indexable', :list
+  it_behaves_like 'privacy', :list
 end

@@ -23,8 +23,12 @@
           = f.text_area :long_description, class: 'form-control'
         .form-group
           = f.label :tag_list, 'Tags', class: 'control-label'
-          = f.text_field :tag_list, value: @group.cached_tags.join(', '), class: 'form-control', placeholder: 'Separate tags with commas...'
-        .form-group
+          .row
+            .col-xs-12 data-gctagsinput='true'
+              = f.text_field :tag_list, value: @group.cached_tags.join(', '), 
+                                        class: 'form-control', 
+                                        placeholder: 'Separate tags with commas...'
+            .form-group
           = f.label :url, 'URL', class: 'control-label'
           = f.text_field :url, class: 'form-control', placeholder: 'URL...'
         .form-group
