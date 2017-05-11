@@ -4,6 +4,7 @@ class ListsItem < ApplicationRecord
 
   validates :list, presence: true
   validates :item, presence: true
+  validates_uniqueness_of :list_id, scope: [:item_id, :item_type]
 
   scope :sorted, -> { order(:created_at) }
 end

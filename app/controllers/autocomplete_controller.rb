@@ -7,11 +7,18 @@ class AutocompleteController < ApplicationController
   end
 
   def lists
-    current = params[:current_resource].split(':')
-    current = current[0].constantize.find(current[1])
-
     lists = Suggesters::Lists.new(query: params[:q],
-                                  except: current).suggest
-    render json: { items: lists.map { |l| { id: l.id, name: l.name } } }
+                                  except: current_resource.lists).suggest
+    render json: { items: lists }
+  end
+
+  private
+
+  def current_resource
+    @current_resource ||= lambda do
+      return nil unless params[:current_resource]
+      current = params[:current_resource].split(':')
+      current[0].constantize.find(current[1])
+    end.call
   end
 end
