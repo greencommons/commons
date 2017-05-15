@@ -7,7 +7,8 @@ var AddToListButton = React.createClass({
     list_count: React.PropTypes.number,
     action: React.PropTypes.string,
     autocomplete_path: React.PropTypes.string,
-    authenticity_token: React.PropTypes.string
+    authenticity_token: React.PropTypes.string,
+    button_class: React.PropTypes.string,
   },
 
   getInitialState: function() {
@@ -44,7 +45,7 @@ var AddToListButton = React.createClass({
 
     return (
       <div>
-        <a className="btn btn-groups btn--large" onClick={this.toggleModal}>
+        <a className={"btn " + this.props.button_class} onClick={this.toggleModal}>
           Add to a list ({this.state.listCount})
         </a>
         {modal}

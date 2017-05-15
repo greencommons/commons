@@ -78,7 +78,15 @@
                                               can_create: policy(@resource).update? }, { prerender: true }
                 .col-xs-12.col-md-6
                   .resource-actions
-                    = link_to "Add to a list (#{@resource.lists.count})", '#', class: "btn btn-#{@resource.resource_type} btn--large"
+                    = react_component 'AddToListButton', { name: @resource.name, 
+                                                           id: @resource.id, 
+                                                           type: 'Resource',
+                                                           action: list_items_path,
+                                                           loader_image: image_path('loader.gif'),
+                                                           autocomplete_path: autocomplete_lists_path(current_resource: "Resource:#{@resource.id}"),
+                                                           authenticity_token: form_authenticity_token,
+                                                           list_count: @resource.lists.count,
+                                                           button_class: "btn-#{@resource.resource_type} btn--large" }
 
 
             .resource-page__content

@@ -18,7 +18,15 @@
       = render 'shared/components/tags_list', tags: resource.cached_tags
       .summary-card__row.summary-card__row--last
         .summary-card__more.summary-card__more--space.summary-card__more--buttons
-          = link_to 'Add to a list (25)', '#', class: 'btn btn-gc'
+          = react_component 'AddToListButton', { name: resource.name, 
+                                                 id: resource.id, 
+                                                 type: 'Group',
+                                                 action: list_items_path,
+                                                 loader_image: image_path('loader.gif'),
+                                                 autocomplete_path: autocomplete_lists_path(current_resource: "Group:#{resource.id}"),
+                                                 authenticity_token: form_authenticity_token,
+                                                 list_count: resource.lists.count,
+                                                 button_class: "btn-gc" }
         .summary-card__more.summary-card__more--meta
           .summary-card__metadata.summary-card__metadata--last
             i.fa.fa-th-list.glyphicon--right

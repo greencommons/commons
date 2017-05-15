@@ -2,29 +2,64 @@ class ListItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
   def create
-    @list_item = ListsItem.new(list_item_params)
-    # authorize @list_item
+    if valid_type? && item
+      list_item.list = list
+      list_item.item = item
+      list_item.published_at = item.published_at
+      authorize list_item
 
-    if @list_item.save
-      render json: {
-        status: 'ok',
-        list_name: @list_item.list.name,
-        resource_name: @list_item.item.name,
-        list_count: @list_item.item.lists.count
-      }
+      if list_item.save
+        render json: {
+          status: 'ok',
+          list_name: list.name,
+          resource_name: item.name,
+          list_count: item.lists.count
+        }
+      else
+        render_errors(list_item.errors)
+      end
     else
-      render json: {
-        status: 'ko',
-        list_name: @list_item.list.name,
-        resource_name: @list_item.item.name,
-        errors: @list_item.errors
-      }
+      render_errors('Item Type' => ['is not valid. Supported types: Group, Resource, List.'])
     end
+  end
+
+  def destroy
+    @list_item = ListItem.find(params[:list_item_id])
+    @list_item.destroy
+
+    render json: { status: 'ok' }
   end
 
   private
 
+  def valid_type?
+    %w(Group Resource List).include?(params[:list_item][:item_type])
+  end
+
+  def list_item
+    @list_item ||= @list_item = ListsItem.new(list_item_params)
+  end
+
+  def list
+    @list ||= List.find(params[:list_item][:list_id])
+  end
+
+  def item
+    @item ||= params[:list_item][:item_type].constantize.find(
+      params[:list_item][:item_id]
+    )
+  end
+
+  def render_errors(errors)
+    render json: {
+      status: 'ko',
+      list_name: list.name,
+      resource_name: item.name,
+      errors: errors
+    }
+  end
+
   def list_item_params
-    params.require(:list_item).permit(:list_id, :item_id, :item_type, :note)
+    params.require(:list_item).permit(:note)
   end
 end

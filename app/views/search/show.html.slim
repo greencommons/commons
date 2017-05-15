@@ -1,8 +1,8 @@
 .page-details.page-details--creme-bg
   .container
     = render 'shared/alerts'
-    .row#search-loader
-      #search-loader__panel
+    .row#ajax-loader
+      #ajax-loader__panel
         = image_tag 'loader.gif'
       #filters
         = render 'search/filters'

@@ -82,7 +82,8 @@
                                                            loader_image: image_path('loader.gif'),
                                                            autocomplete_path: autocomplete_lists_path(current_resource: "Group:#{@group.id}"),
                                                            authenticity_token: form_authenticity_token,
-                                                           list_count: @group.lists.count }
+                                                           list_count: @group.lists.count,
+                                                           button_class: "btn-groups btn--large" }
 
 
 

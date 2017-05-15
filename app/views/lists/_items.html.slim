@@ -1,0 +1,27 @@
+.col-xs-12.col-md-9
+  .row.page-details__row
+    .col-xs-12
+      .page-details__section-title.page-details__row
+        h6.pull-left
+          | #{@list.lists_items.count} items
+        .pull-right
+          .pull-left.resource-actions__button--right
+            = select_tag :sort, 
+                         options_for_select([['Sort by publication date', 'published_at'], 
+                                             ['Sort by creation date', 'created_at'] ], @sort), 
+                         class: 'form-control gc-select',
+                         data: { 'filter-select' => true }
+        .clearfix
+          
+      .row.page-details__row--double
+        .col-xs-12
+          - @items.each_slice(2) do |slice|
+            .row
+              - slice.each do |list_item|
+                .col-xs-12.col-md-6
+                  = render 'shared/summary_cards/main', resource: list_item.item, 
+                                                        minimalist: true, 
+                                                        data: { remove_item: list_item.id }
+        .row.page-details__row
+          .col-xs-12.text-center
+            = paginate @items
