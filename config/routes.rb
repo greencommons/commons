@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get '/profile/password', to: 'users/passwords#edit', as: 'password'
   patch '/profile/password', to: 'users/passwords#update', as: 'update_password'
 
-  resources :list_items, only: [:create]
+  resources :list_items, only: [:create, :destroy]
 
   resources :resources, model_name: 'Resource', concerns: :taggable
   resources :lists, model_name: 'List', concerns: :taggable

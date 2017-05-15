@@ -9,13 +9,13 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-
     @sort = params[:sort] || 'published_at'
+    @page = params[:page] || 1
 
     @items = @list.lists_items.
              includes(:item).
              order("#{@sort} DESC").
-             page(params[:page] || 1).
+             page(@page).
              per(12)
 
     @similar = Suggesters::Tags.new(tags: @list.cached_tags,
