@@ -47,10 +47,23 @@ class ListItemsController < ApplicationController
   end
 
   def destroy
-    @list_item = ListItem.find(params[:list_item_id])
+    @list_item = ListsItem.find(params[:id])
+
+    @list = @list_item.list
+    @sort = params[:sort] || 'published_at'
+    @page = params[:page] || 1
+
     @list_item.destroy
 
-    render json: { status: 'ok' }
+    @items = @list.lists_items.
+             includes(:item).
+             order("#{@sort} DESC").
+             page(params[:page] || 1).
+             per(12)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
