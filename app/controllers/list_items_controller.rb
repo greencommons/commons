@@ -46,6 +46,13 @@ class ListItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @list_item = ListItem.find(params[:list_item_id])
+    @list_item.destroy
+
+    render json: { status: 'ok' }
+  end
+
   private
 
   def valid_type?
