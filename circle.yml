@@ -11,7 +11,7 @@ machine:
 dependencies:
   post:
     - wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.4.0/elasticsearch-2.4.0.tar.gz
-    - tar -xvf elasticsearch-2.4.0.tar.gz
+    - tar -xvf elasticsearch-5.1.1.tar.gz
     - elasticsearch-2.4.0/bin/elasticsearch: {background: true}
     # Make sure that Elasticsearch is up before running tests:
     - sleep 10 && wget --waitretry=5 --retry-connrefused -v http://127.0.0.1:9200/
