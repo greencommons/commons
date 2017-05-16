@@ -13,7 +13,7 @@ var initRemovers = function() {
       });
     });
   });
-}
+};
 
 $(document).on('ready turbolinks:load', function () {
   initRemovers();
