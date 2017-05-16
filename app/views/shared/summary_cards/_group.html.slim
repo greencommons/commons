@@ -1,7 +1,7 @@
 .summary-card 
   .summary-card__body
-    .summary-card__delete
-      a href='' data-sc-remove="#{remove}"
+    - if remove
+      a.summary-card__delete href='' data-sc-remove="#{remove}"
         i.fa.fa-trash
     .summary-card__row--double
       div class="entity-icon entity-icon--groups"

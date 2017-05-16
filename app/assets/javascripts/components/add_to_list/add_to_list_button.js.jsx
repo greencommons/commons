@@ -45,7 +45,7 @@ var AddToListButton = React.createClass({
 
     return (
       <div>
-        <a className={"btn " + this.props.button_class} onClick={this.toggleModal}>
+        <a className={"btn-add-to-list btn " + this.props.button_class} onClick={this.toggleModal}>
           Add to a list ({this.state.listCount})
         </a>
         {modal}
