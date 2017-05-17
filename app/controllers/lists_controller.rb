@@ -1,7 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_list, only: [:show, :edit, :update, :destroy, :leave]
-  before_action :set_owner_suggestions, only: [:new, :edit]
 
   def index
     @lists = policy_scope(List).page(params[:page] || 1).per(10)
@@ -72,14 +71,10 @@ class ListsController < ApplicationController
     authorize @list
   end
 
-  def set_owner_suggestions
-    @owner_suggestions = Group.all.map { |g| [g.name, "Group:#{g.id}"] } +
-                         User.all.map { |u| [u.name.presence || u.email, "User:#{u.id}"] }
-  end
-
   def owner
+    return nil unless params[:list][:owner]
     owner = params[:list][:owner].split(':')
-    return current_user unless %w(Group User).include?(owner[0])
+    return nil unless %w(Group User).include?(owner[0])
     owner[0].constantize.find(owner[1]) || current_user
   end
 

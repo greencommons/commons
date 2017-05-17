@@ -78,7 +78,7 @@ RSpec.configure do |config|
   end
 
   def reset_all_indices
-    [Resource, List, Group].each do |klass|
+    [Resource, List, Group, User].each do |klass|
       klass.__elasticsearch__.delete_index!(index: klass.index_name)
       klass.__elasticsearch__.create_index!(index: klass.index_name)
     end

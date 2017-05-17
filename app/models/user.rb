@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Indexable
+
   has_paper_trail
   acts_as_taggable
 
@@ -20,6 +22,28 @@ class User < ApplicationRecord
 
   scope :filter_by_email, ->(email) { where('email ILIKE ?', "%#{email}%") }
   scope :sort_by_email, -> { order('email ASC') }
+
+  settings index: { number_of_shards: 2 } do
+    mappings dynamic: true do
+      indexes :id, type: 'long'
+      indexes :email, analyzer: 'english', type: 'string'
+      indexes :first_name, analyzer: 'english', type: 'string'
+      indexes :last_name, analyzer: 'english', type: 'string'
+      indexes :bio, analyzer: 'english', type: 'string'
+      indexes :created_at, type: 'date'
+      indexes :updated_at, type: 'date'
+
+      indexes :name_suggest, type: 'completion'
+    end
+  end
+
+  def as_indexed_json(_options = {})
+    json = as_json
+    json['name_suggest'] = { input: [first_name ? first_name.split(' ') : nil,
+                                     last_name ? last_name.split(' ') : nil,
+                                     email].compact.flatten }
+    json
+  end
 
   def full_name
     ([first_name, last_name] - ['']).compact.join(' ')
