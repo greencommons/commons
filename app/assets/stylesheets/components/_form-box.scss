@@ -11,6 +11,10 @@
     margin-bottom: 200px;
   }
 
+  &--no-top-margin {
+    margin-top: 0;
+  }
+
   &--modal {
     width: 100%;
   }
@@ -23,6 +27,13 @@
       font-size: 18px;
       margin: 0;
     }
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 14px;
+    color: $gc-dark-gray;
   }
 
   &__body {
