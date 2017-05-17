@@ -9,14 +9,14 @@ RSpec.feature 'Update Profile' do
 
     click_link 'Hello,'
     click_link 'My Profile'
-    expect(find('h1')).to have_content('My Profile')
+    expect(find('h1')).to have_content('Hello')
     within("#edit_user_#{user.id}") do
       fill_in 'user[first_name]', with: 'John'
       fill_in 'user[last_name]', with: 'Wick'
       fill_in 'user[email]', with: 'johnwick@example.com'
       fill_in 'user[bio]', with: 'Something interesting.'
       attach_file 'user[avatar]', Rails.root.join('spec/support/samples/horse.jpg')
-      click_on 'UPDATE'
+      click_on 'Update'
     end
 
     expect(page).to have_content('Profile updated.')
@@ -40,16 +40,15 @@ RSpec.feature 'Update Profile' do
     click_link 'Hello,'
     click_link 'My Profile'
     expect(page).to have_current_path(profile_path)
-    click_link 'Change My Password'
 
     within("#edit_user_#{user.id}") do
       fill_in 'user[current_password]', with: 'thecommons'
       fill_in 'user[password]', with: 'commons2'
       fill_in 'user[password_confirmation]', with: 'commons2'
-      click_on 'UPDATE'
+      click_on 'Update'
     end
 
-    expect(page).to have_content('Password updated.')
+    expect(page).to have_content('Profile updated.')
     expect(user.reload.encrypted_password).not_to eq original
   end
 end

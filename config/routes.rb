@@ -26,8 +26,6 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users/profile#edit', as: 'profile'
   patch '/profile', to: 'users/profile#update', as: 'update_profile'
-  get '/profile/password', to: 'users/passwords#edit', as: 'password'
-  patch '/profile/password', to: 'users/passwords#update', as: 'update_password'
 
   resources :list_items, only: [:create, :destroy]
 
