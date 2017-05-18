@@ -17,7 +17,10 @@ var initFilters = function() {
       format: 'MM/DD/YYYY'
     }
   }, function(start, end, label) {
-    // Handle filtering
+    var url = new Uri(window.location.href);
+    url.replaceQueryParam('filters[start]', start);
+    url.replaceQueryParam('filters[end]', end);
+    reload(url);
   });
 
   $('[data-filter-select]').each(function() {

@@ -19,6 +19,11 @@ module SearchBuilders
       self
     end
 
+    def filter_by_date
+      @es_params = SearchBuilders::DateFilter.new(@filters, @es_params).build
+      self
+    end
+
     def sort
       @es_params = SearchBuilders::Sorter.new(@sort, @es_params).build
       self
