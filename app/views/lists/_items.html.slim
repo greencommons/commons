@@ -21,7 +21,7 @@
                 .col-xs-12.col-md-6
                   = render 'shared/summary_cards/main', resource: list_item.item, 
                                                         minimalist: true, 
-                                                        remove: list_item_path(list_item, sort: @sort, page: @page)
+                                                        remove: policy(@list).update? ? list_item_path(list_item, sort: @sort, page: @page) : nil
         .row.page-details__row
           .col-xs-12.text-center
             = paginate @items

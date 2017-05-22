@@ -7,12 +7,10 @@ class ListsItemPolicy < ApplicationPolicy
   end
 
   def create?
-    return false unless @user
-    true
+     @user && ListPolicy.new(@user, @list_item.list).update?
   end
 
   def destroy?
-    return false unless @user
-    true
+     @user && ListPolicy.new(@user, @list_item.list).update?
   end
 end

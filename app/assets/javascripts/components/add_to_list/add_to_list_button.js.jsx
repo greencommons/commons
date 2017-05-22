@@ -9,6 +9,7 @@ var AddToListButton = React.createClass({
     autocomplete_path: React.PropTypes.string,
     authenticity_token: React.PropTypes.string,
     button_class: React.PropTypes.string,
+    logged_in: React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -39,7 +40,8 @@ var AddToListButton = React.createClass({
                         autocompletePath={this.props.autocomplete_path}
                         authenticityToken={this.props.authenticity_token}
                         toggleModal={this.toggleModal}
-                        updateListCount={this.updateListCount} />
+                        updateListCount={this.updateListCount}
+                        loggedIn={this.props.logged_in} />
       )
     }
 

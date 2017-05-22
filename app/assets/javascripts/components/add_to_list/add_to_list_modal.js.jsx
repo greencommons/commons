@@ -8,12 +8,13 @@ var AddToListModal = React.createClass({
     autocompletePath: React.PropTypes.string,
     authenticityToken: React.PropTypes.string,
     toggleModal: React.PropTypes.func,
-    updateListCount: React.PropTypes.func
+    updateListCount: React.PropTypes.func,
+    loggedIn: React.PropTypes.bool,
   },
 
   getInitialState: function() {
     return {
-      step: 'form',
+      step: this.props.loggedIn ? 'form' : 'unauthorized',
       submitted: false,
       json: {}
     }
@@ -32,6 +33,12 @@ var AddToListModal = React.createClass({
     var content = "";
 
     switch(this.state.step) {
+      case 'unauthorized':
+        content = (
+          <AddToListUnauthorized name={this.props.name}
+                                 toggleModal={this.props.toggleModal} />
+        )
+        break;
       case 'form':
         content = (
           <AddToListForm id={this.props.id}

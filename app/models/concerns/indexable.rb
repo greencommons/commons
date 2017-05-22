@@ -7,8 +7,13 @@ module Indexable
     attr_accessor :relevancy
 
     def run_if_public
-      return if respond_to?(:priv?) && priv?
-      yield
+      if respond_to?(:priv?) && priv?
+        if previous_changes.keys.include?('privacy')
+          RemoveFromIndexJob.perform_async(self.class.name, id)
+        end
+      else
+        yield
+      end
     end
 
     after_create :set_published_at

@@ -2,35 +2,38 @@ class ListItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
   def create
-    if valid_type? && item
-      list_item.list = list
-      list_item.item = item
-      list_item.published_at = item.published_at
-      authorize list_item
+    if policy(list).update?
+      if valid_type? && item
+        list_item.list = list
+        list_item.item = item
+        list_item.published_at = item.published_at
+        authorize list_item
 
-      if list_item.save
-        render json: {
-          status: 'ok',
-          list_name: list.name,
-          resource_name: item.name,
-          list_count: item.lists.count
-        }
+        if list_item.save
+          render json: {
+            status: 'ok',
+            list_name: list.name,
+            resource_name: item.name,
+            list_count: item.lists.count
+          }
+        else
+          render_errors(list_item.errors)
+        end
       else
-        render_errors(list_item.errors)
+        render_errors('Item Type' => ['is not valid. Supported types: Group, Resource, List.'])
       end
     else
-      render_errors('Item Type' => ['is not valid. Supported types: Group, Resource, List.'])
+      render_errors('Unauthorized: ' => ["You don't have the permission to do that."])
     end
   end
 
   def destroy
     @list_item = ListsItem.find(params[:id])
-
     @list = @list_item.list
+
     @sort = params[:sort] || 'published_at'
     @page = params[:page] || 1
-
-    @list_item.destroy
+    @list_item.destroy if policy(list).update?
 
     @items = @list.lists_items.
              includes(:item).
@@ -64,10 +67,11 @@ class ListItemsController < ApplicationController
   end
 
   def render_errors(errors)
-    render json: {
+    render status: 400, json: {
       status: 'ko',
       list_name: list.name,
       resource_name: item.name,
+      list_count: item.lists.count,
       errors: errors
     }
   end
