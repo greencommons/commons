@@ -1,6 +1,6 @@
 var initFilters = function() {
   var reload = function(url) {
-    $('#search-loader__panel').show();
+    $('#ajax-loader__panel').show();
     window.history.pushState({}, "", url);
     $.ajax({
       url: url,

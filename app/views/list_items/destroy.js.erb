@@ -1,0 +1,4 @@
+$("#list-items").html("<%= escape_javascript(render 'lists/items' ) %>");
+initFilters();
+initRemovers();
+$('#ajax-loader__panel').hide()

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UserFilter do
+RSpec.describe Suggesters::Members do
   describe '#run' do
     context 'when group_id is given to scope down the results' do
       context 'when the group contains users' do
@@ -12,7 +12,7 @@ RSpec.describe UserFilter do
 
           group.add_user(john)
 
-          users = UserFilter.new(query: 'comm', group_id: group.id).run
+          users = Suggesters::Members.new(query: 'comm', group_id: group.id).suggest
           expect(users.map(&:email)).not_to include('john@commons.org')
           expect(users.map(&:email)).to include('mark@commons.org',
                                                 'jack@commons.org')
@@ -26,7 +26,7 @@ RSpec.describe UserFilter do
 
           group.add_user(john)
 
-          users = UserFilter.new(query: 'jo', group_id: group.id).run
+          users = Suggesters::Members.new(query: 'jo', group_id: group.id).suggest
           expect(users).to eq([])
         end
       end
@@ -38,7 +38,7 @@ RSpec.describe UserFilter do
           create(:user, email: 'mark@commons.org')
           create(:user, email: 'jack@commons.org')
 
-          users = UserFilter.new(query: 'comm', group_id: group.id).run
+          users = Suggesters::Members.new(query: 'comm', group_id: group.id).suggest
           expect(users.map(&:email)).to include('john@commons.org',
                                                 'mark@commons.org',
                                                 'jack@commons.org')
@@ -52,7 +52,7 @@ RSpec.describe UserFilter do
         create(:user, email: 'mark@commons.org')
         create(:user, email: 'jack@commons.org')
 
-        users = UserFilter.new(query: 'comm').run
+        users = Suggesters::Members.new(query: 'comm').suggest
         expect(users.map(&:email)).to include('john@commons.org',
                                               'mark@commons.org',
                                               'jack@commons.org')
@@ -63,7 +63,7 @@ RSpec.describe UserFilter do
         create(:user, email: 'mark@commons.org')
         create(:user, email: 'jack@commons.org')
 
-        users = UserFilter.new(query: 'jo').run
+        users = Suggesters::Members.new(query: 'jo').suggest
         expect(users.map(&:email)).to eq(['john@commons.org'])
       end
     end

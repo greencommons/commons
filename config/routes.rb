@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:create]
   end
   get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
+  get '/autocomplete/lists/:current_resource', to: 'autocomplete#lists', as: 'autocomplete_lists'
 
   # User-facing routes
   resources :search, only: [:new]
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users/profile#update', as: 'update_profile'
   get '/profile/password', to: 'users/passwords#edit', as: 'password'
   patch '/profile/password', to: 'users/passwords#update', as: 'update_password'
+
+  resources :list_items, only: [:create, :destroy]
 
   resources :resources, model_name: 'Resource', concerns: :taggable
   resources :lists, model_name: 'List', concerns: :taggable

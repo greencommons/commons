@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Managing lists' do
+RSpec.feature 'Managing lists', :worker, :elasticsearch do
   scenario 'users can list lists' do
     user = feature_login
     list = create(:list, owner: user, description: 'Some description.')
@@ -88,5 +88,78 @@ RSpec.feature 'Managing lists' do
     wait_for_ajax
 
     expect(List.count).to eq 0
+  end
+
+  scenario 'sort by creation date' do
+    user = feature_login
+    list = create(:list, owner: user, description: 'Some description.')
+
+    group1 = create(:group, name: 'Group 1', published_at: 3.days.ago)
+    group2 = create(:group, name: 'Group 2', published_at: 1.days.ago)
+    resource = create(:resource, title: 'Resource', published_at: 10.days.ago)
+
+    create(:lists_item, list: list, item: group1, published_at: group1.published_at)
+    create(:lists_item, list: list, item: group2, published_at: group2.published_at)
+    create(:lists_item, list: list, item: resource, published_at: resource.published_at)
+
+    visit list_path(list)
+    expect(page).to have_text(group1.name)
+    expect(page).to have_text(group2.name)
+    expect(page).to have_text(resource.title)
+
+    expect(page).to have_text(/.*Group 2.*Group 1.*Resource.*/)
+    select 'Sort by creation date', from: 'sort'
+    wait_for_ajax
+    expect(page).to have_text(/.*Resource.*Group 2.*Group 1.*/)
+  end
+
+  context 'remove from list' do
+    scenario 'users can remove a group from a list' do
+      user = feature_login
+      list = create(:list, owner: user, description: 'Some description.')
+
+      group1 = create(:group, name: 'Group 1', published_at: 3.days.ago)
+      group2 = create(:group, name: 'Group 2', published_at: 1.days.ago)
+      resource = create(:resource, title: 'Resource', published_at: 10.days.ago)
+
+      create(:lists_item, list: list, item: group1)
+      create(:lists_item, list: list, item: group2)
+      create(:lists_item, list: list, item: resource)
+
+      visit list_path(list)
+      expect(page).to have_text(group1.name)
+      expect(page).to have_text(group2.name)
+      expect(page).to have_text(resource.name)
+
+      first('.summary-card__body').hover
+      find('.summary-card__delete').click
+      wait_for_ajax
+
+      expect(page).not_to have_text(group1.name)
+      expect(page).to have_text(group2.name)
+      expect(page).to have_text(resource.name)
+    end
+
+    scenario 'users can remove a resource from a list' do
+      user = feature_login
+      list = create(:list, owner: user, description: 'Some description.')
+
+      resource1 = create(:resource, title: 'Resource 1', published_at: 10.days.ago)
+      resource2 = create(:resource, title: 'Resource 2', published_at: 10.days.ago)
+
+      create(:lists_item, list: list, item: resource1)
+      create(:lists_item, list: list, item: resource2)
+
+      visit list_path(list)
+      expect(page).to have_text(resource1.name)
+      expect(page).to have_text(resource2.name)
+
+      first('.summary-card__body').hover
+      find('.summary-card__delete').click
+      wait_for_ajax
+
+      expect(page).not_to have_text(resource1.name)
+      expect(page).to have_text(resource2.name)
+    end
   end
 end

@@ -11,7 +11,8 @@ class ListPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    return true unless @list.priv?
+    @user && owned?
   end
 
   def create?
