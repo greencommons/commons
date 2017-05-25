@@ -12,7 +12,7 @@ module Suggesters
     private
 
     def format_records
-      return [] unless es_records['suggest'] && es_records['suggest']['owner_suggest'].any?
+      return [] unless es_records['suggest'] && es_records['suggest']['list_suggest'].any?
 
       formatted_records = es_records['suggest']['list_suggest'].first['options'].map do |l|
         { id: l['_source']['id'], name: l['_source']['name'] }

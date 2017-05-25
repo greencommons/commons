@@ -51,7 +51,7 @@ var AddToListForm = React.createClass({
   },
 
   handleSelect: function(value) {
-    _this.setState({ listId: value });
+    this.setState({ listId: value });
   },
 
   componentWillUnmount: function() {
