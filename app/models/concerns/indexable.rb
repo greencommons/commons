@@ -35,7 +35,7 @@ module Indexable
     end
 
     def set_published_at
-      unless published_at
+      if respond_to?(:published_at) && !published_at
         if defined?(metadata) && metadata && metadata['date']
           begin
             self.published_at = Date.parse(metadata['date'])
