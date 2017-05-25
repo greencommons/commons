@@ -17,7 +17,7 @@ class List < ApplicationRecord
   validates :owner_type, inclusion: %w(User Group)
 
   settings index: { number_of_shards: 2 } do
-    mappings dynamic: 'false' do
+    mappings dynamic: true do
       indexes :id, type: 'long'
       indexes :name, analyzer: 'english', type: 'string'
       indexes :description, analyzer: 'english', type: 'string'

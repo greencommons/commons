@@ -8,7 +8,7 @@ namespace :elasticsearch do
       client.indices.delete index: klass.index_name
     end
 
-    klass.__elasticsearch__.create_index!
+    klass.__elasticsearch__.create_index! force: true
 
     begin
       klass.import
@@ -21,7 +21,7 @@ namespace :elasticsearch do
 
   desc 'Deletes the "resource", "group" and "list" indices and regenerates it with all records'
   task reset_all_indices: :environment do
-    [Resource, Group, List].each { |klass| reset_index(klass) }
+    [Resource, Group, List, User].each { |klass| reset_index(klass) }
   end
 
   desc 'Deletes the "resource" index and regenerates it with all records currently in Resource'
@@ -37,5 +37,10 @@ namespace :elasticsearch do
   desc 'Deletes the "list" index and regenerates it with all records currently in List'
   task reset_list_index: :environment do
     reset_index(List)
+  end
+
+  desc 'Deletes the "user" index and regenerates it with all records currently in List'
+  task reset_list_index: :environment do
+    reset_index(User)
   end
 end

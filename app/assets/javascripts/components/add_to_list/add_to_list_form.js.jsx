@@ -50,6 +50,10 @@ var AddToListForm = React.createClass({
     });
   },
 
+  handleSelect: function(value) {
+    this.setState({ listId: value });
+  },
+
   componentWillUnmount: function() {
     $('body').removeClass('no-scroll');
   },
@@ -106,8 +110,11 @@ var AddToListForm = React.createClass({
                 <fieldset>
                   <div className="form-group">
                     <label className="control-label" htmlFor="resource_title">List</label>
-                    <select name="list_item[list_id]" id="list_id" aria-hidden="true" onChange={this.handleListId}>
-                    </select>
+                    <AutocompleteSelect name='list_item[list_id]'
+                                        id='list_id'
+                                        autocompletePath={this.props.autocompletePath}
+                                        handler={this.handleSelect}
+                                        remote={true} />
                   </div>
                   <div className="form-group">
                     <label className="control-label" htmlFor="resource_url">Note</label>

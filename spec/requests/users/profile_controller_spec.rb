@@ -27,7 +27,7 @@ RSpec.describe 'Profile', type: :request do
     describe 'PATCH /profile' do
       context 'valid attributes' do
         it 'gets redirected to profile_path' do
-          patch profile_path, params: { user: valid_attributes }
+          patch profile_path, params: { user: { bio: 'Something interesting' } }
           expect(response).to redirect_to profile_path
         end
 

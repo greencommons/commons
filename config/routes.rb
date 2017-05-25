@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
   get '/autocomplete/members', to: 'autocomplete#members', as: 'autocomplete_members'
   get '/autocomplete/lists/:current_resource', to: 'autocomplete#lists', as: 'autocomplete_lists'
+  get '/autocomplete/lists_owners', to: 'autocomplete#list_owners', as: 'autocomplete_list_owners'
 
   # User-facing routes
   resources :search, only: [:new]
@@ -26,8 +27,6 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users/profile#edit', as: 'profile'
   patch '/profile', to: 'users/profile#update', as: 'update_profile'
-  get '/profile/password', to: 'users/passwords#edit', as: 'password'
-  patch '/profile/password', to: 'users/passwords#update', as: 'update_password'
 
   resources :list_items, only: [:create, :destroy]
 

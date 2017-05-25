@@ -7,10 +7,10 @@ class ListsItemPolicy < ApplicationPolicy
   end
 
   def create?
-     @user && ListPolicy.new(@user, @list_item.list).update?
+    @user && ListPolicy.new(@user, @list_item.list).update?
   end
 
   def destroy?
-     @user && ListPolicy.new(@user, @list_item.list).update?
+    @user && ListPolicy.new(@user, @list_item.list).update?
   end
 end

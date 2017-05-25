@@ -15,9 +15,8 @@
         .form-group
           = f.label :name, 'Name', class: 'control-label'
           = f.text_field :name, class: 'form-control', placeholder: 'List name...'
-        .form-group
-          = f.label :owner, 'Owner', class: 'control-label'
-          = f.select :owner, @owner_suggestions, {}, data: { gcselect2: true }
+        = react_component 'OwnerPicker', { autocompletePath: autocomplete_list_owners_path,
+                                           options: list.owner ? [list_owner(list.owner)] : [] }
         .form-group
           = f.label :description, class: 'control-label'
           = f.text_area :description, class: 'form-control', placeholder: '300 characters max'

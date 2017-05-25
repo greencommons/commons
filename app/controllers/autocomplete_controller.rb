@@ -12,6 +12,11 @@ class AutocompleteController < ApplicationController
     render json: { items: lists }
   end
 
+  def list_owners
+    list_owners = Suggesters::ListOwners.new(query: params[:q]).suggest
+    render json: { items: list_owners }
+  end
+
   private
 
   def current_resource
