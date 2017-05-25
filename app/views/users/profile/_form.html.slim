@@ -53,12 +53,13 @@
                   .form-group
                     = f.label :current_password, "Current Password", class: "control-label"
                     = f.password_field :current_password, class: "form-control", placeholder: "Your Current Password"
+              .row
                 .col-xs-12.col-md-6
                   .form-group
                     = f.label :password, "New Password", class: "control-label"
                     = f.password_field :password, class: "form-control", placeholder: "Your New Password"
               .row.page-details__row
-                .col-xs-12
+                .col-xs-12.col-md-6
                   .form-group
                     = f.label :password_confirmation, "New Password Confirmation", class: "control-label"
                     = f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Your New Password"
