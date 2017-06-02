@@ -25,4 +25,10 @@ module TypesHelper
       "#{suggestion.first_name} #{suggestion.last_name}, #{suggestion.email} (User)"
     end
   end
+
+  def user_lists(user, resource)
+    user.owned_lists.where.not(id: resource.lists.pluck(:id)).limit(5).map do |l|
+      { id: l.id, name: l.name }
+    end
+  end
 end
