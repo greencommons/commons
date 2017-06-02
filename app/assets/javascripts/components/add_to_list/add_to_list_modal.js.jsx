@@ -10,6 +10,7 @@ var AddToListModal = React.createClass({
     toggleModal: React.PropTypes.func,
     updateListCount: React.PropTypes.func,
     loggedIn: React.PropTypes.bool,
+    options: React.PropTypes.array
   },
 
   getInitialState: function() {
@@ -49,7 +50,8 @@ var AddToListModal = React.createClass({
                          authenticityToken={this.props.authenticityToken}
                          toggleModal={this.props.toggleModal}
                          load={this.load}
-                         confirm={this.confirm} />
+                         confirm={this.confirm}
+                         options={this.props.options} />
         )
         break;
       case 'loading':

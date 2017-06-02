@@ -8,4 +8,10 @@ module TypesHelper
 
     { id: "#{owner.class}:#{owner.id}", name: name }
   end
+
+  def user_lists(user, resource)
+    user.owned_lists.where.not(id: resource.lists.pluck(:id)).limit(5).map do |l|
+      { id: l.id, name: l.name }
+    end
+  end
 end

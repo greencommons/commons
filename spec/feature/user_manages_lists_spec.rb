@@ -34,11 +34,10 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
     within('#new_list') do
       fill_in 'list[name]', with: 'My list'
       fill_in 'list[description]', with: 'Description!'
-      find('.select2-selection').click
-      find(:xpath, "//input[@class='select2-search__field']").set 'te'
+      find('.selectize-input').click
+      find('#list_owner-selectized').set 'te'
       wait_for_ajax
-      find(:xpath, "//li[@class='select2-results__option select2-results__option--highlighted']").
-        click
+      find(:xpath, "//div[@class='option active']").click
 
       fill_in 'list[description]', with: 'Description!'
       find('.bootstrap-tagsinput').find('input').set('some,random,tags')
@@ -64,11 +63,11 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
     within('#new_list') do
       fill_in 'list[name]', with: 'My list'
       fill_in 'list[description]', with: 'Description!'
-      find('.select2-selection').click
-      find(:xpath, "//input[@class='select2-search__field']").set 'ad'
+
+      find('.selectize-input').click
+      find('#list_owner-selectized').set 'ad'
       wait_for_ajax
-      find(:xpath, "//li[@class='select2-results__option select2-results__option--highlighted']").
-        click
+      find(:xpath, "//div[@class='option active']").click
 
       fill_in 'list[description]', with: 'Description!'
       find(:css, '#list_privacy').set(true)

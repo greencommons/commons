@@ -1,8 +1,9 @@
 module Suggesters
   class Lists
-    def initialize(query:, except: [])
+    def initialize(query:, only: [], except: [])
       @query = query
-      @except = [*except].compact
+      @only = only.map { |e| [e.id, e.class.name] }
+      @except = [*except].compact.map { |e| [e.id, e.class.name] }
     end
 
     def suggest
@@ -17,10 +18,11 @@ module Suggesters
       formatted_records = es_records['suggest']['list_suggest'].first['options'].map do |l|
         { id: l['_source']['id'], name: l['_source']['name'] }
       end
-      return formatted_records unless @except.any?
+      return formatted_records unless @except.any? || @only.any?
 
       formatted_records.reject do |r|
-        @except.map { |e| [e.id, e.class.name] }.include?([r[:id], 'List'])
+        (@only.any? && !@only.include?([r[:id], 'List'])) ||
+          (@except.any? && @except.include?([r[:id], 'List']))
       end
     end
 
