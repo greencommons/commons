@@ -38,6 +38,11 @@ class User < ApplicationRecord
     end
   end
 
+  def all_owned_lists
+    List.where(owner_type: 'User', owner_id: id).
+      or(List.where(owner_type: 'Group', owner_id: groups.pluck(:id)))
+  end
+
   def as_indexed_json(_options = {})
     json = as_json
     json['name_suggest'] = { input: [first_name ? first_name.split(' ') : nil,

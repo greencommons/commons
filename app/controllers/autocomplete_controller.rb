@@ -7,9 +7,8 @@ class AutocompleteController < ApplicationController
   end
 
   def lists
-    existing_lists = current_user.group_owned_lists.pluck(:id)
-    allowed_lists = current_user.owned_lists.where.not(id: existing_lists) +
-                      current_user.group_owned_lists.where.not(id: existing_lists)
+    allowed_lists = current_user.all_owned_lists.
+                    where.not(id: current_resource.lists.pluck(:id))
     lists = Suggesters::Lists.new(query: params[:q],
                                   only: allowed_lists).suggest
     render json: { items: lists }
