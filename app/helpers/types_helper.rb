@@ -27,8 +27,18 @@ module TypesHelper
   end
 
   def user_lists(user, resource)
-    user.owned_lists.where.not(id: resource.lists.pluck(:id)).limit(5).map do |l|
+    user.all_owned_lists.where.not(id: resource.lists.pluck(:id)).limit(5).map do |l|
       { id: l.id, name: l.name }
+    end
+  end
+
+  private
+
+  def owner_name(suggestion)
+    if suggestion.is_a?(Group)
+      "#{suggestion.name} (Group)"
+    else
+      "#{suggestion.first_name} #{suggestion.last_name}, #{suggestion.email} (User)"
     end
   end
 end
