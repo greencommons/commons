@@ -31,4 +31,14 @@ module TypesHelper
       { id: l.id, name: l.name }
     end
   end
+
+  private
+
+  def owner_name(suggestion)
+    if suggestion.is_a?(Group)
+      "#{suggestion.name} (Group)"
+    else
+      "#{suggestion.first_name} #{suggestion.last_name}, #{suggestion.email} (User)"
+    end
+  end
 end
