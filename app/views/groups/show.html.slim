@@ -85,7 +85,7 @@
                                                            list_count: @group.lists.count,
                                                            button_class: "btn-groups btn--large",
                                                            logged_in: current_user.present?,
-                                                           options: current_user ? user_lists(current_user, @group) : [] }
+                                                           options: current_user ? owner_options(current_user, @group) : [] }
 
             .resource-page__content
               .row

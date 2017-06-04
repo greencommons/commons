@@ -1,5 +1,5 @@
 module TypesHelper
-  def list_owner(user, _list)
+  def list_options(user)
     suggestions = current_user.groups.order('groups_users.created_at DESC').limit(5).to_a
     suggestions.unshift(user)
     suggestions.map do |suggestion|
@@ -10,7 +10,7 @@ module TypesHelper
     end
   end
 
-  def user_lists(user, resource)
+  def owner_options(user, resource)
     user.all_owned_lists.where.not(id: resource.lists.pluck(:id)).limit(5).map do |l|
       { id: l.id, name: l.name }
     end

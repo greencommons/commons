@@ -43,7 +43,7 @@
                                                  list_count: resource.lists.count,
                                                  button_class: "btn-gc",
                                                  logged_in: current_user.present?,
-                                                 options: current_user ? user_lists(current_user, resource) : [] }
+                                                 options: current_user ? owner_options(current_user, resource) : [] }
         .summary-card__more.summary-card__more--meta
           .summary-card__metadata.summary-card__metadata--last
             i.fa.fa-pencil.glyphicon--right
