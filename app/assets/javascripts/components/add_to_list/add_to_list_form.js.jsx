@@ -8,7 +8,8 @@ var AddToListForm = React.createClass({
     authenticityToken: React.PropTypes.string,
     toggleModal: React.PropTypes.func,
     load: React.PropTypes.func,
-    confirm: React.PropTypes.func
+    confirm: React.PropTypes.func,
+    options: React.PropTypes.array
   },
 
   getInitialState: function() {
@@ -16,38 +17,6 @@ var AddToListForm = React.createClass({
       listId: null,
       note: ''
     }
-  },
-
-  componentDidMount: function() {
-    var _this = this;
-    $('body').addClass('no-scroll');
-
-    $('#list_id').select2({
-      theme: 'bootstrap',
-      ajax: {
-        url: _this.props.autocompletePath,
-        dataType: 'json',
-        delay: 250,
-        data: function (params) {
-          return {
-            q: params.term
-          };
-        },
-        processResults: function (data, params) {
-          return {
-            results: data.items
-          };
-        },
-        cache: true
-      },
-      minimumInputLength: 2,
-      templateResult: function(list) { return list.name; },
-      templateSelection: function(list) { return list.name }
-    })
-
-    $('#list_id').on('change', function(e) {
-      _this.setState({ listId: e.target.value });
-    });
   },
 
   handleSelect: function(value) {
@@ -114,7 +83,7 @@ var AddToListForm = React.createClass({
                                         id='list_id'
                                         autocompletePath={this.props.autocompletePath}
                                         handler={this.handleSelect}
-                                        remote={true} />
+                                        options={this.props.options} />
                   </div>
                   <div className="form-group">
                     <label className="control-label" htmlFor="resource_url">Note</label>

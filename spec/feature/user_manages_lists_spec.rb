@@ -22,64 +22,86 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
     expect(page).to have_text('Some description.')
   end
 
-  scenario 'users can create a private list owned by a group' do
-    user = feature_login
-    group = create(:group, name: 'test')
-    wait_for { User.search(user.email).results.total }.to eq(1)
-    wait_for { Group.search(group.name).results.total }.to eq(1)
+  describe 'create a list' do
+    scenario 'users can see themselves and 5 of their groups as suggestions' do
+      user = feature_login
+      user.update_columns(first_name: 'John', last_name: 'Doe')
+      group = create(:group, name: 'test')
+      group.add_user(user)
+      wait_for { User.search(user.email).results.total }.to eq(1)
+      wait_for { Group.search(group.name).results.total }.to eq(1)
 
-    find(:css, '.glyphicon.glyphicon-plus').click
-    click_link 'Create List'
+      find(:css, '.glyphicon.glyphicon-plus').click
+      click_link 'Create List'
 
-    within('#new_list') do
-      fill_in 'list[name]', with: 'My list'
-      fill_in 'list[description]', with: 'Description!'
-      find('.select2-selection').click
-      find(:xpath, "//input[@class='select2-search__field']").set 'te'
-      wait_for_ajax
-      find(:xpath, "//li[@class='select2-results__option select2-results__option--highlighted']").
-        click
+      within('#new_list') do
+        fill_in 'list[name]', with: 'My list'
+        fill_in 'list[description]', with: 'Description!'
+        find('.selectize-input').click
+      end
 
-      fill_in 'list[description]', with: 'Description!'
-      find('.bootstrap-tagsinput').find('input').set('some,random,tags')
-      click_on 'Create'
+      expect(page).to have_text "John Doe, #{user.email} (User)"
+      expect(page).to have_text "#{group.name} (Group)"
     end
 
-    expect(find('h1')).to have_content('My list')
-    expect(List.count).to eq 1
-    expect(List.first.privacy).to eq 'publ'
-    expect(List.first.owner).to eq group
-    expect(List.first.description).to eq 'Description!'
-    expect(page).to have_content('some')
-    expect(page).to have_content('random')
-    expect(page).to have_content('tags')
-  end
+    scenario 'users can create a private list owned by a group' do
+      user = feature_login
+      group = create(:group, name: 'test')
+      wait_for { User.search(user.email).results.total }.to eq(1)
+      wait_for { Group.search(group.name).results.total }.to eq(1)
 
-  scenario 'users can create a private list owner by a user' do
-    user = feature_login
+      find(:css, '.glyphicon.glyphicon-plus').click
+      click_link 'Create List'
 
-    find(:css, '.glyphicon.glyphicon-plus').click
-    click_link 'Create List'
+      within('#new_list') do
+        fill_in 'list[name]', with: 'My list'
+        fill_in 'list[description]', with: 'Description!'
+        find('.selectize-input').click
+        find('#list_owner-selectized').set 'te'
+        wait_for_ajax
+        find(:xpath, "//div[@class='option active']").click
 
-    within('#new_list') do
-      fill_in 'list[name]', with: 'My list'
-      fill_in 'list[description]', with: 'Description!'
-      find('.select2-selection').click
-      find(:xpath, "//input[@class='select2-search__field']").set 'ad'
-      wait_for_ajax
-      find(:xpath, "//li[@class='select2-results__option select2-results__option--highlighted']").
-        click
+        fill_in 'list[description]', with: 'Description!'
+        find('.bootstrap-tagsinput').find('input').set('some,random,tags')
+        click_on 'Create'
+      end
 
-      fill_in 'list[description]', with: 'Description!'
-      find(:css, '#list_privacy').set(true)
-      find('.bootstrap-tagsinput').find('input').set('some,random,tags')
-      click_on 'Create'
+      expect(find('h1')).to have_content('My list')
+      expect(List.count).to eq 1
+      expect(List.first.privacy).to eq 'publ'
+      expect(List.first.owner).to eq group
+      expect(List.first.description).to eq 'Description!'
+      expect(page).to have_content('some')
+      expect(page).to have_content('random')
+      expect(page).to have_content('tags')
     end
 
-    expect(find('h1')).to have_content('My list')
-    expect(List.count).to eq 1
-    expect(List.first.privacy).to eq 'priv'
-    expect(List.first.owner).to eq user
+    scenario 'users can create a private list owner by a user' do
+      user = feature_login
+
+      find(:css, '.glyphicon.glyphicon-plus').click
+      click_link 'Create List'
+
+      within('#new_list') do
+        fill_in 'list[name]', with: 'My list'
+        fill_in 'list[description]', with: 'Description!'
+
+        find('.selectize-input').click
+        find('#list_owner-selectized').set 'ad'
+        wait_for_ajax
+        find(:xpath, "//div[@class='option active']").click
+
+        fill_in 'list[description]', with: 'Description!'
+        find(:css, '#list_privacy').set(true)
+        find('.bootstrap-tagsinput').find('input').set('some,random,tags')
+        click_on 'Create'
+      end
+
+      expect(find('h1')).to have_content('My list')
+      expect(List.count).to eq 1
+      expect(List.first.privacy).to eq 'priv'
+      expect(List.first.owner).to eq user
+    end
   end
 
   scenario 'users can update a list' do

@@ -4,49 +4,58 @@ var AutocompleteSelect = React.createClass({
     id: React.PropTypes.string,
     autocompletePath: React.PropTypes.string,
     handler: React.PropTypes.func,
-    options: React.PropTypes.array
+    options: React.PropTypes.array,
+    selected: React.PropTypes.string
   },
 
   componentDidMount: function() {
     var _this = this;
+    var select = null;
     $('body').addClass('no-scroll');
 
     if (this.props.autocompletePath) {
-      $('#' + this.props.id).select2({
-        theme: 'bootstrap',
-        data: _this.props.options,
-        ajax: {
-          url: _this.props.autocompletePath,
-          dataType: 'json',
-          delay: 250,
-          data: function (params) {
-            return {
-              q: params.term
-            };
-          },
-          processResults: function (data, params) {
-            return {
-              results: data.items
-            };
-          },
-          cache: true
+      select = $('#' + this.props.id).selectize({
+        valueField: 'id',
+        labelField: 'name',
+        searchField: 'name',
+        options: _this.props.options,
+        create: false,
+        onChange: function(value) {
+          if (_this.props.handler) {
+            _this.props.handler(value);
+          }
         },
-        minimumInputLength: 2,
-        templateResult: function(item) { return item.name; },
-        templateSelection: function(item) { return item.name }
-      })
+        load: function(query, callback) {
+          if (query.length < 2) return callback();
+
+          $.ajax({
+            url: _this.props.autocompletePath,
+            dataType: 'json',
+            data: {
+              q: query
+            },
+            error: function() {
+              callback();
+            },
+            success: function(res) {
+              callback(res.items);
+            }
+          });
+        }
+      });
     } else {
-      $('#' + this.props.id).select2({
-        theme: 'bootstrap',
-        data: _this.props.options
-      })
+      select = $('#' + this.props.id).selectize({
+        valueField: 'id',
+        labelField: 'name',
+        searchField: 'name',
+        options: _this.props.options,
+        create: false
+      });
     }
 
-    $('#' + this.props.id).on('change', function(e) {
-      if (_this.props.handler) {
-        _this.props.handler(e.target.value);
-      }
-    });
+    if (this.props.selected) {
+      select[0].selectize.setValue(this.props.selected, false);
+    }
   },
 
   componentWillUnmount: function() {

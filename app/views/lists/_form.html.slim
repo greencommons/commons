@@ -16,7 +16,8 @@
           = f.label :name, 'Name', class: 'control-label'
           = f.text_field :name, class: 'form-control', placeholder: 'List name...'
         = react_component 'OwnerPicker', { autocompletePath: autocomplete_list_owners_path,
-                                           options: list.owner ? [list_owner(list.owner)] : [] }
+                                           options: list_options(current_user),
+                                           selected: list.owner ? "#{list.owner.class}:#{list.owner.id}" : nil }
         .form-group
           = f.label :description, class: 'control-label'
           = f.text_area :description, class: 'form-control', placeholder: '300 characters max'

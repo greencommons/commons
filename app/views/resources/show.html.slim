@@ -87,7 +87,8 @@
                                                            authenticity_token: form_authenticity_token,
                                                            list_count: @resource.lists.count,
                                                            button_class: "btn-#{@resource.resource_type} btn--large",
-                                                           logged_in: current_user.present? }
+                                                           logged_in: current_user.present?,
+                                                           options: current_user ? owner_options(current_user, @resource) : [] }
 
 
             .resource-page__content

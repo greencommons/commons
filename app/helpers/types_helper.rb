@@ -1,11 +1,28 @@
 module TypesHelper
-  def list_owner(owner)
-    name = if owner.is_a?(Group)
-             "#{owner.name} (Group)"
-           else
-             "#{owner.first_name} #{owner.last_name}, #{owner.email} (User)"
-           end
+  def list_options(user)
+    suggestions = current_user.groups.order('groups_users.created_at DESC').limit(5).to_a
+    suggestions.unshift(user)
+    suggestions.map do |suggestion|
+      {
+        id: "#{suggestion.class}:#{suggestion.id}",
+        name: owner_name(suggestion)
+      }
+    end
+  end
 
-    { id: "#{owner.class}:#{owner.id}", name: name }
+  def owner_options(user, resource)
+    user.all_owned_lists.where.not(id: resource.lists.pluck(:id)).limit(5).map do |l|
+      { id: l.id, name: l.name }
+    end
+  end
+
+  private
+
+  def owner_name(suggestion)
+    if suggestion.is_a?(Group)
+      "#{suggestion.name} (Group)"
+    else
+      "#{suggestion.first_name} #{suggestion.last_name}, #{suggestion.email} (User)"
+    end
   end
 end

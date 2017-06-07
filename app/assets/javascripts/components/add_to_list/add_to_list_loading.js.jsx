@@ -22,7 +22,7 @@ var AddToListLoading = React.createClass({
         </div>
         <div className="form-box__body">
           <div className="row">
-            <div className="col-xs-12">
+            <div className="col-xs-4 col-xs-offset-4">
               <div className='text-center'>
                 <img src={this.props.loaderImage}></img>
               </div>

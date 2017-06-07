@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :groups_users
   has_many :groups, through: :groups_users
   has_many :owned_lists, as: :owner, class_name: List
+  has_many :group_owned_lists, through: :groups, source: :lists, class_name: List
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, length: { maximum: 255 }
@@ -35,6 +36,11 @@ class User < ApplicationRecord
 
       indexes :name_suggest, type: 'completion'
     end
+  end
+
+  def all_owned_lists
+    List.where(owner_type: 'User', owner_id: id).
+      or(List.where(owner_type: 'Group', owner_id: groups.pluck(:id)))
   end
 
   def as_indexed_json(_options = {})

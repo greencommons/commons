@@ -47,10 +47,10 @@ describe ListPolicy do
       it { is_expected.to permit_action(:destroy) }
     end
 
-    context 'when list is owned by a group where the user is admin' do
+    context 'when list is owned by a group where the user is a member' do
       before do
         group = create(:group)
-        group.add_admin(user)
+        group.add_user(user)
         list.owner = group
         list.save
       end
