@@ -73,6 +73,14 @@ module Api
       render(status: 403)
     end
 
+    def error(e)
+      render(status: 400, json: {
+               errors: [{
+                 detail: e.message
+               }]
+             })
+    end
+
     private
 
     def version
