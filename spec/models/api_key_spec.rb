@@ -1,8 +1,7 @@
 # spec/models/api_key_spec.rb
 require 'rails_helper'
 
-RSpec.describe ApiKey, :type => :model do
-
+RSpec.describe ApiKey, type: :model do
   let(:key) { ApiKey.create }
 
   it 'is valid on creation' do
