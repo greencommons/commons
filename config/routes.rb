@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   get '/profile', to: 'users/profile#edit', as: 'profile'
   patch '/profile', to: 'users/profile#update', as: 'update_profile'
 
+  resources :users, only: [] do
+    resources :api_keys
+  end
+
   resources :list_items, only: [:create, :destroy]
 
   resources :resources, model_name: 'Resource', concerns: :taggable

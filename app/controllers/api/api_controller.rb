@@ -1,6 +1,11 @@
 module Api
   class ApiController < ActionController::API
+    include Pundit
+    include Authentication
+
     before_action :set_paper_trail_whodunnit
+
+    rescue_from Pundit::NotAuthorizedError, with: :forbidden
 
     def base_url
       "#{request.base_url}/api/#{version.downcase}"
@@ -25,6 +30,10 @@ module Api
 
     def render_json_api(data)
       render json: data, content_type: 'application/vnd.api+json'
+    end
+
+    def forbidden
+      render(status: 403)
     end
 
     private
