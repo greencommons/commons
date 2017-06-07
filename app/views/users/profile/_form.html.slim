@@ -58,11 +58,33 @@
                   .form-group
                     = f.label :password, "New Password", class: "control-label"
                     = f.password_field :password, class: "form-control", placeholder: "Your New Password"
-              .row.page-details__row
+              .row
                 .col-xs-12.col-md-6
                   .form-group
                     = f.label :password_confirmation, "New Password Confirmation", class: "control-label"
                     = f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Your New Password"
+                    
+              .row.page-details__row
+                .col-xs-12
+                  .form-box__subtitle
+                    | API Access
+                  
+                  - unless @user.api_keys.enabled.any?
+                    = link_to 'Generate my access keys', user_api_keys_path(@user), method: :post
+                - if @user.api_keys.enabled.any?
+                  .row
+                    .col-xs-12
+                      table.table
+                        tr 
+                          th Label
+                          th Access Key
+                          th Secret Key
+                          th 
+                        - @user.api_keys.each do |api_key|
+                          tr
+                            td Main
+                            td= api_key.access_key
+                            td= api_key.secret_key
 
               .row
                 .col-xs-12.col-md-3.col-md-offset-9
