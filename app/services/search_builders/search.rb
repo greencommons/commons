@@ -1,11 +1,12 @@
 module SearchBuilders
   class Search
-    def initialize(q: nil, filters: nil, sort: nil, page: nil, per: nil)
+    def initialize(q: nil, filters: nil, sort: nil, page: nil, per: nil, models: [])
       @query = q
       @filters = filters
       @sort = sort
       @page = page
       @per = per
+      @models = models
     end
 
     def results
@@ -35,6 +36,7 @@ module SearchBuilders
         query: @query,
         filters: @filters,
         sort: @sort,
+        only_models: @models
       ).search.filter_by_resource_type.sort
     end
   end

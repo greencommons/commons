@@ -1,7 +1,7 @@
 module Authentication
   extend ActiveSupport::Concern
 
-  AUTH_SCHEME = 'GC'
+  AUTH_SCHEME = 'GC'.freeze
 
   included do
     before_action :validate_auth_scheme
@@ -11,7 +11,7 @@ module Authentication
   private
 
   def validate_auth_scheme
-    unless authorization_request.match(/^#{AUTH_SCHEME} /)
+    unless authorization_request =~ /^#{AUTH_SCHEME} */
       unauthorized!('Default Realm')
     end
   end
@@ -21,7 +21,7 @@ module Authentication
   end
 
   def unauthorized!(realm)
-    headers["WWW-Authenticate"] = %(#{AUTH_SCHEME} realm="#{realm}")
+    headers['WWW-Authenticate'] = %(#{AUTH_SCHEME} realm="#{realm}")
     render(status: 401)
   end
 
@@ -34,8 +34,8 @@ module Authentication
   end
 
   def api_key
-    @api_key ||= -> do
-      key = "api_keys/#{authenticator.credentials['api_key']}"
+    @api_key ||= lambda do
+      key = "api_keys/#{authenticator.secret_key}"
 
       Rails.cache.fetch(key, expires_in: 24.hours) do
         authenticator.api_key
@@ -44,6 +44,6 @@ module Authentication
   end
 
   def current_user
-    @current_user ||= api_key.user
+    @current_user ||= api_key.try(:user)
   end
 end

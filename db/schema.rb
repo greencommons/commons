@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20170605141931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "api_keys", id: false, force: :cascade do |t|
+  create_table "api_keys", force: :cascade do |t|
     t.string   "label"
     t.string   "access_key"
     t.string   "secret_key"

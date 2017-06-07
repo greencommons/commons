@@ -2,11 +2,12 @@ module SearchBuilders
   class Builder
     attr_accessor :es_params
 
-    def initialize(query: nil, filters: {}, sort: nil)
+    def initialize(query: nil, filters: {}, sort: nil, only_models: [])
       @query = query
       @filters = filters
       @sort = sort
       @es_params = base
+      @only_models = only_models
     end
 
     def search
@@ -25,7 +26,7 @@ module SearchBuilders
     end
 
     def models
-      SearchBuilders::ModelLister.new(@filters).build
+      @only_models.any? ? @only_models : SearchBuilders::ModelLister.new(@filters).build
     end
 
     def to_elasticsearch

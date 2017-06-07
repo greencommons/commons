@@ -6,17 +6,23 @@ module Api
       @authorization = authorization
     end
 
-    def credentials
-      @credentials ||= Hash[@authorization.scan(/(\w+)[:=] ?"?([\w|:]+)"?/)]
+    def api_key
+      return nil unless access_key && secret_key
+      api_key = ApiKey.enabled.find_by(access_key: access_key)
+
+      return api_key if api_key && secure_compare_with_hashing(api_key.secret_key, secret_key)
     end
 
-    def api_key
-      return nil if credentials['api_key'].blank?
+    def access_key
+      @access_key ||= credentials[0]
+    end
 
-      access_key, key = credentials['api_key'].split(':')
-      api_key = access_key && key && ApiKey.enabled.find_by(access_key: access_key)
+    def secret_key
+      @secret_key ||= credentials[1]
+    end
 
-      return api_key if api_key && secure_compare_with_hashing(api_key.key, key)
+    def credentials
+      @credentials ||= @authorization.present? ? @authorization.split(' ')[1].split(':') : []
     end
 
     private
