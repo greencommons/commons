@@ -69,6 +69,10 @@ module Api
              })
     end
 
+    def forbidden
+      render(status: 403)
+    end
+
     private
 
     def version

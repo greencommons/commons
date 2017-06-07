@@ -21,7 +21,7 @@ module Authentication
   end
 
   def unauthorized!(realm)
-    headers['WWW-Authenticate'] = %(#{AUTH_SCHEME} realm="#{realm}")
+    headers["WWW-Authenticate"] = %(#{AUTH_SCHEME} realm="#{realm}")
     render(status: 401)
   end
 
