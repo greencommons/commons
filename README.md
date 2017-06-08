@@ -361,7 +361,7 @@ curl http://localhost:3000/api/v1/groups \
 ##### Update a group
 
 ```
-curl http://localhost:3000/api/v1/groups/1 \
+curl http://localhost:3000/api/v1/groups/2131 \
      -X PATCH \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
