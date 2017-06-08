@@ -16,7 +16,7 @@ class ListPolicy < ApplicationPolicy
   end
 
   def create?
-    @user
+    @user && owned?
   end
 
   def new?

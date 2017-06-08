@@ -19,7 +19,7 @@ Rails.application.routes.draw do
           end
         end
       end
-      resources :lists, only: [:show]
+      resources :lists, only: %i(show create)
     end
   end
 
