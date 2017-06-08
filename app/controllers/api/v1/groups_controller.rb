@@ -1,8 +1,8 @@
 module Api
   module V1
     class GroupsController < ApiController
-      skip_before_action :validate_auth_scheme, only: [:index, :show]
-      skip_before_action :authenticate_client, only: [:index, :show]
+      skip_before_action :validate_auth_scheme, only: %i(index show)
+      skip_before_action :authenticate_client, only: %i(index show)
 
       def index
         data, = search(models: [Group])

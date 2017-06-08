@@ -1,8 +1,8 @@
 module Api
   module V1
     class SearchController < ApiController
-      skip_before_action :validate_auth_scheme, only: [:show]
-      skip_before_action :authenticate_client, only: [:show]
+      skip_before_action :validate_auth_scheme, only: %i(show)
+      skip_before_action :authenticate_client, only: %i(show)
 
       def show
         data, results = search
