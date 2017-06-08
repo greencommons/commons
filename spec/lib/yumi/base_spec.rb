@@ -18,7 +18,7 @@ describe Yumi::Base do
         data: [{ type: 'games', id: '1' }, { type: 'games', id: '2' }],
         links: {
           self: "#{url}/relationships/games",
-          related: "#{url}/games"
+          # related: "#{url}/games"
         }
       )
     end
@@ -30,7 +30,7 @@ describe Yumi::Base do
           data: [{ type: 'games', id: '1' }, { type: 'games', id: '2' }],
           links: {
             self: "#{url}/cool_prefix/relationships/games",
-            related: "#{url}/cool_prefix/games"
+            # related: "#{url}/cool_prefix/games"
           }
         )
       end
