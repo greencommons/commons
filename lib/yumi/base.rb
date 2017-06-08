@@ -22,7 +22,7 @@ module Yumi
         data: data,
         links: {
           self: "#{@url}/#{@prefix}relationships/#{@type.pluralize}",
-          related: "#{@url}/#{@prefix}#{@type.pluralize}"
+          # related: "#{@url}/#{@prefix}#{@type.pluralize}"
         }
       }
     end
