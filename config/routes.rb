@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/search', to: 'search#show', as: 'search'
       resources :resources, only: [:show]
-      resources :groups, only: [:index, :show, :create, :update]
+      resources :groups, only: %i(index show create update)
       resources :lists, only: [:show]
     end
   end
