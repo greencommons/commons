@@ -368,6 +368,40 @@ curl http://localhost:3000/api/v1/groups/:id \
      -d '{ "data": { "id": ":id", "type": "groups", "attributes": { "name": "A new group" } } }'
 ```
 
+#### Group Users
+
+##### List group users
+
+```
+curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/members
+```
+
+Note that it is also possible to just include the members when retrieving a group:
+
+```
+curl http://greencommons.herokuapp.com/api/v1/groups/:id?include=users
+```
+
+##### Add users to a group
+
+```
+curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": [{ "id": "1", "type": "users" }] }'
+```
+
+##### Remove users from a group
+
+```
+curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users \
+     -X DELETE \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": [{ "id": "1", "type": "users" }] }'
+```
+
 #### Lists
 
 Coming Soon.
