@@ -1,5 +1,3 @@
-require_relative 'yumi/parser'
-
 require_relative 'yumi/presenters/links'
 require_relative 'yumi/presenters/root_links'
 require_relative 'yumi/presenters/relationships'
