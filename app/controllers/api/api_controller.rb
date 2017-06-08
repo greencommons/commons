@@ -7,7 +7,8 @@ module Api
     before_action :set_paper_trail_whodunnit
 
     rescue_from Pundit::NotAuthorizedError, with: :forbidden
-    rescue_from ActionController::ParameterMissing, with: :error
+    rescue_from ActionController::ParameterMissing, with: :client_error
+    rescue_from StandardError, with: :server_error
 
     def base_url
       "#{request.base_url}/api/#{version.downcase}"
@@ -43,14 +44,27 @@ module Api
       render status: status, json: data, content_type: 'application/vnd.api+json'
     end
 
-    def forbidden
-      render(status: 403)
+    def server_error(e)
+      render_json_api_error(e, 500)
     end
 
-    def error(e)
-      render(status: 400, json: {
+    def client_error(e)
+      render_json_api_error(e, 400)
+    end
+
+    def forbidden
+      render_json_api_error({
+                              title: 'Forbidden',
+                              message: "You don't have the permission to do that."
+                            }, status: 403)
+    end
+
+    def render_json_api_error(error, status = 400)
+      render(status: status, json: {
                errors: [{
-                 detail: e.message
+                 status: status,
+                 title: error.is_a?(Hash) ? error[:title] : error.class.name,
+                 detail: error.is_a?(Hash) ? error[:message] : error.message
                }]
              })
     end
