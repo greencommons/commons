@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_list, only: [:show, :edit, :update, :destroy, :leave]
+  before_action :set_list, only: [:show, :edit, :destroy, :leave]
 
   def index
     @lists = policy_scope(List).page(params[:page] || 1).per(10)
@@ -38,9 +38,9 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+    @list.owner = owner
     authorize @list
 
-    @list.owner = owner
     if @list.save
       @list.touch
       redirect_to @list, notice: 'List was successfully created.'
@@ -50,7 +50,10 @@ class ListsController < ApplicationController
   end
 
   def update
+    @list = List.find(params[:id])
     @list.owner = owner
+    authorize @list
+
     if @list.update(list_params)
       @list.touch
       redirect_to @list, notice: 'List was successfully updated.'
