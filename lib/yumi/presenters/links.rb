@@ -17,7 +17,13 @@ module Yumi
         if @presenter.resource.respond_to?(:each)
           "#{@presenter.url}/#{@presenter.type.pluralize}"
         else
-          "#{@presenter.url}/#{@presenter.type.pluralize}/#{@presenter.resource.id}"
+          type = if @presenter.override_type
+                   @presenter.resource_type(@presenter.resource)
+                 else
+                   @presenter.type.pluralize
+                 end
+
+          "#{@presenter.url}/#{type}/#{@presenter.resource.id}"
         end
       end
     end

@@ -47,6 +47,7 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
     scenario 'users can create a private list owned by a group' do
       user = feature_login
       group = create(:group, name: 'test')
+      group.add_admin(user)
       wait_for { User.search(user.email).results.total }.to eq(1)
       wait_for { Group.search(group.name).results.total }.to eq(1)
 
