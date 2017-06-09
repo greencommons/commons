@@ -53,7 +53,7 @@ class ListItemsController < ApplicationController
   end
 
   def list_item
-    @list_item ||= @list_item = ListsItem.new(list_item_params)
+    @list_item ||= ListsItem.new(list_item_params)
   end
 
   def list

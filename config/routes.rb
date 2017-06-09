@@ -19,7 +19,17 @@ Rails.application.routes.draw do
           end
         end
       end
-      resources :lists, only: %i(show create)
+      resources :lists, only: %i(show create) do
+        namespace :relationships do
+          resources :items, only: %i(index) do
+            collection do
+              patch '/', action: 'update'
+              post '/', action: 'create'
+              delete '/', action: 'destroy'
+            end
+          end
+        end
+      end
     end
   end
 

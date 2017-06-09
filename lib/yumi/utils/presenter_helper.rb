@@ -15,14 +15,15 @@ module Yumi
       end
 
       def presenter_from_rel(rel)
-        @resource_class = rel.to_s.singularize.capitalize
+        @resource_class = rel.to_s.singularize.camelcase
         presenter_instance
       end
 
       private
 
       def presenter_instance
-        presenter_class.constantize.new(@url, @resource, @presenter_module, @prefix, @fields)
+        presenter_class.camelcase.constantize.new(@url, @resource, @presenter_module,
+                                                  @prefix, @fields)
       end
 
       def presenter_class
