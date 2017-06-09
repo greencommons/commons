@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_list, only: [:show, :edit, :destroy, :leave]
+  before_action :set_list, only: %i(show edit destroy leave)
 
   def index
     @lists = policy_scope(List).page(params[:page] || 1).per(10)
