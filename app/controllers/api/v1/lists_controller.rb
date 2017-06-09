@@ -24,16 +24,15 @@ module Api
       private
 
       def owner
-        return nil unless params[:list][:owner]
-        owner = params[:list][:owner].split(':')
-        return nil unless %w(Group User).include?(owner[0])
-        owner[0].constantize.find(owner[1]) || current_user
+        return current_user unless list_params[:owner_id] && list_params[:owner_type]
+        return current_user unless %w(Group User).include?(list_params[:owner_type])
+        list_params[:owner_type].constantize.find(list_params[:owner_id]) || current_user
       end
 
       def list_params
         params.require(:data).
           require(:attributes).
-          permit(:name, :description, :tag_list, :privacy)
+          permit(:name, :description, :tag_list, :privacy, :owner_id, :owner_type)
       end
     end
   end

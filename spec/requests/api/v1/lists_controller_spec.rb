@@ -32,29 +32,95 @@ RSpec.describe Api::V1::ListsController, type: :request do
   describe 'POST /api/v1/lists' do
     context 'authenticated' do
       context 'with valid params' do
-        before do
-          post '/api/v1/lists', params: {
-            data: {
-              type: 'lists',
-              attributes: {
-                name: 'My Awesome List'
+        context 'with no specified owner' do
+          before do
+            post '/api/v1/lists', params: {
+              data: {
+                type: 'lists',
+                attributes: {
+                  name: 'My Awesome List'
+                }
               }
-            }
-          }.to_json, headers: headers
+            }.to_json, headers: headers
+          end
+
+          it 'returns 200 OK' do
+            expect(response.status).to eq 200
+            expect(response.content_type).to eq 'application/vnd.api+json'
+          end
+
+          it 'returns the group as JSON API' do
+            expect(response).to match_response_schema('jsonapi')
+            expect(json_body['data']['id']).to eq List.last.id.to_s
+          end
+
+          it 'creates the list with the current user as owner' do
+            expect(List.count).to eq 1
+            expect(List.last.owner).to eq user
+          end
         end
 
-        it 'returns 200 OK' do
-          expect(response.status).to eq 200
-          expect(response.content_type).to eq 'application/vnd.api+json'
+        context 'with the current user specified' do
+          before do
+            post '/api/v1/lists', params: {
+              data: {
+                type: 'lists',
+                attributes: {
+                  name: 'My Awesome List',
+                  owner_id: user.id,
+                  owner_type: 'User'
+                }
+              }
+            }.to_json, headers: headers
+          end
+
+          it 'returns 200 OK' do
+            expect(response.status).to eq 200
+            expect(response.content_type).to eq 'application/vnd.api+json'
+          end
+
+          it 'returns the group as JSON API' do
+            expect(response).to match_response_schema('jsonapi')
+            expect(json_body['data']['id']).to eq List.last.id.to_s
+          end
+
+          it 'creates the list with the current user as owner' do
+            expect(List.count).to eq 1
+            expect(List.last.owner).to eq user
+          end
         end
 
-        it 'returns the group as JSON API' do
-          expect(response).to match_response_schema('jsonapi')
-          expect(json_body['data']['id']).to eq List.last.id.to_s
-        end
+        context 'with a group as owner' do
+          let(:group) { create(:group) }
 
-        it 'creates the group' do
-          expect(List.count).to eq 1
+          before do
+            group.add_user(user)
+            post '/api/v1/lists', params: {
+              data: {
+                type: 'lists',
+                attributes: {
+                  name: 'My Awesome List',
+                  owner_id: group.id,
+                  owner_type: 'Group'
+                }
+              }
+            }.to_json, headers: headers
+          end
+
+          it 'returns 200 OK' do
+            expect(response.status).to eq 200
+            expect(response.content_type).to eq 'application/vnd.api+json'
+          end
+
+          it 'returns the group as JSON API' do
+            expect(response).to match_response_schema('jsonapi')
+            expect(json_body['data']['id']).to eq List.last.id.to_s
+          end
+
+          it 'creates the list with the group as owner' do
+            expect(List.count).to eq 1
+            expect(List.last.owner).to eq group
+          end
         end
       end
 
