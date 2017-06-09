@@ -15,11 +15,9 @@ RSpec.describe Suggesters::Lists do
     context 'without the only parameter' do
       it 'only returns all the matching lists' do
         lists = Suggesters::Lists.new(query: 'test').suggest
-        expect(lists).to eq [
-          { id: list1.id, name: 'test 1' },
-          { id: list2.id, name: 'test 2' },
-          { id: list3.id, name: 'test 3' }
-        ]
+        expect(lists).to include(id: list1.id, name: 'test 1')
+        expect(lists).to include(id: list2.id, name: 'test 2')
+        expect(lists).to include(id: list3.id, name: 'test 3')
       end
     end
 

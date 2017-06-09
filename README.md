@@ -404,4 +404,40 @@ curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users \
 
 #### Lists
 
-Coming Soon.
+##### Retrieve a list - `/api/v1/lists/:id`
+
+__Example__
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists/10
+```
+
+##### Create a list
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "type": "lists", "attributes": { "name": "A new list" } } }'
+```
+
+##### Add to a list
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
+```
+
+##### Remove from a list
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
+     -X DELETE \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
+```
