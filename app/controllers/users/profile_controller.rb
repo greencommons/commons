@@ -1,5 +1,7 @@
 module Users
   class ProfileController < ApplicationController
+    include Shared::Users
+
     before_action :authenticate_user!
 
     def edit
@@ -7,20 +9,12 @@ module Users
     end
 
     def update
-      @user = User.find(current_user.id)
-
-      if skip_password_update?
-        user_params = user_password_params.except(:current_password,
-                                                  :password,
-                                                  :password_confirmation)
-      end
-
-      if user_params ? @user.update(user_params) : @user.update_with_password(user_password_params)
+      shared_update(lambda do
         bypass_sign_in(@user)
         redirect_to profile_path, notice: 'Profile updated.'
-      else
+      end, lambda do
         render :edit
-      end
+      end)
     end
 
     private
