@@ -49,7 +49,7 @@ RSpec.describe Api::V1::ListsController, type: :request do
             expect(response.content_type).to eq 'application/vnd.api+json'
           end
 
-          it 'returns the group as JSON API' do
+          it 'returns the list as JSON API' do
             expect(response).to match_response_schema('jsonapi')
             expect(json_body['data']['id']).to eq List.last.id.to_s
           end
@@ -79,7 +79,7 @@ RSpec.describe Api::V1::ListsController, type: :request do
             expect(response.content_type).to eq 'application/vnd.api+json'
           end
 
-          it 'returns the group as JSON API' do
+          it 'returns the list as JSON API' do
             expect(response).to match_response_schema('jsonapi')
             expect(json_body['data']['id']).to eq List.last.id.to_s
           end
@@ -112,7 +112,7 @@ RSpec.describe Api::V1::ListsController, type: :request do
             expect(response.content_type).to eq 'application/vnd.api+json'
           end
 
-          it 'returns the group as JSON API' do
+          it 'returns the list as JSON API' do
             expect(response).to match_response_schema('jsonapi')
             expect(json_body['data']['id']).to eq List.last.id.to_s
           end
@@ -141,7 +141,7 @@ RSpec.describe Api::V1::ListsController, type: :request do
           expect(response.content_type).to eq 'application/vnd.api+json'
         end
 
-        it 'creates the group' do
+        it 'creates the list' do
           expect(List.count).to eq 0
         end
       end
