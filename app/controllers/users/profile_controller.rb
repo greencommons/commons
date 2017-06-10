@@ -9,6 +9,8 @@ module Users
     end
 
     def update
+      @user = User.find(current_user.id)
+
       shared_update(lambda do
         bypass_sign_in(@user)
         redirect_to profile_path, notice: 'Profile updated.'

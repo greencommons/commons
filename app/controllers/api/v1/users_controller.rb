@@ -18,6 +18,8 @@ module Api
       end
 
       def update
+        @user = User.find(params[:id])
+
         shared_update(lambda do
           render_json_api present_entity(@user)
         end, lambda do
