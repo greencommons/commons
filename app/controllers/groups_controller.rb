@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
 
   def show
     @resources = @group.latest_resources
-    @lists = @group.lists
+    @lists = @group.owned_lists.order(created_at: :desc)
     @similar = Suggesters::Tags.new(tags: @group.cached_tags,
                                     except: @group,
                                     limit: 12,
