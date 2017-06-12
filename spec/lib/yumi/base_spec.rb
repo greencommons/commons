@@ -17,8 +17,7 @@ describe Yumi::Base do
       expect(Fake::GamePresenter.new(url, resources, Fake).as_relationship).to eq(
         data: [{ type: 'games', id: '1' }, { type: 'games', id: '2' }],
         links: {
-          self: "#{url}/relationships/games",
-          related: "#{url}/games"
+          self: "#{url}/relationships/games"
         }
       )
     end
@@ -29,8 +28,7 @@ describe Yumi::Base do
         expect(presenter.as_relationship).to eq(
           data: [{ type: 'games', id: '1' }, { type: 'games', id: '2' }],
           links: {
-            self: "#{url}/cool_prefix/relationships/games",
-            related: "#{url}/cool_prefix/games"
+            self: "#{url}/cool_prefix/relationships/games"
           }
         )
       end

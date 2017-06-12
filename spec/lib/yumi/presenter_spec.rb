@@ -39,15 +39,13 @@ describe Yumi::Presenter do
           levels: {
             data: [{ type: 'levels', id: '1' }, { type: 'levels', id: '2' }],
             links: {
-              self: 'http://example.org:80/api/v1/games/1/relationships/levels',
-              related: 'http://example.org:80/api/v1/games/1/levels'
+              self: 'http://example.org:80/api/v1/games/1/relationships/levels'
             }
           },
           characters: {
             data: [{ type: 'characters', id: '1' }],
             links: {
-              self: 'http://example.org:80/api/v1/games/1/relationships/characters',
-              related: 'http://example.org:80/api/v1/games/1/characters'
+              self: 'http://example.org:80/api/v1/games/1/relationships/characters'
             }
           }
         }
@@ -66,15 +64,13 @@ describe Yumi::Presenter do
           levels: {
             data: [{ type: 'levels', id: '1' }, { type: 'levels', id: '2' }],
             links: {
-              self: 'http://example.org:80/api/v1/games/2/relationships/levels',
-              related: 'http://example.org:80/api/v1/games/2/levels'
+              self: 'http://example.org:80/api/v1/games/2/relationships/levels'
             }
           },
           characters: {
             data: [{ type: 'characters', id: '1' }],
             links: {
-              self: 'http://example.org:80/api/v1/games/2/relationships/characters',
-              related: 'http://example.org:80/api/v1/games/2/characters'
+              self: 'http://example.org:80/api/v1/games/2/relationships/characters'
             }
           }
         }
