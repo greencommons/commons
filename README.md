@@ -425,3 +425,25 @@ curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
 ```
+
+#### Users
+
+##### Create users
+
+```
+curl http://greencommons.herokuapp.com/api/v1/users \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "type": "users", "attributes": { "email": "john@example.com", "password": "password", "password_confirmation": "password"} } }'
+```
+
+##### Update user
+
+```
+curl http://greencommons.herokuapp.com/api/v1/users/:id \
+     -X PATCH \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "id": ":id", "type": "users", "attributes": { "first_name": "John" } } }'
+```
