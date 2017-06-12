@@ -373,7 +373,7 @@ curl http://localhost:3000/api/v1/groups/:id \
 ##### List group users
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/members
+curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users
 ```
 
 Note that it is also possible to just include the members when retrieving a group:
