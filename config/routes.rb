@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/search', to: 'search#show', as: 'search'
-      resources :resources, only: [:show]
+      resources :users, only: %i(create update)
+      resources :resources, only: %i(show create update)
       resources :groups, only: %i(index show create update) do
         namespace :relationships do
           resources :users, only: %i(index) do
@@ -19,7 +20,17 @@ Rails.application.routes.draw do
           end
         end
       end
-      resources :lists, only: [:show]
+      resources :lists, only: %i(show create) do
+        namespace :relationships do
+          resources :items, only: %i(index) do
+            collection do
+              patch '/', action: 'update'
+              post '/', action: 'create'
+              delete '/', action: 'destroy'
+            end
+          end
+        end
+      end
     end
   end
 

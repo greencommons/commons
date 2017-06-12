@@ -213,44 +213,28 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
 
 ##### Retrieve a resource - `/api/v1/resources/:id`
 
-__Example__
-
 ```
 curl http://greencommons.herokuapp.com/api/v1/resources/7577
 ```
 
+##### Create a resource
+
 ```
-{
-  "data": {
-    "type": "resources",
-    "id": "7577",
-    "attributes": {
-      "title": "Report doubts future of wind power",
-      "excerpt": "...",
-      "published_at": null,
-      "tags": ["wind"],
-      "resource_type": "article"
-    },
-    "links": {
-      "self": "http://greencommons.herokuapp.com/api/v1/resources/7577"
-    },
-    "relationships": {
-      "lists": {
-        "data": [],
-        "links": {
-          "self": "http://greencommons.herokuapp.com/api/v1/resources/7577/relationships/lists",
-          "related": "http://greencommons.herokuapp.com/api/v1/resources/7577/lists"
-        }
-      }
-    }
-  },
-  "links": {
-    "self": "http://greencommons.herokuapp.com/api/v1/resources/7577",
-    "next": "",
-    "last": ""
-  },
-  "included": []
-}
+curl http://greencommons.herokuapp.com/api/v1/resources \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "type": "resources", "attributes": { "title": "A new resource" } } }'
+```
+
+##### Update a resource
+
+```
+curl http://greencommons.herokuapp.com/api/v1/resources/:id \
+     -X PATCH \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "id": ":id", "type": "resources", "attributes": { "title": "An updated resource" } } }'
 ```
 
 #### Groups
@@ -404,4 +388,62 @@ curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users \
 
 #### Lists
 
-Coming Soon.
+##### Retrieve a list - `/api/v1/lists/:id`
+
+__Example__
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists/10
+```
+
+##### Create a list
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "type": "lists", "attributes": { "name": "A new list" } } }'
+```
+
+##### Add to a list
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
+```
+
+##### Remove from a list
+
+```
+curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
+     -X DELETE \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
+```
+
+#### Users
+
+##### Create users
+
+```
+curl http://greencommons.herokuapp.com/api/v1/users \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "type": "users", "attributes": { "email": "john@example.com", "password": "password", "password_confirmation": "password"} } }'
+```
+
+##### Update user
+
+```
+curl http://greencommons.herokuapp.com/api/v1/users/:id \
+     -X PATCH \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "id": ":id", "type": "users", "attributes": { "first_name": "John" } } }'
+```

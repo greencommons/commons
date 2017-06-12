@@ -5,7 +5,7 @@ module Yumi
   class Base
     extend Yumi::ClassMethods
 
-    attr_accessor :url, :resource, :type, :links, :attributes, :relationships,
+    attr_accessor :override_type, :url, :resource, :type, :links, :attributes, :relationships,
                   :presenter_module, :prefix, :relationships, :fields
 
     def initialize(url, resource, presenter_module = nil, prefix = nil, fields = nil)
@@ -45,14 +45,21 @@ module Yumi
 
     def data
       if @resource.respond_to?(:each)
-        @resource.map { |c| { type: @type.pluralize, id: c.id.to_s } }
+        @resource.map do |c|
+          type = @override_type ? resource_type(c) : @type.pluralize
+          { type: type, id: c.id.to_s }
+        end
       else
-        { type: @type.pluralize, id: @resource.id.to_s }
+        {
+          type: @override_type ? resource_type(@resource) : @type.pluralize,
+          id: @resource.id.to_s
+        }
       end
     end
 
     # Assigns the class variables to the instance
     def set_instance_variables
+      @override_type = respond_to?(:resource_type)
       instance_variable_set('@type', self.class.send('_type') || 'base')
 
       [:relationships, :links, :attributes].each do |v|
