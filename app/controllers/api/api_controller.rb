@@ -7,6 +7,7 @@ module Api
     before_action :set_paper_trail_whodunnit
 
     rescue_from StandardError, with: :server_error
+    rescue_from ActionController::RoutingError, with: :not_found
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from Pundit::NotAuthorizedError, with: :forbidden
     rescue_from ActionController::ParameterMissing, with: :client_error
