@@ -121,7 +121,23 @@ See [ETL.md](ETL.md) for more information.
 Web API Usage
 ------------------------------------
 
-The Green Commons Web API follows the [JSON API specification](http://jsonapi.org/) to facilitate the integration in your projects.
+### Authentication
+
+Green Commons uses a custom HTTP Authentication scheme in order to authenticate the requests. For resources requiring authentication, you need to pass the `Authorization` header in the following format:
+
+```
+Authorization: GC access_key:secret_key
+```
+
+Your `access_key` and `secret_key` can be found in your profile.
+
+### JSON API
+
+The Green Commons Web API follows the [JSON API specification](http://jsonapi.org/) to facilitate the integration in your projects. Specify the content-type of your request using by setting the `Content-Type` header.
+
+```
+Content-Type: application/vnd.api+json
+```
 
 ### Available Resources
 
@@ -239,12 +255,20 @@ curl http://greencommons.herokuapp.com/api/v1/resources/7577
 
 #### Groups
 
+##### Retrieve all groups - `/api/v1/groups`
+
+All the query parameters defined for the `/search` resource can be used here as well.
+
+```
+curl http://greencommons.herokuapp.com/api/v1/groups
+```
+
 ##### Retrieve a group - `/api/v1/groups/:id`
 
 __Example__
 
 ```
-http://greencommons.herokuapp.com/api/v1/groups/10
+curl http://greencommons.herokuapp.com/api/v1/groups/10
 ```
 
 ```
@@ -322,6 +346,26 @@ http://greencommons.herokuapp.com/api/v1/groups/10
   },
   "included":[]
 }
+```
+
+##### Create a group
+
+```
+curl http://localhost:3000/api/v1/groups \
+     -X POST \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "type": "groups", "attributes": { "name": "A new group" } } }'
+```
+
+##### Update a group
+
+```
+curl http://localhost:3000/api/v1/groups/:id \
+     -X PATCH \
+     -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
+     -H 'Content-Type: application/vnd.api+json' \
+     -d '{ "data": { "id": ":id", "type": "groups", "attributes": { "name": "A new group" } } }'
 ```
 
 #### Lists

@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :groups, through: :groups_users
   has_many :owned_lists, as: :owner, class_name: List
   has_many :group_owned_lists, through: :groups, source: :lists, class_name: List
+  has_many :api_keys
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, length: { maximum: 255 }

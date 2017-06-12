@@ -1,17 +1,11 @@
 module Api
   module V1
     class SearchController < ApiController
-      def show
-        search = SearchBuilders::Search.new(
-          q: params[:q],
-          filters: params[:filters]&.to_unsafe_hash,
-          sort: params[:sort],
-          page: params[:page],
-          per: params[:per]
-        )
+      skip_before_action :validate_auth_scheme, only: %i(show)
+      skip_before_action :authenticate_client, only: %i(show)
 
-        results = search.results_with_relevancy
-        data = present_collection(results, search.total_count)
+      def show
+        data, results = search
 
         if results.any?
           tags = results.map(&:cached_tags).flatten.compact.uniq

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/search', to: 'search#show', as: 'search'
       resources :resources, only: [:show]
-      resources :groups, only: [:show]
+      resources :groups, only: %i(index show create update)
       resources :lists, only: [:show]
     end
   end
@@ -27,6 +27,10 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users/profile#edit', as: 'profile'
   patch '/profile', to: 'users/profile#update', as: 'update_profile'
+
+  resources :users, only: [] do
+    resources :api_keys
+  end
 
   resources :list_items, only: [:create, :destroy]
 
