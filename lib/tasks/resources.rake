@@ -20,4 +20,14 @@ namespace :resources do
       resource.save if resource.changed?
     end
   end
+
+  task transfer_content: :environment do
+    Resource.find_each.each do |resource|
+      ap "Transferring content for resource #{resource.id}"
+      next unless resource.content.is_a?(String)
+      resource.long_content = resource.content
+      resource.content = {}
+      resource.save!
+    end
+  end
 end
