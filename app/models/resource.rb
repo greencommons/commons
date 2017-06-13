@@ -7,7 +7,14 @@ class Resource < ApplicationRecord
     article: 0,
     book: 1,
     report: 2,
-    url: 3
+    url: 3,
+    audio: 4,
+    course: 5,
+    dataset: 6,
+    image: 7,
+    syllabus: 8,
+    video: 9,
+    profile: 10
   }.freeze
 
   has_paper_trail

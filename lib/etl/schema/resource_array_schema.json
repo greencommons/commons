@@ -4,7 +4,7 @@
         "vendor": "org.islandpress",
         "name": "ResourceArraySchema",
         "format": "jsonschema",
-        "version": "0.0.1"
+        "version": "0.0.3"
     },
     "definitions": {
         "schema_version_type": {
@@ -16,13 +16,19 @@
             "type": "string",
             "title": "Detailed Date Time",
             "description": "Format that schema validator can accept; example: 2015-10-16 13:29:27.282294",
-            "pattern": "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]+"
+            "pattern": "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}(.[0-9])*"
         },
         "day_datetime_type": {
             "type": "string",
             "title": "Day Date Time",
             "description": "Format that schema validator can accept; example: 2015-10-16",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "month_datetime_type": {
+            "type": "string",
+            "title": "Day Date Time",
+            "description": "Format that schema validator can accept; example: 2015-10",
+            "pattern": "^[0-9]{4}-[0-9]{2}$"
         },
         "year_datetime_type": {
             "type": "string",
@@ -34,6 +40,7 @@
             "oneOf" :[
                 { "$ref": "#/definitions/detailed_datetime_type" },
                 { "$ref": "#/definitions/day_datetime_type" },
+                { "$ref": "#/definitions/month_datetime_type" },
                 { "$ref": "#/definitions/year_datetime_type" }
             ],
             "title": "Generic Date Format"
@@ -45,6 +52,91 @@
         "s3_inclusive_url_type": {
             "type": "string",
             "pattern": "^((https?://)|(s3://))?([/a-zA-Z0-9_-]+\\.)+"
+        },
+        "tag_label_uri_score_type": {
+            "type": "object",
+            "title": "Tag Record with Label, URI, and Score",
+            "description": "The URI identifies the tag definitino; the score qualifies the tag's relevancy; a higher score is more relevant",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "title": "Tag"
+                },
+                "uri": {
+                    "type": "string",
+                    "title": "URI"
+                },
+                "score": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 100.0,
+                    "title": "Score"
+                }
+            }
+        },
+        "tag_location_type": {
+            "type": "object",
+            "title": "Tag Location Type",
+            "description": "Tag Location from Climate Tagger (Reegle)",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "reegleCountry":{
+                	"type": "string"
+                },
+                "type":{
+                	"type": "string"
+                },
+                "uri":{
+                	"type": "string"
+                }
+            }
+        },
+        "tag_label_score_type": {
+            "type": "object",
+            "title": "Tag Record with Label and Score",
+            "description": "The score qualifies the tag's relevancy; a higher score is more relevant",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "title": "Tag"
+                },
+                "score": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 100.0,
+                    "title": "Score"
+                }
+            }
+        },
+        "tagger_data_type": {
+            "type": "object",
+            "title": "Tagger Data",
+            "description": "Tagger data including terms, locations and concepts",
+            "properties": {
+                "locations": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/tag_location_type" },
+                    "title": "Locations"
+                },
+                "terms": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/tag_label_score_type" },
+                    "title": "Terms"
+                },
+                "concepts": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/tag_label_uri_score_type" },
+                    "title": "Concepts"
+                }
+            }
         },
         "metadata_type": {
             "type": "object",
@@ -61,13 +153,42 @@
                     "type": "string",
                     "title": "Publisher"
                 },
+                "content_thumbnail_link": {
+                    "$ref": "#/definitions/s3_inclusive_url_type",
+                    "title": "Content (Image) Thumbnail Download Link"
+                },
                 "content_download_link": {
                     "$ref": "#/definitions/s3_inclusive_url_type",
                     "title": "Content Download Link"
                 },
+                "content_embed_link": {
+                    "$ref": "#/definitions/s3_inclusive_url_type",
+                    "title": "Content Embed Link"
+                },
                 "content_record_link": {
                     "$ref": "#/definitions/url_type",
                     "title": "Content Record Link"
+                },
+                "source_tags": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "title": "Array of Source Tags with Labels Only"
+                },
+                "tagger_data": {
+                    "$ref": "#/definitions/tagger_data_type",
+                    "title": "Tagger Data"
+                },
+                "rights": {
+                    "type": "string",
+                    "title": "Rights"
+                },
+                "pages": {
+                    "type": "integer",
+                    "title": "Number of Pages"
+                },
+                "isbn": {
+                    "type": "string",
+                    "title": "ISBN"
                 },
                 "schema": { 
                     "$ref" : "#/definitions/schema_version_type",
@@ -80,7 +201,8 @@
             "type": "object",
             "properties": {
                 "resource_type": {
-                    "enum": [ "article", "book", "report" ],
+                    "enum": ["article", "audio", "book", "course", "dataset", 
+                    		 "image", "report", "syllabus", "video", "profile"],
                     "title": "Resource Type"
                 },
                 "user_id": {
@@ -99,21 +221,41 @@
                     "type": "string",
                     "title": "Title"
                  },
-                "content": {
+                "content_url": {
                     "type": "string",
-                    "title": "Content"
-                 },
+                    "title": "Primary URL of the content"
+                },
+                "short_content": {
+                    "type": "string",
+                    "title": "Short Content"
+                },
+                "long_content": {
+                    "type": "string",
+                    "title": "Long Content"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "title": "Array of Tag Labels"
+                },
                 "metadata": {
                     "$ref": "#/definitions/metadata_type",
                     "title": "Metadata"
                  }
             },
-            "required": ["title", "content", "metadata"],
+            "required": ["title", "resource_type", "metadata"],
+            "anyOf": [
+                {"required": ["resource_type"]},
+                {"required": ["content_url"]},
+                {"required": ["short_content"]},
+                {"required": ["long_content"]}
+            ],            
             "additionalProperties": false
         }
     },
     "type": "array",
     "title": "Resource Array Doc",
     "items": { "$ref": "#/definitions/record_type" },
+    "minItems": 1,
     "description": "Green Commons Resource Array Document"
  }

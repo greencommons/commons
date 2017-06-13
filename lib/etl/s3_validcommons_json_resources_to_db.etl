@@ -1,0 +1,6 @@
+require_relative 'common'
+
+source(NormalizeRow,
+       NormalizeJsonResources,
+       ProcessAllFilesInS3Folders, 'valid-commons', '0.0.3/05-10-2017_1494448082/resources/', '.json', 'us-west-2')
+destination(CreateNewResourceRecord)
