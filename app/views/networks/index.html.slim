@@ -1,0 +1,16 @@
+.page-details.page-details--creme-bg
+  .container
+    .row
+      .col-xs-12
+        = render 'shared/alerts'
+
+        h1 My Networks
+        - @networks.each_slice(2) do |slice|
+          .row
+            - slice.each do |network|
+              .col-xs-12.col-md-6
+                = render "shared/summary_cards/main", resource: network
+
+    .row.page-details__row
+      .col-xs-12.text-center
+        = paginate @networks

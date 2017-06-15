@@ -1,0 +1,6 @@
+require_relative 'common'
+
+source(NormalizeRow,
+       NormalizeJsonNetworks,
+       ProcessAllFilesInLocalFolders, 'lib/etl/data/*network*.json')
+destination(CreateNewNetworkRecord)

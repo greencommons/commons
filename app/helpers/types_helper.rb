@@ -1,6 +1,6 @@
 module TypesHelper
   def list_options(user)
-    suggestions = current_user.groups.order('groups_users.created_at DESC').limit(5).to_a
+    suggestions = current_user.networks.order('networks_users.created_at DESC').limit(5).to_a
     suggestions.unshift(user)
     suggestions.map do |suggestion|
       {
@@ -19,8 +19,8 @@ module TypesHelper
   private
 
   def owner_name(suggestion)
-    if suggestion.is_a?(Group)
-      "#{suggestion.name} (Group)"
+    if suggestion.is_a?(Network)
+      "#{suggestion.name} (Network)"
     else
       "#{suggestion.first_name} #{suggestion.last_name}, #{suggestion.email} (User)"
     end

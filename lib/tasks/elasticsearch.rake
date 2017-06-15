@@ -21,7 +21,7 @@ namespace :elasticsearch do
 
   desc 'Deletes the "resource", "group" and "list" indices and regenerates it with all records'
   task reset_all_indices: :environment do
-    [Resource, Group, List, User].each { |klass| reset_index(klass) }
+    [Resource, Network, List, User].each { |klass| reset_index(klass) }
   end
 
   desc 'Deletes the "resource" index and regenerates it with all records currently in Resource'
@@ -29,9 +29,9 @@ namespace :elasticsearch do
     reset_index(Resource)
   end
 
-  desc 'Deletes the "group" index and regenerates it with all records currently in Group'
-  task reset_group_index: :environment do
-    reset_index(Group)
+  desc 'Deletes the "group" index and regenerates it with all records currently in Network'
+  task reset_network_index: :environment do
+    reset_index(Network)
   end
 
   desc 'Deletes the "list" index and regenerates it with all records currently in List'

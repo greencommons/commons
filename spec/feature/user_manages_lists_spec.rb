@@ -23,13 +23,13 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
   end
 
   describe 'create a list' do
-    scenario 'users can see themselves and 5 of their groups as suggestions' do
+    scenario 'users can see themselves and 5 of their networks as suggestions' do
       user = feature_login
       user.update_columns(first_name: 'John', last_name: 'Doe')
-      group = create(:group, name: 'test')
-      group.add_user(user)
+      network = create(:network, name: 'test')
+      network.add_user(user)
       wait_for { User.search(user.email).results.total }.to eq(1)
-      wait_for { Group.search(group.name).results.total }.to eq(1)
+      wait_for { Network.search(network.name).results.total }.to eq(1)
 
       find(:css, '.glyphicon.glyphicon-plus').click
       click_link 'Create List'
@@ -41,15 +41,15 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
       end
 
       expect(page).to have_text "John Doe, #{user.email} (User)"
-      expect(page).to have_text "#{group.name} (Group)"
+      expect(page).to have_text "#{network.name} (Network)"
     end
 
-    scenario 'users can create a private list owned by a group' do
+    scenario 'users can create a private list owned by a network' do
       user = feature_login
-      group = create(:group, name: 'test')
-      group.add_admin(user)
+      network = create(:network, name: 'test')
+      network.add_admin(user)
       wait_for { User.search(user.email).results.total }.to eq(1)
-      wait_for { Group.search(group.name).results.total }.to eq(1)
+      wait_for { Network.search(network.name).results.total }.to eq(1)
 
       find(:css, '.glyphicon.glyphicon-plus').click
       click_link 'Create List'
@@ -70,7 +70,7 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
       expect(find('h1')).to have_content('My list')
       expect(List.count).to eq 1
       expect(List.first.privacy).to eq 'publ'
-      expect(List.first.owner).to eq group
+      expect(List.first.owner).to eq network
       expect(List.first.description).to eq 'Description!'
       expect(page).to have_content('some')
       expect(page).to have_content('random')
@@ -137,49 +137,49 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
     user = feature_login
     list = create(:list, owner: user, description: 'Some description.')
 
-    group1 = create(:group, name: 'Group 1', published_at: 3.days.ago)
-    group2 = create(:group, name: 'Group 2', published_at: 1.days.ago)
+    network1 = create(:network, name: 'Network 1', published_at: 3.days.ago)
+    network2 = create(:network, name: 'Network 2', published_at: 1.days.ago)
     resource = create(:resource, title: 'Resource', published_at: 10.days.ago)
 
-    create(:lists_item, list: list, item: group1, published_at: group1.published_at)
-    create(:lists_item, list: list, item: group2, published_at: group2.published_at)
+    create(:lists_item, list: list, item: network1, published_at: network1.published_at)
+    create(:lists_item, list: list, item: network2, published_at: network2.published_at)
     create(:lists_item, list: list, item: resource, published_at: resource.published_at)
 
     visit list_path(list)
-    expect(page).to have_text(group1.name)
-    expect(page).to have_text(group2.name)
+    expect(page).to have_text(network1.name)
+    expect(page).to have_text(network2.name)
     expect(page).to have_text(resource.title)
 
-    expect(page).to have_text(/.*Group 2.*Group 1.*Resource.*/)
+    expect(page).to have_text(/.*Network 2.*Network 1.*Resource.*/)
     select 'Sort by creation date', from: 'sort'
     wait_for_ajax
-    expect(page).to have_text(/.*Resource.*Group 2.*Group 1.*/)
+    expect(page).to have_text(/.*Resource.*Network 2.*Network 1.*/)
   end
 
   context 'remove from list' do
-    scenario 'users can remove a group from a list' do
+    scenario 'users can remove a network from a list' do
       user = feature_login
       list = create(:list, owner: user, description: 'Some description.')
 
-      group1 = create(:group, name: 'Group 1', published_at: 3.days.ago)
-      group2 = create(:group, name: 'Group 2', published_at: 1.days.ago)
+      network1 = create(:network, name: 'Network 1', published_at: 3.days.ago)
+      network2 = create(:network, name: 'Network 2', published_at: 1.days.ago)
       resource = create(:resource, title: 'Resource', published_at: 10.days.ago)
 
-      create(:lists_item, list: list, item: group1)
-      create(:lists_item, list: list, item: group2)
+      create(:lists_item, list: list, item: network1)
+      create(:lists_item, list: list, item: network2)
       create(:lists_item, list: list, item: resource)
 
       visit list_path(list)
-      expect(page).to have_text(group1.name)
-      expect(page).to have_text(group2.name)
+      expect(page).to have_text(network1.name)
+      expect(page).to have_text(network2.name)
       expect(page).to have_text(resource.name)
 
       first('.summary-card__body').hover
       find('.summary-card__delete').click
       wait_for_ajax
 
-      expect(page).not_to have_text(group1.name)
-      expect(page).to have_text(group2.name)
+      expect(page).not_to have_text(network1.name)
+      expect(page).to have_text(network2.name)
       expect(page).to have_text(resource.name)
     end
 

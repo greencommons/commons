@@ -94,8 +94,8 @@ kiba ETL source files are in `lib/etl/`
 │   ├── corrupted_sample_epub_book_3.epub
 │   ├── good_resource_array.json
 │   ├── bad_resource_array.json
-│   └── good_group_array.json
-│   └── bad_group_array.json
+│   └── good_network_array.json
+│   └── bad_network_array.json
 ├── extract
 │   └── process_files_all_files_in_local_folders.rb
 │   └── process_files_all_files_in_s3_folders.rb
@@ -105,12 +105,12 @@ kiba ETL source files are in `lib/etl/`
 ├── load
 │   ├── create_new_record.rb
 │   ├── create_new_resource_record.rb
-│   └── create_new_group_record.rb
+│   └── create_new_network_record.rb
 ├── transform
 │   └── transform_epub.rb
 └── schema
     ├── resource_array_schema.json
-    └── group_array_schema.json
+    └── network_array_schema.json
 
 ```
 

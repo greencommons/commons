@@ -90,18 +90,18 @@ RSpec.describe Api::V1::ListsController, type: :request do
           end
         end
 
-        context 'with a group as owner' do
-          let(:group) { create(:group) }
+        context 'with a network as owner' do
+          let(:network) { create(:network) }
 
           before do
-            group.add_user(user)
+            network.add_user(user)
             post '/api/v1/lists', params: {
               data: {
                 type: 'lists',
                 attributes: {
                   name: 'My Awesome List',
-                  owner_id: group.id,
-                  owner_type: 'Group'
+                  owner_id: network.id,
+                  owner_type: 'Network'
                 }
               }
             }.to_json, headers: headers
@@ -117,9 +117,9 @@ RSpec.describe Api::V1::ListsController, type: :request do
             expect(json_body['data']['id']).to eq List.last.id.to_s
           end
 
-          it 'creates the list with the group as owner' do
+          it 'creates the list with the network as owner' do
             expect(List.count).to eq 1
-            expect(List.last.owner).to eq group
+            expect(List.last.owner).to eq network
           end
         end
       end

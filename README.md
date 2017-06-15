@@ -143,7 +143,7 @@ Content-Type: application/vnd.api+json
 
 - [Search](#search)
 - Resources
-- Groups
+- Networks
 - Lists
 
 #### Search - `/api/v1/search`
@@ -237,7 +237,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources/:id \
      -d '{ "data": { "id": ":id", "type": "resources", "attributes": { "title": "An updated resource" } } }'
 ```
 
-#### Groups
+#### Networks
 
 ##### Retrieve all groups - `/api/v1/groups`
 
@@ -352,7 +352,7 @@ curl http://localhost:3000/api/v1/groups/:id \
      -d '{ "data": { "id": ":id", "type": "groups", "attributes": { "name": "A new group" } } }'
 ```
 
-#### Group Users
+#### Network Users
 
 ##### List group users
 

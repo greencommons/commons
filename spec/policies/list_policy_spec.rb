@@ -47,11 +47,11 @@ describe ListPolicy do
       it { is_expected.to permit_action(:destroy) }
     end
 
-    context 'when list is owned by a group where the user is a member' do
+    context 'when list is owned by a network where the user is a member' do
       before do
-        group = create(:group)
-        group.add_user(user)
-        list.owner = group
+        network = create(:network)
+        network.add_user(user)
+        list.owner = network
         list.save
       end
 

@@ -25,7 +25,7 @@ module Api
 
       def owner
         return current_user unless list_params[:owner_id] && list_params[:owner_type]
-        return current_user unless %w(Group User).include?(list_params[:owner_type])
+        return current_user unless %w(Network User).include?(list_params[:owner_type])
         list_params[:owner_type].constantize.find(list_params[:owner_id]) || current_user
       end
 

@@ -1,12 +1,12 @@
 module Suggesters
   class Members
-    def initialize(query:, group_id: nil)
+    def initialize(query:, network_id: nil)
       @query = query
-      @group_id = group_id
+      @network_id = network_id
     end
 
     def suggest
-      users - group_members
+      users - network_members
     end
 
     private
@@ -15,9 +15,9 @@ module Suggesters
       @users ||= User.filter_by_email(@query).sort_by_email.limit(10)
     end
 
-    def group_members
-      return [] unless @group_id
-      @group_members ||= User.joins(:groups_users).where('group_id = ?', @group_id)
+    def network_members
+      return [] unless @network_id
+      @network_members ||= User.joins(:networks_users).where('network_id = ?', @network_id)
     end
   end
 end

@@ -20,7 +20,7 @@ class ListItemsController < ApplicationController
           render_errors(list_item.errors)
         end
       else
-        render_errors('Item Type' => ['is not valid. Supported types: Group, Resource, List.'])
+        render_errors('Item Type' => ['is not valid. Supported types: Network, Resource, List.'])
       end
     else
       render_errors('Unauthorized: ' => ["You don't have the permission to do that."])
@@ -49,7 +49,7 @@ class ListItemsController < ApplicationController
   private
 
   def valid_type?
-    %w(Group Resource List).include?(params[:list_item][:item_type])
+    %w(Network Resource List).include?(params[:list_item][:item_type])
   end
 
   def list_item

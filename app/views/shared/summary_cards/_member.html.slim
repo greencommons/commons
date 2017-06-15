@@ -22,9 +22,9 @@
   - if resource.user != current_user && @admin
     .summary-card__actions
       - if resource.admin?
-        = link_to 'Remove admin rights', remove_admin_group_member_path(@group, resource), method: :post
+        = link_to 'Remove admin rights', remove_admin_network_member_path(@network, resource), method: :post
       - else
-        = link_to 'Make admin', make_admin_group_member_path(@group, resource), method: :post
+        = link_to 'Make admin', make_admin_network_member_path(@network, resource), method: :post
       = ' | '
-      = link_to 'Remove from group', group_member_path(@group, resource), method: :delete, data: { confirm: 'Are you sure?' }
+      = link_to 'Remove from network', network_member_path(@network, resource), method: :delete, data: { confirm: 'Are you sure?' }
       

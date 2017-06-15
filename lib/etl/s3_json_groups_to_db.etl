@@ -1,6 +1,0 @@
-require_relative 'common'
-
-source(NormalizeRow,
-       NormalizeJsonGroups,
-       ProcessAllFilesInS3Folders,  'knowledge.commons', 'valid_data/groups/', '.json')
-destination(CreateNewGroupRecord)

@@ -17,10 +17,10 @@ RSpec.describe User do
   end
 
   describe 'Associations' do
-    it { is_expected.to have_many(:groups_users) }
-    it { is_expected.to have_many(:groups) }
+    it { is_expected.to have_many(:networks_users) }
+    it { is_expected.to have_many(:networks) }
     it { is_expected.to have_many(:owned_lists) }
-    it { is_expected.to have_many(:group_owned_lists) }
+    it { is_expected.to have_many(:network_owned_lists) }
   end
 
   describe '#full_name' do
@@ -31,15 +31,15 @@ RSpec.describe User do
   end
 
   describe '#all_owned_lists' do
-    it 'returns all the lists owned by the user and by groups the user belongs to' do
+    it 'returns all the lists owned by the user and by networks the user belongs to' do
       user = create(:user)
-      group1 = create(:group)
-      group2 = create(:group)
-      group1.add_user(user)
-      group2.add_user(user)
+      network1 = create(:network)
+      network2 = create(:network)
+      network1.add_user(user)
+      network2.add_user(user)
       list1 = create(:list, owner: user)
-      list2 = create(:list, owner: group1)
-      list3 = create(:list, owner: group2)
+      list2 = create(:list, owner: network1)
+      list3 = create(:list, owner: network2)
 
       expect(user.all_owned_lists).to match_array([list1, list2, list3])
     end

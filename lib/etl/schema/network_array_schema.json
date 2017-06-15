@@ -1,0 +1,103 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "self": {
+        "vendor": "org.islandpress",
+        "name": "NetworkArraySchema",
+        "format": "jsonschema",
+        "version": "0.0.1"
+    },
+    "definitions": {
+        "schema_version_type": {
+            "type": "string",
+            "title" : "Schema Version",
+            "pattern": "^[a-zA-Z0-9_]+/[0-9]+\\.[0-9]+\\.[0-9]$"
+        },
+        "detailed_datetime_type": {
+            "type": "string",
+            "title": "Detailed Date Time",
+            "description": "Format that schema validator can accept; example: 2015-10-16 13:29:27.282294",
+            "pattern": "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]+"
+        },
+        "day_datetime_type": {
+            "type": "string",
+            "title": "Day Date Time",
+            "description": "Format that schema validator can accept; example: 2015-10-16",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "year_datetime_type": {
+            "type": "string",
+            "title": "Year Date Time",
+            "description": "Format that schema validator can accept; example: 2015",
+            "pattern": "^[0-9]{4}$"
+        },
+        "generic_datetime_type": {
+            "oneOf" :[
+                { "$ref": "#/definitions/detailed_datetime_type" },
+                { "$ref": "#/definitions/day_datetime_type" },
+                { "$ref": "#/definitions/year_datetime_type" }
+            ],
+            "title": "Generic Date Format"
+        },
+        "email_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_\\.-]+@[a-zA-Z0-9_\\.-]+\\.[a-zA-Z]+$"
+        },
+        "url_type": {
+            "type": "string",
+            "pattern": "^(https?://)?([/a-zA-Z0-9_-]+\\.)+"
+        },
+        "metadata_type": {
+            "type": "object",
+            "properties": {
+                "schema": { 
+                    "$ref" : "#/definitions/schema_version_type",
+                    "title": "Schema Version"
+                }
+            },
+            "additionalProperties": true
+        },
+        "record_type": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Network Name"
+                 },
+                "short_description": {
+                    "type": "string",
+                    "title": "Short Description"
+                 },
+                "long_description": {
+                    "type": "string",
+                    "title": "Long Description"
+                 },
+                "url": {
+                    "$ref": "#/definitions/url_type",
+                    "title": "URL"
+                 },
+                "email": {
+                    "$ref": "#/definitions/email_type",
+                    "title": "Email"
+                 },
+                "metadata": {
+                    "$ref": "#/definitions/metadata_type",
+                    "title": "Metadata"
+                 },
+                "created_at": {
+                    "$ref": "#/definitions/generic_datetime_type",
+                    "title": "Creation Time"
+                 },
+                "updated_at": {
+                    "$ref": "#/definitions/generic_datetime_type",
+                    "title": "Last Update Time"
+                 }
+            },
+            "required": ["name"],
+            "additionalProperties": false
+        }
+    },
+    "type": "array",
+    "title": "Network Array Doc",
+    "items": { "$ref": "#/definitions/record_type" },
+    "description": "Green Commons Network Array Document"
+ }
