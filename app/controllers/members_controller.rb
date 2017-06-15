@@ -1,8 +1,8 @@
 class MembersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: %i(index)
   before_action :set_network
-  before_action :set_network_user, except: [:index, :create, :join, :leave]
-  before_action :set_admin, except: [:join, :leave]
+  before_action :set_network_user, except: %i(index create join leave)
+  before_action :set_admin, except: %i(join leave)
 
   def index
     authorize @network, :show?

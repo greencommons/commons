@@ -1,6 +1,6 @@
 class NetworksController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
-  before_action :set_network, only: [:show, :edit, :update, :destroy, :leave]
+  before_action :authenticate_user!, except: %i(show)
+  before_action :set_network, only: %i(show edit update destroy leave)
 
   def index
     @networks = policy_scope(Network).page(params[:page] || 1).per(10)
@@ -22,8 +22,7 @@ class NetworksController < ApplicationController
     authorize @network
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @network = Network.new(network_params)
