@@ -7,7 +7,8 @@ REGISTERED_ETLS = [
   :s3_islandpress_epubs_to_db,
   :s3_json_resources_to_db,
   :s3_json_groups_to_db,
-  :s3_validcommons_json_resources_to_db
+  :s3_validcommons_json_resources_to_db,
+  :s3_validcommons_json_networks_to_db
 ].freeze
 
 namespace :etl do

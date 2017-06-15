@@ -4,7 +4,7 @@
         "vendor": "org.islandpress",
         "name": "NetworkArraySchema",
         "format": "jsonschema",
-        "version": "0.0.1"
+        "version": "0.0.3"
     },
     "definitions": {
         "schema_version_type": {
@@ -49,7 +49,7 @@
         "metadata_type": {
             "type": "object",
             "properties": {
-                "schema": { 
+                "schema": {
                     "$ref" : "#/definitions/schema_version_type",
                     "title": "Schema Version"
                 }
@@ -61,7 +61,7 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "title": "Network Name"
+                    "title": "Group Name"
                  },
                 "short_description": {
                     "type": "string",
@@ -71,14 +71,11 @@
                     "type": "string",
                     "title": "Long Description"
                  },
-                "url": {
-                    "$ref": "#/definitions/url_type",
-                    "title": "URL"
-                 },
-                "email": {
-                    "$ref": "#/definitions/email_type",
-                    "title": "Email"
-                 },
+                "tags": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "title": "Array of Tag Labels"
+                },
                 "metadata": {
                     "$ref": "#/definitions/metadata_type",
                     "title": "Metadata"
@@ -99,5 +96,6 @@
     "type": "array",
     "title": "Network Array Doc",
     "items": { "$ref": "#/definitions/record_type" },
-    "description": "Green Commons Network Array Document"
+    "minItems": 1,
+    "description": "Network Array Document"
  }

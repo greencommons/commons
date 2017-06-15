@@ -10,7 +10,13 @@ class CreateNewNetworkRecord < CreateNewRecord
   end
 
   def create
+    tags = attributes.delete(:tags) if attributes[:tags]
     record = Network.create!(attributes)
+
+    if tags && tags.any?
+      tags.each { |tag| record.tag_list.add(tag) }
+      record.save
+    end
 
     ap "Name: #{record.name}"
     ap 'Metadata: '

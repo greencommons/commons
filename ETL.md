@@ -57,6 +57,7 @@ bundle exec rake etl:local_json_groups_to_db
 ```
 bundle exec rake etl:s3_json_resources_to_db
 bundle exec rake etl:s3_validcommons_json_resources_to_db
+bundle exec rake etl:s3_validcommons_json_networks_to_db
 bundle exec rake etl:s3_json_groups_to_db
 ```
 
