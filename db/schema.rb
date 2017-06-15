@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615024650) do
+ActiveRecord::Schema.define(version: 20170615070755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 20170615024650) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.jsonb    "metadata",      default: {}, null: false
-    t.jsonb    "content",       default: {}, null: false
     t.text     "cached_tags",   default: [],              array: true
     t.integer  "privacy",       default: 0,  null: false
     t.string   "url"
