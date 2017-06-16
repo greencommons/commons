@@ -4,9 +4,11 @@ module Api
     include Authentication
     include Search
 
+    before_action :validate_content_type
     before_action :set_paper_trail_whodunnit
 
     rescue_from StandardError, with: :server_error
+    rescue_from ActionDispatch::ParamsParser::ParseError, with: :client_error
     rescue_from ActionController::RoutingError, with: :not_found
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from Pundit::NotAuthorizedError, with: :forbidden
@@ -76,6 +78,18 @@ module Api
     end
 
     private
+
+    def validate_content_type
+      unless %w(GET DELETE).include?(request.method) ||
+             request.env['CONTENT_TYPE'] =~ %r(application\/vnd\.api\+json)
+        error = {
+          title: 'Unsupported Media Type',
+          message: "#{request.env['CONTENT_TYPE']} is not supported. Please use " \
+                   "'application/vnd.api+json'"
+        }
+        render_json_api_error(error, 415)
+      end
+    end
 
     def version
       self.class.name.split('::')[1]
