@@ -1,7 +1,7 @@
 # config
 users_count = 20
 resources_count = 400
-groups_count = 10
+networks_count = 10
 
 p 'Creating admin user with email \'admin@greencommons.org\' and password \'thecommons\'...'
 admin = FactoryGirl.create(:user, email: 'admin@greencommons.org',
@@ -25,15 +25,15 @@ User.all.each do |user|
                                     resources: Resource.order('RANDOM()').limit(rand(10..50)))
 end
 
-p "Creating #{groups_count} groups and 3-5 lists with 30-80 resources for each group..."
-groups_count.times do |n|
-  group = FactoryGirl.create(:group)
+p "Creating #{networks_count} networks and 3-5 lists with 30-80 resources for each network..."
+networks_count.times do |n|
+  network = FactoryGirl.create(:network)
   users = User.order('RANDOM()').limit(rand(2..10)).to_a
 
-  group.add_admin(admin)
-  group.add_admin(users.shift)
-  users.each { |user| group.add_user(user) }
+  network.add_admin(admin)
+  network.add_admin(users.shift)
+  users.each { |user| network.add_user(user) }
 
-  FactoryGirl.create_list(:list, rand(3..5), owner: group,
+  FactoryGirl.create_list(:list, rand(3..5), owner: network,
                                              resources: Resource.order('RANDOM()').limit(rand(30..80)))
 end

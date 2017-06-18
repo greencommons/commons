@@ -1,5 +1,5 @@
 .page-details.resource-page 
-  div class="resource-page__background resource-page__background--groups"
+  div class="resource-page__background resource-page__background--networks"
     = render 'shared/alerts'
   .resource-page__container
     .container
@@ -10,9 +10,9 @@
               .row
                 .page-details__row--more-space 
                   .col-xs-12.col-sm-6.col-md-4
-                    div class="entity-icon entity-icon--big entity-icon--groups"
+                    div class="entity-icon entity-icon--big entity-icon--networks"
                       i class="fa fa-users"
-                    div class="resource-page__type resource-page__type--groups"
+                    div class="resource-page__type resource-page__type--networks"
                       | Networks
                   .col-xs-12.col-sm-6.col-md-8
                     .resource-actions.resource-actions--align-middle
@@ -83,7 +83,7 @@
                                                            autocomplete_path: autocomplete_lists_path(current_resource: "Network:#{@network.id}"),
                                                            authenticity_token: form_authenticity_token,
                                                            list_count: @network.lists.count,
-                                                           button_class: "btn-groups btn--large",
+                                                           button_class: "btn-networks btn--large",
                                                            logged_in: current_user.present?,
                                                            options: current_user ? owner_options(current_user, @network) : [] }
 
@@ -134,6 +134,6 @@
                       h6
                         | Similar networks
                     ul.sidelist
-                      - @similar.each do |similar_group|
-                        li= link_to similar_group.name, network_path(similar_group)
+                      - @similar.each do |similar_network|
+                        li= link_to similar_network.name, network_path(similar_network)
                     
