@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
   let(:list) { create(:list) }
   let(:resource) { create(:resource) }
-  let(:groups) { create_list(:group, 3) }
+  let(:networks) { create_list(:network, 3) }
   let(:resources) { create_list(:resource, 3) }
 
   let(:user) { create(:user) }
@@ -18,7 +18,7 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
 
   describe 'GET /api/v1/lists/:id/relationships/items' do
     before do
-      (groups + resources).each do |item|
+      (networks + resources).each do |item|
         create(:lists_item, list: list, item: item)
       end
       get "/api/v1/lists/#{list.id}/relationships/items"
@@ -43,7 +43,7 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
           list.save
           post "/api/v1/lists/#{list.id}/relationships/items", params: {
             data: [
-              { id: groups.first.id, type: 'groups' },
+              { id: networks.first.id, type: 'networks' },
               { id: resources.first.id, type: 'resources' }
             ]
           }.to_json, headers: headers
@@ -68,7 +68,7 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
         before do
           post "/api/v1/lists/#{list.id}/relationships/items", params: {
             data: [
-              { id: groups.first.id, type: 'groups' },
+              { id: networks.first.id, type: 'networks' },
               { id: resources.first.id, type: 'resources' }
             ]
           }.to_json, headers: headers
@@ -89,7 +89,7 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
       before do
         post "/api/v1/lists/#{list.id}/relationships/items", params: {
           data: [
-            { id: groups.first.id, type: 'groups' },
+            { id: networks.first.id, type: 'networks' },
             { id: resources.first.id, type: 'resources' }
           ]
         }.to_json
@@ -105,7 +105,7 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
     before do
       patch "/api/v1/lists/#{list.id}/relationships/items", params: {
         data: [
-          { id: groups.first.id, type: 'groups' },
+          { id: networks.first.id, type: 'networks' },
           { id: resources.first.id, type: 'resources' }
         ]
       }.to_json, headers: headers
@@ -124,14 +124,14 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
     context 'when authenticated' do
       context 'when the list owner is the current user' do
         before do
-          (groups + resources).each do |item|
+          (networks + resources).each do |item|
             create(:lists_item, list: list, item: item)
           end
           list.owner = user
           list.save
           delete "/api/v1/lists/#{list.id}/relationships/items", params: {
             data: [
-              { id: groups.first.id, type: 'groups' },
+              { id: networks.first.id, type: 'networks' },
               { id: resources.first.id, type: 'resources' }
             ]
           }.to_json, headers: headers
@@ -149,20 +149,20 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
 
         it 'removes the two items from the list' do
           expect(list.reload.lists_items.length).to eq 4
-          expect(list.reload.lists_items.pluck(:id)).not_to include(groups.first.id)
+          expect(list.reload.lists_items.pluck(:id)).not_to include(networks.first.id)
           expect(list.reload.lists_items.pluck(:id)).not_to include(resources.first.id)
         end
       end
 
       context 'when the list is owned by someone else' do
         before do
-          (groups + resources).each do |item|
+          (networks + resources).each do |item|
             create(:lists_item, list: list, item: item)
           end
 
           delete "/api/v1/lists/#{list.id}/relationships/items", params: {
             data: [
-              { id: groups.first.id, type: 'items' },
+              { id: networks.first.id, type: 'items' },
               { id: resources.last.id, type: 'items' }
             ]
           }.to_json, headers: headers
@@ -183,7 +183,7 @@ RSpec.describe Api::V1::Relationships::ItemsController, type: :request do
       before do
         delete "/api/v1/lists/#{list.id}/relationships/items", params: {
           data: [
-            { id: groups.first.id, type: 'items' },
+            { id: networks.first.id, type: 'items' },
             { id: resources.first.id, type: 'items' }
           ]
         }.to_json

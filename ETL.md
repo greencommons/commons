@@ -49,14 +49,16 @@ The JSON ETL should be seen as the default one since it results in less errors t
 
 ```
 bundle exec rake etl:local_json_resources_to_db
-bundle exec rake etl:local_json_groups_to_db
+bundle exec rake etl:local_json_networks_to_db
 ```
 
 #### With files from S3
 
 ```
 bundle exec rake etl:s3_json_resources_to_db
-bundle exec rake etl:s3_json_groups_to_db
+bundle exec rake etl:s3_validcommons_json_resources_to_db
+bundle exec rake etl:s3_validcommons_json_networks_to_db
+bundle exec rake etl:s3_json_networks_to_db
 ```
 
 ### Epub Files
@@ -83,18 +85,18 @@ kiba ETL source files are in `lib/etl/`
 ├── common.rb
 ├── local_epubs_to_db.etl
 ├── local_json_resources_to_db.etl
-├── local_json_groups_to_db.etl
+├── local_json_networks_to_db.etl
 ├── s3_islandpress_epubs_to_db.etl
 ├── s3_json_resources_to_db.etl
-├── s3_json_groups_to_db.etl
+├── s3_json_networks_to_db.etl
 ├── data
 │   ├── sample_epub_book_1.epub
 │   ├── sample_epub_book_2.epub
 │   ├── corrupted_sample_epub_book_3.epub
 │   ├── good_resource_array.json
 │   ├── bad_resource_array.json
-│   └── good_group_array.json
-│   └── bad_group_array.json
+│   └── good_network_array.json
+│   └── bad_network_array.json
 ├── extract
 │   └── process_files_all_files_in_local_folders.rb
 │   └── process_files_all_files_in_s3_folders.rb
@@ -104,12 +106,12 @@ kiba ETL source files are in `lib/etl/`
 ├── load
 │   ├── create_new_record.rb
 │   ├── create_new_resource_record.rb
-│   └── create_new_group_record.rb
+│   └── create_new_network_record.rb
 ├── transform
 │   └── transform_epub.rb
 └── schema
     ├── resource_array_schema.json
-    └── group_array_schema.json
+    └── network_array_schema.json
 
 ```
 

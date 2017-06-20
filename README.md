@@ -143,19 +143,19 @@ Content-Type: application/vnd.api+json
 
 - [Search](#search)
 - Resources
-- Groups
+- Networks
 - Lists
 
 #### Search - `/api/v1/search`
 
-The search endpoint can be used to search through resources, groups and lists. It accepts some query parameters allowing you to customize the results.
+The search endpoint can be used to search through resources, networks and lists. It accepts some query parameters allowing you to customize the results.
 
 __Query Parameters__
 
 - `q`: The term to search for.
 - `filters`: Filters to apply to the search. For now, results can only be filtered by class or `resource_type`. Supported Values:
   - `filters[resource_types]=books,articles,reports`
-  - `filters[model_types]=resources,lists,groups`
+  - `filters[model_types]=resources,lists,networks`
 - `sort`: Field to sort the results by. Supported Values:
   - `sort=published_at` (Ascending)
   - `sort=-published_at` (Descending)
@@ -167,23 +167,23 @@ More filters and sorting options are coming soon.
 __Example__
 
 ```
-curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,groups&page=2&per=5'
+curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,networks&page=2&per=5'
 ```
 
 ```
-{  
-   "data":[  
-      {  
+{
+   "data":[
+      {
          "type":"resources",
          "id":"504",
-         "attributes":{  
+         "attributes":{
             "title":"The Upside of Down: Catastrophe, Creativity, and the Renewal of Civilization",
             "excerpt":"...",
             "published_at":"2017-01-05T14:14:49.305Z",
             "tags":[],
             "resource_type":"article"
          },
-         "links":{  
+         "links":{
             "self":"https://greencommons.herokuapp.com/api/v1/resources/504"
          },
          "relationships":{  
@@ -201,7 +201,7 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
       { ... }
    ],
    "links":{  
-      "self":"https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,groups&page=2&per=5",
+      "self":"https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,networks&page=2&per=5",
       "next":"",
       "last":""
    },
@@ -237,28 +237,28 @@ curl http://greencommons.herokuapp.com/api/v1/resources/:id \
      -d '{ "data": { "id": ":id", "type": "resources", "attributes": { "title": "An updated resource" } } }'
 ```
 
-#### Groups
+#### Networks
 
-##### Retrieve all groups - `/api/v1/groups`
+##### Retrieve all networks - `/api/v1/networks`
 
 All the query parameters defined for the `/search` resource can be used here as well.
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/groups
+curl http://greencommons.herokuapp.com/api/v1/networks
 ```
 
-##### Retrieve a group - `/api/v1/groups/:id`
+##### Retrieve a network - `/api/v1/networks/:id`
 
 __Example__
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/groups/10
+curl http://greencommons.herokuapp.com/api/v1/networks/10
 ```
 
 ```
 {  
   "data":{  
-    "type":"groups",
+    "type":"networks",
     "id":"10",
     "attributes":{  
       "name":"Mertz, Wisozk and Marks",
@@ -274,7 +274,7 @@ curl http://greencommons.herokuapp.com/api/v1/groups/10
       "resources_count":164
     },
     "links":{  
-      "self":"http://greencommons.herokuapp.com/api/v1/groups/10"
+      "self":"http://greencommons.herokuapp.com/api/v1/networks/10"
     },
     "relationships":{  
       "users":{  
@@ -317,14 +317,14 @@ curl http://greencommons.herokuapp.com/api/v1/groups/10
           }
         ],
         "links":{  
-          "self":"http://greencommons.herokuapp.com/api/v1/groups/10/relationships/users",
-          "related":"http://greencommons.herokuapp.com/api/v1/groups/10/users"
+          "self":"http://greencommons.herokuapp.com/api/v1/networks/10/relationships/users",
+          "related":"http://greencommons.herokuapp.com/api/v1/networks/10/users"
         }
       }
     }
   },
   "links":{  
-    "self":"http://greencommons.herokuapp.com/api/v1/groups/10",
+    "self":"http://greencommons.herokuapp.com/api/v1/networks/10",
     "next":"",
     "last":""
   },
@@ -332,54 +332,54 @@ curl http://greencommons.herokuapp.com/api/v1/groups/10
 }
 ```
 
-##### Create a group
+##### Create a network
 
 ```
-curl http://localhost:3000/api/v1/groups \
+curl http://localhost:3000/api/v1/networks \
      -X POST \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": { "type": "groups", "attributes": { "name": "A new group" } } }'
+     -d '{ "data": { "type": "networks", "attributes": { "name": "A new network" } } }'
 ```
 
-##### Update a group
+##### Update a network
 
 ```
-curl http://localhost:3000/api/v1/groups/:id \
+curl http://localhost:3000/api/v1/networks/:id \
      -X PATCH \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": { "id": ":id", "type": "groups", "attributes": { "name": "A new group" } } }'
+     -d '{ "data": { "id": ":id", "type": "networks", "attributes": { "name": "A new network" } } }'
 ```
 
-#### Group Users
+#### Network Users
 
-##### List group users
-
-```
-curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users
-```
-
-Note that it is also possible to just include the members when retrieving a group:
+##### List network users
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/groups/:id?include=users
+curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users
 ```
 
-##### Add users to a group
+Note that it is also possible to just include the members when retrieving a network:
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users \
+curl http://greencommons.herokuapp.com/api/v1/networks/:id?include=users
+```
+
+##### Add users to a network
+
+```
+curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users \
      -X POST \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": [{ "id": "1", "type": "users" }] }'
 ```
 
-##### Remove users from a group
+##### Remove users from a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/groups/:id/relationships/users \
+curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users \
      -X DELETE \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -413,7 +413,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
      -X POST \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
+     -d '{ "data": [{ "id": "1", "type": "networks" }, { "id": "1", "type": "resources" }] }'
 ```
 
 ##### Remove from a list
@@ -423,7 +423,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
      -X DELETE \
      -H 'Authorization: GC aXq8R267J_v1uXk5pbvU5g:1f9413d519c881a5cfc3c15faf6cd17e' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": [{ "id": "1", "type": "groups" }, { "id": "1", "type": "resources" }] }'
+     -d '{ "data": [{ "id": "1", "type": "networks" }, { "id": "1", "type": "resources" }] }'
 ```
 
 #### Users

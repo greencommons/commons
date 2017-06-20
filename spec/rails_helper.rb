@@ -31,7 +31,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
 
-    [Resource, List, Group, User].each do |klass|
+    [Resource, List, Network, User].each do |klass|
       klass.__elasticsearch__.create_index!(index: klass.index_name)
     end
   end
@@ -78,7 +78,7 @@ RSpec.configure do |config|
   end
 
   def reset_all_indices
-    [Resource, List, Group, User].each do |klass|
+    [Resource, List, Network, User].each do |klass|
       klass.__elasticsearch__.delete_index!(index: klass.index_name)
       klass.__elasticsearch__.create_index!(index: klass.index_name)
     end

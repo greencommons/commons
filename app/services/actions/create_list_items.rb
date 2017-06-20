@@ -3,16 +3,16 @@ module Actions
     def initialize(params, list)
       @data = params.to_unsafe_hash[:data]
       @list = list
-      @items = { 'groups' => {}, 'resources' => {} }
+      @items = { 'networks' => {}, 'resources' => {} }
       @built_items = []
     end
 
     def run
       extract_items
-      fill_records(Group, 'groups')
+      fill_records(Network, 'networks')
       fill_records(Resource, 'resources')
 
-      @items['groups'].each { |_id, group| create_list_item(group) }
+      @items['networks'].each { |_id, network| create_list_item(network) }
       @items['resources'].each { |_id, resource| create_list_item(resource) }
 
       @built_items
@@ -39,8 +39,8 @@ module Actions
 
     def extract_items
       @data.each do |o|
-        if o['type'] == 'groups'
-          @items['groups'][o['id'].to_s] = o
+        if o['type'] == 'networks'
+          @items['networks'][o['id'].to_s] = o
         elsif o['type'] == 'resources'
           @items['resources'][o['id'].to_s] = o
         end

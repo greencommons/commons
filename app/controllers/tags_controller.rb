@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
   before_action :authenticate_user!
 
-  TAGGABLE_MODELS = %w(Group Resource List).freeze
+  TAGGABLE_MODELS = %w(Network Resource List).freeze
 
   def create
     if TAGGABLE_MODELS.include?(params[:model_name])

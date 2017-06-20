@@ -10,11 +10,18 @@ class CreateNewResourceRecord < CreateNewRecord
   end
 
   def create
+    tags = attributes.delete(:tags) if attributes[:tags]
+    attributes[:url] = attributes.delete(:content_url)
     record = Resource.create!(attributes)
+
+    if tags && tags.any?
+      tags.each { |tag| record.tag_list.add(tag) }
+      record.save
+    end
 
     ap "Title: #{record.title}"
     ap 'Metadata: '
     ap record.metadata
-    ap "Content: #{record.content.truncate(100)}"
+    ap "Content: #{record.short_content.truncate(100)}"
   end
 end

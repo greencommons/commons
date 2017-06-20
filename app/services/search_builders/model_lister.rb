@@ -3,7 +3,7 @@ module SearchBuilders
     MODEL_TYPE_FILTERS = {
       resources: Resource,
       lists: List,
-      groups: Group
+      networks: Network
     }.freeze
 
     def initialize(filters)

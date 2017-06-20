@@ -7,7 +7,14 @@ class Resource < ApplicationRecord
     article: 0,
     book: 1,
     report: 2,
-    url: 3
+    url: 3,
+    audio: 4,
+    course: 5,
+    dataset: 6,
+    image: 7,
+    syllabus: 8,
+    video: 9,
+    profile: 10
   }.freeze
 
   has_paper_trail
@@ -31,8 +38,8 @@ class Resource < ApplicationRecord
   end
 
   def excerpt
-    return content unless content.is_a?(String)
-    content.truncate(500)
+    return short_content unless short_content.is_a?(String)
+    short_content.truncate(500)
   end
 
   def creators

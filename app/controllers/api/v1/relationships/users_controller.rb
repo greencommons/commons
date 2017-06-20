@@ -5,25 +5,25 @@ module Api
         skip_before_action :validate_auth_scheme, only: %i(index)
         skip_before_action :authenticate_client, only: %i(index)
 
-        before_action :set_group
+        before_action :set_network
 
         def index
-          results = @group.groups_users.includes(:user).
+          results = @network.networks_users.includes(:user).
                     page(params[:page] || 1).per(params[:per] || 10)
-          render_json_api present_collection(results, @group.groups_users.count)
+          render_json_api present_collection(results, @network.networks_users.count)
         end
 
         def create
-          authorize @group, :update?
+          authorize @network, :update?
           users = User.where(id: params[:data].map { |d| d[:id] })
 
           users.each do |user|
-            @group.add_user(user) unless @group.find_member(user)
+            @network.add_user(user) unless @network.find_member(user)
           end
 
-          results = @group.groups_users.includes(:user).
+          results = @network.networks_users.includes(:user).
                     page(params[:page] || 1).per(params[:per] || 10)
-          render_json_api present_collection(results, @group.groups_users.count)
+          render_json_api present_collection(results, @network.networks_users.count)
         end
 
         def update
@@ -34,19 +34,19 @@ module Api
         end
 
         def destroy
-          authorize @group, :update?
+          authorize @network, :update?
           users = User.where(id: params[:data].map { |d| d[:id] })
-          users.each { |user| @group.find_member(user).try(:destroy) }
+          users.each { |user| @network.find_member(user).try(:destroy) }
 
-          results = @group.groups_users.includes(:user).
+          results = @network.networks_users.includes(:user).
                     page(params[:page] || 1).per(params[:per] || 10)
-          render_json_api present_collection(results, @group.groups_users.count)
+          render_json_api present_collection(results, @network.networks_users.count)
         end
 
         private
 
-        def set_group
-          @group = Group.find(params[:group_id])
+        def set_network
+          @network = Network.find(params[:network_id])
         end
       end
     end

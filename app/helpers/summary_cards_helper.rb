@@ -1,8 +1,8 @@
 module SummaryCardsHelper
   def summary_card_for(resource)
     {
-      'Group' => 'shared/summary_cards/group',
-      'GroupsUser' => 'shared/summary_cards/member',
+      'Network' => 'shared/summary_cards/network',
+      'NetworksUser' => 'shared/summary_cards/member',
       'List' => 'shared/summary_cards/list',
       'Resource' => 'shared/summary_cards/resource',
     }[resource.class.to_s]

@@ -7,21 +7,18 @@
     .filters__lists
       = hidden_field_tag :query, @query
       ul.filters__list
-        li 
+        li
           .filters__item
             = render 'search/filter', name: :resources, category: :model_types, indeterminate: true
           ul.filters__list
-            li.filters__item
-              = render 'search/filter', name: :books, category: :resource_types, indeterminate_child: true
-            li.filters__item
-              = render 'search/filter', name: :articles, category: :resource_types, indeterminate_child: true
-            li.filters__item
-              = render 'search/filter', name: :reports, category: :resource_types, indeterminate_child: true
+            - Resource::RESOURCE_TYPES.keys.each do |type|
+              li.filters__item
+                = render 'search/filter', name: type.to_s.pluralize, category: :resource_types, indeterminate_child: true
         li.filters__item
           = render 'search/filter', name: :lists, category: :model_types
         li.filters__item
-          = render 'search/filter', name: :groups, category: :model_types
-      .clearfix      
+          = render 'search/filter', name: :networks, category: :model_types
+      .clearfix
   .filters
     .filters__title.text-xs-left.text-center
       h6
@@ -42,7 +39,7 @@
       h6
         | Date
         span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
-    
+
     .form-group.has-feedback
       input name="daterange" type="text" class='form-control fw'
       i.glyphicon.glyphicon-calendar.form-control-feedback

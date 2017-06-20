@@ -9,12 +9,12 @@ class List < ApplicationRecord
   has_many :lists_items
   has_many :resources, through: :lists_items, source: :item,
                        source_type: 'Resource'
-  has_many :groups, through: :lists_items, source: :item,
-                    source_type: 'Group'
+  has_many :networks, through: :lists_items, source: :item,
+                      source_type: 'Network'
 
   validates :name, presence: true
   validates :owner, presence: true
-  validates :owner_type, inclusion: %w(User Group)
+  validates :owner_type, inclusion: %w(User Network)
 
   settings index: { number_of_shards: 2 } do
     mappings dynamic: true do

@@ -1,0 +1,19 @@
+[
+	{
+		"name": "A Green Network",
+		"long_description": "Founded in 1991, this organization aims to combat climate change and otherwise save humanity.",
+		"metadata": {
+		}
+	},
+	{
+		"name": "Climate Uncles",
+		"long_description": "Uncles of the future generation, we stand together and protect.",
+		"metadata": {
+			"founded": "2016-01-05"
+		}
+	},
+	{
+		"name": "Clean Energies R Us",
+		"short_description": "Uncles of the future generation, we stand together and protect."
+	}
+]

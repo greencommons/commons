@@ -21,7 +21,7 @@
                           | Edit
                           i.fa.fa-pencil.glyphicon--left
                       - if policy(@list).destroy?
-                        = link_to @group, method: 'DELETE', class: "resource-actions__button btn btn-white", data: { confirm: 'Are you sure?' }   
+                        = link_to @network, method: 'DELETE', class: "resource-actions__button btn btn-white", data: { confirm: 'Are you sure?' }   
                           | Delete
                           i.fa.fa-times.glyphicon--left
                   .clearfix

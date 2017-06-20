@@ -11,10 +11,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :groups_users
-  has_many :groups, through: :groups_users
+  has_many :networks_users
+  has_many :networks, through: :networks_users
   has_many :owned_lists, as: :owner, class_name: List
-  has_many :group_owned_lists, through: :groups, source: :lists, class_name: List
+  has_many :network_owned_lists, through: :networks, source: :lists, class_name: List
   has_many :api_keys
 
   validates :email, presence: true, uniqueness: true
@@ -41,7 +41,7 @@ class User < ApplicationRecord
 
   def all_owned_lists
     List.where(owner_type: 'User', owner_id: id).
-      or(List.where(owner_type: 'Group', owner_id: groups.pluck(:id)))
+      or(List.where(owner_type: 'Network', owner_id: networks.pluck(:id)))
   end
 
   def as_indexed_json(_options = {})

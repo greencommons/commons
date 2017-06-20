@@ -2,10 +2,11 @@ require 'aws-sdk'
 require 'tempfile'
 
 class ProcessAllFilesInS3Folders
-  def initialize(bucket_name, prefix_folders, file_ext)
+  def initialize(bucket_name, prefix_folders, file_ext, region = nil)
     @bucket_name = bucket_name
     @prefix_folders = prefix_folders
     @file_ext = file_ext
+    @region = region
   end
 
   def each
@@ -43,7 +44,7 @@ class ProcessAllFilesInS3Folders
   end
 
   def s3
-    @_s3 = Aws::S3::Client.new
+    @_s3 = Aws::S3::Client.new(region: @region || ENV['AWS_REGION'])
   end
 
   def bucket_location(prefix_folder)

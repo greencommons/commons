@@ -33,8 +33,8 @@ class NormalizeJsonResources < NormalizeJson
   end
 end
 
-class NormalizeJsonGroups < NormalizeJson
+class NormalizeJsonNetworks < NormalizeJson
   def schema_fname
-    'lib/etl/schema/group_array_schema.json'
+    'lib/etl/schema/network_array_schema.json'
   end
 end

@@ -77,7 +77,7 @@ class ListsController < ApplicationController
   def owner
     return nil unless params[:list][:owner]
     owner = params[:list][:owner].split(':')
-    return nil unless %w(Group User).include?(owner[0])
+    return nil unless %w(Network User).include?(owner[0])
     owner[0].constantize.find(owner[1]) || current_user
   end
 

@@ -5,7 +5,7 @@ module Suggesters
     end
 
     def suggest
-      @records ||= format_records(User) + format_records(Group)
+      @records ||= format_records(User) + format_records(Network)
     end
 
     private
