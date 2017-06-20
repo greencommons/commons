@@ -49,7 +49,7 @@ The JSON ETL should be seen as the default one since it results in less errors t
 
 ```
 bundle exec rake etl:local_json_resources_to_db
-bundle exec rake etl:local_json_groups_to_db
+bundle exec rake etl:local_json_networks_to_db
 ```
 
 #### With files from S3
@@ -58,7 +58,7 @@ bundle exec rake etl:local_json_groups_to_db
 bundle exec rake etl:s3_json_resources_to_db
 bundle exec rake etl:s3_validcommons_json_resources_to_db
 bundle exec rake etl:s3_validcommons_json_networks_to_db
-bundle exec rake etl:s3_json_groups_to_db
+bundle exec rake etl:s3_json_networks_to_db
 ```
 
 ### Epub Files
@@ -85,10 +85,10 @@ kiba ETL source files are in `lib/etl/`
 ├── common.rb
 ├── local_epubs_to_db.etl
 ├── local_json_resources_to_db.etl
-├── local_json_groups_to_db.etl
+├── local_json_networks_to_db.etl
 ├── s3_islandpress_epubs_to_db.etl
 ├── s3_json_resources_to_db.etl
-├── s3_json_groups_to_db.etl
+├── s3_json_networks_to_db.etl
 ├── data
 │   ├── sample_epub_book_1.epub
 │   ├── sample_epub_book_2.epub
