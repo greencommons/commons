@@ -2,7 +2,7 @@ class AutocompleteController < ApplicationController
   before_action :authenticate_user!
 
   def members
-    users = Suggesters::Members.new(query: params[:q], group_id: params[:group_id]).suggest
+    users = Suggesters::Members.new(query: params[:q], network_id: params[:network_id]).suggest
     render json: users.map { |u| { email: u.email } }
   end
 

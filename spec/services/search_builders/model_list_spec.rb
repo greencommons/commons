@@ -5,28 +5,28 @@ RSpec.describe SearchBuilders::ModelLister do
     context 'with filters = nil' do
       it 'returns all the supported model types' do
         lister = SearchBuilders::ModelLister.new(nil)
-        expect(lister.build).to eq [Resource, List, Group]
+        expect(lister.build).to eq [Resource, List, Network]
       end
     end
 
     context 'with filters = {}' do
       it 'returns all the supported model types' do
         lister = SearchBuilders::ModelLister.new({})
-        expect(lister.build).to eq [Resource, List, Group]
+        expect(lister.build).to eq [Resource, List, Network]
       end
     end
 
     context 'with filters = { model_types: "" }' do
       it 'returns only the requested types Resource and List' do
         lister = SearchBuilders::ModelLister.new(model_types: '')
-        expect(lister.build).to eq [Resource, List, Group]
+        expect(lister.build).to eq [Resource, List, Network]
       end
     end
 
     context 'with filters = { model_types: {} }' do
       it 'returns all the supported model types' do
         lister = SearchBuilders::ModelLister.new(model_types: {})
-        expect(lister.build).to eq [Resource, List, Group]
+        expect(lister.build).to eq [Resource, List, Network]
       end
     end
 

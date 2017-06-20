@@ -72,15 +72,15 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).to have_text(new_title)
     end
 
-    scenario 'users can search for resources, groups and lists' do
+    scenario 'users can search for resources, networks and lists' do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource")
-      create(:group, name: "#{title} My Group")
+      create(:network, name: "#{title} My Network")
       create(:list, name: "#{title} My List")
 
       wait_for do
-        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
       end.to eq(3)
 
       visit new_search_path
@@ -90,7 +90,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).to have_text('My Resource')
-      expect(page).to have_text('My Group')
+      expect(page).to have_text('My Network')
       expect(page).to have_text('My List')
     end
 
@@ -117,11 +117,11 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource")
-      create(:group, name: "#{title} My Group")
+      create(:network, name: "#{title} My Network")
       create(:list, name: "#{title} My List")
 
       wait_for do
-        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
       end.to eq(3)
 
       visit new_search_path
@@ -131,7 +131,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).to have_text('My Resource')
-      expect(page).to have_text('My Group')
+      expect(page).to have_text('My Network')
       expect(page).to have_text('My List')
 
       uncheck('Resources')
@@ -141,7 +141,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
       expect(page).not_to have_text('My Resource')
       expect(page).not_to have_text('My List')
-      expect(page).to have_text('My Group')
+      expect(page).to have_text('My Network')
     end
 
     scenario 'users can filter by resource type' do
@@ -172,11 +172,11 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
-      create(:group, name: "#{title} My Group", created_at: 5.days.ago)
+      create(:network, name: "#{title} My Network", created_at: 5.days.ago)
       create(:list, name: "#{title} My List", created_at: 8.days.ago)
 
       wait_for do
-        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
       end.to eq(3)
 
       visit new_search_path
@@ -188,18 +188,18 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       select 'Newest First', from: 'sort'
       wait_for_ajax
 
-      expect(page).to have_text(/.*My Group.*My List.*My Resource.*/)
+      expect(page).to have_text(/.*My Network.*My List.*My Resource.*/)
     end
 
     scenario 'users can sort by oldest first' do
       title = Faker::Hipster.sentence
 
       create(:resource, title: "#{title} My Resource", created_at: 10.days.ago)
-      create(:group, name: "#{title} My Group", created_at: 5.days.ago)
+      create(:network, name: "#{title} My Network", created_at: 5.days.ago)
       create(:list, name: "#{title} My List", created_at: 8.days.ago)
 
       wait_for do
-        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
       end.to eq(3)
 
       visit new_search_path
@@ -211,26 +211,26 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       select 'Oldest First', from: 'sort'
       wait_for_ajax
 
-      expect(page).to have_text(/.*My Resource.*My List.*My Group.*/)
+      expect(page).to have_text(/.*My Resource.*My List.*My Network.*/)
     end
   end
 
   context 'related records' do
     scenario 'users can see related records' do
       resource = create(:resource, title: 'My Resource')
-      protection_group = create(:group, name: 'Protection Group')
-      help_group = create(:group, name: 'Help Group')
+      protection_network = create(:network, name: 'Protection Network')
+      help_network = create(:network, name: 'Help Network')
       helpful_list = create(:list, name: 'Helpful List')
 
       resource.tag_list.add('ocean')
       resource.tag_list.add('sky')
       resource.save!
 
-      protection_group.tag_list.add('ocean')
-      protection_group.save!
+      protection_network.tag_list.add('ocean')
+      protection_network.save!
 
-      help_group.tag_list.add('mountain')
-      help_group.save!
+      help_network.tag_list.add('mountain')
+      help_network.save!
 
       helpful_list.tag_list.add('sky')
       helpful_list.save!
@@ -247,9 +247,9 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
       expect(page).to have_text('My Resource')
       expect(page).to have_text('You may also like...')
-      expect(page).to have_text('Protection Group')
+      expect(page).to have_text('Protection Network')
       expect(page).to have_text('Helpful List')
-      expect(page).not_to have_text('Help Group')
+      expect(page).not_to have_text('Help Network')
     end
   end
 end

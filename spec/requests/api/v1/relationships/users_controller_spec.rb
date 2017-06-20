@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Relationships::UsersController, type: :request do
-  let(:group) { create(:group) }
+  let(:network) { create(:network) }
   let(:users) { create_list(:user, 5) }
 
   let(:user) { create(:user) }
@@ -14,10 +14,10 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
     }
   end
 
-  describe 'GET /api/v1/groups/:id/relationships/users' do
+  describe 'GET /api/v1/networks/:id/relationships/users' do
     before do
-      users.each { |u| group.add_user(u) }
-      get "/api/v1/groups/#{group.id}/relationships/users"
+      users.each { |u| network.add_user(u) }
+      get "/api/v1/networks/#{network.id}/relationships/users"
     end
 
     it 'returns 200 OK' do
@@ -31,12 +31,12 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
     end
   end
 
-  describe 'POST /api/v1/groups/:id/relationships/users' do
+  describe 'POST /api/v1/networks/:id/relationships/users' do
     context 'when authenticated' do
-      context 'when group admin' do
+      context 'when network admin' do
         before do
-          group.add_admin(user)
-          post "/api/v1/groups/#{group.id}/relationships/users", params: {
+          network.add_admin(user)
+          post "/api/v1/networks/#{network.id}/relationships/users", params: {
             data: [
               { id: users.first.id, type: 'users' },
               { id: users.last.id, type: 'users' }
@@ -54,14 +54,14 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
           expect(json_body['data'].length).to eq(3)
         end
 
-        it 'adds the users to the group' do
-          expect(group.users.length).to eq 3
+        it 'adds the users to the network' do
+          expect(network.users.length).to eq 3
         end
       end
 
-      context 'when not a group admin' do
+      context 'when not a network admin' do
         before do
-          post "/api/v1/groups/#{group.id}/relationships/users", params: {
+          post "/api/v1/networks/#{network.id}/relationships/users", params: {
             data: [
               { id: users.first.id, type: 'users' },
               { id: users.last.id, type: 'users' }
@@ -74,15 +74,15 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
           expect(response.content_type).to eq 'application/vnd.api+json'
         end
 
-        it 'does not add the users to the group' do
-          expect(group.users.length).to eq 0
+        it 'does not add the users to the network' do
+          expect(network.users.length).to eq 0
         end
       end
     end
 
     context 'when unauthenticated' do
       before do
-        post "/api/v1/groups/#{group.id}/relationships/users", params: {
+        post "/api/v1/networks/#{network.id}/relationships/users", params: {
           data: [
             { id: users.first.id, type: 'users' },
             { id: users.last.id, type: 'users' }
@@ -96,9 +96,9 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
     end
   end
 
-  describe 'PATCH /api/v1/groups/:id/relationships/users' do
+  describe 'PATCH /api/v1/networks/:id/relationships/users' do
     before do
-      patch "/api/v1/groups/#{group.id}/relationships/users", params: {
+      patch "/api/v1/networks/#{network.id}/relationships/users", params: {
         data: [
           { id: users.first.id, type: 'users' },
           { id: users.last.id, type: 'users' }
@@ -115,14 +115,14 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/groups/:id/relationships/users' do
+  describe 'DELETE /api/v1/networks/:id/relationships/users' do
     context 'when authenticated' do
-      context 'when group admin' do
+      context 'when network admin' do
         before do
-          group.add_admin(user)
-          users.each { |u| group.add_user(u) }
+          network.add_admin(user)
+          users.each { |u| network.add_user(u) }
 
-          delete "/api/v1/groups/#{group.id}/relationships/users", params: {
+          delete "/api/v1/networks/#{network.id}/relationships/users", params: {
             data: [
               { id: users.first.id, type: 'users' },
               { id: users.last.id, type: 'users' }
@@ -140,18 +140,18 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
           expect(json_body['data'].length).to eq(4)
         end
 
-        it 'removes the two users from the group' do
-          expect(group.users.length).to eq 4
-          expect(group.users.pluck(:id)).not_to include(users.first.id)
-          expect(group.users.pluck(:id)).not_to include(users.last.id)
+        it 'removes the two users from the network' do
+          expect(network.users.length).to eq 4
+          expect(network.users.pluck(:id)).not_to include(users.first.id)
+          expect(network.users.pluck(:id)).not_to include(users.last.id)
         end
       end
 
-      context 'when not a group admin' do
+      context 'when not a network admin' do
         before do
-          users.each { |u| group.add_user(u) }
+          users.each { |u| network.add_user(u) }
 
-          delete "/api/v1/groups/#{group.id}/relationships/users", params: {
+          delete "/api/v1/networks/#{network.id}/relationships/users", params: {
             data: [
               { id: users.first.id, type: 'users' },
               { id: users.last.id, type: 'users' }
@@ -164,15 +164,15 @@ RSpec.describe Api::V1::Relationships::UsersController, type: :request do
           expect(response.content_type).to eq 'application/vnd.api+json'
         end
 
-        it 'does not remove the users from the group' do
-          expect(group.users.length).to eq 5
+        it 'does not remove the users from the network' do
+          expect(network.users.length).to eq 5
         end
       end
     end
 
     context 'when unauthenticated' do
       before do
-        delete "/api/v1/groups/#{group.id}/relationships/users", params: {
+        delete "/api/v1/networks/#{network.id}/relationships/users", params: {
           data: [
             { id: users.first.id, type: 'users' },
             { id: users.last.id, type: 'users' }

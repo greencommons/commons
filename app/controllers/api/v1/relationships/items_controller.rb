@@ -37,7 +37,7 @@ module Api
         def destroy
           authorize @list, :update?
           params[:data].each do |item|
-            unless %w(groups resources).include?(item[:type])
+            unless %w(networks resources).include?(item[:type])
               raise ActionController::ParameterMissing.new(:item_type)
             end
 

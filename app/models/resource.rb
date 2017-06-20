@@ -38,8 +38,8 @@ class Resource < ApplicationRecord
   end
 
   def excerpt
-    return content unless content.is_a?(String)
-    content.truncate(500)
+    return short_content unless short_content.is_a?(String)
+    short_content.truncate(500)
   end
 
   def creators

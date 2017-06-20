@@ -1,0 +1,15 @@
+[
+	{
+		"namEE": "Ima Invalid Network",
+		"long_description": "Org for goodness sake",
+		"metadata": {
+		}
+	},
+	{
+		"name": "Ima Good One",
+		"long_description": "All day, every day, combating polluting corporations.",
+		"metadata": {
+			"founded": "2017-01-01"
+		}
+	}
+]

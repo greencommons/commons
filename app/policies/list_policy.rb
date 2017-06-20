@@ -36,7 +36,7 @@ class ListPolicy < ApplicationPolicy
   end
 
   def owned?
-    if @list.owner.is_a?(Group)
+    if @list.owner.is_a?(Network)
       !@list.owner.find_member(@user).nil?
     else
       @list.owner == @user

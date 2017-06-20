@@ -1,0 +1,6 @@
+require_relative 'common'
+
+source(NormalizeRow,
+       NormalizeJsonNetworks,
+       ProcessAllFilesInS3Folders,  'knowledge.commons', 'valid_data/networks/', '.json')
+destination(CreateNewNetworkRecord)

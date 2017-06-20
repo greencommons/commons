@@ -8,11 +8,11 @@ RSpec.describe Api::V1::SearchController, type: :request do
       create(:resource, title: "#{title} My Resource",
                         resource_type: :article,
                         published_at: 12.days.ago)
-      create(:group, name: "#{title} My Group", published_at: 5.days.ago)
+      create(:network, name: "#{title} My Network", published_at: 5.days.ago)
       create(:list, name: "#{title} My List", published_at: 10.days.ago)
 
       wait_for do
-        Elasticsearch::Model.search(title, [Resource, Group, List]).results.total
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
       end.to eq(3)
     end
 
@@ -71,9 +71,9 @@ RSpec.describe Api::V1::SearchController, type: :request do
         resource.tag_list.add('sky')
         resource.save!
 
-        group = Group.first
-        group.tag_list.add('ocean')
-        group.save!
+        network = Network.first
+        network.tag_list.add('ocean')
+        network.save!
 
         list = List.first
         list.tag_list.add('sky')
@@ -113,10 +113,10 @@ RSpec.describe Api::V1::SearchController, type: :request do
     end
 
     describe 'field picking', :worker, :elasticsearch do
-      it 'only returns the name for groups' do
-        get '/api/v1/search?q=Group&fields[groups]=name'
+      it 'only returns the name for networks' do
+        get '/api/v1/search?q=Network&fields[networks]=name'
 
-        expect(json_body['data'][0]['type']).to eq 'groups'
+        expect(json_body['data'][0]['type']).to eq 'networks'
         expect(json_body['data'][0]['attributes'].keys).to eq ['name']
       end
     end

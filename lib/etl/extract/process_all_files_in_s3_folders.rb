@@ -44,7 +44,6 @@ class ProcessAllFilesInS3Folders
   end
 
   def s3
-    p @region
     @_s3 = Aws::S3::Client.new(region: @region || ENV['AWS_REGION'])
   end
 

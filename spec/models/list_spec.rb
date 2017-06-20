@@ -10,14 +10,14 @@ RSpec.describe List do
 
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:owner) }
-    it { is_expected.to validate_inclusion_of(:owner_type).in_array(%w(User Group)) }
+    it { is_expected.to validate_inclusion_of(:owner_type).in_array(%w(User Network)) }
   end
 
   describe 'Associations' do
     it { is_expected.to belong_to(:owner) }
     it { is_expected.to have_many(:lists_items) }
     it { is_expected.to have_many(:resources) }
-    it { is_expected.to have_many(:groups) }
+    it { is_expected.to have_many(:networks) }
   end
 
   it_behaves_like 'indexable', :list

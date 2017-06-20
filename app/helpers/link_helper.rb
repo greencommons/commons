@@ -6,7 +6,7 @@ module LinkHelper
   def resource_type_path(resource)
     {
       'Resource' => resource_path(resource),
-      'Group' => group_path(resource),
+      'Network' => network_path(resource),
       'List' => '#'
     }[resource.class.to_s]
   end

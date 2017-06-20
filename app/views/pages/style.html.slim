@@ -16,13 +16,13 @@
         .col-xs-12
           p
             | Summary cards are reusable components used to show the details
-            | of specific entites (groups, groups_users, and more to come).
+            | of specific entites (groups, networks_users, and more to come).
             | Currently, the type of summary card that will be used is deduced from
             | the passed resource class.
       .summary-card-group-example
         .row
           .col-xs-12
-            h3#navbar Groups
+            h3#navbar Networks
             p The following slim template will generate the summary card below.
         .row
           .col-xs-12
@@ -60,7 +60,7 @@
       .summary-card-group-example
         .row
           .col-xs-12
-            h3#navbar Group Members
+            h3#navbar Network Members
         .row
           .col-xs-12
             pre
@@ -200,7 +200,7 @@
         a.btn.btn-link.disabled href='#'  Link
       div style=('margin-bottom: 15px;') 
         .btn-toolbar.bs-component style=('margin: 0;') 
-          .btn-group
+          .btn-network
             a.btn.btn-default href='#'  Default
             a.btn.btn-default.dropdown-toggle data-toggle='dropdown' href='#' 
               span.caret
@@ -214,7 +214,7 @@
               li.divider
               li
                 a href='#'  Separated link
-          .btn-group
+          .btn-network
             a.btn.btn-primary href='#'  Primary
             a.btn.btn-primary.dropdown-toggle data-toggle='dropdown' href='#' 
               span.caret
@@ -228,7 +228,7 @@
               li.divider
               li
                 a href='#'  Separated link
-          .btn-group
+          .btn-network
             a.btn.btn-success href='#'  Success
             a.btn.btn-success.dropdown-toggle data-toggle='dropdown' href='#' 
               span.caret
@@ -242,7 +242,7 @@
               li.divider
               li
                 a href='#'  Separated link
-          .btn-group
+          .btn-network
             a.btn.btn-info href='#'  Info
             a.btn.btn-info.dropdown-toggle data-toggle='dropdown' href='#' 
               span.caret
@@ -256,7 +256,7 @@
               li.divider
               li
                 a href='#'  Separated link
-          .btn-group
+          .btn-network
             a.btn.btn-warning href='#'  Warning
             a.btn.btn-warning.dropdown-toggle data-toggle='dropdown' href='#' 
               span.caret
@@ -279,24 +279,24 @@
       p.bs-component
         a.btn.btn-default.btn-lg.btn-block href='#'  Block level button
       .bs-component style=('margin-bottom: 15px;') 
-        .btn-group.btn-group-justified
+        .btn-network.btn-network-justified
           a.btn.btn-default href='#'  Left
           a.btn.btn-default href='#'  Middle
           a.btn.btn-default href='#'  Right
       .bs-component style=('margin-bottom: 15px;') 
         .btn-toolbar
-          .btn-group
+          .btn-network
             a.btn.btn-default href='#'  1
             a.btn.btn-default href='#'  2
             a.btn.btn-default href='#'  3
             a.btn.btn-default href='#'  4
-          .btn-group
+          .btn-network
             a.btn.btn-default href='#'  5
             a.btn.btn-default href='#'  6
             a.btn.btn-default href='#'  7
-          .btn-group
+          .btn-network
             a.btn.btn-default href='#'  8
-            .btn-group
+            .btn-network
               a.btn.btn-default.dropdown-toggle data-toggle='dropdown' href='#' 
                 | Dropdown
                 span.caret
@@ -308,7 +308,7 @@
                 li
                   a href='#'  Dropdown link
       .bs-component
-        .btn-group-vertical
+        .btn-network-vertical
           a.btn.btn-default href='#'  Button
           a.btn.btn-default href='#'  Button
           a.btn.btn-default href='#'  Button
@@ -809,7 +809,7 @@
             a.btn.btn-primary.btn-lg Learn more
   .row
     .col-lg-12
-      h2 List groups
+      h2 List networks
   .row
     .col-lg-4
       .bs-component
@@ -836,10 +836,10 @@
       .bs-component
         .list-group
           a.list-group-item href='#' 
-            h4.list-group-item-heading List group item heading
+            h4.list-group-item-heading List network item heading
             p.list-group-item-text Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
           a.list-group-item href='#' 
-            h4.list-group-item-heading List group item heading
+            h4.list-group-item-heading List network item heading
             p.list-group-item-text Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
   .row
     .col-lg-12

@@ -5,19 +5,19 @@ RSpec.feature 'Interacting with resources', :worker, :elasticsearch do
     feature_login
 
     resource = create(:resource, title: 'My Resource')
-    protection_group = create(:group, name: 'Protection Group')
-    help_group = create(:group, name: 'Help Group')
+    protection_network = create(:network, name: 'Protection Network')
+    help_network = create(:network, name: 'Help Network')
     helpful_list = create(:list, name: 'Helpful List')
 
     resource.tag_list.add('ocean')
     resource.tag_list.add('sky')
     resource.save!
 
-    protection_group.tag_list.add('ocean')
-    protection_group.save!
+    protection_network.tag_list.add('ocean')
+    protection_network.save!
 
-    help_group.tag_list.add('mountain')
-    help_group.save!
+    help_network.tag_list.add('mountain')
+    help_network.save!
 
     helpful_list.tag_list.add('sky')
     helpful_list.save!
@@ -30,8 +30,8 @@ RSpec.feature 'Interacting with resources', :worker, :elasticsearch do
 
     expect(page).to have_content('My Resource')
     expect(page).to have_content('Explore')
-    expect(page).to have_content('Protection Group')
+    expect(page).to have_content('Protection Network')
     expect(page).to have_content('Helpful List')
-    expect(page).not_to have_content('Help Group')
+    expect(page).not_to have_content('Help Network')
   end
 end

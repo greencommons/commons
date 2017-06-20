@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get '/search', to: 'search#show', as: 'search'
       resources :users, only: %i(create update)
       resources :resources, only: %i(show create update)
-      resources :groups, only: %i(index show create update) do
+      resources :networks, only: %i(index show create update) do
         namespace :relationships do
           resources :users, only: %i(index) do
             collection do
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   resources :resources, model_name: 'Resource', concerns: :taggable
   resources :lists, model_name: 'List', concerns: :taggable
 
-  resources :groups, model_name: 'Group', concerns: :taggable do
+  resources :networks, model_name: 'Network', concerns: :taggable do
     resources :members, only: [:index, :create, :destroy] do
       collection do
         post :join
