@@ -49,6 +49,46 @@ RSpec.describe Api::V1::NetworksController, type: :request do
 
   describe 'POST /api/v1/networks' do
     context 'authenticated' do
+      context 'with invalid content type' do
+        it 'returns 400 OK' do
+          post '/api/v1/networks', params: '{"test":"a"}', headers: {
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/vnd.api+json',
+            'Authorization' => "GC #{api_key.access_key}:#{api_key.secret_key}"
+          }
+
+          expect(response.status).to eq 415
+          expect(response.content_type).to eq 'application/vnd.api+json'
+        end
+      end
+
+      context 'with invalid json' do
+        it 'returns 400 OK' do
+          post '/api/v1/networks', params: '{"test":"a"', headers: headers
+
+          expect(response.status).to eq 400
+          expect(response.content_type).to eq 'application/vnd.api+json'
+        end
+      end
+
+      context 'with empty params' do
+        it 'returns 400 OK' do
+          post '/api/v1/networks', params: '{}', headers: headers
+
+          expect(response.status).to eq 400
+          expect(response.content_type).to eq 'application/vnd.api+json'
+        end
+      end
+
+      context 'with empty data params' do
+        it 'returns 400 OK' do
+          post '/api/v1/networks', params: '{"data": {}}', headers: headers
+
+          expect(response.status).to eq 400
+          expect(response.content_type).to eq 'application/vnd.api+json'
+        end
+      end
+
       context 'with valid params' do
         before do
           post '/api/v1/networks', params: {

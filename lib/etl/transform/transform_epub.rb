@@ -7,7 +7,7 @@ class TransformEpub
 
     {
       title: title,
-      content: PageContentExtractor.new(parsed_book).start,
+      long_content: PageContentExtractor.new(parsed_book).start,
       metadata: {
         creators: creators,
         date: date,
