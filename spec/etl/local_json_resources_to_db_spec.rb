@@ -5,5 +5,6 @@ RSpec.describe 'local_json_resources_to_db' do
   it 'extracts the valid JSON documents and generates resources' do
     ETL.run('lib/etl/local_json_resources_to_db.etl')
     expect(Resource.count).to eq 2
+    expect(Resource.first.privacy).to eq 'publ'
   end
 end

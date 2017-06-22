@@ -12,6 +12,7 @@ class CreateNewResourceRecord < CreateNewRecord
   def create
     tags = attributes.delete(:tags) if attributes[:tags]
     attributes[:url] = attributes.delete(:content_url)
+    attributes[:privacy] = :publ
     record = Resource.create!(attributes)
 
     if tags && tags.any?
