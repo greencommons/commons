@@ -39,7 +39,7 @@
     img {
       width: 40px;
       height: 40px;
-      border: 1px solid $gray-light;
+      border: 1px solid #fff;
       padding: 3px;
       margin-top: 7px;
       position: relative;
@@ -69,11 +69,13 @@
     }
   }
 
-  &__login {
+  &__no-bg {
     color: #fff;
+    background: none !important;
   }
 
-  &__login:hover {
+  &__no-bg:focus, &__no-bg:active, &__no-bg.active, &__no-bg:hover {
+    color: #fff !important;
     background: none !important;
   }
 }

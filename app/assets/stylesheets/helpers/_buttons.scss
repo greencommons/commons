@@ -154,7 +154,7 @@ fieldset[disabled] .btn-white.active {
 
 .btn-white-transparent {
   color: $gc-dark-gray;
-  background-color: none;
+  background-color: transparent;
   border: 1px solid $gc-clear-blue;
   @include box-shadow(none);
   text-transform: none;
@@ -173,4 +173,27 @@ fieldset[disabled] .btn-white.active {
 .btn-white-transparent.active,
 .open .dropdown-toggle.btn-white-transparent {
   background-color: $gray-lighter;
+}
+
+.btn-gc-transparent {
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  @include box-shadow(none);
+  text-transform: none;
+  font-weight: normal;
+  border-radius: 6px;
+
+  i {
+    color: #fff;
+  }
+}
+
+.btn-gc-transparent:hover,
+.btn-gc-transparent:focus,
+.btn-gc-transparent:active,
+.btn-gc-transparent.active,
+.open .dropdown-toggle.btn-gc-transparent {
+  background-color: transparent;
+  color: #fff;
 }

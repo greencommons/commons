@@ -8,9 +8,6 @@ nav.navbar.navbar--dissolve
         span.icon-bar
       a.navbar-brand.navbar-brand--dissolve href='/'
         svg.navbar-brand-logo height="37px" version="1.1" viewbox=("0 0 37 37") width="37px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          /! Generator: Sketch 44 (41411) - http://www.bohemiancoding.com/sketch
-          desc Created with Sketch.
-          defs
           g#Page-1 fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"
             g fill="#FFFFFF" id="Shared-Eco-Home-Page-2-(v2)" transform="translate(-141.000000, -25.000000)"
               g#Header transform="translate(141.000000, 25.000000)"
@@ -23,7 +20,7 @@ nav.navbar.navbar--dissolve
         - if user_signed_in?
           li
             .btn-network.navbar-btn
-              button.btn.btn-gc.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+              button.btn.btn-gc-transparent.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
                 span.glyphicon.glyphicon-plus.glyphicon--right aria-hidden='true'
                 | Create new
               ul.dropdown-menu
@@ -32,7 +29,7 @@ nav.navbar.navbar--dissolve
                 li= link_to('Create List', new_list_path)
 
           li.dropdown
-            a.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
+            a.navbar__no-bg.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
               = "Hello, #{current_user.first_name} "
               span.caret
             ul.dropdown-menu role='menu'
@@ -46,6 +43,6 @@ nav.navbar.navbar--dissolve
             .navbar-button__badge.hidden
         - else
           ul.nav.navbar-nav.navbar-right
-            li= link_to 'Log In', new_user_session_path, class: 'navbar__login'
+            li= link_to 'Log In', new_user_session_path, class: 'navbar__no-bg'
           form.navbar-form.navbar-right
             = link_to 'Register', new_user_registration_path, class: 'btn btn-white-blue'

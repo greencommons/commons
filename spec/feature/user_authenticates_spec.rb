@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature 'Authentication' do
   scenario 'users can login' do
-    create(:user, email: 'admin@greencommons.org', password: 'thecommons')
+    create(:user, first_name: 'John',
+                  email: 'admin@greencommons.org',
+                  password: 'thecommons')
     visit new_user_session_path
 
     within('#new_user') do
@@ -11,7 +13,7 @@ RSpec.feature 'Authentication' do
       click_button 'Log in'
     end
 
-    expect(page).to have_text('Signed in successfully.')
+    expect(page).to have_text('Hello, John')
   end
 
   scenario 'users can logout' do
@@ -26,6 +28,6 @@ RSpec.feature 'Authentication' do
 
     click_link 'Hello, admin'
     click_link 'Logout'
-    expect(page).to have_text('Signed out successfully.')
+    expect(page).not_to have_text('Hello, admin')
   end
 end
