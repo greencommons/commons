@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   default_url_options Rails.application.config.action_mailer.default_url_options
 
-  root 'search#new'
+  root 'static_pages#home'
 
   # External API routes
   namespace :api do

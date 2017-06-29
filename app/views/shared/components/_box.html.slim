@@ -1,0 +1,12 @@
+div class=("hero-box hero-box--#{color}")
+  .row
+    .col-xs-12
+      = render "shared/svg/#{svg}"
+  .row
+    .col-xs-12
+      p.hero-box__title
+        = title
+  .row
+    .col-xs-12
+      p.hero-box__description.hero-box__description--blue
+        = content

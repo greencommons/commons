@@ -16,4 +16,16 @@
     background-color: $gc-blue-gray;
     border: 1px solid $gc-blue-gray;
   }
+
+  &__tag--white {
+    float: none;
+    color: #fff;
+    font-size: 15px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &__tag--white:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
 }

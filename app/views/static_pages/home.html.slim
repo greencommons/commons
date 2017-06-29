@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+    title Commons
+    = csrf_meta_tags
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .home-header
+      = render 'shared/home_nav'
+      = render 'static_pages/hero'
+
+
+
+    = yield
+    = render 'shared/footer'
+    = yield :scripts
+    = render 'shared/integrations/disqus/script'

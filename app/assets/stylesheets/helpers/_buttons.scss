@@ -38,9 +38,9 @@
   color: #fff;
 }
 
-@mixin gc-button($name, $color, $dark) {
+@mixin gc-button($name, $color, $dark, $font-color) {
   .btn-#{$name} {
-    color: #FFFFFF;
+    color: $font-color;
     background-color: $color;
     border-color: $color;
     text-transform: none;
@@ -54,7 +54,7 @@
   .btn-#{$name}:active,
   .btn-#{$name}.active,
   .open .dropdown-toggle.btn-#{$name} {
-    color: #FFFFFF;
+    color: $font-color;
     background-color: $dark;
     border-color: $dark;
   }
@@ -90,16 +90,18 @@
   }
 }
 
-@include gc-button('gc', #EF5350, #D64946);
-@include gc-button('dark-blue', $gc-dark-blue, #425762);
+@include gc-button('gc', #EF5350, #D64946, #fff);
+@include gc-button('dark-blue', $gc-dark-blue, #425762, #fff);
+@include gc-button('white-blue', #fff, $gray-lighter, $gc-blue);
 
-@include gc-button('book', $books-dark, $books-darker);
-@include gc-button('article', $articles-dark, $articles-darker);
-@include gc-button('report', $reports-dark, $reports-darker);
-@include gc-button('url', $urls-dark, $urls-darker);
+@include gc-button('book', $books-dark, $books-darker, #fff);
+@include gc-button('article', $articles-dark, $articles-darker, #fff);
+@include gc-button('report', $reports-dark, $reports-darker, #fff);
+@include gc-button('url', $urls-dark, $urls-darker, #fff);
 
-@include gc-button('networks', $networks-dark, $networks-darker);
-@include gc-button('lists', $lists-dark, $lists-darker);
+@include gc-button('networks', $networks-dark, $networks-darker, #fff);
+@include gc-button('lists', $lists-dark, $lists-darker, #fff);
+@include gc-button('lists', $lists-dark, $lists-darker, #fff);
 
 // White button
 .btn-white {

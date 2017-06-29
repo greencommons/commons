@@ -3,12 +3,34 @@
   border-bottom: 1px solid $gc-clear-gray;
   @include box-shadow(none);
 
+  &--dissolve {
+    border-bottom: none;
+    padding-top: 25px;
+  }
+
   &-brand {
     font-size: 14px;
     font-weight: 500;
   }
 
-  &-nav > li{
+  &-brand--dissolve {
+    padding: 0;
+    padding-top: 8.5px;
+    padding-left: 15.5px;
+  }
+
+  &-brand-logo {
+    float: left;
+    margin-right: 20px;
+  }
+
+  &-brand-name {
+    line-height: 37px;
+    display: inline-block;
+    color: #fff;
+  }
+
+  &-nav > li {
     padding-left: 2px;
     padding-right: 2px;
   }
@@ -45,5 +67,13 @@
     &:focus {
       outline: none;
     }
+  }
+
+  &__login {
+    color: #fff;
+  }
+
+  &__login:hover {
+    background: none !important;
   }
 }
