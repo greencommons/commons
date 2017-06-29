@@ -1,0 +1,33 @@
+.resource-details {
+  display: inline-block;
+
+  &__title {
+    font-size: 14px;
+    color: #425971;
+    margin-bottom: 4px;
+  }
+
+  &__count {
+    font-size: 42px;
+    color: #78E6CA;
+    margin-bottom: 21px;
+  }
+
+  &__list {
+    padding-left: 18px;
+
+    li {
+      a {
+        font-size: 16px;
+        color: #8D9BAA;
+        line-height: 35px;
+      }
+    }
+  }
+
+  &__see-more {
+    font-size: 16px;
+    color: #39CBFE;
+    letter-spacing: 0;
+  }
+}
