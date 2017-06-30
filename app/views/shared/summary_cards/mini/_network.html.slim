@@ -1,0 +1,29 @@
+.summary-card
+  .summary-card__body.summary-card__body--with-footer
+    .summary-card__row
+      .summary-card__title.summary-card__title--mini
+        h5 Super cool network
+      .clearfix
+    .summary-card__row.summary-card__row--mini
+      .summary-card__metadata.summary-card__metadata--left.summary-card__metadata--mini.summary-card__metadata--closer
+        .user-picture
+          = image_tag(resource.users[0] ? resource.users[0].avatar_url : 'user.png',
+                      class: 'user-picture__image user-picture__image--mini')
+          = image_tag(resource.users[1] ? resource.users[1].avatar_url : 'user.png',
+                      class: 'user-picture__image user-picture__image--mini user-picture__image--mini-over')
+          = image_tag(resource.users[2] ? resource.users[2].avatar_url : 'user.png',
+                      class: 'user-picture__image user-picture__image--mini user-picture__image--mini-over')
+          .clearfix
+      .summary-card__metadata.summary-card__metadata--left.summary-card__metadata--mini
+        p.summary-card__p--mini +40
+      .summary-card__metadata.summary-card__metadata--left.summary-card__metadata--mini
+        p.summary-card__p--mini
+          i.fa.fa-calendar.glyphicon--right
+          = humanize_date(resource.published_at)
+      .clearfix
+    .summary-card__row
+      p
+        = resource.short_description
+  .summary-card__footer
+    .summary-card__row.summary-card__row--last
+      = link_to 'Join now', root_path, class: 'summary-card__cta'

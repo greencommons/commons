@@ -1,0 +1,70 @@
+.home-connect
+  .container-fluid
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2
+        .row
+          .col-xs-12.col-md-5
+            .home-connect__feature
+              .row
+                .col-xs-12
+                  h4.home-connect__title
+                    | Connect to Shared.Eco
+              .row
+                .col-xs-12
+                  h6.home-connect__subtitle
+                    | Small headline ipsum abets
+              .row
+                .col-xs-12
+                  p.home-connect__description Donec fermentum, ante vitae suscipit porttitor, nunc augue mattis massa, in ornare magna arcu nec magna. Etiam et sapien blandit, fermentum lacus at, viverra ipsum. Praesent vel arcu eget dolor ultric.
+                  p.home-connect__description Donec non ex tristique felis ultricies malesuada ac sed lectus. Phasellus vel nulla auctor, commodo dui at, suscipit turpis. Vivamus pellentesque condimentum elit, malesuada.
+              .row
+                .col-xs-12
+                  = link_to 'Start a group', root_path, class: 'btn btn-clear-blue btn--large'
+
+          .col-xs-12.col-md-4.col-md-offset-1
+            .home-connect__feature-gallery
+              = render 'shared/summary_cards/mini/network', resource: Network.first
+  .container-fluid
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2
+        .home-connect__getting-started
+          .row
+            .col-xs-12.col-md-8
+              .row
+                .col-xs-6
+                  = link_to root_path do
+                    .feature-box.feature-box--red
+                      p.feature-box__type
+                        | REGISTRATION
+                      p.feature-box__title
+                        | Register for an Account on Shared.Eco
+                      .feature-box__icon
+                        svg height="29px" version="1.1" viewbox=("0 0 26 29") width="26px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          g#Page-1 fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"
+                            g fill="#FFFFFF" fill-rule="nonzero" id="Shared-Eco-Home-Page-2-(v2)" transform="translate(-260.000000, -2415.000000)"
+                              g#5 transform="translate(225.000000, 2226.000000)"
+                                g#v3
+                                  path#Shape d="M58.1111111,191.9 L52.0733333,191.9 C51.4666667,190.218 49.8777778,189 48,189 C46.1222222,189 44.5333333,190.218 43.9266667,191.9 L37.8888889,191.9 C36.3,191.9 35,193.205 35,194.8 L35,215.1 C35,216.695 36.3,218 37.8888889,218 L58.1111111,218 C59.7,218 61,216.695 61,215.1 L61,194.8 C61,193.205 59.7,191.9 58.1111111,191.9 Z M48,191.9 C48.7944444,191.9 49.4444444,192.5525 49.4444444,193.35 C49.4444444,194.1475 48.7944444,194.8 48,194.8 C47.2055556,194.8 46.5555556,194.1475 46.5555556,193.35 C46.5555556,192.5525 47.2055556,191.9 48,191.9 Z M50.8888889,212.2 L40.7777778,212.2 L40.7777778,209.3 L50.8888889,209.3 L50.8888889,212.2 Z M55.2222222,206.4 L40.7777778,206.4 L40.7777778,203.5 L55.2222222,203.5 L55.2222222,206.4 Z M55.2222222,200.6 L40.7777778,200.6 L40.7777778,197.7 L55.2222222,197.7 L55.2222222,200.6 Z"
+
+                .col-xs-6
+                  = link_to root_path do
+                    .feature-box.feature-box--yellow
+                      p.feature-box__type
+                        | CREATE NEW
+                      p.feature-box__title
+                        | Create a Share list
+                      .feature-box__icon
+                        svg height="28px" version="1.1" viewbox=("0 0 28 28") width="28px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          g#Page-1 fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"
+                            g fill="#FFFFFF" fill-rule="nonzero" id="Shared-Eco-Home-Page-2-(v2)" transform="translate(-671.000000, -2416.000000)"
+                              g#5 transform="translate(225.000000, 2226.000000)"
+                                g#v3
+                                  path#Shape d="M470.666667,203.333333 L468.666667,203.333333 L468.666667,198 C468.666667,196.533333 467.466667,195.333333 466,195.333333 L460.666667,195.333333 L460.666667,193.333333 C460.666667,191.493333 459.173333,190 457.333333,190 C455.493333,190 454,191.493333 454,193.333333 L454,195.333333 L448.666667,195.333333 C447.2,195.333333 446.013333,196.533333 446.013333,198 L446.013333,203.066667 L448,203.066667 C449.986667,203.066667 451.6,204.68 451.6,206.666667 C451.6,208.653333 449.986667,210.266667 448,210.266667 L446,210.266667 L446,215.333333 C446,216.8 447.2,218 448.666667,218 L453.733333,218 L453.733333,216 C453.733333,214.013333 455.346667,212.4 457.333333,212.4 C459.32,212.4 460.933333,214.013333 460.933333,216 L460.933333,218 L466,218 C467.466667,218 468.666667,216.8 468.666667,215.333333 L468.666667,210 L470.666667,210 C472.506667,210 474,208.506667 474,206.666667 C474,204.826667 472.506667,203.333333 470.666667,203.333333 Z"
+
+              .row
+                .col-xs-12
+                  .feature-box.feature-box--blue
+                    | blue
+            .col-xs-12.col-md-4
+              .feature-box.feature-box--green.feature-box--tall
+                | green
