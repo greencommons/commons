@@ -11,12 +11,10 @@ html
     .home-header
       = render 'shared/home_nav'
       = render 'static_pages/hero'
-      = render 'static_pages/content'
-      = render 'static_pages/connect'
+    = render 'static_pages/content'
+    = render 'static_pages/connect'
 
 
-
-    = yield
-    = render 'shared/footer'
+    = render 'shared/home_footer'
     = yield :scripts
     = render 'shared/integrations/disqus/script'

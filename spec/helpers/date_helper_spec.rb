@@ -5,7 +5,7 @@ describe DateHelper do
     context 'with date' do
       it 'returns a date object' do
         date = helper.humanize_date(Date.new(2016, 1, 1))
-        expect(date).to eq('01 January 2016')
+        expect(date).to eq('January 01, 2016')
       end
     end
 
@@ -20,7 +20,7 @@ describe DateHelper do
     context 'with valid date' do
       it 'returns a date object' do
         date = helper.humanize_str_date('2016-01-01')
-        expect(date).to eq('01 January 2016')
+        expect(date).to eq('January 01, 2016')
       end
     end
 

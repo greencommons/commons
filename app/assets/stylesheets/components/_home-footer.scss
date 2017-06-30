@@ -1,0 +1,30 @@
+.home-footer {
+  margin-bottom: 102px;
+
+  &__title {
+    font-size: 15px;
+    color: #425971;
+    letter-spacing: 0;
+    margin-top: 0;
+  }
+
+  &__title--brand {
+    margin-top: 16px;
+    margin-bottom: 10px;
+  }
+
+  &__sections {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__sections--list {
+    padding-top: 5px;
+  }
+
+  &__section {
+    font-size: 15px;
+    color: #8D9BAA;
+    line-height: 30px;
+  }
+}

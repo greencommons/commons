@@ -23,7 +23,8 @@
 
           .col-xs-12.col-md-4.col-md-offset-1
             .home-connect__feature-gallery
-              = render 'shared/summary_cards/mini/network', resource: Network.first
+              - if network = Network.first
+                = render 'shared/summary_cards/mini/network', resource: network
   .container-fluid
     .row
       .col-xs-12.col-md-8.col-md-offset-2

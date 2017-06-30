@@ -183,13 +183,17 @@
     color: $gray-mid-light;
   }
 
-  .summary-card__p--mini {
+  &__p--mini {
     font-size: 12px;
     color: #98A9B3;
 
     i {
       font-size: 18px;
     }
+  }
+
+  &__image {
+    width: 100%;
   }
 
   &__cta {

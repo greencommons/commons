@@ -1,4 +1,4 @@
-.page-details.resource-page 
+.page-details.resource-page
   div class="resource-page__background resource-page__background--networks"
     = render 'shared/alerts'
   .resource-page__container
@@ -8,7 +8,7 @@
           .resource-page__wrapper
             .resource-page__header
               .row
-                .page-details__row--more-space 
+                .page-details__row--more-space
                   .col-xs-12.col-sm-6.col-md-5
                     div class="entity-icon entity-icon--big entity-icon--networks"
                       i class="fa fa-users"
@@ -22,7 +22,7 @@
                                                                 action: network_members_path,
                                                                 autocomplete_url: autocomplete_members_path(network_id: @network.id),
                                                                 placeholder: 'Type member name or email',
-                                                                authenticity_token: form_authenticity_token }, 
+                                                                authenticity_token: form_authenticity_token },
                                                               { prerender: true })
                   .clearfix
               .row
@@ -34,17 +34,17 @@
               .row
                 .page-details__row
                   .col-xs-12
-                    .page-details__metadata.page-details__metadata--half-margin 
+                    .page-details__metadata.page-details__metadata--half-margin
                       .user-picture
-                        = image_tag(@network.users[0] ? @network.users[0].avatar_url : 'user.png', 
-                                    class: 'user-picture__image')
-                        = image_tag(@network.users[1] ? @network.users[1].avatar_url : 'user.png', 
-                                    class: 'user-picture__image user-picture__image--over')
+                        = image_tag(@network.users[0] ? @network.users[0].avatar_url : 'user.png',
+                                    class: 'user-picture__image user-picture__image--realign')
+                        = image_tag(@network.users[1] ? @network.users[1].avatar_url : 'user.png',
+                                    class: 'user-picture__image user-picture__image--realign user-picture__image--over')
                         a class='btn btn--picture-cover'
                           = @network.users.count
-                    .page-details__metadata 
+                    .page-details__metadata
                       | members
-                    .page-details__metadata 
+                    .page-details__metadata
                       i.fa.fa-calendar.glyphicon--right
                       = "Published Date: #{humanize_date(@network.published_at)}"
                   .clearfix
