@@ -16,13 +16,13 @@
           .fa.fa-info-circle.home-header__info-icon
           = ' Not sure where to start?'
           = ' Try searching for '
-          = link_to 'solar panels', root_path, class: 'home-header__hero-link'
+          = link_to 'solar panels', search_path(query: 'solar panels'), class: 'home-header__hero-link'
           = ', '
-          = link_to 'greenhouse', root_path, class: 'home-header__hero-link'
+          = link_to 'greenhouse', search_path(query: 'greenhouse'), class: 'home-header__hero-link'
           = ', '
-          = link_to 'gaz emissions', root_path, class: 'home-header__hero-link'
+          = link_to 'gaz emissions', search_path(query: 'gaz emissions'), class: 'home-header__hero-link'
           = ' or '
-          = link_to 'municipal data sets', root_path, class: 'home-header__hero-link'
+          = link_to 'municipal data sets', search_path(query: 'municipal data sets'), class: 'home-header__hero-link'
     .row
       .col-xs-12
         .home-header__hero-tags

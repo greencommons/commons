@@ -19,12 +19,24 @@
                   p.home-connect__description Donec non ex tristique felis ultricies malesuada ac sed lectus. Phasellus vel nulla auctor, commodo dui at, suscipit turpis. Vivamus pellentesque condimentum elit, malesuada.
               .row
                 .col-xs-12
-                  = link_to 'Start a group', root_path, class: 'btn btn-clear-blue btn--large'
+                  = link_to 'Start a group', new_network_path, class: 'btn btn-clear-blue btn--large'
 
           .col-xs-12.col-md-4.col-md-offset-1
             .home-connect__feature-gallery
-              - if network = Network.first
-                = render 'shared/summary_cards/mini/network', resource: network
+              #carousel-connect.carousel.slide data-ride="carousel"
+                .row
+                  .carousel-inner.home-connect__feature-carousel role="listbox"
+                    - Network.limit(3).each_with_index do |network, index|
+                      div class="#{index == 0 ? 'item active' : 'item'}"
+                        .col-xs-12
+                          = render 'shared/summary_cards/mini/network', network: network
+
+                .row
+                  .col-xs-12
+                    ol.carousel-indicators.gc-carousel-indicators
+                      li.gc-carousel-indicator.active data-slide-to="0" data-target="#carousel-connect"
+                      li.gc-carousel-indicator data-slide-to="1" data-target="#carousel-connect"
+                      li.gc-carousel-indicator data-slide-to="2" data-target="#carousel-connect"
   .container-fluid
     .row
       .col-xs-12.col-md-8.col-md-offset-2
@@ -33,7 +45,7 @@
             .col-xs-12.col-md-8
               .row
                 .col-xs-12.col-md-6
-                  = link_to root_path, class: 'feature-box feature-box--red' do
+                  = link_to new_user_registration_path, class: 'feature-box feature-box--red' do
                     p.feature-box__type
                       | REGISTRATION
                     p.feature-box__title
@@ -47,7 +59,7 @@
                                 path#Shape d="M58.1111111,191.9 L52.0733333,191.9 C51.4666667,190.218 49.8777778,189 48,189 C46.1222222,189 44.5333333,190.218 43.9266667,191.9 L37.8888889,191.9 C36.3,191.9 35,193.205 35,194.8 L35,215.1 C35,216.695 36.3,218 37.8888889,218 L58.1111111,218 C59.7,218 61,216.695 61,215.1 L61,194.8 C61,193.205 59.7,191.9 58.1111111,191.9 Z M48,191.9 C48.7944444,191.9 49.4444444,192.5525 49.4444444,193.35 C49.4444444,194.1475 48.7944444,194.8 48,194.8 C47.2055556,194.8 46.5555556,194.1475 46.5555556,193.35 C46.5555556,192.5525 47.2055556,191.9 48,191.9 Z M50.8888889,212.2 L40.7777778,212.2 L40.7777778,209.3 L50.8888889,209.3 L50.8888889,212.2 Z M55.2222222,206.4 L40.7777778,206.4 L40.7777778,203.5 L55.2222222,203.5 L55.2222222,206.4 Z M55.2222222,200.6 L40.7777778,200.6 L40.7777778,197.7 L55.2222222,197.7 L55.2222222,200.6 Z"
 
                 .col-xs-12.col-md-6
-                  = link_to root_path, class: 'feature-box feature-box--yellow' do
+                  = link_to new_list_path, class: 'feature-box feature-box--yellow' do
                     p.feature-box__type
                       | CREATE NEW
                     p.feature-box__title
@@ -62,7 +74,7 @@
 
               .row
                 .col-xs-12
-                  = link_to root_path, class: 'feature-box feature-box--blue' do
+                  = link_to new_network_path, class: 'feature-box feature-box--blue' do
                     p.feature-box__type
                       | REGISTRATION
                     p.feature-box__title
@@ -76,7 +88,7 @@
                                 path#Shape d="M49,481 C41.272,481 35,487.272 35,495 C35,502.728 41.272,509 49,509 C56.728,509 63,502.728 63,495 C63,487.272 56.728,481 49,481 Z M47.6,506.102 C42.07,505.416 37.8,500.712 37.8,495 C37.8,494.132 37.912,493.306 38.094,492.494 L44.8,499.2 L44.8,500.6 C44.8,502.14 46.06,503.4 47.6,503.4 L47.6,506.102 Z M57.26,502.546 C56.896,501.412 55.86,500.6 54.6,500.6 L53.2,500.6 L53.2,496.4 C53.2,495.63 52.57,495 51.8,495 L43.4,495 L43.4,492.2 L46.2,492.2 C46.97,492.2 47.6,491.57 47.6,490.8 L47.6,488 L50.4,488 C51.94,488 53.2,486.74 53.2,485.2 L53.2,484.626 C57.302,486.292 60.2,490.31 60.2,495 C60.2,497.912 59.08,500.558 57.26,502.546 Z"
 
             .col-xs-12.col-md-4
-              = link_to root_path, class: 'feature-box feature-box--green feature-box--tall' do
+              = link_to new_network_path, class: 'feature-box feature-box--green feature-box--tall' do
                 p.feature-box__type
                   | JOIN US
                 p.feature-box__title
