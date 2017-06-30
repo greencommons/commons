@@ -33,6 +33,10 @@ class Resource < ApplicationRecord
 
   scope :sort_by_created_at, -> { order('created_at DESC') }
 
+  RESOURCE_TYPES.keys.each do |type|
+    scope type.to_s.pluralize, -> { where(resource_type: type) }
+  end
+
   def name
     title
   end

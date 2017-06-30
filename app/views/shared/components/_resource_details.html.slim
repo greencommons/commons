@@ -1,19 +1,16 @@
 .resource-details
   .row
     .col-xs-12
-      h5.resource-details__title Books Collected
+      h5.resource-details__title= title
   .row
     .col-xs-12
-      p.resource-details__count 1432
+      p.resource-details__count= count
   .row
     .col-xs-12
       ul.resource-details__list
-        li= link_to 'Longer Article Title', root_path
-        li= link_to 'The architectures conquering Antarctica Drilling', root_path
-        li= link_to 'What is the envrionment impact?', root_path
-        li= link_to 'Sustainable palm oil needs time to grow', root_path
-        li= link_to 'Another title with subtitle article', root_path
-        li= link_to 'Sun article about environment crysis', root_path
+        - list.each do |item|
+          li= link_to item.name, item
+
   .row
     .col-xs-12
       = link_to root_path, class: 'resource-details__see-more' do
