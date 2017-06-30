@@ -91,7 +91,7 @@
 }
 
 @include gc-button('gc', #EF5350, #D64946, #fff);
-@include gc-button('clear-blue', $gc-blue, $gc-clear-blue, #fff);
+@include gc-button('clear-blue', $gc-blue, $gc-turquoise, #fff);
 @include gc-button('dark-blue', $gc-dark-blue, #425762, #fff);
 @include gc-button('white-blue', #fff, $gray-lighter, $gc-blue);
 
