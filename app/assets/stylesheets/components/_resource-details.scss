@@ -17,7 +17,7 @@
 
   &__list {
     padding-left: 18px;
-    list-style: none; // this
+    list-style: none;
 
     li {
       a {
@@ -38,5 +38,9 @@
 @media only screen and (min-width : 768px) {
   .resource-details {
     text-align: left;
+
+    &__list {
+      list-style: initial;
+    }
   }
 }
