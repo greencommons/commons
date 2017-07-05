@@ -1,5 +1,6 @@
 .home-footer {
   margin-bottom: 102px;
+  text-align: center;
 
   &__title {
     font-size: 15px;
@@ -26,5 +27,11 @@
     font-size: 15px;
     color: #8D9BAA;
     line-height: 30px;
+  }
+}
+
+@media only screen and (min-width : 992px) {
+  .home-footer {
+    text-align: left;
   }
 }

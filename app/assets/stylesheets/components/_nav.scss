@@ -41,7 +41,7 @@
       height: 40px;
       border: 1px solid #fff;
       padding: 3px;
-      margin-top: 7px;
+      margin-left: 14px;
       position: relative;
     }
   }
@@ -74,8 +74,74 @@
     background: none !important;
   }
 
+  &__inline {
+    display: inline-block;
+  }
+
   &__no-bg:focus, &__no-bg:active, &__no-bg.active, &__no-bg:hover {
     color: #fff !important;
     background: none !important;
+  }
+
+  &__icon-bar {
+    background: #fff;
+  }
+
+  &__navbar-nav {
+    margin: auto;
+    padding: 20px 0;
+  }
+
+  &__dropdown-item {
+    a {
+      color: #fff !important;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    &__collapse {
+      background: $gc-blue;
+    }
+  }
+
+  .collapsing {
+    position: absolute !important;
+    z-index: 20;
+    width: 100%;
+    top: 79px;
+  }
+
+  .collapse.in {
+    display: block;
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    top: 79px;
+  }
+
+  .navbar-collapse {
+    max-height: none !important;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .navbar {
+    &__navbar-nav {
+      margin: auto;
+      padding: 0;
+    }
+
+    &__dropdown-item {
+      a {
+        color: $gc-blue !important;
+      }
+    }
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }

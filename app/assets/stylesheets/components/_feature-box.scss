@@ -32,10 +32,6 @@
     background-image: image-url('start-network.png');
   }
 
-  &--tall {
-    height: 545px;
-  }
-
   &__type {
     opacity: 0.7;
     font-size: 12px;
@@ -53,5 +49,13 @@
   &__icon {
     position: absolute;
     bottom: 34px;
+  }
+}
+
+@media only screen and (min-width : 1200px) {
+  .feature-box {
+    &--tall {
+      height: 545px;
+    }
   }
 }

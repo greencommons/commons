@@ -5,52 +5,53 @@
         h4.home-content__title
           | BROWSE OUR CONTENT
     .row
-      .col-xs-12.col-md-8.col-md-offset-2
+      .col-xs-12.col-md-10.col-md-offset-1
         #carousel-content.carousel.slide data-ride="carousel"
           .row
-            .carousel-inner role="listbox"
-              .item.active
-                .row
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Collected Books',
-                                                                   count: Resource.books.count,
-                                                                   list: Resource.books.limit(6)
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Written Articles',
-                                                                   count: Resource.articles.count,
-                                                                   list: Resource.articles.limit(6)
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Issued Reports',
-                                                                   count: Resource.reports.count,
-                                                                   list: Resource.reports.limit(6)
-              .item
-                .row
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Recorded Audios',
-                                                                   count: Resource.audios.count,
-                                                                   list: Resource.audios.limit(6)
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Collected Courses',
-                                                                   count: Resource.courses.count,
-                                                                   list: Resource.courses.limit(6)
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Collected Datasets',
-                                                                   count: Resource.datasets.count,
-                                                                   list: Resource.datasets.limit(6)
-              .item
-                .row
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Collected Syllabuses',
-                                                                   count: Resource.syllabuses.count,
-                                                                   list: Resource.syllabuses.limit(6)
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Collected Videos',
-                                                                   count: Resource.videos.count,
-                                                                   list: Resource.videos.limit(6)
-                  .col-xs-12.col-md-4
-                    = render 'shared/components/resource_details', title: 'Collected Profiles',
-                                                                   count: Resource.profiles.count,
-                                                                   list: Resource.profiles.limit(6)
+            .col-xs-12.col-sm-10.col-sm-offset-1.col-md-12.col-md-offset-0
+              .carousel-inner role="listbox"
+                .item.active
+                  .row
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Collected Books',
+                                                                     count: Resource.books.count,
+                                                                     list: Resource.books.limit(6)
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Written Articles',
+                                                                     count: Resource.articles.count,
+                                                                     list: Resource.articles.limit(6)
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Issued Reports',
+                                                                     count: Resource.reports.count,
+                                                                     list: Resource.reports.limit(6)
+                .item
+                  .row
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Recorded Audios',
+                                                                     count: Resource.audios.count,
+                                                                     list: Resource.audios.limit(6)
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Collected Courses',
+                                                                     count: Resource.courses.count,
+                                                                     list: Resource.courses.limit(6)
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Collected Datasets',
+                                                                     count: Resource.datasets.count,
+                                                                     list: Resource.datasets.limit(6)
+                .item
+                  .row
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Collected Syllabuses',
+                                                                     count: Resource.syllabuses.count,
+                                                                     list: Resource.syllabuses.limit(6)
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Collected Videos',
+                                                                     count: Resource.videos.count,
+                                                                     list: Resource.videos.limit(6)
+                    .col-xs-12.col-sm-4.col-md-4
+                      = render 'shared/components/resource_details', title: 'Collected Profiles',
+                                                                     count: Resource.profiles.count,
+                                                                     list: Resource.profiles.limit(6)
           .row
             .col-xs-12.col-md-8.col-md-offset-2
               ol.carousel-indicators.gc-carousel-indicators
