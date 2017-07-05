@@ -9,7 +9,7 @@
     .col-xs-12
       ul.resource-details__list
         - list.each do |item|
-          li= link_to item.name, item
+          li= link_to item.name.truncate(40, separator: ' '), item
 
   .row
     .col-xs-12
