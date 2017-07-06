@@ -2,7 +2,7 @@
   .summary-card__body.summary-card__body--with-footer.summary-card__body--mini
     .summary-card__row
       .summary-card__title.summary-card__title--mini
-        h5= network.name
+        h5= network.name.to_s.truncate(40, separator: ' ')
       .clearfix
     .summary-card__row.summary-card__row--mini
       .summary-card__metadata.summary-card__metadata--left.summary-card__metadata--mini.summary-card__metadata--closer
@@ -23,7 +23,7 @@
       .clearfix
     .summary-card__row
       p
-        = network.short_description
+        = network.short_description.to_s.truncate(200, separator: ' ')
   .summary-card__footer
     .summary-card__row.summary-card__row--last
       = link_to 'Join now', network, class: 'summary-card__cta'

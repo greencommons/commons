@@ -17,4 +17,3 @@
 //= require filters
 //= require expand
 //= require remove_from_list
-//= require carousel

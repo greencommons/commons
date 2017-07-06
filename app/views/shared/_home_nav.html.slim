@@ -43,6 +43,5 @@ nav.navbar.navbar--dissolve
             .navbar-button__badge.hidden
         - else
           ul.nav.navbar-nav.navbar-right
+            li= link_to 'Register', new_user_registration_path, class: 'btn btn-white-blue'
             li= link_to 'Log In', new_user_session_path, class: 'navbar__no-bg'
-          form.navbar-form.navbar-right
-            = link_to 'Register', new_user_registration_path, class: 'btn btn-white-blue'
