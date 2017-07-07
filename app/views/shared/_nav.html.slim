@@ -27,7 +27,7 @@ nav.navbar
                 li= link_to('Create Network', new_network_path)
                 li= link_to('Create List', new_list_path)
 
-          li.dropdown
+          li.dropdown.navbar__user-info
             a.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
               = "Hello, #{current_user.first_name} "
               span.caret
@@ -37,10 +37,10 @@ nav.navbar
               li= link_to('My Networks', networks_path)
               li= link_to('My Lists', lists_path)
               li= link_to('Logout', destroy_user_session_path)
-          li.navbar-profile-image
+          li.navbar-profile-image.navbar__user-info
             = image_tag(current_user.avatar_url, class: 'img-circle')
             .navbar-button__badge.hidden
         - else
-          ul.nav.navbar-nav.navbar-right
-            li= link_to 'Register', new_user_registration_path, class: 'btn btn-white-blue'
-            li= link_to 'Log In', new_user_session_path, class: 'navbar__no-bg'
+          form.navbar-form.navbar-right
+            = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-gc mr-10'
+            = link_to 'Log In', new_user_session_path, class: 'btn btn-gc'
