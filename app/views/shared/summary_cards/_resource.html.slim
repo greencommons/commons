@@ -5,16 +5,17 @@
         i.fa.fa-trash
     .summary-card__row--double
       div class="entity-icon entity-icon--#{resource.resource_type}"
-        i class="fa fa-#{resource_icon(resource)}"
+        = resource_icon(resource)
+
       .summary-card__title
         h5= link_to resource.title, resource
         h6
           - if resource.creators.present?
             = resource.creators
-            |  &bull; 
+            |  &bull;
           - if resource.publisher
             = resource.publisher
-            |  &bull; 
+            |  &bull;
           = humanize_date(resource.published_at)
       - if defined?(hit) && hit
         .summary-card__relevancy style="background-color: rgba(95, 125, 140, #{score_opacity(hit._score)});"
@@ -33,8 +34,8 @@
       = render 'shared/components/tags_list', tags: resource.cached_tags
       .summary-card__row.summary-card__row--last
         .summary-card__more.summary-card__more--space.summary-card__more--buttons
-          = react_component 'AddToListButton', { name: resource.name, 
-                                                 id: resource.id, 
+          = react_component 'AddToListButton', { name: resource.name,
+                                                 id: resource.id,
                                                  type: 'Resource',
                                                  action: list_items_path,
                                                  loader_image: image_path('loader.gif'),
@@ -50,7 +51,6 @@
             | 102 Annotations
           .summary-card__metadata
             i.fa.fa-comments.glyphicon--right
-            span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}" 
+            span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}"
               | 0 Comments
         .clearfix
-          
