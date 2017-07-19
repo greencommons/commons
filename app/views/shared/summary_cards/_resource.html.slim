@@ -33,7 +33,7 @@
     - unless minimalist
       = render 'shared/components/tags_list', tags: resource.cached_tags
       .summary-card__row.summary-card__row--last
-        .summary-card__more.summary-card__more--space.summary-card__more--buttons
+        .summary-card__more.summary-card__more--mr
           = react_component 'AddToListButton', { name: resource.name,
                                                  id: resource.id,
                                                  type: 'Resource',
@@ -45,12 +45,17 @@
                                                  button_class: "btn-gc",
                                                  logged_in: current_user.present?,
                                                  options: current_user ? owner_options(current_user, resource) : [] }
-        .summary-card__more.summary-card__more--meta
-          .summary-card__metadata.summary-card__metadata--last
-            i.fa.fa-pencil.glyphicon--right
-            | 102 Annotations
-          .summary-card__metadata
-            i.fa.fa-comments.glyphicon--right
-            span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}"
-              | 0 Comments
-        .clearfix
+        .summary-card__more
+          - if resource.url
+            = link_to via_hypothesis(resource.url), target: '_blank', class: 'resource-actions__button btn btn-dark-blue'
+              | View Original
+              i.fa.fa-link.glyphicon--left
+      .summary-card__more.summary-card__more--meta
+        .summary-card__metadata.summary-card__metadata--last
+          i.fa.fa-pencil.glyphicon--right
+          | 102 Annotations
+        .summary-card__metadata
+          i.fa.fa-comments.glyphicon--right
+          span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}"
+            | 0 Comments
+      .clearfix
