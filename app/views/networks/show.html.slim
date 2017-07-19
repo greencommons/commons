@@ -49,9 +49,9 @@
                     .page-details__metadata.page-details__metadata--half-margin
                       .user-picture
                         = image_tag(@network.users[0] ? @network.users[0].avatar_url : 'user.png',
-                                    class: 'user-picture__image')
+                                    class: 'user-picture__image user-picture__image--realign')
                         = image_tag(@network.users[1] ? @network.users[1].avatar_url : 'user.png',
-                                    class: 'user-picture__image user-picture__image--over')
+                                    class: 'user-picture__image user-picture__image--over user-picture__image--realign')
                         = link_to network_members_path(@network), class: 'btn btn--picture-cover' do
                           = @network.users.count
                     .page-details__metadata
@@ -136,4 +136,3 @@
                     ul.sidelist
                       - @similar.each do |similar_network|
                         li= link_to similar_network.name, network_path(similar_network)
-

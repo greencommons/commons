@@ -3,23 +3,49 @@
   border-bottom: 1px solid $gc-clear-gray;
   @include box-shadow(none);
 
+  &--dissolve {
+    border-bottom: none;
+    padding-top: 25px;
+  }
+
   &-brand {
     font-size: 14px;
     font-weight: 500;
   }
 
-  &-nav > li{
+  &-brand--dissolve {
+    padding: 0;
+    padding-top: 8.5px;
+    padding-left: 15.5px;
+  }
+
+  &-brand-logo {
+    float: left;
+    margin-right: 20px;
+  }
+
+  &-brand-name {
+    line-height: 37px;
+    display: inline-block;
+    color: #fff;
+  }
+
+  &-nav > li {
     padding-left: 2px;
     padding-right: 2px;
+  }
+
+  &__user-info {
+    margin-top: 5px;
   }
 
   &-profile-image {
     img {
       width: 40px;
       height: 40px;
-      border: 1px solid $gray-light;
+      border: 1px solid #fff;
       padding: 3px;
-      margin-top: 7px;
+      margin-left: 14px;
       position: relative;
     }
   }
@@ -45,5 +71,81 @@
     &:focus {
       outline: none;
     }
+  }
+
+  &__no-bg {
+    color: #fff;
+    background: none !important;
+  }
+
+  &__inline {
+    display: inline-block;
+  }
+
+  &__no-bg:focus, &__no-bg:active, &__no-bg.active, &__no-bg:hover {
+    color: #fff !important;
+    background: none !important;
+  }
+
+  &__icon-bar {
+    background: #fff;
+  }
+
+  &__navbar-nav {
+    margin: auto;
+    padding: 20px 0;
+  }
+
+  &__dropdown-item {
+    a {
+      color: #fff !important;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    &__collapse {
+      background: $gc-blue;
+    }
+  }
+
+  .collapsing {
+    position: absolute !important;
+    z-index: 20;
+    width: 100%;
+    top: 79px;
+  }
+
+  .collapse.in {
+    display: block;
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    top: 79px;
+  }
+
+  .navbar-collapse {
+    max-height: none !important;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .navbar {
+    &__navbar-nav {
+      margin: auto;
+      padding: 0;
+    }
+
+    &__dropdown-item {
+      a {
+        color: $gc-blue !important;
+      }
+    }
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }

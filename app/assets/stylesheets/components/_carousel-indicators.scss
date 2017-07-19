@@ -1,0 +1,17 @@
+.gc-carousel-indicators {
+  position: relative;
+  bottom: 0;
+  top: 53px;
+
+  li.gc-carousel-indicator {
+    background-color: #dce3e6;
+    border: none;
+    margin-right: 12px;
+  }
+
+  li.gc-carousel-indicator.active {
+    background-color: #8D9BAA;
+    width: 10px;
+    height: 10px;
+  }
+}

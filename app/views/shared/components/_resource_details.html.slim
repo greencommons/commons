@@ -1,0 +1,18 @@
+.resource-details
+  .row
+    .col-xs-12
+      h5.resource-details__title= title
+  .row
+    .col-xs-12
+      p.resource-details__count= count
+  .row
+    .col-xs-12
+      ul.resource-details__list
+        - list.each do |item|
+          li= link_to item.name.truncate(40, separator: ' '), item
+
+  .row
+    .col-xs-12
+      = link_to root_path, class: 'resource-details__see-more' do
+        | See more
+        .fa.fa-arrow-right.glyphicon--left

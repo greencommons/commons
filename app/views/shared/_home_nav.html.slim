@@ -1,0 +1,47 @@
+nav.navbar.navbar--dissolve
+  .container
+    .navbar-header
+      button.navbar-toggle.collapsed data-target='#navbar-collapse' data-toggle='collapse' type='button'
+        span.sr-only Toggle navigation
+        span.icon-bar.navbar__icon-bar
+        span.icon-bar.navbar__icon-bar
+        span.icon-bar.navbar__icon-bar
+      a.navbar-brand.navbar-brand--dissolve href='/'
+        svg.navbar-brand-logo height="37px" version="1.1" viewbox=("0 0 37 37") width="37px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          g#Page-1 fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"
+            g fill="#FFFFFF" id="Shared-Eco-Home-Page-2-(v2)" transform="translate(-141.000000, -25.000000)"
+              g#Header transform="translate(141.000000, 25.000000)"
+                g#Logo
+                  path#Combined-Shape d="M7,0 L30,0 C33.8659932,-7.10171439e-16 37,3.13400675 37,7 L37,30 C37,33.8659932 33.8659932,37 30,37 L7,37 C3.13400675,37 4.73447626e-16,33.8659932 0,30 L0,7 L0,7 C-4.73447626e-16,3.13400675 3.13400675,7.10171439e-16 7,0 L7,0 Z M26.7853231,9 L10.976147,9 C9.88926616,9 9,9.88926616 9,10.976147 L9,28.7614702 L12.952294,24.8091761 L26.7853231,24.8091761 C27.872204,24.8091761 28.7614702,23.91991 28.7614702,22.8330291 L28.7614702,10.976147 C28.7614702,9.88926616 27.872204,9 26.7853231,9 Z"
+        .navbar-brand-name Green Commons
+        .clearfix
+    #navbar-collapse.collapse.navbar-collapse.navbar__collapse
+      ul.nav.navbar-nav.navbar__navbar-nav.navbar-right
+        - if user_signed_in?
+          li
+            .btn-network.navbar-btn
+              button.btn.btn-gc-transparent.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+                span.glyphicon.glyphicon-plus.glyphicon--right aria-hidden='true'
+                | Create new
+              ul.dropdown-menu
+                li.navbar__dropdown-item= link_to('Add Resource', new_resource_path)
+                li.navbar__dropdown-item= link_to('Create Network', new_network_path)
+                li.navbar__dropdown-item= link_to('Create List', new_list_path)
+
+          li.dropdown
+            a.navbar__no-bg.navbar__inline.dropdown-toggle aria-expanded='false' data-toggle='dropdown' href='#' role='button'
+              = "Hello, #{current_user.first_name} "
+              span.caret
+              .navbar-profile-image.navbar__inline
+                = image_tag(current_user.avatar_url, class: 'img-circle')
+            ul.dropdown-menu role='menu'
+              li.navbar__dropdown-item= link_to('My Profile', profile_path)
+              li.navbar__dropdown-item= link_to('My Resources', resources_path)
+              li.navbar__dropdown-item= link_to('My Networks', networks_path)
+              li.navbar__dropdown-item= link_to('My Lists', lists_path)
+              li.navbar__dropdown-item= link_to('Logout', destroy_user_session_path)
+            .navbar-button__badge.hidden
+        - else
+          ul.nav.navbar-nav.navbar-right
+            li= link_to 'Register', new_user_registration_path, class: 'btn btn-white-blue'
+            li= link_to 'Log In', new_user_session_path, class: 'navbar__no-bg'

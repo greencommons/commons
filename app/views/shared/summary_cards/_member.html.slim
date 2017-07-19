@@ -2,7 +2,7 @@
   .summary-card__body
     .summary-card__row
       div class="entity-icon"
-        = image_tag resource.user.avatar
+        = image_tag resource.user.avatar, class: 'summary-card__image'
       .summary-card__title
         h5
           - if resource.user.full_name.present?
@@ -12,13 +12,13 @@
         h6
           - if resource.user.full_name.present?
             = resource.user.email
-            |  &bull; 
+            |  &bull;
           = humanize_date(resource.created_at)
       .clearfix
     .summary-card__row
       p
         = resource.user.bio
-        
+
   - if resource.user != current_user && @admin
     .summary-card__actions
       - if resource.admin?
@@ -27,4 +27,3 @@
         = link_to 'Make admin', make_admin_network_member_path(@network, resource), method: :post
       = ' | '
       = link_to 'Remove from network', network_member_path(@network, resource), method: :delete, data: { confirm: 'Are you sure?' }
-      

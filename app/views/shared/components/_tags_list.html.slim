@@ -3,4 +3,4 @@
     .tags-list
       - tags.each_with_index do |tag, i|
           = link_to "##{tag}", search_path(query: tag), class: 'tags-list__tag'
-    .clearfix  
+      .clearfix

@@ -1,0 +1,154 @@
+.home-header {
+  background: image-url('home-background.png');
+  background-repeat: no-repeat;
+  background-size: 590%;
+  background-position: center top;
+
+  &__hero {
+    padding-top: 127px;
+    text-align: center;
+  }
+
+  &__hero-title {
+    color: #fff;
+    font-size: 60px;
+    letter-spacing: 0;
+    margin-bottom: 0;
+  }
+
+  &__hero-subtitle {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 0;
+    margin-top: 0;
+    font-weight: lighter;
+    margin-bottom: 30px;
+  }
+
+  &__hero-search {
+    width: 100%;
+
+    &-form {
+      width: 100%;
+    }
+
+    &-input {
+      width: 100% !important;
+      height: 56px;
+      padding-left: 25px !important;
+    }
+  }
+
+  &__search-button {
+    border: none;
+    background: none;
+    padding-right: 25px !important;
+    top: 8px !important;
+    color: $gc-turquoise;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__hero-hint {
+    color: #fff;
+    width: 100%;
+    border-radius: 30px;
+    // padding: 4px 12px;
+    padding: 6px 16px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.17);
+    line-height: 18px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  &__info-icon {
+    color: #40E7C2;
+    font-size: 18px;
+    margin-right: 6px;
+    display: block;
+    float: left;
+  }
+
+  &__hero-link {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  &__hero-tags {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  &__hero-boxes {
+    margin-top: 80px;
+  }
+}
+
+@media only screen and (min-width : 480px) {
+  .home-header {
+    background-size: 400%;
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  .home-header {
+    background-size: 300%;
+  }
+}
+
+@media only screen and (min-width : 992px) {
+  .home-header {
+    background-size: 200%;
+  }
+}
+
+@media only screen and (min-width : 1100px) {
+  .home-header {
+    background-size: 180%;
+  }
+}
+
+@media only screen and (min-width : 1200px) {
+  .home-header {
+    background-size: 160%;
+  }
+}
+
+@media only screen and (min-width : 1300px) {
+  .home-header {
+    background-size: 150%;
+  }
+}
+
+@media only screen and (min-width : 1400px) {
+  .home-header {
+    background-size: 140%;
+  }
+}
+
+@media only screen and (min-width : 1500px) {
+  .home-header {
+    background-size: 130%;
+  }
+}
+
+@media only screen and (min-width : 1600px) {
+  .home-header {
+    background-size: 120%;
+  }
+}
+
+@media only screen and (min-width : 1700px) {
+  .home-header {
+    background-size: 110%;
+  }
+}
+
+@media only screen and (min-width : 1800px) {
+  .home-header {
+    background-size: 100%;
+  }
+}

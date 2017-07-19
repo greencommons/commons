@@ -1,17 +1,29 @@
 .user-picture {
+
   &__image {
     width: 36px;
     height: 36px;
     border: 1px solid #fff;
     border-radius: 25px;
     position: relative;
-    margin-top: -6px;
     display: inline-block;
     float: left;
+  }
 
+  &__image--realign {
+    margin-top: -6px;
   }
 
   &__image--over {
     margin-left: -18px;
+  }
+
+  &__image--mini {
+    width: 26px;
+    height: 26px;
+  }
+
+  &__image--mini-over {
+    margin-left: -12px;
   }
 }
