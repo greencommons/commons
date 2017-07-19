@@ -2,11 +2,14 @@
   padding-top: 0;
 
   &__background {
+    background-color: $unknown-light;
     height: 500px;
   }
 
   &__background--book {
     background-color: $books-light;
+    background-image: image-url('show-books-bg.png');
+    background-size: 100% 100%;
   }
 
   &__background--article {
@@ -23,10 +26,14 @@
 
   &__background--networks {
     background-color: $networks-light;
+    background-image: image-url('show-networks-bg.png');
+    background-size: 100% 100%;
   }
 
   &__background--lists {
     background-color: $lists-light;
+    background-image: image-url('show-lists-bg.png');
+    background-size: 100% 100%;
   }
 
   &__container {

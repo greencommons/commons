@@ -1,4 +1,4 @@
-.page-details.resource-page 
+.page-details.resource-page
   div class="resource-page__background resource-page__background--#{@resource.resource_type}"
     = render 'shared/alerts'
   .resource-page__container
@@ -8,10 +8,10 @@
           .resource-page__wrapper
             .resource-page__header
               .row
-                .page-details__row--more-space 
+                .page-details__row--more-space
                   .col-xs-12.col-sm-6.col-md-4
                     div class="entity-icon entity-icon--big entity-icon--#{@resource.resource_type}"
-                      i class="fa fa-#{resource_icon(@resource)}"
+                      = resource_icon(@resource)
                     div class="resource-page__type resource-page__type--#{@resource.resource_type}"
                       = @resource.resource_type.pluralize.capitalize
                   .col-xs-12.col-sm-6.col-md-8
@@ -24,8 +24,8 @@
                           | Edit
                           i.fa.fa-pencil.glyphicon--left
                       - if policy(@resource).destroy?
-                        = link_to @resource, method: 'DELETE', 
-                                             class: "resource-actions__button btn btn-white resource-actions__button--right", 
+                        = link_to @resource, method: 'DELETE',
+                                             class: "resource-actions__button btn btn-white resource-actions__button--right",
                                              data: { confirm: 'Are you sure?' } do
                           | Delete
                           i.fa.fa-times.glyphicon--left
@@ -44,19 +44,19 @@
                 .page-details__row
                   .col-xs-12
                     - if @resource&.user&.full_name.present?
-                      .page-details__metadata 
+                      .page-details__metadata
                         i.fa.fa-suitcase.glyphicon--right
                         = "Owner: #{@resource&.user&.full_name}"
-                    .page-details__metadata 
+                    .page-details__metadata
                       i.fa.fa-calendar.glyphicon--right
                       = "Published Date: #{humanize_date(@resource.published_at)}"
-                    .page-details__metadata 
+                    .page-details__metadata
                       i.fa.fa-users.glyphicon--right
                       = "Creators: #{@resource.creators}"
-                    .page-details__metadata 
+                    .page-details__metadata
                       i.fa.fa-user-circle.glyphicon--right
                       = "Publisher: #{@resource.publisher}"
-                    .page-details__metadata 
+                    .page-details__metadata
                       i.fa.fa-lock.glyphicon--right
                       = "Privacy: #{@resource.priv? ? 'Private' : 'Public'}"
                   .clearfix
@@ -69,7 +69,7 @@
                       - else
                         = @resource.excerpt
                   .clearfix
-                  
+
               .row
                 .col-xs-12.col-md-6
                   = react_component 'Tags', { authenticity_token: form_authenticity_token,
@@ -78,8 +78,8 @@
                                               can_create: policy(@resource).update? }, { prerender: true }
                 .col-xs-12.col-md-6
                   .resource-actions
-                    = react_component 'AddToListButton', { name: @resource.name, 
-                                                           id: @resource.id, 
+                    = react_component 'AddToListButton', { name: @resource.name,
+                                                           id: @resource.id,
                                                            type: 'Resource',
                                                            action: list_items_path,
                                                            loader_image: image_path('loader.gif'),
@@ -110,7 +110,7 @@
                     .col-xs-12
                       .page-details__row--double
                         = render 'shared/integrations/disqus/comments', entity: @resource
-                      
+
                 .col-xs-12.col-md-3
                   .page-details__row--double
                     .page-details__section-title
@@ -119,4 +119,3 @@
                     ul.sidelist
                       - @suggestions.each do |suggestion|
                         li= link_to suggestion.name, resource_type_path(suggestion)
-                  
