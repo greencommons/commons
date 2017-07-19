@@ -10,7 +10,7 @@
   text-decoration: none !important;
   background-repeat: no-repeat;
   background-size: 120%;
-  background-position: -30px;
+  background-position: 30% 10%;
 
   &--red {
     background-color: #ec643d;
@@ -25,6 +25,8 @@
   &--blue {
     background-color: #21bafc;
     background-image: image-url('enlist.png');
+    background-size: 120% 140%;
+    background-position: 30% 30%;
   }
 
   &--green {
@@ -54,6 +56,9 @@
 
 @media only screen and (min-width : 1200px) {
   .feature-box {
+    background-size: 120% 140%;
+    background-position: 30% 20%;
+
     &--tall {
       height: 545px;
     }

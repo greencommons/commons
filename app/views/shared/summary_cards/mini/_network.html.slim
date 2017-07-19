@@ -23,7 +23,7 @@
       .clearfix
     .summary-card__row
       p
-        = network.short_description.to_s.truncate(200, separator: ' ')
+        = network.short_description.to_s.truncate(100, separator: ' ')
   .summary-card__footer
     .summary-card__row.summary-card__row--last
       = link_to 'Join now', network, class: 'summary-card__cta'
