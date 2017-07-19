@@ -90,7 +90,7 @@
   }
 }
 
-@include gc-button('gc', #EF5350, #D64946, #fff);
+@include gc-button('gc', $gc-secondary-blue, $gc-secondary-dark-blue, #fff);
 @include gc-button('clear-blue', $gc-blue, $gc-turquoise, #fff);
 @include gc-button('dark-blue', $gc-dark-blue, #425762, #fff);
 @include gc-button('white-blue', #fff, $gray-lighter, $gc-blue);
