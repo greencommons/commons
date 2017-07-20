@@ -28,6 +28,11 @@ $gc-turquoise:          #39CBFE !default;
 $gc-blue-green:         #40E7C2 !default;
 $gc-blue-green-clear:   #d9faf3 !default;
 
+$gc-main-blue:          #425971 !default;
+$gc-secondary-blue:     #0097ff !default;
+$gc-secondary-dark-blue:#005d9d !default;
+$gc-secondary-clear-blue:#e6f4fc !default;
+
 $gc-red:                #f1524b !default;
 $gc-clear-red:          #fdeded !default;
 $creme:                 #fafafa !default;
@@ -38,9 +43,13 @@ $brand-info:            #9C27B0 !default;
 $brand-warning:         #ff9800 !default;
 $brand-danger:          #e51c23 !default;
 
-$books-light:           #f3faee !default;
-$books-dark:            #a3cf86 !default;
-$books-darker:          #5d923a !default;
+$unknown-light:         #eeeeee !default;
+$unknown-dark:          #a2a2a2 !default;
+$unknown-darker:        #7c7c7c !default;
+
+$books-light:           #cdf6ef !default;
+$books-dark:            #00e1aa !default;
+$books-darker:          #00936f !default;
 
 $urls-light:             #f3faee !default;
 $urls-dark:              #a3cf86 !default;
@@ -50,13 +59,13 @@ $articles-light:        #fef7e3 !default;
 $articles-dark:         #f5c746 !default;
 $articles-darker:       #dcb33f !default;
 
-$reports-light:         #f4efe8 !default;
-$reports-dark:          #b49261 !default;
-$reports-darker:        #876a40 !default;
+$reports-light:         #ddd9f8 !default;
+$reports-dark:          #5333e4 !default;
+$reports-darker:        #2b1494 !default;
 
-$networks-light:          #e6f3fb !default;
-$networks-dark:           #58abe0 !default;
-$networks-darker:         #217bb4 !default;
+$networks-light:          #cdf2fc !default;
+$networks-dark:           #00c7ff !default;
+$networks-darker:         #007a9d !default;
 
 $lists-light:           #ffeee9 !default;
 $lists-dark:            #fb8969 !default;

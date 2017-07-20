@@ -1,11 +1,11 @@
 .daterangepicker {
-  margin-top: 10px;  
+  margin-top: 10px;
 }
 
 .daterangepicker td.active, .daterangepicker td.active:hover, .daterangepicker td.end-date {
-  background-color: $gc-red !important;
+  background-color: $gc-secondary-blue !important;
 }
 
 .daterangepicker td.in-range {
-  background-color: $gc-clear-red;
+  background-color: $gc-secondary-clear-blue;
 }

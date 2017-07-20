@@ -21,6 +21,10 @@
 
   &-brand-logo {
     float: left;
+    margin-right: 10px;
+  }
+
+  &-brand-logo--home {
     margin-right: 20px;
   }
 
@@ -28,6 +32,12 @@
     line-height: 37px;
     display: inline-block;
     color: #fff;
+  }
+
+  &-brand-name--dark {
+    color: $gc-main-blue;
+    font-size: 14px;
+    letter-spacing: 0;
   }
 
   &-nav > li {
