@@ -34,7 +34,7 @@ RSpec.feature 'Managing networks' do
 
     within("#edit_network_#{network.id}") do
       fill_in 'network[name]', with: network.name
-      fill_in 'network[long_description]', with: 'New Description.'
+      fill_in 'network[short_description]', with: 'New Description.'
       find('.bootstrap-tagsinput').find('input').set('some,tags')
 
       click_on 'Update'
