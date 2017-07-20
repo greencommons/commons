@@ -65,7 +65,7 @@
                   .col-xs-12
                     p.page-details__description
                       - if @resource.short_content
-                        = @resource.short_content.truncate(400)
+                        = @resource.short_content
                       - else
                         = @resource.long_content&.truncate(400)
                   .clearfix
