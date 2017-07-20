@@ -112,6 +112,11 @@
     float: left;
   }
 
+
+  &__more--mr {
+    margin-right: 10px;
+  }
+
   &__more--space {
     margin-right: 5%;
   }
@@ -123,6 +128,7 @@
   &__more--meta {
     width: 65%;
     min-width: 300px;
+    float: right;
   }
 
   &__actions {

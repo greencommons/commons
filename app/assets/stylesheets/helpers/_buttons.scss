@@ -80,8 +80,8 @@
   .btn-#{$name}.disabled.active,
   .btn-#{$name}[disabled].active,
   fieldset[disabled] .btn-#{$name}.active {
-    background-color: #EF5350;
-    border-color: #EF5350;
+    background-color: $dark;
+    border-color: $dark;
   }
 
   .btn-#{$name} .badge {
