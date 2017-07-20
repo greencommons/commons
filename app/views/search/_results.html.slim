@@ -6,14 +6,16 @@
           h6
             span= "Results for \"#{@query}\" "
             span.gray-light
-              | &bull;
+              = ' '
+              |  &bull;
+              = ' '
               = " #{number_with_delimiter(@total_count, delimiter: ',')}"
         .col-xs-12.col-sm-2.col-sm-offset-4
           = hidden_field_tag :query, @query
-          = select_tag :sort, 
-                       options_for_select([ ['Score', 'score'], 
-                                            ['Newest First', '-published_at'], 
-                                            ['Oldest First', 'published_at'] ], @sort || 'SCORE'), 
+          = select_tag :sort,
+                       options_for_select([ ['Score', 'score'],
+                                            ['Newest First', '-published_at'],
+                                            ['Oldest First', 'published_at'] ], @sort || 'SCORE'),
                        class: 'form-control gc-select',
                        data: { 'filter-select' => true }
   - if @results.any?
