@@ -24,7 +24,11 @@
       .clearfix
     .summary-card__row
       p
-        = resource.short_description
+        - if resource.short_description
+          = resource.short_description.truncate(400)
+        - else
+          = resource.long_description&.truncate(400)
+
     - unless minimalist
       = render 'shared/components/tags_list', tags: resource.cached_tags
       .summary-card__row.summary-card__row--last

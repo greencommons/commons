@@ -27,13 +27,11 @@
       .clearfix
     .summary-card__row
       p
-        - if resource.url?
-          = link_to resource.url, resource.url, target: '_blank'
+        - if resource.short_content
+          = resource.short_content.truncate(400)
         - else
-          - if resource.short_content.is_a?(String)
-            = resource.short_content.truncate(400)
-          - else
-            = resource.short_content
+          = resource.long_content&.truncate(400)
+
     - unless minimalist
       = render 'shared/components/tags_list', tags: resource.cached_tags
       .summary-card__row.summary-card__row--last

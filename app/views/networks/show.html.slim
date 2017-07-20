@@ -64,7 +64,10 @@
                 .page-details__row
                   .col-xs-12
                     p.page-details__description
-                      = @network.long_description
+                      - if @network.short_description
+                        = @network.short_description.truncate(400)
+                      - else
+                        = @network.long_description&.truncate(400)
                   .clearfix
 
               .row
