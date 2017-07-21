@@ -35,6 +35,7 @@ gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
 gem 'bootstrap-tagsinput-rails'
 gem 'selectize-rails'
+gem 'scout_apm'
 
 group :development do
   gem 'bummr'

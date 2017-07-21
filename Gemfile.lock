@@ -348,6 +348,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scout_apm (2.1.26)
     selectize-rails (0.12.4)
     shellany (0.0.1)
     shoulda (3.5.0)
@@ -449,6 +450,7 @@ DEPENDENCIES
   rubocop
   rubocop-rspec
   sass-rails (~> 5.0)
+  scout_apm
   selectize-rails
   shoulda
   sidekiq
