@@ -12,10 +12,14 @@
         h6
           - if resource.creators.present?
             = resource.creators
+            = ' '
             |  &bull;
+            = ' '
           - if resource.publisher
             = resource.publisher
+            = ' '
             |  &bull;
+            = ' '
           = humanize_date(resource.published_at)
       - if defined?(hit) && hit
         .summary-card__relevancy style="background-color: rgba(95, 125, 140, #{score_opacity(hit._score)});"
