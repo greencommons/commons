@@ -64,10 +64,10 @@
                 .page-details__row
                   .col-xs-12
                     p.page-details__description
-                      - if @resource.url?
-                        = @resource.url
+                      - if @resource.short_content
+                        = @resource.short_content
                       - else
-                        = @resource.excerpt
+                        = @resource.long_content&.truncate(400)
                   .clearfix
 
               .row

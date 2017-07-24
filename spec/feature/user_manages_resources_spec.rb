@@ -20,7 +20,7 @@ RSpec.feature 'Managing resources' do
     click_link resource.title
 
     expect(page).to have_text('Urls')
-    expect(page).to have_text('http://example.com')
+    expect(page).to have_text('View Original')
   end
 
   scenario 'users can create a resource' do
