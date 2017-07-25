@@ -49,7 +49,7 @@ RSpec.describe SearchBuilders::ResourceTypeFilter do
               minimum_should_match: 1,
               should: [
                 { bool: { must_not: { exists: { field: 'resource_type' } } } },
-                { terms: { resource_type: ['book', 'article'] } }
+                { terms: { resource_type: %w(book article) } }
               ]
             }
           }
@@ -74,7 +74,7 @@ RSpec.describe SearchBuilders::ResourceTypeFilter do
               minimum_should_match: 1,
               should: [
                 { bool: { must_not: { exists: { field: 'resource_type' } } } },
-                { terms: { resource_type: ['book', 'article'] } }
+                { terms: { resource_type: %w(book article) } }
               ]
             }
           }
