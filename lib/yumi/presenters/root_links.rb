@@ -63,7 +63,7 @@ module Yumi
 
         @params.each_with_index do |(key, value), i|
           if value.is_a? Hash
-            value.each_with_index do |(subkey, subvalue), i|
+            value.each do |subkey, subvalue|
               prefix = i.zero? ? '?' : '&'
               base << "#{prefix}#{key}[#{subkey}]=#{subvalue}"
             end
