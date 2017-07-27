@@ -62,8 +62,15 @@ module Yumi
         base = @current_url.split('?')[0]
 
         @params.each_with_index do |(key, value), i|
-          prefix = i.zero? ? '?' : '&'
-          base << "#{prefix}#{key}=#{value}"
+          if value.is_a? Hash
+            value.each_with_index do |(subkey, subvalue), i|
+              prefix = i.zero? ? '?' : '&'
+              base << "#{prefix}#{key}[#{subkey}]=#{subvalue}"
+            end
+          else
+            prefix = i.zero? ? '?' : '&'
+            base << "#{prefix}#{key}=#{value}"
+          end
         end
 
         base
