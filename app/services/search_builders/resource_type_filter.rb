@@ -3,7 +3,15 @@ module SearchBuilders
     RESOURCE_TYPE_FILTERS = {
       books: 'book',
       articles: 'article',
-      reports: 'report'
+      reports: 'report',
+      urls: 'url',
+      audios: 'audio',
+      courses: 'course',
+      datasets: 'dataset',
+      images: 'image',
+      syllabuses: 'syllabus',
+      videos: 'video',
+      profiles: 'profile'
     }.freeze
 
     def initialize(filters, es_params)
@@ -32,12 +40,10 @@ module SearchBuilders
     end
 
     def filter_by_resource_type
-      values.each do |resource_type|
-        next unless RESOURCE_TYPE_FILTERS.keys.include?(resource_type.to_sym)
-        @es_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
-          term: { resource_type: RESOURCE_TYPE_FILTERS[resource_type.to_sym] }
-        }
-      end
+      types = values.map { |v| RESOURCE_TYPE_FILTERS[v.to_sym] }.compact
+      @es_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
+        terms: { resource_type: types }
+      }
     end
 
     def values
