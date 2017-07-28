@@ -121,7 +121,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources/63244 \
      -X PATCH \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": { "id": ":id", "type": "resources", "attributes": { "title": "An updated resource" } } }'
+     -d '{ "data": { "id": "63244", "type": "resources", "attributes": { "title": "An updated resource" } } }'
 ```
 
 #### Networks
@@ -159,7 +159,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks/2140 \
      -X PATCH \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": { "id": ":id", "type": "networks", "attributes": { "name": "A new network" } } }'
+     -d '{ "data": { "id": "2140", "type": "networks", "attributes": { "name": "A new network" } } }'
 ```
 
 #### Network Users
