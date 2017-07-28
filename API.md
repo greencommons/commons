@@ -93,12 +93,15 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
 ##### Retrieve a resource - `/api/v1/resources/:id`
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/resources/7577
+curl http://greencommons.herokuapp.com/api/v1/resources/43130
 ```
 
+Or to access a private resource belonging to you:
+
+```
 curl -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
 http://greencommons.herokuapp.com/api/v1/resources/63243
-
+```
 
 ##### Create a resource
 
@@ -114,7 +117,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources \
 ##### Update a resource
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/resources/:id \
+curl http://greencommons.herokuapp.com/api/v1/resources/63244 \
      -X PATCH \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -136,84 +139,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks
 __Example__
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/10
-```
-
-```
-{  
-  "data":{  
-    "type":"networks",
-    "id":"10",
-    "attributes":{  
-      "name":"Mertz, Wisozk and Marks",
-      "short_description":"Ad non quia laborum enim.",
-      "long_description":"Enim recusandae vitae. Nam ut qui cum. Molestiae suscipit quae culpa sint possimus. Quo officiis perferendis. Est est et ut ullam qui commodi.",
-      "relevancy":null,
-      "tags":[  
-
-      ],
-      "published_at":null,
-      "members_count":9,
-      "lists_count":5,
-      "resources_count":164
-    },
-    "links":{  
-      "self":"http://greencommons.herokuapp.com/api/v1/networks/10"
-    },
-    "relationships":{  
-      "users":{  
-        "data":[  
-          {  
-            "type":"users",
-            "id":"1"
-          },
-          {  
-            "type":"users",
-            "id":"6"
-          },
-          {  
-            "type":"users",
-            "id":"2"
-          },
-          {  
-            "type":"users",
-            "id":"10"
-          },
-          {  
-            "type":"users",
-            "id":"5"
-          },
-          {  
-            "type":"users",
-            "id":"8"
-          },
-          {  
-            "type":"users",
-            "id":"4"
-          },
-          {  
-            "type":"users",
-            "id":"9"
-          },
-          {  
-            "type":"users",
-            "id":"7"
-          }
-        ],
-        "links":{  
-          "self":"http://greencommons.herokuapp.com/api/v1/networks/10/relationships/users",
-          "related":"http://greencommons.herokuapp.com/api/v1/networks/10/users"
-        }
-      }
-    }
-  },
-  "links":{  
-    "self":"http://greencommons.herokuapp.com/api/v1/networks/10",
-    "next":"",
-    "last":""
-  },
-  "included":[]
-}
+curl http://greencommons.herokuapp.com/api/v1/networks/2129
 ```
 
 ##### Create a network
@@ -229,7 +155,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks \
 ##### Update a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/:id \
+curl http://greencommons.herokuapp.com/api/v1/networks/2140 \
      -X PATCH \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -241,19 +167,19 @@ curl http://greencommons.herokuapp.com/api/v1/networks/:id \
 ##### List network users
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users
+curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users
 ```
 
 Note that it is also possible to just include the members when retrieving a network:
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/:id?include=users
+curl 'http://greencommons.herokuapp.com/api/v1/networks/2140?include=users'
 ```
 
 ##### Add users to a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users \
+curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users \
      -X POST \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -263,7 +189,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users \
 ##### Remove users from a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users \
+curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users \
      -X DELETE \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -277,7 +203,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks/:id/relationships/users \
 __Example__
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists/10
+curl http://greencommons.herokuapp.com/api/v1/lists/93
 ```
 
 ##### Create a list
@@ -293,21 +219,21 @@ curl http://greencommons.herokuapp.com/api/v1/lists \
 ##### Add to a list
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
+curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
      -X POST \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": [{ "id": "1", "type": "networks" }, { "id": "1", "type": "resources" }] }'
+     -d '{ "data": [{ "id": "2140", "type": "networks" }, { "id": "43130", "type": "resources" }] }'
 ```
 
 ##### Remove from a list
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists/:id/relationships/items \
+curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
      -X DELETE \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": [{ "id": "1", "type": "networks" }, { "id": "1", "type": "resources" }] }'
+     -d '{ "data": [{ "id": "2140", "type": "networks" }, { "id": "43130", "type": "resources" }] }'
 ```
 
 #### Users
@@ -325,9 +251,9 @@ curl http://greencommons.herokuapp.com/api/v1/users \
 ##### Update user
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/users/:id \
+curl http://greencommons.herokuapp.com/api/v1/users/10 \
      -X PATCH \
      -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
      -H 'Content-Type: application/vnd.api+json' \
-     -d '{ "data": { "id": ":id", "type": "users", "attributes": { "first_name": "John" } } }'
+     -d '{ "data": { "id": "10", "type": "users", "attributes": { "first_name": "John" } } }'
 ```

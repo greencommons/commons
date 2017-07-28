@@ -35,6 +35,14 @@ module Yumi
       }
     end
 
+    def pid(c)
+      if respond_to?(:resource_id)
+        resource_id(c)
+      else
+        c.id
+      end.to_s
+    end
+
     protected
 
     def object
@@ -47,12 +55,12 @@ module Yumi
       if @resource.respond_to?(:each)
         @resource.map do |c|
           type = @override_type ? resource_type(c) : @type.pluralize
-          { type: type, id: c.id.to_s }
+          { type: type, id: pid(c) }
         end
       else
         {
           type: @override_type ? resource_type(@resource) : @type.pluralize,
-          id: @resource.id.to_s
+          id: pid(@resource)
         }
       end
     end

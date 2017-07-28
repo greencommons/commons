@@ -23,7 +23,7 @@ module Yumi
                    @presenter.type.pluralize
                  end
 
-          "#{@presenter.url}/#{type}/#{@presenter.resource.id}"
+          "#{@presenter.url}/#{type}/#{@presenter.pid(@presenter.resource)}"
         end
       end
     end
