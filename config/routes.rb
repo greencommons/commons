@@ -71,6 +71,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/privacypolicy', to: 'static_pages#policy', as: :policy
+
   devise_for :users
 
   # TODO: replace this with a check for admin user

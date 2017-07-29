@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
-  layout false
+  layout false, only: :home
 
   def home; end
+
+  def policy; end
 end
