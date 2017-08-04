@@ -8,7 +8,7 @@ Green Commons uses a custom HTTP Authentication scheme in order to authenticate 
 Authorization: GC access_key:secret_key
 ```
 
-Your `access_key` and `secret_key` can be found in your profile.
+Your `access_key` and `secret_key` can be found in your profile. In the `curl` request examples below, fake keys are being used (`access_key` and `secret_key`), __replace them with your personal keys__. You will also want to change the IDs in order to interact with real resources.
 
 ### JSON API
 
@@ -99,7 +99,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources/43130
 Or to access a private resource belonging to you:
 
 ```
-curl -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+curl -H 'Authorization: GC access_key:secret_key' \
 http://greencommons.herokuapp.com/api/v1/resources/63243
 ```
 
@@ -109,7 +109,7 @@ http://greencommons.herokuapp.com/api/v1/resources/63243
 curl http://greencommons.herokuapp.com/api/v1/resources \
      -X POST \
      -v \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "type": "resources", "attributes": { "title": "A new resource" } } }'
 ```
@@ -119,7 +119,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources \
 ```
 curl http://greencommons.herokuapp.com/api/v1/resources/63244 \
      -X PATCH \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "id": "63244", "type": "resources", "attributes": { "title": "An updated resource" } } }'
 ```
@@ -147,7 +147,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks/2129
 ```
 curl http://greencommons.herokuapp.com/api/v1/networks \
      -X POST \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "type": "networks", "attributes": { "name": "A new network" } } }'
 ```
@@ -157,7 +157,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks \
 ```
 curl http://greencommons.herokuapp.com/api/v1/networks/2140 \
      -X PATCH \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "id": "2140", "type": "networks", "attributes": { "name": "A new network" } } }'
 ```
@@ -181,7 +181,7 @@ curl 'http://greencommons.herokuapp.com/api/v1/networks/2140?include=users'
 ```
 curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users \
      -X POST \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": [{ "id": "1", "type": "users" }] }'
 ```
@@ -191,7 +191,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users 
 ```
 curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users \
      -X DELETE \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": [{ "id": "1", "type": "users" }] }'
 ```
@@ -211,7 +211,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/93
 ```
 curl http://greencommons.herokuapp.com/api/v1/lists \
      -X POST \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "type": "lists", "attributes": { "name": "A new list" } } }'
 ```
@@ -221,7 +221,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists \
 ```
 curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
      -X POST \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": [{ "id": "2140", "type": "networks" }, { "id": "43130", "type": "resources" }] }'
 ```
@@ -231,7 +231,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
 ```
 curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
      -X DELETE \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": [{ "id": "2140", "type": "networks" }, { "id": "43130", "type": "resources" }] }'
 ```
@@ -243,7 +243,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
 ```
 curl http://greencommons.herokuapp.com/api/v1/users \
      -X POST \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "type": "users", "attributes": { "email": "john@example.com", "password": "password", "password_confirmation": "password"} } }'
 ```
@@ -253,7 +253,7 @@ curl http://greencommons.herokuapp.com/api/v1/users \
 ```
 curl http://greencommons.herokuapp.com/api/v1/users/10 \
      -X PATCH \
-     -H 'Authorization: GC SOcdhU1l5Jiebg6EDtyDFQ:1168c1433a2e7aa5945401e7245186e3' \
+     -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
      -d '{ "data": { "id": "10", "type": "users", "attributes": { "first_name": "John" } } }'
 ```
