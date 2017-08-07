@@ -6,8 +6,8 @@ module V1
 
     delegate :id, :name, :published_at, :created_at, :updated_at, to: :'object.item'
 
-    def resource_id
-      object.item_id
+    def resource_id(o = object)
+      o.item_id
     end
 
     def resource_type(resource)

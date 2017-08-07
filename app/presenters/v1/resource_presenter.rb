@@ -1,8 +1,8 @@
 module V1
   class ResourcePresenter < Yumi::Base
     type 'resource'
-    attributes :title, :excerpt, :published_at, :private, :tags, :resource_type,
-               :created_at, :updated_at
+    attributes :title, :short_content, :url, :published_at, :private, :tags,
+               :resource_type, :created_at, :updated_at
     links :self
 
     has_many :lists

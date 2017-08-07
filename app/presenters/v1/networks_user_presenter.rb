@@ -6,5 +6,9 @@ module V1
     belongs_to :network
 
     delegate :email, :first_name, :last_name, to: :'object.user'
+
+    def resource_id(o = object)
+      o.user.id
+    end
   end
 end
