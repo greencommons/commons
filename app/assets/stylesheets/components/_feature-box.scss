@@ -1,7 +1,7 @@
 .feature-box {
   display: block;
   width: 100%;
-  height: 260px;
+  height: 320px;
   background-color: #fff;
   margin-bottom: 25px;
   padding: 34px;
@@ -9,8 +9,8 @@
   border-radius: 5px;
   text-decoration: none !important;
   background-repeat: no-repeat;
-  background-size: 120%;
-  background-position: 30% 10%;
+  background-size: 130%;
+  background-position: 30% 23%;
 
   &--red {
     background-color: #ec643d;
@@ -46,6 +46,13 @@
     font-size: 22px;
     color: #FFFFFF;
     line-height: 28px;
+    margin-bottom: 0.4em;
+  }
+
+  &__description {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    line-height: 1.5em;
   }
 
   &__icon {
@@ -60,7 +67,7 @@
     background-position: 30% 20%;
 
     &--tall {
-      height: 545px;
+      height: 665px;
     }
   }
 }
