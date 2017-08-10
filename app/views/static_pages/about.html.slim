@@ -1,0 +1,91 @@
+.page-details--creme-bg
+  .container
+    = render 'shared/alerts'
+    .row
+      .col-xs-12
+        .form-box
+          .form-box__title
+            h2 About the Commons
+          .form-box__body
+            p
+              | The Commons is a knowledge-sharing, learning platform for environmental research and action.
+              | It provides a place for people working on environmental issues to
+              = ' '
+              span.form-box__underline find and share
+              = ' '
+              | resources, information, and ideas;
+              = ' to '
+              span.form-box__underline build
+              = ' '
+              | networks; and to
+              = ' '
+              span.form-box__underline work collaboratively
+              = ' '
+              | . We aim to provide users the information and tools that will help them create a
+              | more sustainable world.
+
+            h5 Vision
+            p
+              | The Commons is an open space for the environmental community to learn, share, and connect.
+              |  The Commons is a place to come for information, discover who’s working on what problems, get and give help in solving those problems, and to join a community of practice that means to share and collaborate.
+            ol
+              li The Commons brings together information in multiple forms across a broad range of sources—including articles, books, reports, videos, datasets, and syllabi.
+              li It enhances this body of information algorithmically and socially, finding connections among the pieces that enable open exploration and rich discovery.*
+              li It will allow users not only to discover and access information; it allows them to annotate, augment, review, recombine, and share it with others.*
+              li The Commons is open to material contributed by publishers, environmental organizations, governments, municipalities, universities, researchers and others. It provides a unified index of these materials, whether the copies are held locally by The Commons or are maintained at their source sites.
+            p
+              | *This prototype provides basic versions of this functionality. More is on the way.
+
+            h5 Goals
+            p
+              | First, we want to make information from many sources and of many types discoverable with a single query.
+              | Second, we want to integrate and enrich this information,  making the semantic relationships among them visible to users.
+              | Third, finding information is not enough. We need to be making sense of that information together, which is a function of collaborative networks.
+
+            h5 Our values
+            p
+              | The Commons is committed to open principles. The source code being developed for The Commons is made available under open software licenses. The code behind this site is available as Open Source software at
+              = ' '
+              = link_to 'Github', 'https://github.com/greencommons/commons', class: 'form-box__link', target: '_blank'
+              |  under a TK license.
+              br/
+              | The Commons provides
+              = ' '
+              = link_to 'open APIs', 'https://github.com/greencommons/commons/blob/master/API.md', class: 'form-box__link', target: '_blank'
+              |  to allow other organizations the ability to access network information and resources, and similarly benefits from incorporating external services into its functionality.
+              br/
+              | We are committed to sharing and partnering.
+              br/
+              | While we index closed access works along with open access ones (and note which is which), all the metadata presented on this site is provided under a Creative Commons By license.
+              | We make that metadata available via an open API.
+              br/
+              | We will never sell your private, personal information to any other group. For more information,
+              = ' '
+              = link_to 'click here', policy_path, class: 'form-box__link', target: '_blank'
+              | .
+
+            h5 Who are we?
+            p The Commons is maintained by a non-profit, independent group, with initial leadership coming from Island Press, which is responsible for developing this prototype site.  Funding of this prototype came from the JPB Foundation.
+
+            h5 Frequently asked questions
+            p.form-box__italic You say this is a prototype. How far along is it?
+            p Like a Minimum Viable Product, it provides real services that give a taste of what it will be once we move it beyond the prototype stage.
+            p.form-box__italic What enhancements do you plan?
+            p
+              | Here’s our next-stage to-do list, in no particular order. (When we get to each of these depends on the usual sort of dependencies.)
+            ul
+              li Enable users to upload resources. Resolve the myriad of issues that entails -- most especially dealing with spammers.
+              li Let any network engage in group annotation of the sources we’ve indexed or any page on the Web.
+              li Add more social networking features, such as following and notifications.
+              li Increase our full text index with more book content, more municipal reports, more everything.
+              li Take semantic indexing and linking to the next level. Each work should link to its related works. The threshold for relevance should be adjustable by the user.
+              li Differentiate between topic tags generated by machine analysis -- we currently use the excellent and free service provided by ClimateTagger.org -- and by users.
+              li Improve the user experience and design.
+              li Create a Campaign feature.
+              li Integrate the QA service and discussions feature  so they don’t require a second login
+            p.form-box__italic I’d like to suggest a new feature, how do I do that?
+            p
+              | Good ideas are always welcome, just send us an
+              = ' '
+              = mail_to 'admin@greencommons.org', 'email', class: 'form-box__link'
+              | .
