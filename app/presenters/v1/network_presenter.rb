@@ -16,7 +16,7 @@ module V1
     end
 
     def lists_count
-      object.lists.count
+      object.lists_items_count
     end
 
     def resources_count

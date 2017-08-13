@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170813141720) do
+ActiveRecord::Schema.define(version: 20170813145314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,15 +28,16 @@ ActiveRecord::Schema.define(version: 20170813141720) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.string   "name",                      null: false
+    t.string   "name",                           null: false
     t.string   "description"
-    t.string   "owner_type",                null: false
-    t.integer  "owner_id",                  null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.text     "cached_tags",  default: [],              array: true
+    t.string   "owner_type",                     null: false
+    t.integer  "owner_id",                       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "cached_tags",       default: [],              array: true
     t.datetime "published_at"
-    t.integer  "privacy",      default: 1,  null: false
+    t.integer  "privacy",           default: 1,  null: false
+    t.integer  "lists_items_count", default: 0
     t.index ["owner_type", "owner_id"], name: "index_lists_on_owner_type_and_owner_id", using: :btree
   end
 
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20170813141720) do
     t.text     "cached_tags",          default: [],              array: true
     t.datetime "published_at"
     t.integer  "networks_users_count", default: 0
+    t.integer  "lists_items_count",    default: 0
   end
 
   create_table "networks_users", force: :cascade do |t|
@@ -76,18 +78,19 @@ ActiveRecord::Schema.define(version: 20170813141720) do
   end
 
   create_table "resources", force: :cascade do |t|
-    t.string   "title",                      null: false
-    t.integer  "resource_type", default: 0,  null: false
+    t.string   "title",                          null: false
+    t.integer  "resource_type",     default: 0,  null: false
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.jsonb    "metadata",      default: {}, null: false
-    t.text     "cached_tags",   default: [],              array: true
-    t.integer  "privacy",       default: 0,  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.jsonb    "metadata",          default: {}, null: false
+    t.text     "cached_tags",       default: [],              array: true
+    t.integer  "privacy",           default: 0,  null: false
     t.string   "url"
     t.datetime "published_at"
     t.text     "short_content"
     t.text     "long_content"
+    t.integer  "lists_items_count", default: 0
     t.index ["user_id"], name: "index_resources_on_user_id", using: :btree
   end
 

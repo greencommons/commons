@@ -85,7 +85,7 @@
                                                            loader_image: image_path('loader.gif'),
                                                            autocomplete_path: autocomplete_lists_path(current_resource: "Network:#{@network.id}"),
                                                            authenticity_token: form_authenticity_token,
-                                                           list_count: @network.lists.count,
+                                                           list_count: @network.lists_items_count,
                                                            button_class: "btn-networks btn--large",
                                                            logged_in: current_user.present?,
                                                            options: current_user ? owner_options(current_user, @network) : [] }

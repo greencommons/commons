@@ -43,7 +43,7 @@
                                                  loader_image: image_path('loader.gif'),
                                                  autocomplete_path: autocomplete_lists_path(current_resource: "Resource:#{resource.id}"),
                                                  authenticity_token: form_authenticity_token,
-                                                 list_count: resource.lists.count,
+                                                 list_count: resource.lists_items_count,
                                                  button_class: "btn-gc",
                                                  logged_in: current_user.present?,
                                                  options: current_user ? owner_options(current_user, resource) : [] }

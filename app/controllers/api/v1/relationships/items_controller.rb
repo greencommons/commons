@@ -10,7 +10,7 @@ module Api
         def index
           results = @list.lists_items.includes(:item).
                     page(params[:page] || 1).per(params[:per] || 10)
-          render_json_api present_collection(results, @list.lists_items.count)
+          render_json_api present_collection(results, @list.lists_items_count)
         end
 
         def create
@@ -24,7 +24,7 @@ module Api
 
           results = @list.lists_items.includes(:item).
                     page(params[:page] || 1).per(params[:per] || 10)
-          render_json_api present_collection(results, @list.lists_items.count)
+          render_json_api present_collection(results, @list.lists_items_count)
         end
 
         def update
@@ -50,7 +50,7 @@ module Api
 
           results = @list.lists_items.includes(:item).
                     page(params[:page] || 1).per(params[:per] || 10)
-          render_json_api present_collection(results, @list.lists_items.count)
+          render_json_api present_collection(results, @list.lists_items_count)
         end
 
         private
