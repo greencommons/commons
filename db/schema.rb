@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615070755) do
+ActiveRecord::Schema.define(version: 20170813141720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,14 +54,15 @@ ActiveRecord::Schema.define(version: 20170615070755) do
   end
 
   create_table "networks", force: :cascade do |t|
-    t.string   "name",                           null: false
+    t.string   "name",                              null: false
     t.string   "short_description"
     t.text     "long_description"
     t.json     "metadata"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.text     "cached_tags",       default: [],              array: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.text     "cached_tags",          default: [],              array: true
     t.datetime "published_at"
+    t.integer  "networks_users_count", default: 0
   end
 
   create_table "networks_users", force: :cascade do |t|

@@ -53,7 +53,7 @@
                         = image_tag(@network.users[1] ? @network.users[1].avatar_url : 'user.png',
                                     class: 'user-picture__image user-picture__image--over user-picture__image--realign')
                         = link_to network_members_path(@network), class: 'btn btn--picture-cover' do
-                          = @network.users.count
+                          = @network.networks_users_count
                     .page-details__metadata
                       | members
                     .page-details__metadata

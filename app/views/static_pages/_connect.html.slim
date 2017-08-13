@@ -26,7 +26,7 @@
               #carousel-connect.carousel.slide data-ride="carousel"
                 .row
                   .carousel-inner.home-connect__feature-carousel role="listbox"
-                    - Network.limit(9).each_with_index do |network, index|
+                    - Network.includes(:users).limit(9).each_with_index do |network, index|
                       div class="#{index == 0 ? 'item active' : 'item'}"
                         .col-xs-12
                           = render 'shared/summary_cards/mini/network', network: network
