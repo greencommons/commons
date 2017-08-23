@@ -1,5 +1,5 @@
 class NetworksUser < ApplicationRecord
-  belongs_to :network
+  belongs_to :network, counter_cache: true
   belongs_to :user
 
   validates :network, presence: true

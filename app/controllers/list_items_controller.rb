@@ -14,7 +14,7 @@ class ListItemsController < ApplicationController
             status: 'ok',
             list_name: list.name,
             resource_name: item.name,
-            list_count: item.lists.count
+            list_count: item.lists_items_count
           }
         else
           render_errors(list_item.errors)
@@ -71,7 +71,7 @@ class ListItemsController < ApplicationController
       status: 'ko',
       list_name: list.name,
       resource_name: item.name,
-      list_count: item.lists.count,
+      list_count: item.lists_items_count,
       errors: errors
     }
   end

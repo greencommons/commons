@@ -41,7 +41,7 @@
                         = image_tag(@network.users[1] ? @network.users[1].avatar_url : 'user.png',
                                     class: 'user-picture__image user-picture__image--realign user-picture__image--over')
                         a class='btn btn--picture-cover'
-                          = @network.users.count
+                          = @network.networks_users_count
                     .page-details__metadata
                       | members
                     .page-details__metadata

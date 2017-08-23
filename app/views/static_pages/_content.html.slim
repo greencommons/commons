@@ -14,43 +14,43 @@
                   .row
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Books',
-                                                                     count: Resource.books.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:book]],
                                                                      list: Resource.books.limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Written Articles',
-                                                                     count: Resource.articles.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:article]],
                                                                      list: Resource.articles.limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Issued Reports',
-                                                                     count: Resource.reports.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:report]],
                                                                      list: Resource.reports.limit(6)
                 .item
                   .row
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Recorded Audios',
-                                                                     count: Resource.audios.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:audio]],
                                                                      list: Resource.audios.limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Courses',
-                                                                     count: Resource.courses.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:course]],
                                                                      list: Resource.courses.limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Datasets',
-                                                                     count: Resource.datasets.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:dataset]],
                                                                      list: Resource.datasets.limit(6)
                 .item
                   .row
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Syllabuses',
-                                                                     count: Resource.syllabuses.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:syllabus]],
                                                                      list: Resource.syllabuses.limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Videos',
-                                                                     count: Resource.videos.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:video]],
                                                                      list: Resource.videos.limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Profiles',
-                                                                     count: Resource.profiles.count,
+                                                                     count: @counts[Resource::RESOURCE_TYPES[:profile]],
                                                                      list: Resource.profiles.limit(6)
           .row
             .col-xs-12.col-md-8.col-md-offset-2
