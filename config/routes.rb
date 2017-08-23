@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   default_url_options Rails.application.config.action_mailer.default_url_options
 
   root 'static_pages#home'
+  get '/privacypolicy', to: 'static_pages#policy', as: :policy
+  get '/about', to: 'static_pages#about', as: :about
 
   # External API routes
   namespace :api do
@@ -70,8 +72,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  get '/privacypolicy', to: 'static_pages#policy', as: :policy
 
   devise_for :users
 
