@@ -10,9 +10,9 @@ var initFilters = function() {
   };
 
   $('input[name="daterange"]').each(function() {
-    var daterange = $(this)
-    var start = daterange.data('start') ? moment.unix(daterange.data('start')) : moment().subtract(7, 'days')
-    var end = daterange.data('end') ? moment.unix(daterange.data('end')) : moment()
+    var daterange = $(this);
+    var start = daterange.data('start') ? moment.unix(daterange.data('start')) : moment().subtract(7, 'days');
+    var end = daterange.data('end') ? moment.unix(daterange.data('end')) : moment();
 
     daterange.daterangepicker({
       "startDate": start,

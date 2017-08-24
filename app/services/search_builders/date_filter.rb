@@ -6,7 +6,9 @@ module SearchBuilders
     end
 
     def build
-      return @es_params unless @filters[:start] && @filters[:end]
+      return @es_params unless @filters &&
+                               @filters[:start].present? &&
+                               @filters[:end].present?
 
       filter_by_date
       @es_params
@@ -23,7 +25,6 @@ module SearchBuilders
           }
         }
       }
-
     end
   end
 end

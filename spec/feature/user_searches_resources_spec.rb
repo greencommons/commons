@@ -165,6 +165,32 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
       expect(page).not_to have_text('My Resource')
     end
+
+    scenario 'users can filter by date' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource", resource_type: :article)
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource]).results.total
+      end.to eq(1)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: title
+        find('.navbar__search-button').click
+      end
+
+      expect(page).to have_text('My Resource')
+
+      find('input[name=daterange]').click
+      all('.available')[3].click
+      all('.available')[6].click
+      find('.applyBtn').click
+      wait_for_ajax
+
+      expect(page).not_to have_text('My Resource')
+    end
   end
 
   context 'sorting' do
