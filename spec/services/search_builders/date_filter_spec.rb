@@ -51,8 +51,8 @@ RSpec.describe SearchBuilders::DateFilter do
                 {
                   range: {
                     published_at: {
-                      lte: '2017-01-07T23:59:59Z',
-                      gte: '2017-01-06T00:00:00Z'
+                      lte: '2017-01-07T23:59:59',
+                      gte: '2017-01-06T00:00:00'
                     }
                   }
                 }

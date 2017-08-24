@@ -20,8 +20,8 @@ module SearchBuilders
       @es_params[:query][:bool][:filter][:bool][:should][:bool][:should] << {
         range: {
           published_at: {
-            lte: Time.at(@filters[:end].to_i).strftime('%Y-%m-%dT23:59:59Z'),
-            gte: Time.at(@filters[:start].to_i).strftime('%Y-%m-%dT00:00:00Z')
+            lte: Time.at(@filters[:end].to_i).strftime('%Y-%m-%dT%H:%M:%S'),
+            gte: Time.at(@filters[:start].to_i).strftime('%Y-%m-%dT%H:%M:%S')
           }
         }
       }
