@@ -1,11 +1,10 @@
 .row
   .col-xs-12.col-md-8.col-md-offset-2
     = form_for(list) do |f|
-      = render 'shared/alerts'
       - if list.errors.any?
         .page-details__row
           .alert.alert-warning role='alert'
-            p 
+            p
               = pluralize(list.errors.count, 'error')
               |  prohibited this list from being saved.
             ul
@@ -25,8 +24,8 @@
           = f.label :tag_list, 'Tags', class: 'control-label'
           .row
             .col-xs-12 data-gctagsinput='true'
-              = f.text_field :tag_list, value: @list.cached_tags.join(', '), 
-                                        class: 'form-control', 
+              = f.text_field :tag_list, value: @list.cached_tags.join(', '),
+                                        class: 'form-control',
                                         placeholder: 'Separate tags with commas...'
         .form-group
           .checkbox
