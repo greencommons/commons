@@ -27,7 +27,7 @@ var initFilters = function() {
       url.replaceQueryParam('filters[end]', end.unix());
       reload(url);
     });
-  })
+  });
 
   $('[data-filter-select]').each(function() {
     var select = $(this);
