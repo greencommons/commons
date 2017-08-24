@@ -9,16 +9,25 @@ var initFilters = function() {
     });
   };
 
-  $('input[name="daterange"]').daterangepicker({
-    "startDate": moment().subtract(7, 'days'),
-    "endDate": moment(),
-    "buttonClasses": "btn btn-sm btn-gc",
-    locale: {
-      format: 'MM/DD/YYYY'
-    }
-  }, function(start, end, label) {
-    // Handle filtering
-  });
+  $('input[name="daterange"]').each(function() {
+    var daterange = $(this)
+    var start = daterange.data('start') ? moment.unix(daterange.data('start')) : moment().subtract(7, 'days')
+    var end = daterange.data('end') ? moment.unix(daterange.data('end')) : moment()
+
+    daterange.daterangepicker({
+      "startDate": start,
+      "endDate": end,
+      "buttonClasses": "btn btn-sm btn-gc",
+      locale: {
+        format: 'MM/DD/YYYY'
+      }
+    }, function(start, end, label) {
+      var url = new Uri(window.location.href);
+      url.replaceQueryParam('filters[start]', start.unix());
+      url.replaceQueryParam('filters[end]', end.unix());
+      reload(url);
+    });
+  })
 
   $('[data-filter-select]').each(function() {
     var select = $(this);
