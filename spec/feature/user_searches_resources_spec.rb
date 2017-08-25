@@ -191,6 +191,25 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
       expect(page).not_to have_text('My Resource')
     end
+
+    scenario 'users can see filtered resources by date' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource", resource_type: :article,
+                        published_at: Time.parse('02-01-2017'))
+      create(:resource, title: "#{title} My Other Resource", resource_type: :article,
+                        published_at: Time.parse('09-01-2017'))
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource]).results.total
+      end.to eq(2)
+
+      # Searching between 01/01/2017 and 07/01/2017
+      visit search_path(query: title, filters: { start: '1483225200', end: '1483829999' })
+
+      expect(page).to have_text('My Resource')
+      expect(page).not_to have_text('My Other Resource')
+    end
   end
 
   context 'sorting' do

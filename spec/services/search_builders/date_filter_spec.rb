@@ -51,8 +51,9 @@ RSpec.describe SearchBuilders::DateFilter do
                 {
                   range: {
                     published_at: {
-                      lte: '2017-01-07T23:59:59',
-                      gte: '2017-01-06T00:00:00'
+                      lte: '1483829999',
+                      gte: '1483657200',
+                      format: 'epoch_second'
                     }
                   }
                 }
