@@ -21,7 +21,7 @@ var initFilters = function() {
       end = moment.unix(daterange.data('end'));
     } else {
       start = moment().subtract(7, 'days');
-      end = moment()
+      end = moment();
     }
 
     daterange.daterangepicker({
