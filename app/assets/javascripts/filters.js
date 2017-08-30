@@ -11,20 +11,49 @@ var initFilters = function() {
 
   $('input[name="daterange"]').each(function() {
     var daterange = $(this);
-    var start = daterange.data('start') ? moment.unix(daterange.data('start')) : moment().subtract(7, 'days');
-    var end = daterange.data('end') ? moment.unix(daterange.data('end')) : moment();
+    var filtering = false;
+    var start;
+    var end;
+
+    if (daterange.data('start') && daterange.data('end')) {
+      filtering = true;
+      start = moment.unix(daterange.data('start'));
+      end = moment.unix(daterange.data('end'));
+    } else {
+      start = moment().subtract(7, 'days');
+      end = moment()
+    }
 
     daterange.daterangepicker({
       "startDate": start,
       "endDate": end,
       "buttonClasses": "btn btn-sm btn-gc",
+      autoUpdateInput: false,
       locale: {
-        format: 'MM/DD/YYYY'
+        format: 'MM/DD/YYYY',
+        cancelLabel: 'Clear'
       }
-    }, function(start, end, label) {
+    });
+
+    if (filtering) {
+      $(this).val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'));
+    }
+
+    daterange.on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+
       var url = new Uri(window.location.href);
-      url.replaceQueryParam('filters[start]', start.unix());
-      url.replaceQueryParam('filters[end]', end.unix());
+      url.replaceQueryParam('filters[start]', picker.startDate.unix());
+      url.replaceQueryParam('filters[end]', picker.endDate.unix());
+      reload(url);
+    });
+
+    daterange.on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+
+      var url = new Uri(window.location.href);
+      url.deleteQueryParam('filters[start]');
+      url.deleteQueryParam('filters[end]');
       reload(url);
     });
   });
@@ -77,3 +106,4 @@ var initFilters = function() {
 $(document).on('ready turbolinks:load', function () {
   initFilters();
 });
+
