@@ -1,15 +1,16 @@
 module SearchBuilders
   class Query
-    QUERY_KEYS = %i{
-      title
-      name
-      short_content
-      long_content
-      short_description
-      long_description
-      metadata.publisher
-      metadata.creators
-      metadata.isbn
+    QUERY_KEYS = {
+      title: 1,
+      name: 1,
+      short_content: 1,
+      long_content: 1,
+      short_description: 1,
+      long_description: 1,
+      'metadata.publisher': 1,
+      'metadata.creators': 1,
+      'metadata.isbn': 1,
+      tags: 10
     }.freeze
 
     def initialize(query, es_params)
@@ -20,8 +21,10 @@ module SearchBuilders
     def build
       return @es_params if @query.blank?
 
-      QUERY_KEYS.each do |key|
-        @es_params[:query][:bool][:must][:bool][:should] << { match: { key => @query } }
+      QUERY_KEYS.each do |key, value|
+        @es_params[:query][:bool][:must][:bool][:should] << {
+          match: { key => { query: @query, boost: value } }
+        }
       end
 
       @es_params
