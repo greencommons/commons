@@ -114,8 +114,10 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
   context 'tags' do
     scenario 'users can search for resources, networks and lists' do
-      resource = create(:resource, title: 'Super Resource')
-      network = create(:network, name: 'Super Network')
+      title = Faker::Hipster.sentence
+
+      resource = create(:resource, title: "Resource #{title}")
+      network = create(:network, name: "Network #{title}")
 
       resource.tag_list.add('ocean')
       resource.tag_list.add('sky')
@@ -126,17 +128,21 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       network.save!
 
       wait_for do
-        Elasticsearch::Model.search('super', [Resource, Network, List]).results.total
-      end.to eq(2)
+        Elasticsearch::Model.search('ocean', [Resource]).results.total
+      end.to eq(1)
+
+      wait_for do
+        Elasticsearch::Model.search('earth', [Network]).results.total
+      end.to eq(1)
 
       visit new_search_path
       within('.customer-search-form') do
-        fill_in 'query', with: 'sky'
+        fill_in 'query', with: 'ocean'
         find('.navbar__search-button').click
       end
 
-      expect(page).to have_text('Super Resource')
-      expect(page).not_to have_text('Super Network')
+      expect(page).to have_text("Resource #{title}")
+      expect(page).not_to have_text("Network #{title}")
     end
   end
 
@@ -326,3 +332,4 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
   end
 end
+
