@@ -96,18 +96,6 @@
                 .col-xs-12.col-md-9
                   .row
                     .col-xs-12
-                      .page-details__section-title.page-details__section-title--underline
-                        h6
-                          | Content viewer
-                      .resource-page__empty-content-viewer
-                        .row
-                          .col-xs-12
-                            i.fa.fa-frown-o
-                        .row
-                          .col-xs-12
-                            p Oops... Nothing Available
-                  .row
-                    .col-xs-12
                       .page-details__row--double
                         = render 'shared/integrations/disqus/comments', entity: @resource
 
@@ -119,3 +107,4 @@
                     ul.sidelist
                       - @suggestions.each do |suggestion|
                         li= link_to suggestion.name, resource_type_path(suggestion)
+
