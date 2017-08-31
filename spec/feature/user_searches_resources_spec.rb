@@ -332,4 +332,3 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
   end
 end
-
