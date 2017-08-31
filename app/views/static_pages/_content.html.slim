@@ -15,46 +15,47 @@
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Books',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:book]],
-                                                                     list: Resource.books.limit(6)
+                                                                     list: Resource.books.order("RANDOM()").limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Written Articles',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:article]],
-                                                                     list: Resource.articles.limit(6)
+                                                                     list: Resource.articles.order("RANDOM()").limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Issued Reports',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:report]],
-                                                                     list: Resource.reports.limit(6)
+                                                                     list: Resource.reports.order("RANDOM()").limit(6)
                 .item
                   .row
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Recorded Audios',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:audio]],
-                                                                     list: Resource.audios.limit(6)
+                                                                     list: Resource.audios.order("RANDOM()").limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Courses',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:course]],
-                                                                     list: Resource.courses.limit(6)
+                                                                     list: Resource.courses.order("RANDOM()").limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Datasets',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:dataset]],
-                                                                     list: Resource.datasets.limit(6)
+                                                                     list: Resource.datasets.order("RANDOM()").limit(6)
                 .item
                   .row
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Syllabuses',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:syllabus]],
-                                                                     list: Resource.syllabuses.limit(6)
+                                                                     list: Resource.syllabuses.order("RANDOM()").limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Videos',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:video]],
-                                                                     list: Resource.videos.limit(6)
+                                                                     list: Resource.videos.order("RANDOM()").limit(6)
                     .col-xs-12.col-sm-4.col-md-4
                       = render 'shared/components/resource_details', title: 'Collected Profiles',
                                                                      count: @counts[Resource::RESOURCE_TYPES[:profile]],
-                                                                     list: Resource.profiles.limit(6)
+                                                                     list: Resource.profiles.order("RANDOM()").limit(6)
           .row
             .col-xs-12.col-md-8.col-md-offset-2
               ol.carousel-indicators.gc-carousel-indicators
                 li.gc-carousel-indicator.active data-slide-to="0" data-target="#carousel-content"
                 li.gc-carousel-indicator data-slide-to="1" data-target="#carousel-content"
                 li.gc-carousel-indicator data-slide-to="2" data-target="#carousel-content"
+
