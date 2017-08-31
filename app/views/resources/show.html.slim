@@ -29,7 +29,7 @@
                                              data: { confirm: 'Are you sure?' } do
                           | Delete
                           i.fa.fa-times.glyphicon--left
-                      - if @resource.url
+                      - unless @resource.url.blank?
                         = link_to via_hypothesis(@resource.url), target: '_blank', class: 'resource-actions__button btn btn-dark-blue'
                           | View Original
                           i.fa.fa-link.glyphicon--left
