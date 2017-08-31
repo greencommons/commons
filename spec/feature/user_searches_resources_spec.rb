@@ -112,6 +112,34 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     end
   end
 
+  context 'tags' do
+    scenario 'users can search for resources, networks and lists' do
+      resource = create(:resource, title: 'Super Resource')
+      network = create(:network, name: 'Super Network')
+
+      resource.tag_list.add('ocean')
+      resource.tag_list.add('sky')
+      resource.save!
+
+      network.tag_list.add('earth')
+      network.tag_list.add('cloud')
+      network.save!
+
+      wait_for do
+        Elasticsearch::Model.search('super', [Resource, Network, List]).results.total
+      end.to eq(2)
+
+      visit new_search_path
+      within('.customer-search-form') do
+        fill_in 'query', with: 'sky'
+        find('.navbar__search-button').click
+      end
+
+      expect(page).to have_text('Super Resource')
+      expect(page).not_to have_text('Super Network')
+    end
+  end
+
   context 'filtering' do
     scenario 'users can filter by model', js: true do
       title = Faker::Hipster.sentence
