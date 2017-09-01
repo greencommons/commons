@@ -26,7 +26,7 @@
         span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
     .tags-list
       - ActsAsTaggableOn::Tag.most_used(10).each do |tag|
-        = link_to "##{tag.name} (#{tag.taggings_count})", search_path(query: tag.name), class: 'tags-list__tag'
+        = link_to "##{tag.name} (#{tag.taggings_count})", search_path(query: "##{tag.name}"), class: 'tags-list__tag'
         .clearfix
     .filters__tags-show-more
       = link_to 'Show more', root_path

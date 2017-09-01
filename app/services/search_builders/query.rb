@@ -10,7 +10,7 @@ module SearchBuilders
       'metadata.publisher': 1,
       'metadata.creators': 1,
       'metadata.isbn': 1,
-      tags: 10
+      tags: 1
     }.freeze
 
     def initialize(query, es_params)
@@ -21,10 +21,18 @@ module SearchBuilders
     def build
       return @es_params if @query.blank?
 
-      QUERY_KEYS.each do |key, value|
-        @es_params[:query][:bool][:must][:bool][:should] << {
-          match: { key => { query: @query, boost: value } }
+      if @query[0] == '#'
+        @es_params[:query][:bool][:filter][:bool][:must] << {
+          terms: {
+            tags: @query[1..-1].split(' ')
+          }
         }
+      else
+        QUERY_KEYS.each do |key, value|
+          @es_params[:query][:bool][:must][:bool][:should] << {
+            match: { key => { query: @query, boost: value } }
+          }
+        end
       end
 
       @es_params

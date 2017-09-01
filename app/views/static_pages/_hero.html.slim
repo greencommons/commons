@@ -16,19 +16,19 @@
           .fa.fa-info-circle.home-header__info-icon
           = ' Not sure where to start?'
           = ' Try searching for '
-          = link_to 'solar panels', search_path(query: 'solar panels'), class: 'home-header__hero-link'
+          = link_to 'solar panels', search_path(query: '#solar panels'), class: 'home-header__hero-link'
           = ', '
-          = link_to 'greenhouse', search_path(query: 'greenhouse'), class: 'home-header__hero-link'
+          = link_to 'greenhouse', search_path(query: '#greenhouse'), class: 'home-header__hero-link'
           = ', '
-          = link_to 'gas emissions', search_path(query: 'gas emissions'), class: 'home-header__hero-link'
+          = link_to 'gas emissions', search_path(query: '#gas emissions'), class: 'home-header__hero-link'
           = ' or '
-          = link_to 'municipal data sets', search_path(query: 'municipal data sets'), class: 'home-header__hero-link'
+          = link_to 'municipal data sets', search_path(query: '#municipal data sets'), class: 'home-header__hero-link'
     .row
       .col-xs-12.col-sm-8.col-sm-offset-2
         .home-header__hero-tags
           .tags-list
             - ActsAsTaggableOn::Tag.most_used.limit(6).each_with_index do |tag, i|
-                = link_to "##{tag}", search_path(query: tag.name), class: 'tags-list__tag tags-list__tag--white'
+                = link_to "##{tag}", search_path(query: "##{tag.name}"), class: 'tags-list__tag tags-list__tag--white'
             .clearfix
     .row
       .col-xs-12.col-sm-8.col-sm-offset-2.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
@@ -45,3 +45,4 @@
             .col-xs-12.col-md-4
               = render 'shared/components/box', svg: 'running', title: 'ACT', color: 'orange',
                 content: 'Join a network or start your own. Analyze data. Connect ideas to ideas, people to ideas, and people to people. Organize a project. Have an impact.'
+
