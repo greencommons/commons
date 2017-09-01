@@ -85,4 +85,3 @@ RSpec.describe SearchBuilders::ResourceTypeFilter do
     end
   end
 end
-

@@ -28,4 +28,3 @@ RSpec.describe SearchBuilders::Query do
     end
   end
 end
-
