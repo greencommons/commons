@@ -29,7 +29,7 @@
                                              data: { confirm: 'Are you sure?' } do
                           | Delete
                           i.fa.fa-times.glyphicon--left
-                      - if @resource.url
+                      - unless @resource.url.blank?
                         = link_to via_hypothesis(@resource.url), target: '_blank', class: 'resource-actions__button btn btn-dark-blue'
                           | View Original
                           i.fa.fa-link.glyphicon--left
@@ -58,7 +58,7 @@
                       = "Publisher: #{@resource.publisher}"
                     .page-details__metadata
                       i.fa.fa-lock.glyphicon--right
-                      = "Privacy: #{@resource.priv? ? 'Private' : 'Public'}"
+                      = "License: #{@resource.priv? ? 'Private' : 'Public'}"
                   .clearfix
               .row
                 .page-details__row
@@ -96,18 +96,6 @@
                 .col-xs-12.col-md-9
                   .row
                     .col-xs-12
-                      .page-details__section-title.page-details__section-title--underline
-                        h6
-                          | Content viewer
-                      .resource-page__empty-content-viewer
-                        .row
-                          .col-xs-12
-                            i.fa.fa-frown-o
-                        .row
-                          .col-xs-12
-                            p Oops... Nothing Available
-                  .row
-                    .col-xs-12
                       .page-details__row--double
                         = render 'shared/integrations/disqus/comments', entity: @resource
 
@@ -119,3 +107,4 @@
                     ul.sidelist
                       - @suggestions.each do |suggestion|
                         li= link_to suggestion.name, resource_type_path(suggestion)
+

@@ -42,7 +42,7 @@
                       = "Published Date: #{humanize_date(@list.published_at)}"
                     .page-details__metadata 
                       i.fa.fa-lock.glyphicon--right
-                      = "Privacy: #{@list.priv? ? 'Private' : 'Public'}"
+                      = "License: #{@list.priv? ? 'Private' : 'Public'}"
                   .clearfix
               .row
                 .page-details__row
