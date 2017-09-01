@@ -41,5 +41,5 @@
         span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
 
     .form-group.has-feedback
-      input name="daterange" type="text" class='form-control fw'
+      input name="daterange" data={ start: @filters ? @filters[:start] : '', end: @filters ? @filters[:end] : '' } type="text" class='form-control fw'
       i.glyphicon.glyphicon-calendar.form-control-feedback

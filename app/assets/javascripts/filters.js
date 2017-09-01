@@ -9,15 +9,53 @@ var initFilters = function() {
     });
   };
 
-  $('input[name="daterange"]').daterangepicker({
-    "startDate": moment().subtract(7, 'days'),
-    "endDate": moment(),
-    "buttonClasses": "btn btn-sm btn-gc",
-    locale: {
-      format: 'MM/DD/YYYY'
+  $('input[name="daterange"]').each(function() {
+    var daterange = $(this);
+    var filtering = false;
+    var start;
+    var end;
+
+    if (daterange.data('start') && daterange.data('end')) {
+      filtering = true;
+      start = moment.unix(daterange.data('start'));
+      end = moment.unix(daterange.data('end'));
+    } else {
+      start = moment().subtract(7, 'days');
+      end = moment();
     }
-  }, function(start, end, label) {
-    // Handle filtering
+
+    daterange.daterangepicker({
+      "startDate": start,
+      "endDate": end,
+      "buttonClasses": "btn btn-sm btn-gc",
+      autoUpdateInput: false,
+      locale: {
+        format: 'MM/DD/YYYY',
+        cancelLabel: 'Clear'
+      }
+    });
+
+    if (filtering) {
+      $(this).val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'));
+    }
+
+    daterange.on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+
+      var url = new Uri(window.location.href);
+      url.replaceQueryParam('filters[start]', picker.startDate.unix());
+      url.replaceQueryParam('filters[end]', picker.endDate.unix());
+      reload(url);
+    });
+
+    daterange.on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+
+      var url = new Uri(window.location.href);
+      url.deleteQueryParam('filters[start]');
+      url.deleteQueryParam('filters[end]');
+      reload(url);
+    });
   });
 
   $('[data-filter-select]').each(function() {
@@ -68,3 +106,4 @@ var initFilters = function() {
 $(document).on('ready turbolinks:load', function () {
   initFilters();
 });
+
