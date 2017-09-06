@@ -1,9 +1,8 @@
 namespace :elasticsearch do
   namespace :reset do
-
     def reset_index(klass)
       client = Elasticsearch::Client.new(
-      url: ENV.fetch('BONSAI_URL', 'http://localhost:9200'), log: true
+        url: ENV.fetch('BONSAI_URL', 'http://localhost:9200'), log: true
       )
 
       if client.indices.exists? index: klass.index_name
