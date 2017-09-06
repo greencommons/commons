@@ -56,6 +56,10 @@ To start the app locally run the command (make sure postgres is running):
 
 You should be able to visit http://localhost:3000/ within your browser and see the Green Commons homepage.
 
+If you get errors from ElasticSearch on startup, try running the following command in the Console:
+
+    rake elasticsearch:create:all_indices
+
 Developing
 ----------
 
