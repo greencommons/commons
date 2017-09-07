@@ -13,8 +13,8 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
         fill_in 'query', with: title
         find('.navbar__search-button').click
       end
-
       expect(page).to have_text(title)
+      expect(page).to have_css('a.btn-add-to-list')
     end
 
     scenario 'users should see updated search results' do
@@ -44,6 +44,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).to have_text(new_title)
+      expect(page).to have_css('a.btn-add-to-list')
     end
 
     scenario "users should see updated search results even if the record wasn't indexed" do
@@ -176,6 +177,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).not_to have_text('My Resource')
       expect(page).not_to have_text('My List')
       expect(page).to have_text('My Network')
+      expect(page).to have_css('a.btn-add-to-list')
     end
 
     scenario 'users can filter by resource type' do
@@ -197,6 +199,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
       uncheck('Articles')
 
+      expect(page).to have_css('a.btn-add-to-list')
       expect(page).not_to have_text('My Resource')
     end
 
@@ -216,6 +219,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       end
 
       expect(page).to have_text('My Resource')
+      expect(page).to have_css('a.btn-add-to-list')
 
       find('input[name=daterange]').click
       all('.available')[3].click
@@ -243,6 +247,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
 
       expect(page).to have_text('My Resource')
       expect(page).not_to have_text('My Other Resource')
+      expect(page).to have_css('a.btn-add-to-list')
     end
   end
 
@@ -268,6 +273,7 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       wait_for_ajax
 
       expect(page).to have_text(/.*My Network.*My List.*My Resource.*/)
+      expect(page).to have_css('a.btn-add-to-list')
     end
 
     scenario 'users can sort by oldest first' do
