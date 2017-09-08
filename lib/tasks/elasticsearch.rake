@@ -20,7 +20,10 @@ namespace :elasticsearch do
       end
     end
 
-    desc 'Deletes the "resource", "network", "user" and "list" indices and regenerates it with all records'
+    desc([
+      'Deletes the "resource", "network", "user"',
+      ' and "list" indices and regenerates it with all records'
+    ].join)
     task all_indices: :environment do
       [Resource, Network, List, User].each { |klass| reset_index(klass) }
     end
@@ -54,7 +57,10 @@ namespace :elasticsearch do
       klass.import
     end
 
-    desc 'Creates the "resource", "network", "user" and "list" indices and regenerates it with all records'
+    desc([
+      'Creates the "resource", "network", "user"',
+      ' and "list" indices and regenerates it with all records'
+    ].join)
     task all_indices: :environment do
       [Resource, Network, List, User].each { |klass| create_index(klass) }
     end
