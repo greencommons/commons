@@ -52,6 +52,7 @@ module SearchBuilders
             },
             filter: {
               bool: {
+                must: [],
                 should: {
                   bool: {
                     minimum_should_match: 1,

@@ -22,7 +22,7 @@ RSpec.describe SearchBuilders::Query do
         query = SearchBuilders::Query.new('test', es_params)
 
         expect(query.build[:query][:bool][:filter]).to eq(
-          bool: { should: { bool: { minimum_should_match: 1, should: [] } } }
+          bool: { must: [], should: { bool: { minimum_should_match: 1, should: [] } } }
         )
       end
     end

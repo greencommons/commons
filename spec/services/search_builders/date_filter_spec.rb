@@ -44,6 +44,7 @@ RSpec.describe SearchBuilders::DateFilter do
         )
 
         expect(filter.build[:query][:bool][:filter][:bool]).to eq(
+          must: [],
           should: {
             bool: {
               minimum_should_match: 1,

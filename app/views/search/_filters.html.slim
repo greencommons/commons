@@ -25,13 +25,9 @@
         | Tags
         span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
     .tags-list
-      = link_to '#urban sustainability (245)', root_path, class: 'tags-list__tag'
-      = link_to '#solar energy (148)', root_path, class: 'tags-list__tag'
-      = link_to '#wind (136)', root_path, class: 'tags-list__tag tags-list__tag--selected'
-      = link_to '#ocean (136)', root_path, class: 'tags-list__tag tags-list__tag--selected'
-      = link_to '#solar energy (148)', root_path, class: 'tags-list__tag'
-      = link_to '#solar (148)', root_path, class: 'tags-list__tag'
-      .clearfix
+      - ActsAsTaggableOn::Tag.most_used(10).each do |tag|
+        = link_to "##{tag.name} (#{tag.taggings_count})", search_path(query: "##{tag.name}"), class: 'tags-list__tag'
+        .clearfix
     .filters__tags-show-more
       = link_to 'Show more', root_path
   .filters
@@ -43,3 +39,4 @@
     .form-group.has-feedback
       input name="daterange" data={ start: @filters ? @filters[:start] : '', end: @filters ? @filters[:end] : '' } type="text" class='form-control fw'
       i.glyphicon.glyphicon-calendar.form-control-feedback
+
