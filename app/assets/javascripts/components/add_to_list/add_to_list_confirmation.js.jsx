@@ -10,7 +10,7 @@ var AddToListConfirmation = React.createClass({
 
     Object.keys(this.props.json.errors).forEach(function(error, i) {
       _this.props.json.errors[error].forEach(function(message, j) {
-        errors.push(<li key={i + '-' + j}>{error} {message}</li>)
+        errors.push(<li key={i + '-' + j}><h5>{message}</h5></li>)
       })
     })
 
@@ -48,8 +48,7 @@ var AddToListConfirmation = React.createClass({
       )
       content = (
         <div>
-          <h5>"{this.props.json.resource_name}" could not be added to "{this.props.json.list_name}" for the following reasons:</h5>
-          <ul>{this.errors()}</ul>
+          <ul className="list-unstyled">{this.errors()}</ul>
         </div>
       )
     }

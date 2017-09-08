@@ -4,5 +4,13 @@ class ListsItem < ApplicationRecord
 
   validates :list, presence: true
   validates :item, presence: true
-  validates_uniqueness_of :list_id, scope: [:item_id, :item_type]
+  validates(
+    :list_id,
+    uniqueness: {
+      scope: %i(item_id item_type),
+      message: lambda do |object, _data|
+        "\"#{object.item.name}\" is already in the \"#{object.list.name}\" list."
+      end
+    }
+  )
 end
