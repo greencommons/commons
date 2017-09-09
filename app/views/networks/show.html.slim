@@ -113,7 +113,7 @@
                         h6.pull-left
                           | Lists
                         .pull-right
-                          = link_to '#', class: 'btn btn-white-transparent resource-actions__button--right' do
+                          = link_to new_list_path(list: {owner: "Network:#{@network.id}"}), class: 'btn btn-white-transparent resource-actions__button--right' do
                             | New list
                             i.fa.fa-plus.glyphicon--left
                           = link_to '#', class: 'btn btn-white-transparent' do

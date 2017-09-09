@@ -2,6 +2,8 @@ class ListsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_list, only: %i(show edit destroy leave)
 
+  LIST_OWNERS = %w(Network User).freeze
+
   def index
     @lists = policy_scope(List).page(params[:page] || 1).per(10)
   end
@@ -29,7 +31,7 @@ class ListsController < ApplicationController
   end
 
   def new
-    @list = List.new
+    @list = List.new(owner: owner)
     authorize @list
   end
 
@@ -75,9 +77,9 @@ class ListsController < ApplicationController
   end
 
   def owner
-    return nil unless params[:list][:owner]
+    return nil unless params.fetch(:list, {})[:owner]
     owner = params[:list][:owner].split(':')
-    return nil unless %w(Network User).include?(owner[0])
+    return nil unless LIST_OWNERS.include?(owner[0])
     owner[0].constantize.find(owner[1]) || current_user
   end
 
