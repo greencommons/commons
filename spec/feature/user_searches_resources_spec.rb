@@ -206,7 +206,12 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
     scenario 'users can filter by date' do
       title = Faker::Hipster.sentence
 
-      create(:resource, title: "#{title} My Resource", resource_type: :article)
+      create(
+        :resource,
+        title: "#{title} My Resource",
+        resource_type: :article,
+        created_at: 3.days.from_now
+      )
 
       wait_for do
         Elasticsearch::Model.search(title, [Resource]).results.total
@@ -221,9 +226,10 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).to have_text('My Resource')
       expect(page).to have_css('a.btn-add-to-list')
 
-      find('input[name=daterange]').click
-      all('.available')[3].click
-      all('.available')[6].click
+      daterange = find('input[name=daterange]')
+      daterange.set('date-start' => 5.months.ago.to_i)
+      daterange.set('date-end' => 3.months.ago.to_i)
+      daterange.click
       find('.applyBtn').click
       wait_for_ajax
 
