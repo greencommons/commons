@@ -23,4 +23,28 @@ FactoryGirl.define do
   factory :audio, parent: :resource do
     resource_type { :audio }
   end
+
+  factory :course, parent: :resource do
+    resource_type { :course }
+  end
+
+  factory :dataset, parent: :resource do
+    resource_type { :dataset }
+  end
+
+  factory :image, parent: :resource do
+    resource_type { :image }
+  end
+
+  factory :syllabus, parent: :resource do
+    resource_type { :syllabus }
+  end
+
+  factory :video, parent: :resource do
+    resource_type { :video }
+  end
+
+  factory :profile, parent: :resource do
+    resource_type { :profile }
+  end
 end

@@ -13,6 +13,5 @@
 
   .row
     .col-xs-12
-      = link_to root_path, class: 'resource-details__see-more' do
-        | See more
-        .fa.fa-arrow-right.glyphicon--left
+      = link_to search_path(query: '', filters: { model_types: {resources: 'on'}, resource_types: { resource_type.to_s.pluralize => 'on'}, sort: 'score' }), class: 'resource-details__see-more' do
+        | View All
