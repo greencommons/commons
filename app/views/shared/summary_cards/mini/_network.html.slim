@@ -7,12 +7,9 @@
     .summary-card__row.summary-card__row--mini
       .summary-card__metadata.summary-card__metadata--left.summary-card__metadata--mini.summary-card__metadata--closer
         .user-picture
-          = image_tag(network.users[0] ? network.users[0].avatar_url : 'user.png',
-                      class: 'user-picture__image user-picture__image--mini')
-          = image_tag(network.users[1] ? network.users[1].avatar_url : 'user.png',
-                      class: 'user-picture__image user-picture__image--mini user-picture__image--mini-over')
-          = image_tag(network.users[2] ? network.users[2].avatar_url : 'user.png',
-                      class: 'user-picture__image user-picture__image--mini user-picture__image--mini-over')
+          - network.users.limit(3).each_with_index do |user, index|
+            = image_tag(user ? user.avatar_url : 'user.png',
+                        class: "user-picture__image user-picture__image--mini #{'user-picture__image--mini-over' if index > 0}")
           .clearfix
       .summary-card__metadata.summary-card__metadata--left.summary-card__metadata--mini
         p.summary-card__p--mini= "+#{network.networks_users_count > 3 ? network.networks_users_count - 3 : 0}"
@@ -27,4 +24,3 @@
   .summary-card__footer
     .summary-card__row.summary-card__row--last
       = link_to 'View Now', network, class: 'summary-card__cta'
-

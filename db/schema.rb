@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170813145314) do
+ActiveRecord::Schema.define(version: 20170913184143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170813145314) do
     t.text     "short_content"
     t.text     "long_content"
     t.integer  "lists_items_count", default: 0
+    t.index ["resource_type"], name: "index_resources_on_resource_type", using: :btree
     t.index ["user_id"], name: "index_resources_on_user_id", using: :btree
   end
 
