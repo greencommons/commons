@@ -14,6 +14,7 @@
 //= require form
 
 //= require components
+//= require_tree ./resources
 
 //= require filters
 //= require expand

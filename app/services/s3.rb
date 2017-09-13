@@ -29,6 +29,10 @@ class S3
     root_directory.files.head(path).present?
   end
 
+  def fetch_file(path)
+    root_directory.files.get(path)
+  end
+
   private
 
   def connection

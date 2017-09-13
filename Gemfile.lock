@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
       nio4r (~> 1.2)
@@ -42,6 +43,7 @@ GEM
       activerecord (>= 4.0)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    afm (0.2.2)
     archive-zip (0.8.0)
       io-like (~> 0.3.0)
     arel (7.1.4)
@@ -183,6 +185,7 @@ GEM
       guard (~> 2.8)
       guard-compat (~> 1.0)
       multi_json (~> 1.8)
+    hashery (2.1.2)
     hashie (3.4.6)
     high_voltage (3.0.0)
     http_parser.rb (0.6.0)
@@ -248,6 +251,12 @@ GEM
       request_store (~> 1.1)
     parser (2.3.1.4)
       ast (~> 2.2)
+    pdf-reader (2.0.0)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pg (0.19.0)
     powerpack (0.1.1)
     pry (0.10.4)
@@ -345,6 +354,7 @@ GEM
     rubocop-rspec (1.8.0)
       rubocop (>= 0.42.0)
     ruby-progressbar (1.8.1)
+    ruby-rc4 (0.1.5)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -386,6 +396,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    ttfunk (1.5.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.3)
@@ -442,6 +453,7 @@ DEPENDENCIES
   mini_magick
   momentjs-rails
   paper_trail
+  pdf-reader
   pg
   pry-byebug
   puma (~> 3.0)

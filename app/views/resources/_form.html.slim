@@ -10,13 +10,50 @@
             ul
               - resource.errors.full_messages.each do |message|
                 li= message
+      - if f.object.new_record?
+        fieldset
+          ul.nav.nav-tabs role="tablist"
+            li.active role="presentation"
+              a href="#url" aria-controls="url" role="tab" data-toggle="tab"
+                | URL
+            li role="presentation"
+              a href="#file" aria-controls="file" role="tab" data-toggle="tab"
+                | File
+          .tab-content
+            #url.form-group.tab-pane.active role="tabpanel"
+              label.form-control
+              = f.text_field :url, class: "form-control", placeholder: "Resource URL..."
+            #file.form-group.tab-pane role="tabpanel"
+              label.form-control
+              = react_component 'PdfFileInput', { id: 'resource_file' , name: 'resource[file]', onUploadSuccess: 'processResourceFile' }
+              = f.hidden_field :content_download_link
       fieldset
+        legend Basic Information
+        .form-group
+          = f.label :resource_type, "Resource Type", class: "control-label"
+          = f.select :resource_type, @resource_types , {prompt: "Select a resource type..."}, class: "form-control text-capitalize"
         .form-group
           = f.label :title, "Title", class: "control-label"
           = f.text_field :title, class: "form-control", placeholder: "Resource title..."
         .form-group
-          = f.label :url, "URL", class: "control-label"
-          = f.text_field :url, class: "form-control", placeholder: "Resource URL..."
+          = f.label :short_content, "Short Content", class: "control-label"
+          = f.text_area :short_content, class: "form-control", placeholder: "Short Content Description..."
+        .form-group
+          = f.label :tag_list, 'Tags', class: 'control-label'
+          .row
+            .col-xs-12 data-gctagsinput='true'
+              = f.text_field :tag_list, value: f.object.cached_tags.join(', '),
+                                        class: 'form-control',
+                                        placeholder: 'Separate tags with commas...'
+        .form-group
+          .checkbox
+            = f.label :privacy do
+              = f.check_box :privacy, {placeholder: "Resource title..."}, 'priv', 'publ'
+              | Make private
+      - if f.object.persisted?
+        = render 'extra_information', f: f
+
+
       .pull-right
         = link_to_back('Cancel', class: 'btn btn-white')
         span<>
