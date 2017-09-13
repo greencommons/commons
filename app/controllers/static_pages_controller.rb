@@ -3,15 +3,15 @@ class StaticPagesController < ApplicationController
 
   def home
     @counts = Resource.group(:resource_type).count
-    @networks = Network.includes(:users).sample(10)
-    @books = Resource.books.sample(6)
-    @articles = Resource.articles.sample(6)
-    @reports = Resource.reports.sample(6)
-    @audios = Resource.audios.sample(6)
-    @courses = Resource.courses.sample(6)
-    @datasets = Resource.datasets.sample(6)
-    @syllabuses = Resource.syllabuses.sample(6)
-    @videos = Resource.videos.sample(6)
+    @networks = Network.order('RANDOM()').first(10)
+    @books = Resource.books.order('RANDOM()').first(6)
+    @articles = Resource.articles.order('RANDOM()').first(6)
+    @reports = Resource.reports.order('RANDOM()').first(6)
+    @audios = Resource.audios.order('RANDOM()').first(6)
+    @courses = Resource.courses.order('RANDOM()').first(6)
+    @datasets = Resource.datasets.order('RANDOM()').first(6)
+    @syllabuses = Resource.syllabuses.order('RANDOM()').first(6)
+    @videos = Resource.videos.order('RANDOM()').first(6)
   end
 
   def policy; end
