@@ -89,4 +89,13 @@ RSpec.feature 'Managing networks' do
     wait_for_ajax
     expect(network.admin?(new_member)).to be false
   end
+
+  scenario 'user can create a list with the network as the owner' do
+    network = create(:network)
+    feature_login
+    visit network_path(network)
+    click_on 'New list'
+    expect(find('div[data-react-class="OwnerPicker"]')['data-react-props']).
+      to be_include("Network:#{network.id}")
+  end
 end
