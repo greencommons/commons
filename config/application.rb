@@ -19,4 +19,6 @@ end
 Rails.application.configure do
   config.autoload_paths << Rails.root.join('lib')
   config.middleware.insert_before Rack::Head, CatchJsonParseErrors
+  config.max_upload_filesize = 20.megabytes
+  config.signed_url_expiration_time = 5.minutes.to_i
 end
