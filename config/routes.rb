@@ -73,6 +73,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :s3_signature, only: [:show]
+
   devise_for :users
 
   # TODO: replace this with a check for admin user
