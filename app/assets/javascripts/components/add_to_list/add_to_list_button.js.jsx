@@ -26,7 +26,13 @@ var AddToListButton = React.createClass({
 
   toggleModal: function(e) {
     e.preventDefault();
-    this.setState({ showModal: !this.state.showModal })
+    this.setState({ showModal: !this.state.showModal }, () =>{
+      if (this.state.showModal) {
+        $('body').addClass('no-scroll');
+      } else {
+        $('body').removeClass('no-scroll');
+      }
+    });
   },
 
   render: function() {

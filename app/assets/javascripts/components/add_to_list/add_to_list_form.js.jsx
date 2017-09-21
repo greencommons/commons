@@ -23,10 +23,6 @@ var AddToListForm = React.createClass({
     this.setState({ listId: value });
   },
 
-  componentWillUnmount: function() {
-    $('body').removeClass('no-scroll');
-  },
-
   handleNote: function(e) {
     this.setState({ note: e.target.value });
   },
