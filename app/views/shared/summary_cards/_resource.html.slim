@@ -53,9 +53,9 @@
               | View Original
               i.fa.fa-link.glyphicon--left
       .summary-card__more.summary-card__more--meta
-        .summary-card__metadata.summary-card__metadata--last
-          i.fa.fa-pencil.glyphicon--right
-          | 102 Annotations
+        - if resource.url.present?
+          .summary-card__metadata.summary-card__metadata--last
+            = react_component 'TotalAnnotations', {url: resource.url }, class: 'inline'
         .summary-card__metadata
           i.fa.fa-comments.glyphicon--right
           span.disqus-comment-count data-disqus-identifier="#{url_for(resource)}"

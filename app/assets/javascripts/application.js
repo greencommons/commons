@@ -10,6 +10,7 @@
 //= require bootstrap-tagsinput
 //= require selectize
 
+//= require config
 //= require form
 
 //= require components
