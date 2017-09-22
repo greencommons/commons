@@ -44,6 +44,17 @@ RSpec.feature 'Managing lists', :worker, :elasticsearch do
       expect(page).to have_text "#{network.name} (Network)"
     end
 
+    scenario 'user can cancel and gets redirected to the previous page' do
+      feature_login
+
+      find(:css, '.glyphicon.glyphicon-plus').click
+      click_link 'Create List'
+      within('#new_list') do
+        click_on 'Cancel'
+      end
+      expect(page).to have_current_path('/')
+    end
+
     scenario 'users can create a private list owned by a network' do
       user = feature_login
       network = create(:network, name: 'test')

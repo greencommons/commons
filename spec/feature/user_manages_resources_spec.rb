@@ -40,6 +40,17 @@ RSpec.feature 'Managing resources' do
     expect(Resource.count).to eq 1
   end
 
+  scenario 'user can cancel and gets redirected to the previous page' do
+    feature_login
+
+    find(:css, '.glyphicon.glyphicon-plus').click
+    click_link 'Add Resource'
+    within('#new_resource') do
+      click_on 'Cancel'
+    end
+    expect(page).to have_current_path('/')
+  end
+
   scenario 'users can update a resource' do
     user = feature_login
     resource = create(:resource, resource_type: :url, url: 'http://example.com', user: user)
