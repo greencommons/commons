@@ -4,3 +4,6 @@ scss:
 ruby:
   config_file: .rubocop.yml
   fail_on_violations: true
+
+eslint:
+  enabled: true
