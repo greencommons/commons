@@ -11,7 +11,6 @@ var AutocompleteSelect = React.createClass({
   componentDidMount: function() {
     var _this = this;
     var select = null;
-    $('body').addClass('no-scroll');
 
     if (this.props.autocompletePath) {
       select = $('#' + this.props.id).selectize({
@@ -56,10 +55,6 @@ var AutocompleteSelect = React.createClass({
     if (this.props.selected) {
       select[0].selectize.setValue(this.props.selected, false);
     }
-  },
-
-  componentWillUnmount: function() {
-    $('body').removeClass('no-scroll');
   },
 
   render: function() {
