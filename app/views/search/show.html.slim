@@ -1,6 +1,7 @@
 .page-details.page-details--creme-bg
   .container
     = render 'shared/alerts'
+    = render 'search/form'
     .row#ajax-loader
       #ajax-loader__panel
         = image_tag 'loader.gif'
@@ -10,4 +11,3 @@
         = render 'search/results'
 
     = render 'shared/components/explore', suggestions: @suggestions, title: 'You may also like...'
-    

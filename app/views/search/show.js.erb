@@ -1,6 +1,3 @@
 ReactRailsUJS.unmountComponents();
-$("#filters").html("<%= escape_javascript(render 'search/filters' ) %>");
 $("#results").html("<%= escape_javascript(render 'search/results' ) %>");
-initFilters();
-$('#ajax-loader__panel').hide();
 ReactRailsUJS.mountComponents();

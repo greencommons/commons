@@ -3,7 +3,8 @@
     .filters__title.text-xs-left.text-center
       h6
         | Filter by category
-        span.filters__clear= link_to 'Clear', root_path, class: 'gray-light pull-right'
+        span.filters__clear
+          = link_to 'Reset', "#", class: 'clear_search_filters gray-light pull-right'
     .filters__lists
       = hidden_field_tag :query, @query
       ul.filters__list
@@ -39,4 +40,3 @@
     .form-group.has-feedback
       input name="daterange" data={ start: @filters ? @filters[:start] : '', end: @filters ? @filters[:end] : '' } type="text" class='form-control fw'
       i.glyphicon.glyphicon-calendar.form-control-feedback
-
