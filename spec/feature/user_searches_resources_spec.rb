@@ -343,4 +343,57 @@ RSpec.feature 'Searching for resources', :worker, :elasticsearch do
       expect(page).not_to have_text('Help Network')
     end
   end
+
+  context 'when user search for resource using the search bar located below the nav bar' do
+    scenario 'users can search for resources, networks and lists' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource")
+      create(:network, name: "#{title} My Network")
+      create(:list, name: "#{title} My List")
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
+      end.to eq(3)
+
+      visit search_path
+      within('.search-remote-form') do
+        fill_in 'query', with: title
+        find('button').click
+      end
+
+      expect(page).to have_text("#{title} My Resource")
+      expect(page).to have_text("#{title} My Network")
+      expect(page).to have_text("#{title} My List")
+    end
+
+    scenario 'users can search and keep the filters' do
+      title = Faker::Hipster.sentence
+
+      create(:resource, title: "#{title} My Resource")
+      create(:resource, title: "#{title} Article", resource_type: :article)
+
+      wait_for do
+        Elasticsearch::Model.search(title, [Resource, Network, List]).results.total
+      end.to eq(2)
+
+      visit search_path
+      within('.search-remote-form') do
+        fill_in 'query', with: title
+        find('button').click
+      end
+
+      expect(page).to have_text("#{title} Article")
+      uncheck('Articles')
+
+      expect(page).to have_text("#{title} My Resource")
+      expect(page).not_to have_text("#{title} Article")
+
+      within('.search-remote-form') do
+        fill_in 'query', with: 'Article'
+        find('button').click
+      end
+      expect(page).not_to have_text("#{title} Article")
+    end
+  end
 end
