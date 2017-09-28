@@ -22,6 +22,17 @@ RSpec.feature 'Managing networks' do
     expect(page).to have_content('tags')
   end
 
+  scenario 'user can cancel and gets redirected to the previous page' do
+    feature_login
+
+    find(:css, '.glyphicon.glyphicon-plus').click
+    click_link 'Create Network'
+    within('#new_network') do
+      click_on 'Cancel'
+    end
+    expect(page).to have_current_path('/')
+  end
+
   scenario 'network admins can update a network' do
     user = feature_login
     network = create(:network)

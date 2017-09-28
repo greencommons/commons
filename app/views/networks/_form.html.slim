@@ -27,6 +27,7 @@
               = f.text_field :tag_list, value: @network.cached_tags.join(', '),
                                         class: 'form-control',
                                         placeholder: 'Separate tags with commas...'
-        .form-group
-          .pull-right
-            = f.submit submit_label, class: 'form-control btn btn-gc'
+      .pull-right
+        = link_to_back('Cancel', class: 'btn btn-white')
+        span<>
+        = f.button submit_label, class: "btn btn-gc"

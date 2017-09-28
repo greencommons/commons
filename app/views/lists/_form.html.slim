@@ -31,6 +31,7 @@
           .checkbox
             = f.check_box :privacy, { class: 'checkbox--yellow' }, 'priv', 'publ'
             | Make private
-        .form-group
-          .pull-right
-            = f.submit submit_label, class: 'form-control btn btn-gc'
+      .pull-right
+        = link_to_back('Cancel', class: 'btn btn-white')
+        span<>
+        = f.button submit_label, class: "btn btn-gc"
