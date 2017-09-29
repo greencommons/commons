@@ -3,6 +3,8 @@ class Resource < ApplicationRecord
   include Taggable
   include Privacy
 
+  attr_accessor :user_input
+
   RESOURCE_TYPES = {
     article: 0,
     book: 1,
@@ -16,6 +18,17 @@ class Resource < ApplicationRecord
     video: 9,
     profile: 10
   }.freeze
+
+  METADATA_FIELDS = %w(
+    content_download_link
+    creators
+    publisher
+    date
+    publisher
+    rights
+    pages
+    isbn
+  ).freeze
 
   has_paper_trail
 
@@ -31,26 +44,38 @@ class Resource < ApplicationRecord
   validates :title, :resource_type, presence: true
   validates :url, length: { maximum: 255 }
 
+  after_commit :enqueue_process_uploaded_file, if: :process_uploaded_file?, on: :create
+
   scope :sort_by_created_at, -> { order('created_at DESC') }
 
   RESOURCE_TYPES.keys.each do |type|
     scope type.to_s.pluralize, -> { where(resource_type: type) }
   end
 
-  def name
-    title
-  end
+  alias_attribute :name, :title
 
   def excerpt
     return short_content unless short_content.is_a?(String)
     short_content.truncate(500)
   end
 
-  def creators
-    metadata['creators']
+  METADATA_FIELDS.each do |field|
+    define_method field do
+      metadata[field]
+    end
+
+    define_method "#{field}=" do |value|
+      metadata[field] = value
+    end
   end
 
-  def publisher
-    metadata['publisher']
+  private
+
+  def process_uploaded_file?
+    user_input && content_download_link.present?
+  end
+
+  def enqueue_process_uploaded_file
+    ProcessResourceFileJob.perform_async(id)
   end
 end

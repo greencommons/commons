@@ -1,0 +1,20 @@
+fieldset
+  legend Extra Information
+  .form-group
+    = f.label :rights, "Rights", class: "control-label"
+    = f.text_field :rights, class: "form-control", placeholder: "Rights..."
+  .form-group
+    = f.label :date, "Pub Date", class: "control-label"
+    = f.date_field :date, value: f.object.date.try(:to_date).try(:strftime,"%Y-%m-%d"), class: "form-control", placeholder: "Enter the Pub date..."
+  .form-group
+    = f.label :creators, "Authors", class: "control-label"
+    = f.text_field :creators, class: "form-control", placeholder: "Enter the Authors..."
+  .form-group
+    = f.label :publisher, "Publisher", class: "control-label"
+    = f.text_field :publisher, class: "form-control", placeholder: "Enter the Publisher..."
+  .form-group
+    = f.label :pages, "Pages", class: "control-label"
+    = f.number_field :pages, class: "form-control", placeholder: "Enter the pages...", min: 0
+  .form-group
+    = f.label :isbn, "ISBN", class: "control-label"
+    = f.text_field :isbn, class: "form-control", placeholder: "Enter the ISBN..."

@@ -2,5 +2,9 @@ window.greencommons = {
   hypothesis: {
     apiUrl: 'https://hypothes.is/api',
     key: '<%= ENV.fetch('HYPOTHESIS_API_KEY')%>'
+  },
+  S3: {
+    accessKeyId: '<%= ENV.fetch('AWS_ACCESS_KEY_ID')%>',
+    bucket: '<%= ENV.fetch('AWS_UPLOADS_BUCKET') %>'
   }
 };

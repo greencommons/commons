@@ -6,6 +6,7 @@ RSpec.describe S3, type: :service do
   describe '#signed_url' do
     let(:path) { 'test.pdf' }
     let(:signed_param) { 'X-Amz-Signature' }
+
     it 'returns a signed url' do
       expect(s3.signed_url(path)).to be_include(signed_param)
     end
@@ -28,6 +29,14 @@ RSpec.describe S3, type: :service do
       expect(result[:mime_type]).to eq(signature[:mime_type])
       expect(result[:policy]).to be_present
       expect(result[:signature]).to be_present
+    end
+  end
+
+  describe '#fetch_file' do
+    let(:fetch_file) { S3.new.fetch_file('test.pdf') }
+    
+    it 'retrieves the file' do
+      expect(fetch_file.class.name).to eq('Fog::Storage::AWS::File')
     end
   end
 

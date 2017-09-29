@@ -5,6 +5,7 @@ RSpec.describe 'Resources', type: :request do
   let(:resource) { create(:resource) }
   let(:valid_attributes) { attributes_for(:resource) }
   let(:invalid_attributes) { attributes_for(:resource, title: nil) }
+  let(:resource_types) { (Resource::RESOURCE_TYPES.keys - %w(audio video image url)).sort }
 
   describe 'guest' do
     describe 'GET /resources' do
@@ -33,9 +34,16 @@ RSpec.describe 'Resources', type: :request do
     end
 
     describe 'GET /resources/new' do
-      it 'gets 200' do
+      before do
         get new_resource_path
+      end
+
+      it 'gets 200' do
         expect(response).to have_http_status(200)
+      end
+
+      it 'assigns resource_types' do
+        expect(assigns(:resource_types)).to eq(resource_types)
       end
     end
 
@@ -43,7 +51,7 @@ RSpec.describe 'Resources', type: :request do
       context 'valid attributes' do
         it 'gets redirected to resources_path' do
           post resources_path, params: { resource: valid_attributes }
-          expect(response).to redirect_to Resource.last
+          expect(response).to redirect_to edit_resource_path(Resource.last)
         end
 
         it 'creates the resource' do
@@ -84,9 +92,16 @@ RSpec.describe 'Resources', type: :request do
       before { sign_in user }
 
       describe 'GET /resources/edit' do
-        it 'gets 200' do
+        before do
           get edit_resource_path(resource)
+        end
+
+        it 'gets 200' do
           expect(response).to have_http_status(200)
+        end
+
+        it 'assigns resource_types' do
+          expect(assigns(:resource_types)).to eq(resource_types)
         end
       end
 
@@ -104,14 +119,20 @@ RSpec.describe 'Resources', type: :request do
         end
 
         context 'invalid attributes' do
-          it 'does not redirect to resources_path' do
+          before do
             patch resource_path(resource), params: { resource: { title: nil } }
+          end
+
+          it 'does not redirect to resources_path' do
             expect(response).to have_http_status(200)
           end
 
           it 'does not update the resource' do
-            patch resource_path(resource), params: { resource: { title: nil } }
             expect(Resource.last.title).to eq 'Nice Resource'
+          end
+
+          it 'assigns resource_types' do
+            expect(assigns(:resource_types)).to eq(resource_types)
           end
         end
       end

@@ -5,9 +5,9 @@
         - if alert.present?
           .alert.alert-warning.alert-dismissable
             a.close data-dismiss='alert' href='#'  ×
-            = alert
-          
+            = alert.html_safe
+
         - if notice.present?
           .alert.alert-success.alert-dismissable
             a.close data-dismiss='alert' href='#'  ×
-            = notice
+            = notice.html_safe

@@ -36,6 +36,7 @@ gem 'bootstrap-daterangepicker-rails'
 gem 'bootstrap-tagsinput-rails'
 gem 'selectize-rails'
 gem 'scout_apm'
+gem 'pdf-reader'
 
 group :development do
   gem 'bummr'
