@@ -37,6 +37,7 @@ gem 'bootstrap-tagsinput-rails'
 gem 'selectize-rails'
 gem 'scout_apm'
 gem 'pdf-reader'
+gem 'rollbar'
 
 group :development do
   gem 'bummr'
