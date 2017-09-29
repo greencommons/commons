@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :resource do
     title { Faker::Book.title }
+    url { 'https://google.com/' }
     resource_type { :book }
     short_content { Faker::Hipster.paragraph }
     privacy 'publ'
