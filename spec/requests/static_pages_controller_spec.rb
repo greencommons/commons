@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe StaticPagesController, type: :controller do
+RSpec.describe StaticPagesController, type: :request do
   describe 'GET #home' do
     def perform_request
-      get :home
+      get '/'
     end
 
     let(:counts) do
