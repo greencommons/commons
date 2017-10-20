@@ -46,7 +46,7 @@ More filters and sorting options are coming soon.
 __Example__
 
 ```
-curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,networks&page=2&per=5'
+curl -g -X GET 'https://greencommons.net/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,networks&page=2&per=5'
 ```
 
 ```
@@ -63,7 +63,7 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
             "resource_type":"article"
          },
          "links":{
-            "self":"https://greencommons.herokuapp.com/api/v1/resources/504"
+            "self":"https://greencommons.net/api/v1/resources/504"
          },
          "relationships":{  
             "lists":{  
@@ -71,8 +71,8 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
 
                ],
                "links":{  
-                  "self":"https://greencommons.herokuapp.com/api/v1/resources/504/relationships/lists",
-                  "related":"https://greencommons.herokuapp.com/api/v1/resources/504/lists"
+                  "self":"https://greencommons.net/api/v1/resources/504/relationships/lists",
+                  "related":"https://greencommons.net/api/v1/resources/504/lists"
                }
             }
          }
@@ -80,7 +80,7 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
       { ... }
    ],
    "links":{  
-      "self":"https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,networks&page=2&per=5",
+      "self":"https://greencommons.net/api/v1/search?q=wind&filters[resource_types]=articles,reports&filters[model_types]=resources,lists,networks&page=2&per=5",
       "next":"",
       "last":""
    },
@@ -93,20 +93,20 @@ curl -g -X GET 'https://greencommons.herokuapp.com/api/v1/search?q=wind&filters[
 ##### Retrieve a resource - `/api/v1/resources/:id`
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/resources/43130
+curl https://greencommons.net/api/v1/resources/43130
 ```
 
 Or to access a private resource belonging to you:
 
 ```
 curl -H 'Authorization: GC access_key:secret_key' \
-http://greencommons.herokuapp.com/api/v1/resources/63243
+https://greencommons.net/api/v1/resources/63243
 ```
 
 ##### Create a resource
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/resources \
+curl https://greencommons.net/api/v1/resources \
      -X POST \
      -v \
      -H 'Authorization: GC access_key:secret_key' \
@@ -117,7 +117,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources \
 ##### Update a resource
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/resources/63244 \
+curl https://greencommons.net/api/v1/resources/63244 \
      -X PATCH \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -131,7 +131,7 @@ curl http://greencommons.herokuapp.com/api/v1/resources/63244 \
 All the query parameters defined for the `/search` resource can be used here as well.
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks
+curl https://greencommons.net/api/v1/networks
 ```
 
 ##### Retrieve a network - `/api/v1/networks/:id`
@@ -139,13 +139,13 @@ curl http://greencommons.herokuapp.com/api/v1/networks
 __Example__
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/2129
+curl https://greencommons.net/api/v1/networks/2129
 ```
 
 ##### Create a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks \
+curl https://greencommons.net/api/v1/networks \
      -X POST \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -155,7 +155,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks \
 ##### Update a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/2140 \
+curl https://greencommons.net/api/v1/networks/2140 \
      -X PATCH \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -167,19 +167,19 @@ curl http://greencommons.herokuapp.com/api/v1/networks/2140 \
 ##### List network users
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users
+curl https://greencommons.net/api/v1/networks/2140/relationships/users
 ```
 
 Note that it is also possible to just include the members when retrieving a network:
 
 ```
-curl 'http://greencommons.herokuapp.com/api/v1/networks/2140?include=users'
+curl 'https://greencommons.net/api/v1/networks/2140?include=users'
 ```
 
 ##### Add users to a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users \
+curl https://greencommons.net/api/v1/networks/2140/relationships/users \
      -X POST \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -189,7 +189,7 @@ curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users 
 ##### Remove users from a network
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users \
+curl https://greencommons.net/api/v1/networks/2140/relationships/users \
      -X DELETE \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -203,13 +203,13 @@ curl http://greencommons.herokuapp.com/api/v1/networks/2140/relationships/users 
 __Example__
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists/93
+curl https://greencommons.net/api/v1/lists/93
 ```
 
 ##### Create a list
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists \
+curl https://greencommons.net/api/v1/lists \
      -X POST \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -219,7 +219,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists \
 ##### Add to a list
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
+curl https://greencommons.net/api/v1/lists/93/relationships/items \
      -X POST \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -229,7 +229,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
 ##### Remove from a list
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
+curl https://greencommons.net/api/v1/lists/93/relationships/items \
      -X DELETE \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -241,7 +241,7 @@ curl http://greencommons.herokuapp.com/api/v1/lists/93/relationships/items \
 ##### Create users
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/users \
+curl https://greencommons.net/api/v1/users \
      -X POST \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
@@ -251,7 +251,7 @@ curl http://greencommons.herokuapp.com/api/v1/users \
 ##### Update user
 
 ```
-curl http://greencommons.herokuapp.com/api/v1/users/10 \
+curl https://greencommons.net/api/v1/users/10 \
      -X PATCH \
      -H 'Authorization: GC access_key:secret_key' \
      -H 'Content-Type: application/vnd.api+json' \
