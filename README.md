@@ -10,7 +10,7 @@ Servers
 
 |    branch   |environment|remote|URL|
 |-------------|-----------|------|---|
-|`master`     |production|`git@heroku.com:greencommons.git`|[greencommons.herokuapp.com](https://greencommons.herokuapp.com)|
+|`master`     |production|`git@heroku.com:greencommons.git`|[greencommons.net](https://greencommons.net)|
 
 
 Note: Pushing to `master` will auto-deploy to production.
