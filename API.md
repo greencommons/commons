@@ -12,7 +12,7 @@ Your `access_key` and `secret_key` can be found in your profile. In the `curl` r
 
 ### JSON API
 
-The Green Commons Web API follows the [JSON API specification](https://jsonapi.org/) to facilitate the integration in your projects. Specify the content-type of your request using by setting the `Content-Type` header.
+The Green Commons Web API follows the [JSON API specification](http://jsonapi.org/) to facilitate the integration in your projects. Specify the content-type of your request using by setting the `Content-Type` header.
 
 ```
 Content-Type: application/vnd.api+json
