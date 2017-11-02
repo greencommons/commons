@@ -39,6 +39,10 @@ gem 'scout_apm'
 gem 'pdf-reader'
 gem 'rollbar'
 
+group :production do
+  gem 'sendgrid-ruby'
+end
+
 group :development do
   gem 'bummr'
   gem 'bundler-audit'

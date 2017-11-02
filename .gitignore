@@ -29,3 +29,5 @@
 # Ignore Redis database
 dump.rdb
 public/uploads/*
+
+.ruby-gemset
